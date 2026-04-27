@@ -1,0 +1,1 @@
+{"version":2,"defects":{"Tests\\Unit\\UserTest::testFindByEmailReturnsNullForUnknownEmail":8,"Tests\\Unit\\UserTest::testPasswordHashingWorks":8},"times":{"Tests\\Integration\\RequestValidationTest::testValidationDetectsErrors":0.001,"Tests\\Unit\\UserTest::testFindByEmailReturnsNullForUnknownEmail":0.005,"Tests\\Unit\\UserTest::testPasswordHashingWorks":0.172}}

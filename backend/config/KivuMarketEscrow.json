@@ -1,0 +1,31 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "docHash", "type": "bytes32" },
+      { "indexed": true, "name": "anchoredBy", "type": "address" }
+    ],
+    "name": "DocumentAnchored",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "name": "_docHash", "type": "bytes32" }
+    ],
+    "name": "storeDocumentHash",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "name": "_docHash", "type": "bytes32" }
+    ],
+    "name": "anchoredDocuments",
+    "outputs": [
+      { "name": "", "type": "bool" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

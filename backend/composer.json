@@ -1,0 +1,36 @@
+{
+  "name": "kivumarket/backend",
+  "description": "KivuMarket+ Backend - PHP 8.3 MVC Vanilla",
+  "type": "project",
+  "require": {
+    "php": ">=8.2",
+    "google/cloud-storage": "^1.51",
+    "sc0vu/web3.php": "dev-master"
+  },
+  "require-dev": {
+    "firebase/php-jwt": "^7.0",
+    "kornrunner/keccak": "^1.1",
+    "phpmailer/phpmailer": "^7.0",
+    "phpunit/phpunit": "^11"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit --testdox"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "audit": {
+      "block-insecure": false
+    }
+  }
+}
