@@ -1,5 +1,7 @@
 const esbuild = require('esbuild');
 const path = require('path');
+const http = require('http');
+const fs = require('fs');
 
 const isDev = process.argv.includes('--dev');
 
@@ -22,19 +24,43 @@ async function run() {
       '.css': 'css',
       '.svg': 'file',
     },
+    jsx: 'automatic',
     plugins: [],
   });
 
   if (isDev) {
     console.log('⚡ [esbuild] Démarrage du serveur de développement...');
     await context.watch();
-    
-    const { host, port } = await context.serve({
-      servedir: 'public',
-      port: 3001,
+
+    // Serveur HTTP simple avec fallback SPA sur le port 3005
+    const PORT = 3005;
+    http.createServer((req, res) => {
+      const publicDir = path.join(__dirname, 'public');
+      let url = req.url === '/' ? '/index.html' : req.url;
+      let filePath = path.join(publicDir, url);
+
+      // Si le fichier n'existe pas, on renvoie index.html (SPA Fallback)
+      if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+        filePath = path.join(publicDir, 'index.html');
+      }
+
+      fs.readFile(filePath, (err, data) => {
+        if (err) {
+          res.writeHead(500);
+          res.end('Erreur serveur');
+          return;
+        }
+        
+        // Content-Type basique
+        const ext = path.extname(filePath);
+        const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css' };
+        res.writeHead(200, { 'Content-Type': types[ext] || 'text/plain' });
+        res.end(data);
+      });
+    }).listen(PORT, '0.0.0.0', () => {
+      console.log(`🚀 [KivuMarket+] Serveur lancé sur http://localhost:${PORT}`);
     });
 
-    console.log(`🚀 [esbuild] Serveur lancé sur http://${host}:${port}`);
   } else {
     console.log('📦 [esbuild] Création du bundle de production...');
     await context.rebuild();

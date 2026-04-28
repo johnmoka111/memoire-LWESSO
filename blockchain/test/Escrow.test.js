@@ -4,7 +4,7 @@ const { ethers } = require("hardhat");
 describe("KivuMarketTitle - Tests NFT & Escrow", function () {
   let Title, contract;
   let owner, buyer, seller, agent, other;
-  const docHash = "0x7a8b9c...f1e2";
+  const docHash = ethers.id("titre-foncier-test-123"); // Génère un bytes32 (hash SHA256)
   const coords = "-2.49, 28.85";
   const uri = "ipfs://QmYourHashHere";
   const amount = ethers.parseEther("1.5");
@@ -69,10 +69,11 @@ describe("KivuMarketTitle - Tests NFT & Escrow", function () {
       expect(t.buyer).to.equal(buyer.address);
     });
 
-    it("Devrait transférer le NFT et l'argent lors de la finalisation", async function () {
+    it("Devrait transférer le NFT et l'argent lors de la finalisation (avec frais)", async function () {
       await contract.connect(buyer).depositEscrow(0, { value: amount });
       
       const initialSellerBalance = await ethers.provider.getBalance(seller.address);
+      const initialAdminBalance = await ethers.provider.getBalance(owner.address);
       
       // Libération des fonds
       await contract.connect(buyer).releaseFunds(0);
@@ -80,9 +81,17 @@ describe("KivuMarketTitle - Tests NFT & Escrow", function () {
       // Vérification du transfert du NFT
       expect(await contract.ownerOf(0)).to.equal(buyer.address);
       
+      // Calcul attendu
+      const fee = (amount * 250n) / 10000n;
+      const expectedSellerAmount = amount - fee;
+
       // Vérification du paiement au vendeur
       const finalSellerBalance = await ethers.provider.getBalance(seller.address);
-      expect(finalSellerBalance - initialSellerBalance).to.equal(amount);
+      expect(finalSellerBalance - initialSellerBalance).to.equal(expectedSellerAmount);
+
+      // Vérification du paiement des frais à l'admin
+      const finalAdminBalance = await ethers.provider.getBalance(owner.address);
+      expect(finalAdminBalance).to.be.gt(initialAdminBalance);
     });
 
     it("Devrait interdire la libération si le titre n'est pas vérifié", async function () {
@@ -94,21 +103,40 @@ describe("KivuMarketTitle - Tests NFT & Escrow", function () {
     });
   });
 
-  describe("4. Remboursement (Refund)", function () {
-    it("Devrait permettre à l'admin de rembourser l'acheteur", async function () {
+  describe("4. Arbitrage Admin (Dispute Resolution)", function () {
+    beforeEach(async function () {
       await contract.connect(seller).mintTitle(uri, docHash, coords);
       await contract.connect(buyer).depositEscrow(0, { value: amount });
-      
+    });
+
+    it("Devrait permettre à l'admin de rembourser l'acheteur (Arbitrage False)", async function () {
       const initialBuyerBalance = await ethers.provider.getBalance(buyer.address);
       
-      await contract.connect(owner).refundBuyer(0);
+      await expect(contract.connect(owner).adminResolve(0, false))
+        .to.emit(contract, "DisputeResolved")
+        .withArgs(0, false, owner.address);
       
       const finalBuyerBalance = await ethers.provider.getBalance(buyer.address);
-      // On ne check pas l'égalité exacte à cause du gaz, mais une augmentation proche de amount
       expect(finalBuyerBalance).to.be.gt(initialBuyerBalance);
       
       const t = await contract.titles(0);
       expect(t.escrowAmount).to.equal(0);
+    });
+
+    it("Devrait permettre à l'admin de forcer la vente (Arbitrage True)", async function () {
+      const initialSellerBalance = await ethers.provider.getBalance(seller.address);
+      
+      await expect(contract.connect(owner).adminResolve(0, true))
+        .to.emit(contract, "DisputeResolved")
+        .withArgs(0, true, owner.address);
+      
+      expect(await contract.ownerOf(0)).to.equal(buyer.address);
+      expect(await ethers.provider.getBalance(seller.address)).to.be.gt(initialSellerBalance);
+    });
+
+    it("Devrait interdire à un non-admin de résoudre un litige", async function () {
+      await expect(contract.connect(other).adminResolve(0, true))
+        .to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
     });
   });
 });

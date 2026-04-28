@@ -54,4 +54,15 @@ final class Document extends Model
         $stmt->execute([$propertyId, $type]);
         return $stmt->fetchAll();
     }
+
+    /**
+     * Récupère tous les documents d'un bien.
+     */
+    public function getDocumentsByProperty(int $propertyId): array
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE property_id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$propertyId]);
+        return $stmt->fetchAll();
+    }
 }

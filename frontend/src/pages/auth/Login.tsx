@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Lock, ArrowRight, Shield } from 'lucide-react';
+import api from '../../services/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,19 +13,28 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
+    
+    try {
+      const response = await api.post('/auth/login', { email, password });
+      const { token, user } = response.data.data;
       
-      // Logique de redirection selon l'email (pour la démo)
-      if (email.includes('admin')) {
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+      
+      // Logique de redirection selon le rôle
+      if (user.role === 'admin') {
         navigate('/dashboard/admin');
-      } else if (email.includes('agent')) {
+      } else if (user.role === 'agent') {
         navigate('/dashboard/agent');
       } else {
         navigate('/dashboard/owner');
       }
-    }, 1500);
+    } catch (error: any) {
+      console.error("Erreur de connexion:", error);
+      alert(error.response?.data?.message || "Erreur lors de la connexion");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

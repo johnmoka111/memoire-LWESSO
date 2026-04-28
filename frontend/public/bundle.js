@@ -14,9 +14,9 @@
   var __commonJS = (cb, mod2) => function __require2() {
     return mod2 || (0, cb[__getOwnPropNames(cb)[0]])((mod2 = { exports: {} }).exports, mod2), mod2.exports;
   };
-  var __export = (target, all) => {
-    for (var name in all)
-      __defProp(target, name, { get: all[name], enumerable: true });
+  var __export = (target, all3) => {
+    for (var name in all3)
+      __defProp(target, name, { get: all3[name], enumerable: true });
   };
   var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
@@ -80,7 +80,7 @@
           this.refs = emptyObject;
           this.updater = updater || ReactNoopUpdateQueue;
         }
-        function noop2() {
+        function noop3() {
         }
         function testStringCoercion(value) {
           return "" + value;
@@ -169,7 +169,7 @@
           return Error("react-stack-top-frame");
         }
         function hasValidKey(config) {
-          if (hasOwnProperty.call(config, "key")) {
+          if (hasOwnProperty2.call(config, "key")) {
             var getter = Object.getOwnPropertyDescriptor(config, "key").get;
             if (getter && getter.isReactWarning) return false;
           }
@@ -271,7 +271,7 @@
             case "rejected":
               throw thenable.reason;
             default:
-              switch ("string" === typeof thenable.status ? thenable.then(noop2, noop2) : (thenable.status = "pending", thenable.then(
+              switch ("string" === typeof thenable.status ? thenable.then(noop3, noop3) : (thenable.status = "pending", thenable.then(
                 function(fulfilledValue) {
                   "pending" === thenable.status && (thenable.status = "fulfilled", thenable.value = fulfilledValue);
                 },
@@ -560,7 +560,7 @@
           thrownErrors: [],
           getCurrentStack: null,
           recentlyCreatedOwnerStacks: 0
-        }, hasOwnProperty = Object.prototype.hasOwnProperty, createTask = console.createTask ? console.createTask : function() {
+        }, hasOwnProperty2 = Object.prototype.hasOwnProperty, createTask = console.createTask ? console.createTask : function() {
           return null;
         };
         deprecatedAPIs = {
@@ -739,7 +739,7 @@
           if (null != config) {
             var JSCompiler_inline_result;
             a: {
-              if (hasOwnProperty.call(config, "ref") && (JSCompiler_inline_result = Object.getOwnPropertyDescriptor(
+              if (hasOwnProperty2.call(config, "ref") && (JSCompiler_inline_result = Object.getOwnPropertyDescriptor(
                 config,
                 "ref"
               ).get) && JSCompiler_inline_result.isReactWarning) {
@@ -751,7 +751,7 @@
             JSCompiler_inline_result && (owner = getOwner());
             hasValidKey(config) && (checkKeyStringCoercion(config.key), key = "" + config.key);
             for (propName in config)
-              !hasOwnProperty.call(config, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config.ref || (props[propName] = config[propName]);
+              !hasOwnProperty2.call(config, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config.ref || (props[propName] = config[propName]);
           }
           var propName = arguments.length - 2;
           if (1 === propName) props.children = children;
@@ -800,7 +800,7 @@
             for (propName in didWarnAboutOldJSXRuntime || !("__self" in config) || "key" in config || (didWarnAboutOldJSXRuntime = true, console.warn(
               "Your app (or one of its dependencies) is using an outdated JSX transform. Update to the modern JSX transform for faster performance: https://react.dev/link/new-jsx-transform"
             )), hasValidKey(config) && (checkKeyStringCoercion(config.key), key = "" + config.key), config)
-              hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (i[propName] = config[propName]);
+              hasOwnProperty2.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (i[propName] = config[propName]);
           var childrenLength = arguments.length - 2;
           if (1 === childrenLength) i.children = children;
           else if (1 < childrenLength) {
@@ -909,7 +909,7 @@
           try {
             var returnValue = scope(), onStartTransitionFinish = ReactSharedInternals.S;
             null !== onStartTransitionFinish && onStartTransitionFinish(currentTransition, returnValue);
-            "object" === typeof returnValue && null !== returnValue && "function" === typeof returnValue.then && (ReactSharedInternals.asyncTransitions++, returnValue.then(releaseAsyncTransition, releaseAsyncTransition), returnValue.then(noop2, reportGlobalError));
+            "object" === typeof returnValue && null !== returnValue && "function" === typeof returnValue.then && (ReactSharedInternals.asyncTransitions++, returnValue.then(releaseAsyncTransition, releaseAsyncTransition), returnValue.then(noop3, reportGlobalError));
           } catch (error) {
             reportGlobalError(error);
           } finally {
@@ -1295,7 +1295,7 @@
     "node_modules/react-dom/cjs/react-dom.development.js"(exports) {
       "use strict";
       (function() {
-        function noop2() {
+        function noop3() {
         }
         function testStringCoercion(value) {
           return "" + value;
@@ -1341,19 +1341,19 @@
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
         var React15 = require_react(), Internals = {
           d: {
-            f: noop2,
+            f: noop3,
             r: function() {
               throw Error(
                 "Invalid form element. requestFormReset must be passed a form that was rendered by React."
               );
             },
-            D: noop2,
-            C: noop2,
-            L: noop2,
-            m: noop2,
-            X: noop2,
-            S: noop2,
-            M: noop2
+            D: noop3,
+            C: noop3,
+            L: noop3,
+            m: noop3,
+            X: noop3,
+            S: noop3,
+            M: noop3
           },
           p: 0,
           findDOMNode: null
@@ -1610,7 +1610,7 @@
             "Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo()."
           );
         }
-        function noop2() {
+        function noop3() {
         }
         function warnForMissingKey() {
         }
@@ -2669,9 +2669,9 @@
           );
         }
         function isAttributeNameSafe(attributeName) {
-          if (hasOwnProperty.call(validatedAttributeNameCache, attributeName))
+          if (hasOwnProperty2.call(validatedAttributeNameCache, attributeName))
             return true;
-          if (hasOwnProperty.call(illegalAttributeNameCache, attributeName))
+          if (hasOwnProperty2.call(illegalAttributeNameCache, attributeName))
             return false;
           if (VALID_ATTRIBUTE_NAME_REGEX.test(attributeName))
             return validatedAttributeNameCache[attributeName] = true;
@@ -3564,7 +3564,7 @@
           return aliases.get(name) || name;
         }
         function validateProperty$1(tagName, name) {
-          if (hasOwnProperty.call(warnedProperties$1, name) && warnedProperties$1[name])
+          if (hasOwnProperty2.call(warnedProperties$1, name) && warnedProperties$1[name])
             return true;
           if (rARIACamel$1.test(name)) {
             tagName = "aria-" + name.slice(4).toLowerCase();
@@ -3611,7 +3611,7 @@
           );
         }
         function validateProperty(tagName, name, value, eventRegistry) {
-          if (hasOwnProperty.call(warnedProperties, name) && warnedProperties[name])
+          if (hasOwnProperty2.call(warnedProperties, name) && warnedProperties[name])
             return true;
           var lowerCasedName = name.toLowerCase();
           if ("onfocusin" === lowerCasedName || "onfocusout" === lowerCasedName)
@@ -4112,7 +4112,7 @@
           if (keysA.length !== keysB.length) return false;
           for (keysB = 0; keysB < keysA.length; keysB++) {
             var currentKey = keysA[keysB];
-            if (!hasOwnProperty.call(objB, currentKey) || !objectIs(objA[currentKey], objB[currentKey]))
+            if (!hasOwnProperty2.call(objB, currentKey) || !objectIs(objA[currentKey], objB[currentKey]))
               return false;
           }
           return true;
@@ -4219,7 +4219,7 @@
         }
         function addObjectToProperties(object2, properties, indent, prefix2) {
           for (var key in object2)
-            hasOwnProperty.call(object2, key) && "_" !== key[0] && addValueToProperties(key, object2[key], properties, indent, prefix2);
+            hasOwnProperty2.call(object2, key) && "_" !== key[0] && addValueToProperties(key, object2[key], properties, indent, prefix2);
         }
         function addValueToProperties(propertyName, value, properties, indent, prefix2) {
           switch (typeof value) {
@@ -4253,7 +4253,7 @@
                   );
                   propertyName = false;
                   for (var propKey in value)
-                    "children" === propKey ? null != value.children && (!isArrayImpl(value.children) || 0 < value.children.length) && (propertyName = true) : hasOwnProperty.call(value, propKey) && "_" !== propKey[0] && addValueToProperties(
+                    "children" === propKey ? null != value.children && (!isArrayImpl(value.children) || 0 < value.children.length) && (propertyName = true) : hasOwnProperty2.call(value, propKey) && "_" !== propKey[0] && addValueToProperties(
                       propKey,
                       value[propKey],
                       properties,
@@ -7925,7 +7925,7 @@
             queue,
             pendingState,
             NotPendingTransition,
-            null === action ? noop2 : function() {
+            null === action ? noop3 : function() {
               requestFormReset$1(formFiber);
               return action(formData);
             }
@@ -8263,7 +8263,7 @@
               resetStyle
             );
             error.unshift(console);
-            JSCompiler_inline_result = bind.apply(console.error, error);
+            JSCompiler_inline_result = bind2.apply(console.error, error);
             JSCompiler_inline_result();
           } else
             console.error(
@@ -10316,7 +10316,7 @@
                           }) : nextResource.createElement(type), -1 === type.indexOf("-") && (type !== type.toLowerCase() && console.error(
                             "<%s /> is using incorrect casing. Use PascalCase for React components, or lowercase for HTML elements.",
                             type
-                          ), "[object HTMLUnknownElement]" !== Object.prototype.toString.call(nextResource) || hasOwnProperty.call(warnedUnknownTags, type) || (warnedUnknownTags[type] = true, console.error(
+                          ), "[object HTMLUnknownElement]" !== Object.prototype.toString.call(nextResource) || hasOwnProperty2.call(warnedUnknownTags, type) || (warnedUnknownTags[type] = true, console.error(
                             "The tag <%s> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.",
                             type
                           )));
@@ -17574,9 +17574,9 @@
         }
         function describeLinkForResourceErrorDEV(props) {
           var describedProps = 0, description = "<link";
-          "string" === typeof props.rel ? (describedProps++, description += ' rel="' + props.rel + '"') : hasOwnProperty.call(props, "rel") && (describedProps++, description += ' rel="' + (null === props.rel ? "null" : "invalid type " + typeof props.rel) + '"');
-          "string" === typeof props.href ? (describedProps++, description += ' href="' + props.href + '"') : hasOwnProperty.call(props, "href") && (describedProps++, description += ' href="' + (null === props.href ? "null" : "invalid type " + typeof props.href) + '"');
-          "string" === typeof props.precedence ? (describedProps++, description += ' precedence="' + props.precedence + '"') : hasOwnProperty.call(props, "precedence") && (describedProps++, description += " precedence={" + (null === props.precedence ? "null" : "invalid type " + typeof props.precedence) + "}");
+          "string" === typeof props.rel ? (describedProps++, description += ' rel="' + props.rel + '"') : hasOwnProperty2.call(props, "rel") && (describedProps++, description += ' rel="' + (null === props.rel ? "null" : "invalid type " + typeof props.rel) + '"');
+          "string" === typeof props.href ? (describedProps++, description += ' href="' + props.href + '"') : hasOwnProperty2.call(props, "href") && (describedProps++, description += ' href="' + (null === props.href ? "null" : "invalid type " + typeof props.href) + '"');
+          "string" === typeof props.precedence ? (describedProps++, description += ' precedence="' + props.precedence + '"') : hasOwnProperty2.call(props, "precedence") && (describedProps++, description += " precedence={" + (null === props.precedence ? "null" : "invalid type " + typeof props.precedence) + "}");
           Object.getOwnPropertyNames(props).length > describedProps && (description += " ...");
           return description + " />";
         }
@@ -18542,7 +18542,7 @@
         disabledLog.__reactDisabledLog = true;
         var prefix, suffix, reentry = false;
         var componentFrameCache = new ("function" === typeof WeakMap ? WeakMap : Map)();
-        var current = null, isRendering = false, hasOwnProperty = Object.prototype.hasOwnProperty, scheduleCallback$3 = Scheduler.unstable_scheduleCallback, cancelCallback$1 = Scheduler.unstable_cancelCallback, shouldYield = Scheduler.unstable_shouldYield, requestPaint = Scheduler.unstable_requestPaint, now$1 = Scheduler.unstable_now, getCurrentPriorityLevel = Scheduler.unstable_getCurrentPriorityLevel, ImmediatePriority = Scheduler.unstable_ImmediatePriority, UserBlockingPriority = Scheduler.unstable_UserBlockingPriority, NormalPriority$1 = Scheduler.unstable_NormalPriority, LowPriority = Scheduler.unstable_LowPriority, IdlePriority = Scheduler.unstable_IdlePriority, log$1 = Scheduler.log, unstable_setDisableYieldValue = Scheduler.unstable_setDisableYieldValue, rendererID = null, injectedHook = null, hasLoggedError = false, isDevToolsPresent = "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__, clz32 = Math.clz32 ? Math.clz32 : clz32Fallback, log = Math.log, LN2 = Math.LN2, nextTransitionUpdateLane = 256, nextTransitionDeferredLane = 262144, nextRetryLane = 4194304, DiscreteEventPriority = 2, ContinuousEventPriority = 8, DefaultEventPriority = 32, IdleEventPriority = 268435456, randomKey = Math.random().toString(36).slice(2), internalInstanceKey = "__reactFiber$" + randomKey, internalPropsKey = "__reactProps$" + randomKey, internalContainerInstanceKey = "__reactContainer$" + randomKey, internalEventHandlersKey = "__reactEvents$" + randomKey, internalEventHandlerListenersKey = "__reactListeners$" + randomKey, internalEventHandlesSetKey = "__reactHandles$" + randomKey, internalRootNodeResourcesKey = "__reactResources$" + randomKey, internalHoistableMarker = "__reactMarker$" + randomKey, allNativeEvents = /* @__PURE__ */ new Set(), registrationNameDependencies = {}, possibleRegistrationNames = {}, hasReadOnlyValue = {
+        var current = null, isRendering = false, hasOwnProperty2 = Object.prototype.hasOwnProperty, scheduleCallback$3 = Scheduler.unstable_scheduleCallback, cancelCallback$1 = Scheduler.unstable_cancelCallback, shouldYield = Scheduler.unstable_shouldYield, requestPaint = Scheduler.unstable_requestPaint, now$1 = Scheduler.unstable_now, getCurrentPriorityLevel = Scheduler.unstable_getCurrentPriorityLevel, ImmediatePriority = Scheduler.unstable_ImmediatePriority, UserBlockingPriority = Scheduler.unstable_UserBlockingPriority, NormalPriority$1 = Scheduler.unstable_NormalPriority, LowPriority = Scheduler.unstable_LowPriority, IdlePriority = Scheduler.unstable_IdlePriority, log$1 = Scheduler.log, unstable_setDisableYieldValue = Scheduler.unstable_setDisableYieldValue, rendererID = null, injectedHook = null, hasLoggedError = false, isDevToolsPresent = "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__, clz32 = Math.clz32 ? Math.clz32 : clz32Fallback, log = Math.log, LN2 = Math.LN2, nextTransitionUpdateLane = 256, nextTransitionDeferredLane = 262144, nextRetryLane = 4194304, DiscreteEventPriority = 2, ContinuousEventPriority = 8, DefaultEventPriority = 32, IdleEventPriority = 268435456, randomKey = Math.random().toString(36).slice(2), internalInstanceKey = "__reactFiber$" + randomKey, internalPropsKey = "__reactProps$" + randomKey, internalContainerInstanceKey = "__reactContainer$" + randomKey, internalEventHandlersKey = "__reactEvents$" + randomKey, internalEventHandlerListenersKey = "__reactListeners$" + randomKey, internalEventHandlesSetKey = "__reactHandles$" + randomKey, internalRootNodeResourcesKey = "__reactResources$" + randomKey, internalHoistableMarker = "__reactMarker$" + randomKey, allNativeEvents = /* @__PURE__ */ new Set(), registrationNameDependencies = {}, possibleRegistrationNames = {}, hasReadOnlyValue = {
           button: true,
           checkbox: true,
           image: true,
@@ -21223,7 +21223,7 @@
           _currentValue: NotPendingTransition,
           _currentValue2: NotPendingTransition,
           _threadCount: 0
-        }, badgeFormat = "%c%s%c", badgeStyle = "background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px", resetStyle = "", pad = " ", bind = Function.prototype.bind;
+        }, badgeFormat = "%c%s%c", badgeStyle = "background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px", resetStyle = "", pad = " ", bind2 = Function.prototype.bind;
         var didWarnAboutNestedUpdates = false;
         var overrideHookState = null, overrideHookStateDeletePath = null, overrideHookStateRenamePath = null, overrideProps = null, overridePropsDeletePath = null, overridePropsRenamePath = null, scheduleUpdate = null, scheduleRetry = null, setErrorHandler = null, setSuspenseHandler = null;
         overrideHookState = function(fiber, id4, path, value) {
@@ -21551,7 +21551,7 @@
           return Error("react-stack-top-frame");
         }
         function hasValidKey(config) {
-          if (hasOwnProperty.call(config, "key")) {
+          if (hasOwnProperty2.call(config, "key")) {
             var getter = Object.getOwnPropertyDescriptor(config, "key").get;
             if (getter && getter.isReactWarning) return false;
           }
@@ -21632,7 +21632,7 @@
                   "React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead."
                 );
             else validateChildKeys(children);
-          if (hasOwnProperty.call(config, "key")) {
+          if (hasOwnProperty2.call(config, "key")) {
             children = getComponentNameFromType(type);
             var keys = Object.keys(config).filter(function(k) {
               return "key" !== k;
@@ -21673,7 +21673,7 @@
         function isValidElement3(object2) {
           return "object" === typeof object2 && null !== object2 && object2.$$typeof === REACT_ELEMENT_TYPE;
         }
-        var React15 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React15.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
+        var React15 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React15.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty2 = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
           return null;
         };
         React15 = {
@@ -21733,8 +21733,8 @@
   var import_client = __toESM(require_client(), 1);
 
   // node_modules/react-router/dist/development/chunk-EVOBXE3Y.mjs
+  var React = __toESM(require_react(), 1);
   var React2 = __toESM(require_react(), 1);
-  var React22 = __toESM(require_react(), 1);
   var React3 = __toESM(require_react(), 1);
   var React4 = __toESM(require_react(), 1);
   var React9 = __toESM(require_react(), 1);
@@ -22422,39 +22422,39 @@
     ...validMutationMethodsArr
   ];
   var validRequestMethods = new Set(validRequestMethodsArr);
-  var DataRouterContext = React2.createContext(null);
+  var DataRouterContext = React.createContext(null);
   DataRouterContext.displayName = "DataRouter";
-  var DataRouterStateContext = React2.createContext(null);
+  var DataRouterStateContext = React.createContext(null);
   DataRouterStateContext.displayName = "DataRouterState";
-  var RSCRouterContext = React2.createContext(false);
+  var RSCRouterContext = React.createContext(false);
   function useIsRSCRouterContext() {
-    return React2.useContext(RSCRouterContext);
+    return React.useContext(RSCRouterContext);
   }
-  var ViewTransitionContext = React2.createContext({
+  var ViewTransitionContext = React.createContext({
     isTransitioning: false
   });
   ViewTransitionContext.displayName = "ViewTransition";
-  var FetchersContext = React2.createContext(
+  var FetchersContext = React.createContext(
     /* @__PURE__ */ new Map()
   );
   FetchersContext.displayName = "Fetchers";
-  var AwaitContext = React2.createContext(null);
+  var AwaitContext = React.createContext(null);
   AwaitContext.displayName = "Await";
-  var NavigationContext = React2.createContext(
+  var NavigationContext = React.createContext(
     null
   );
   NavigationContext.displayName = "Navigation";
-  var LocationContext = React2.createContext(
+  var LocationContext = React.createContext(
     null
   );
   LocationContext.displayName = "Location";
-  var RouteContext = React2.createContext({
+  var RouteContext = React.createContext({
     outlet: null,
     matches: [],
     isDataRoute: false
   });
   RouteContext.displayName = "Route";
-  var RouteErrorContext = React2.createContext(null);
+  var RouteErrorContext = React.createContext(null);
   RouteErrorContext.displayName = "RouteError";
   var ENABLE_DEV_WARNINGS = true;
   var ERROR_DIGEST_BASE = "REACT_ROUTER_ERROR";
@@ -22495,7 +22495,7 @@
       // router loaded. We can help them understand how to avoid that.
       `useHref() may be used only in the context of a <Router> component.`
     );
-    let { basename, navigator: navigator2 } = React22.useContext(NavigationContext);
+    let { basename, navigator: navigator2 } = React2.useContext(NavigationContext);
     let { hash: hash2, pathname, search } = useResolvedPath(to, { relative });
     let joinedPathname = pathname;
     if (basename !== "/") {
@@ -22504,7 +22504,7 @@
     return navigator2.createHref({ pathname: joinedPathname, search, hash: hash2 });
   }
   function useInRouterContext() {
-    return React22.useContext(LocationContext) != null;
+    return React2.useContext(LocationContext) != null;
   }
   function useLocation() {
     invariant(
@@ -22513,17 +22513,17 @@
       // router loaded. We can help them understand how to avoid that.
       `useLocation() may be used only in the context of a <Router> component.`
     );
-    return React22.useContext(LocationContext).location;
+    return React2.useContext(LocationContext).location;
   }
   var navigateEffectWarning = `You should call navigate() in a React.useEffect(), not when your component is first rendered.`;
   function useIsomorphicLayoutEffect(cb) {
-    let isStatic = React22.useContext(NavigationContext).static;
+    let isStatic = React2.useContext(NavigationContext).static;
     if (!isStatic) {
-      React22.useLayoutEffect(cb);
+      React2.useLayoutEffect(cb);
     }
   }
   function useNavigate() {
-    let { isDataRoute } = React22.useContext(RouteContext);
+    let { isDataRoute } = React2.useContext(RouteContext);
     return isDataRoute ? useNavigateStable() : useNavigateUnstable();
   }
   function useNavigateUnstable() {
@@ -22533,16 +22533,16 @@
       // router loaded. We can help them understand how to avoid that.
       `useNavigate() may be used only in the context of a <Router> component.`
     );
-    let dataRouterContext = React22.useContext(DataRouterContext);
-    let { basename, navigator: navigator2 } = React22.useContext(NavigationContext);
-    let { matches } = React22.useContext(RouteContext);
+    let dataRouterContext = React2.useContext(DataRouterContext);
+    let { basename, navigator: navigator2 } = React2.useContext(NavigationContext);
+    let { matches } = React2.useContext(RouteContext);
     let { pathname: locationPathname } = useLocation();
     let routePathnamesJson = JSON.stringify(getResolveToMatches(matches));
-    let activeRef = React22.useRef(false);
+    let activeRef = React2.useRef(false);
     useIsomorphicLayoutEffect(() => {
       activeRef.current = true;
     });
-    let navigate = React22.useCallback(
+    let navigate = React2.useCallback(
       (to, options = {}) => {
         warning(activeRef.current, navigateEffectWarning);
         if (!activeRef.current) return;
@@ -22575,17 +22575,17 @@
     );
     return navigate;
   }
-  var OutletContext = React22.createContext(null);
+  var OutletContext = React2.createContext(null);
   function useParams() {
-    let { matches } = React22.useContext(RouteContext);
+    let { matches } = React2.useContext(RouteContext);
     let routeMatch = matches[matches.length - 1];
     return routeMatch?.params ?? {};
   }
   function useResolvedPath(to, { relative } = {}) {
-    let { matches } = React22.useContext(RouteContext);
+    let { matches } = React2.useContext(RouteContext);
     let { pathname: locationPathname } = useLocation();
     let routePathnamesJson = JSON.stringify(getResolveToMatches(matches));
-    return React22.useMemo(
+    return React2.useMemo(
       () => resolveTo(
         to,
         JSON.parse(routePathnamesJson),
@@ -22605,8 +22605,8 @@
       // router loaded. We can help them understand how to avoid that.
       `useRoutes() may be used only in the context of a <Router> component.`
     );
-    let { navigator: navigator2 } = React22.useContext(NavigationContext);
-    let { matches: parentMatches } = React22.useContext(RouteContext);
+    let { navigator: navigator2 } = React2.useContext(NavigationContext);
+    let { matches: parentMatches } = React2.useContext(RouteContext);
     let routeMatch = parentMatches[parentMatches.length - 1];
     let parentParams = routeMatch ? routeMatch.params : {};
     let parentPathname = routeMatch ? routeMatch.pathname : "/";
@@ -22682,7 +22682,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       dataRouterOpts
     );
     if (locationArg && renderedMatches) {
-      return /* @__PURE__ */ React22.createElement(
+      return /* @__PURE__ */ React2.createElement(
         LocationContext.Provider,
         {
           value: {
@@ -22717,12 +22717,12 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         "Error handled by React Router default ErrorBoundary:",
         error
       );
-      devInfo = /* @__PURE__ */ React22.createElement(React22.Fragment, null, /* @__PURE__ */ React22.createElement("p", null, "\u{1F4BF} Hey developer \u{1F44B}"), /* @__PURE__ */ React22.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own ", /* @__PURE__ */ React22.createElement("code", { style: codeStyles }, "ErrorBoundary"), " or", " ", /* @__PURE__ */ React22.createElement("code", { style: codeStyles }, "errorElement"), " prop on your route."));
+      devInfo = /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement("p", null, "\u{1F4BF} Hey developer \u{1F44B}"), /* @__PURE__ */ React2.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own ", /* @__PURE__ */ React2.createElement("code", { style: codeStyles }, "ErrorBoundary"), " or", " ", /* @__PURE__ */ React2.createElement("code", { style: codeStyles }, "errorElement"), " prop on your route."));
     }
-    return /* @__PURE__ */ React22.createElement(React22.Fragment, null, /* @__PURE__ */ React22.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ React22.createElement("h3", { style: { fontStyle: "italic" } }, message), stack ? /* @__PURE__ */ React22.createElement("pre", { style: preStyles }, stack) : null, devInfo);
+    return /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ React2.createElement("h3", { style: { fontStyle: "italic" } }, message), stack ? /* @__PURE__ */ React2.createElement("pre", { style: preStyles }, stack) : null, devInfo);
   }
-  var defaultErrorElement = /* @__PURE__ */ React22.createElement(DefaultErrorComponent, null);
-  var RenderErrorBoundary = class extends React22.Component {
+  var defaultErrorElement = /* @__PURE__ */ React2.createElement(DefaultErrorComponent, null);
+  var RenderErrorBoundary = class extends React2.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -22764,7 +22764,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         const decoded = decodeRouteErrorResponseDigest(error.digest);
         if (decoded) error = decoded;
       }
-      let result = error !== void 0 ? /* @__PURE__ */ React22.createElement(RouteContext.Provider, { value: this.props.routeContext }, /* @__PURE__ */ React22.createElement(
+      let result = error !== void 0 ? /* @__PURE__ */ React2.createElement(RouteContext.Provider, { value: this.props.routeContext }, /* @__PURE__ */ React2.createElement(
         RouteErrorContext.Provider,
         {
           value: error,
@@ -22772,7 +22772,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         }
       )) : this.props.children;
       if (this.context) {
-        return /* @__PURE__ */ React22.createElement(RSCErrorHandler, { error }, result);
+        return /* @__PURE__ */ React2.createElement(RSCErrorHandler, { error }, result);
       }
       return result;
     }
@@ -22783,7 +22783,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     children,
     error
   }) {
-    let { basename } = React22.useContext(NavigationContext);
+    let { basename } = React2.useContext(NavigationContext);
     if (typeof error === "object" && error && "digest" in error && typeof error.digest === "string") {
       let redirect2 = decodeRedirectErrorDigest(error.digest);
       if (redirect2) {
@@ -22803,7 +22803,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
             throw redirectPromise;
           }
         }
-        return /* @__PURE__ */ React22.createElement(
+        return /* @__PURE__ */ React2.createElement(
           "meta",
           {
             httpEquiv: "refresh",
@@ -22815,11 +22815,11 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     return children;
   }
   function RenderedRoute({ routeContext, match, children }) {
-    let dataRouterContext = React22.useContext(DataRouterContext);
+    let dataRouterContext = React2.useContext(DataRouterContext);
     if (dataRouterContext && dataRouterContext.static && dataRouterContext.staticContext && (match.route.errorElement || match.route.ErrorBoundary)) {
       dataRouterContext.staticContext._deepestRenderedBoundaryId = match.route.id;
     }
-    return /* @__PURE__ */ React22.createElement(RouteContext.Provider, { value: routeContext }, children);
+    return /* @__PURE__ */ React2.createElement(RouteContext.Provider, { value: routeContext }, children);
   }
   function _renderMatches(matches, parentMatches = [], dataRouterOpts) {
     let dataRouterState = dataRouterOpts?.state;
@@ -22919,13 +22919,13 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           } else if (shouldRenderHydrateFallback) {
             children = hydrateFallbackElement;
           } else if (match.route.Component) {
-            children = /* @__PURE__ */ React22.createElement(match.route.Component, null);
+            children = /* @__PURE__ */ React2.createElement(match.route.Component, null);
           } else if (match.route.element) {
             children = match.route.element;
           } else {
             children = outlet;
           }
-          return /* @__PURE__ */ React22.createElement(
+          return /* @__PURE__ */ React2.createElement(
             RenderedRoute,
             {
               match,
@@ -22938,7 +22938,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
             }
           );
         };
-        return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ React22.createElement(
+        return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ React2.createElement(
           RenderErrorBoundary,
           {
             location: dataRouterState.location,
@@ -22958,17 +22958,17 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     return `${hookName} must be used within a data router.  See https://reactrouter.com/en/main/routers/picking-a-router.`;
   }
   function useDataRouterContext(hookName) {
-    let ctx = React22.useContext(DataRouterContext);
+    let ctx = React2.useContext(DataRouterContext);
     invariant(ctx, getDataRouterConsoleError(hookName));
     return ctx;
   }
   function useDataRouterState(hookName) {
-    let state = React22.useContext(DataRouterStateContext);
+    let state = React2.useContext(DataRouterStateContext);
     invariant(state, getDataRouterConsoleError(hookName));
     return state;
   }
   function useRouteContext(hookName) {
-    let route = React22.useContext(RouteContext);
+    let route = React2.useContext(RouteContext);
     invariant(route, getDataRouterConsoleError(hookName));
     return route;
   }
@@ -22999,13 +22999,13 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       "useMatches"
       /* UseMatches */
     );
-    return React22.useMemo(
+    return React2.useMemo(
       () => matches.map((m) => convertRouteMatchToUiMatch(m, loaderData)),
       [matches, loaderData]
     );
   }
   function useRouteError() {
-    let error = React22.useContext(RouteErrorContext);
+    let error = React2.useContext(RouteErrorContext);
     let state = useDataRouterState(
       "useRouteError"
       /* UseRouteError */
@@ -23028,11 +23028,11 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       "useNavigate"
       /* UseNavigateStable */
     );
-    let activeRef = React22.useRef(false);
+    let activeRef = React2.useRef(false);
     useIsomorphicLayoutEffect(() => {
       activeRef.current = true;
     });
-    let navigate = React22.useCallback(
+    let navigate = React2.useCallback(
       async (to, options = {}) => {
         warning(activeRef.current, navigateEffectWarning);
         if (!activeRef.current) return;
@@ -24519,93 +24519,43 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   ];
   var BadgeCheck = createLucideIcon("badge-check", __iconNode2);
 
-  // node_modules/lucide-react/dist/esm/icons/building-2.mjs
-  var __iconNode3 = [
-    ["path", { d: "M10 12h4", key: "a56b0p" }],
-    ["path", { d: "M10 8h4", key: "1sr2af" }],
-    ["path", { d: "M14 21v-3a2 2 0 0 0-4 0v3", key: "1rgiei" }],
-    [
-      "path",
-      {
-        d: "M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2",
-        key: "secmi2"
-      }
-    ],
-    ["path", { d: "M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16", key: "16ra0t" }]
-  ];
-  var Building2 = createLucideIcon("building-2", __iconNode3);
-
-  // node_modules/lucide-react/dist/esm/icons/camera.mjs
-  var __iconNode4 = [
-    [
-      "path",
-      {
-        d: "M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z",
-        key: "18u6gg"
-      }
-    ],
-    ["circle", { cx: "12", cy: "13", r: "3", key: "1vg3eu" }]
-  ];
-  var Camera = createLucideIcon("camera", __iconNode4);
-
   // node_modules/lucide-react/dist/esm/icons/chevron-left.mjs
-  var __iconNode5 = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
-  var ChevronLeft = createLucideIcon("chevron-left", __iconNode5);
+  var __iconNode3 = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
+  var ChevronLeft = createLucideIcon("chevron-left", __iconNode3);
 
   // node_modules/lucide-react/dist/esm/icons/circle-check-big.mjs
-  var __iconNode6 = [
+  var __iconNode4 = [
     ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
     ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
   ];
-  var CircleCheckBig = createLucideIcon("circle-check-big", __iconNode6);
+  var CircleCheckBig = createLucideIcon("circle-check-big", __iconNode4);
 
   // node_modules/lucide-react/dist/esm/icons/circle-user.mjs
-  var __iconNode7 = [
+  var __iconNode5 = [
     ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
     ["circle", { cx: "12", cy: "10", r: "3", key: "ilqhr7" }],
     ["path", { d: "M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662", key: "154egf" }]
   ];
-  var CircleUser = createLucideIcon("circle-user", __iconNode7);
-
-  // node_modules/lucide-react/dist/esm/icons/circle-x.mjs
-  var __iconNode8 = [
-    ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-    ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
-    ["path", { d: "m9 9 6 6", key: "z0biqf" }]
-  ];
-  var CircleX = createLucideIcon("circle-x", __iconNode8);
+  var CircleUser = createLucideIcon("circle-user", __iconNode5);
 
   // node_modules/lucide-react/dist/esm/icons/clock.mjs
-  var __iconNode9 = [
+  var __iconNode6 = [
     ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
     ["path", { d: "M12 6v6l4 2", key: "mmk7yg" }]
   ];
-  var Clock = createLucideIcon("clock", __iconNode9);
+  var Clock = createLucideIcon("clock", __iconNode6);
 
   // node_modules/lucide-react/dist/esm/icons/coins.mjs
-  var __iconNode10 = [
+  var __iconNode7 = [
     ["path", { d: "M13.744 17.736a6 6 0 1 1-7.48-7.48", key: "bq4yh3" }],
     ["path", { d: "M15 6h1v4", key: "11y1tn" }],
     ["path", { d: "m6.134 14.768.866-.5 2 3.464", key: "17snzx" }],
     ["circle", { cx: "16", cy: "8", r: "6", key: "14bfc9" }]
   ];
-  var Coins = createLucideIcon("coins", __iconNode10);
-
-  // node_modules/lucide-react/dist/esm/icons/eye.mjs
-  var __iconNode11 = [
-    [
-      "path",
-      {
-        d: "M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0",
-        key: "1nclc0"
-      }
-    ],
-    ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
-  ];
-  var Eye = createLucideIcon("eye", __iconNode11);
+  var Coins = createLucideIcon("coins", __iconNode7);
 
   // node_modules/lucide-react/dist/esm/icons/file-text.mjs
-  var __iconNode12 = [
+  var __iconNode8 = [
     [
       "path",
       {
@@ -24618,28 +24568,18 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ["path", { d: "M16 13H8", key: "t4e002" }],
     ["path", { d: "M16 17H8", key: "z1uh3a" }]
   ];
-  var FileText = createLucideIcon("file-text", __iconNode12);
-
-  // node_modules/lucide-react/dist/esm/icons/gavel.mjs
-  var __iconNode13 = [
-    ["path", { d: "m14 13-8.381 8.38a1 1 0 0 1-3.001-3l8.384-8.381", key: "pgg06f" }],
-    ["path", { d: "m16 16 6-6", key: "vzrcl6" }],
-    ["path", { d: "m21.5 10.5-8-8", key: "a17d9x" }],
-    ["path", { d: "m8 8 6-6", key: "18bi4p" }],
-    ["path", { d: "m8.5 7.5 8 8", key: "1oyaui" }]
-  ];
-  var Gavel = createLucideIcon("gavel", __iconNode13);
+  var FileText = createLucideIcon("file-text", __iconNode8);
 
   // node_modules/lucide-react/dist/esm/icons/globe.mjs
-  var __iconNode14 = [
+  var __iconNode9 = [
     ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
     ["path", { d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20", key: "13o1zl" }],
     ["path", { d: "M2 12h20", key: "9i4pu4" }]
   ];
-  var Globe = createLucideIcon("globe", __iconNode14);
+  var Globe = createLucideIcon("globe", __iconNode9);
 
   // node_modules/lucide-react/dist/esm/icons/heart.mjs
-  var __iconNode15 = [
+  var __iconNode10 = [
     [
       "path",
       {
@@ -24648,10 +24588,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       }
     ]
   ];
-  var Heart = createLucideIcon("heart", __iconNode15);
+  var Heart = createLucideIcon("heart", __iconNode10);
 
   // node_modules/lucide-react/dist/esm/icons/house.mjs
-  var __iconNode16 = [
+  var __iconNode11 = [
     ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
     [
       "path",
@@ -24661,44 +24601,44 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       }
     ]
   ];
-  var House = createLucideIcon("house", __iconNode16);
+  var House = createLucideIcon("house", __iconNode11);
 
   // node_modules/lucide-react/dist/esm/icons/info.mjs
-  var __iconNode17 = [
+  var __iconNode12 = [
     ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
     ["path", { d: "M12 16v-4", key: "1dtifu" }],
     ["path", { d: "M12 8h.01", key: "e9boi3" }]
   ];
-  var Info = createLucideIcon("info", __iconNode17);
+  var Info = createLucideIcon("info", __iconNode12);
 
   // node_modules/lucide-react/dist/esm/icons/key.mjs
-  var __iconNode18 = [
+  var __iconNode13 = [
     ["path", { d: "m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4", key: "g0fldk" }],
     ["path", { d: "m21 2-9.6 9.6", key: "1j0ho8" }],
     ["circle", { cx: "7.5", cy: "15.5", r: "5.5", key: "yqb3hr" }]
   ];
-  var Key = createLucideIcon("key", __iconNode18);
+  var Key = createLucideIcon("key", __iconNode13);
 
   // node_modules/lucide-react/dist/esm/icons/loader-circle.mjs
-  var __iconNode19 = [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]];
-  var LoaderCircle = createLucideIcon("loader-circle", __iconNode19);
+  var __iconNode14 = [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]];
+  var LoaderCircle = createLucideIcon("loader-circle", __iconNode14);
 
   // node_modules/lucide-react/dist/esm/icons/lock.mjs
-  var __iconNode20 = [
+  var __iconNode15 = [
     ["rect", { width: "18", height: "11", x: "3", y: "11", rx: "2", ry: "2", key: "1w4ew1" }],
     ["path", { d: "M7 11V7a5 5 0 0 1 10 0v4", key: "fwvmzm" }]
   ];
-  var Lock = createLucideIcon("lock", __iconNode20);
+  var Lock = createLucideIcon("lock", __iconNode15);
 
   // node_modules/lucide-react/dist/esm/icons/mail.mjs
-  var __iconNode21 = [
+  var __iconNode16 = [
     ["path", { d: "m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7", key: "132q7q" }],
     ["rect", { x: "2", y: "4", width: "20", height: "16", rx: "2", key: "izxlao" }]
   ];
-  var Mail = createLucideIcon("mail", __iconNode21);
+  var Mail = createLucideIcon("mail", __iconNode16);
 
   // node_modules/lucide-react/dist/esm/icons/map-pin.mjs
-  var __iconNode22 = [
+  var __iconNode17 = [
     [
       "path",
       {
@@ -24708,10 +24648,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ],
     ["circle", { cx: "12", cy: "10", r: "3", key: "ilqhr7" }]
   ];
-  var MapPin = createLucideIcon("map-pin", __iconNode22);
+  var MapPin = createLucideIcon("map-pin", __iconNode17);
 
   // node_modules/lucide-react/dist/esm/icons/map.mjs
-  var __iconNode23 = [
+  var __iconNode18 = [
     [
       "path",
       {
@@ -24722,40 +24662,54 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ["path", { d: "M15 5.764v15", key: "1pn4in" }],
     ["path", { d: "M9 3.236v15", key: "1uimfh" }]
   ];
-  var Map2 = createLucideIcon("map", __iconNode23);
+  var Map2 = createLucideIcon("map", __iconNode18);
 
   // node_modules/lucide-react/dist/esm/icons/menu.mjs
-  var __iconNode24 = [
+  var __iconNode19 = [
     ["path", { d: "M4 5h16", key: "1tepv9" }],
     ["path", { d: "M4 12h16", key: "1lakjw" }],
     ["path", { d: "M4 19h16", key: "1djgab" }]
   ];
-  var Menu = createLucideIcon("menu", __iconNode24);
+  var Menu = createLucideIcon("menu", __iconNode19);
 
   // node_modules/lucide-react/dist/esm/icons/plus.mjs
-  var __iconNode25 = [
+  var __iconNode20 = [
     ["path", { d: "M5 12h14", key: "1ays0h" }],
     ["path", { d: "M12 5v14", key: "s699le" }]
   ];
-  var Plus = createLucideIcon("plus", __iconNode25);
+  var Plus = createLucideIcon("plus", __iconNode20);
 
   // node_modules/lucide-react/dist/esm/icons/search.mjs
-  var __iconNode26 = [
+  var __iconNode21 = [
     ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
     ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
   ];
-  var Search = createLucideIcon("search", __iconNode26);
+  var Search = createLucideIcon("search", __iconNode21);
 
   // node_modules/lucide-react/dist/esm/icons/share.mjs
-  var __iconNode27 = [
+  var __iconNode22 = [
     ["path", { d: "M12 2v13", key: "1km8f5" }],
     ["path", { d: "m16 6-4-4-4 4", key: "13yo43" }],
     ["path", { d: "M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8", key: "1b2hhj" }]
   ];
-  var Share = createLucideIcon("share", __iconNode27);
+  var Share = createLucideIcon("share", __iconNode22);
+
+  // node_modules/lucide-react/dist/esm/icons/shield-alert.mjs
+  var __iconNode23 = [
+    [
+      "path",
+      {
+        d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
+        key: "oel41y"
+      }
+    ],
+    ["path", { d: "M12 8v4", key: "1got3b" }],
+    ["path", { d: "M12 16h.01", key: "1drbdi" }]
+  ];
+  var ShieldAlert = createLucideIcon("shield-alert", __iconNode23);
 
   // node_modules/lucide-react/dist/esm/icons/shield-check.mjs
-  var __iconNode28 = [
+  var __iconNode24 = [
     [
       "path",
       {
@@ -24765,10 +24719,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ],
     ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
   ];
-  var ShieldCheck = createLucideIcon("shield-check", __iconNode28);
+  var ShieldCheck = createLucideIcon("shield-check", __iconNode24);
 
   // node_modules/lucide-react/dist/esm/icons/shield.mjs
-  var __iconNode29 = [
+  var __iconNode25 = [
     [
       "path",
       {
@@ -24777,10 +24731,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       }
     ]
   ];
-  var Shield = createLucideIcon("shield", __iconNode29);
+  var Shield = createLucideIcon("shield", __iconNode25);
 
   // node_modules/lucide-react/dist/esm/icons/star.mjs
-  var __iconNode30 = [
+  var __iconNode26 = [
     [
       "path",
       {
@@ -24789,10 +24743,17 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       }
     ]
   ];
-  var Star = createLucideIcon("star", __iconNode30);
+  var Star = createLucideIcon("star", __iconNode26);
+
+  // node_modules/lucide-react/dist/esm/icons/trending-up.mjs
+  var __iconNode27 = [
+    ["path", { d: "M16 7h6v6", key: "box55l" }],
+    ["path", { d: "m22 7-8.5 8.5-5-5L2 17", key: "1t1m79" }]
+  ];
+  var TrendingUp = createLucideIcon("trending-up", __iconNode27);
 
   // node_modules/lucide-react/dist/esm/icons/triangle-alert.mjs
-  var __iconNode31 = [
+  var __iconNode28 = [
     [
       "path",
       {
@@ -24803,16 +24764,25 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ["path", { d: "M12 9v4", key: "juzpu7" }],
     ["path", { d: "M12 17h.01", key: "p32p05" }]
   ];
-  var TriangleAlert = createLucideIcon("triangle-alert", __iconNode31);
+  var TriangleAlert = createLucideIcon("triangle-alert", __iconNode28);
+
+  // node_modules/lucide-react/dist/esm/icons/upload.mjs
+  var __iconNode29 = [
+    ["path", { d: "M12 3v12", key: "1x0j5s" }],
+    ["path", { d: "m17 8-5-5-5 5", key: "7q97r8" }],
+    ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }]
+  ];
+  var Upload = createLucideIcon("upload", __iconNode29);
 
   // node_modules/lucide-react/dist/esm/icons/user.mjs
-  var __iconNode32 = [
+  var __iconNode30 = [
     ["path", { d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2", key: "975kel" }],
     ["circle", { cx: "12", cy: "7", r: "4", key: "17ys0d" }]
   ];
-  var User = createLucideIcon("user", __iconNode32);
+  var User = createLucideIcon("user", __iconNode30);
 
   // src/pages/Home.tsx
+  var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
   var Categories = () => {
     const categories = [
       { label: "Terrains", icon: Map2 },
@@ -24823,26 +24793,64 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       { label: "Luxe", icon: Star }
     ];
     const [selected, setSelected] = (0, import_react4.useState)("Terrains");
-    return /* @__PURE__ */ React.createElement("div", { className: "max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4 bg-white sticky top-20 z-40 pt-4 pb-2 border-b border-slate-100" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-row items-center justify-between overflow-x-auto gap-8 no-scrollbar" }, categories.map((item) => /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4 bg-white sticky top-20 z-40 pt-4 pb-2 border-b border-slate-100", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "flex flex-row items-center justify-between overflow-x-auto gap-8 no-scrollbar", children: categories.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
       "div",
       {
-        key: item.label,
         onClick: () => setSelected(item.label),
-        className: `flex flex-col items-center justify-center gap-2 p-3 border-b-2 hover:text-slate-800 transition cursor-pointer flex-shrink-0 ${selected === item.label ? "border-slate-800 text-slate-800" : "border-transparent text-slate-500 hover:border-slate-300"}`
+        className: `flex flex-col items-center justify-center gap-2 p-3 border-b-2 hover:text-slate-800 transition cursor-pointer flex-shrink-0 ${selected === item.label ? "border-slate-800 text-slate-800" : "border-transparent text-slate-500 hover:border-slate-300"}`,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, { className: "w-6 h-6" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-sm font-medium", children: item.label })
+        ]
       },
-      /* @__PURE__ */ React.createElement(item.icon, { className: "w-6 h-6" }),
-      /* @__PURE__ */ React.createElement("div", { className: "text-sm font-medium" }, item.label)
-    ))));
+      item.label
+    )) }) });
   };
   var PropertyCard = ({ property }) => {
-    return /* @__PURE__ */ React.createElement(Link, { to: `/property/${property.id}`, className: "col-span-1 cursor-pointer group" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-col gap-2 w-full" }, /* @__PURE__ */ React.createElement("div", { className: "aspect-square w-full relative overflow-hidden rounded-xl" }, /* @__PURE__ */ React.createElement(
-      "img",
-      {
-        src: property.image,
-        alt: property.titre,
-        className: "object-cover h-full w-full group-hover:scale-105 transition duration-300"
-      }
-    ), /* @__PURE__ */ React.createElement("div", { className: "absolute top-3 right-3 text-white" }, /* @__PURE__ */ React.createElement(Heart, { className: "w-6 h-6 hover:fill-rose-500 transition active:scale-95" })), property.certified && /* @__PURE__ */ React.createElement("div", { className: "absolute top-3 left-3 bg-white/90 px-2 py-1 rounded-md shadow-sm flex items-center gap-1 text-xs font-bold text-slate-800" }, /* @__PURE__ */ React.createElement(ShieldCheck, { className: "w-4 h-4 text-emerald-600" }), "Certifi\xE9")), /* @__PURE__ */ React.createElement("div", { className: "font-semibold text-slate-900 text-lg mt-1 flex justify-between items-start" }, /* @__PURE__ */ React.createElement("span", null, property.quartier, ", ", property.commune), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1 font-normal" }, /* @__PURE__ */ React.createElement(Star, { className: "w-4 h-4 fill-slate-900" }), /* @__PURE__ */ React.createElement("span", null, "4.9"))), /* @__PURE__ */ React.createElement("div", { className: "font-light text-slate-500" }, "Vendeur: ", property.vendeur), /* @__PURE__ */ React.createElement("div", { className: "font-light text-slate-500" }, "Superficie: ", property.superficie, " m\xB2"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-row items-center gap-1 mt-1" }, /* @__PURE__ */ React.createElement("div", { className: "font-semibold text-slate-900" }, "$", property.prix), /* @__PURE__ */ React.createElement("div", { className: "font-light text-slate-500" }, "total"))));
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, { to: `/property/${property.id}`, className: "col-span-1 cursor-pointer group", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex flex-col gap-2 w-full", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "aspect-square w-full relative overflow-hidden rounded-xl", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+          "img",
+          {
+            src: property.image,
+            alt: property.titre,
+            className: "object-cover h-full w-full group-hover:scale-105 transition duration-300"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-3 right-3 text-white", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Heart, { className: "w-6 h-6 hover:fill-rose-500 transition active:scale-95" }) }),
+        property.certified && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "absolute top-3 left-3 bg-white/90 px-2 py-1 rounded-md shadow-sm flex items-center gap-1 text-xs font-bold text-slate-800", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShieldCheck, { className: "w-4 h-4 text-emerald-600" }),
+          "Certifi\xE9"
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "font-semibold text-slate-900 text-lg mt-1 flex justify-between items-start", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+          property.quartier,
+          ", ",
+          property.commune
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1 font-normal", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Star, { className: "w-4 h-4 fill-slate-900" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "4.9" })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "font-light text-slate-500", children: [
+        "Vendeur: ",
+        property.vendeur
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "font-light text-slate-500", children: [
+        "Superficie: ",
+        property.superficie,
+        " m\xB2"
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex flex-row items-center gap-1 mt-1", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "font-semibold text-slate-900", children: [
+          "$",
+          property.prix
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "font-light text-slate-500", children: "total" })
+      ] })
+    ] }) });
   };
   var Home = () => {
     const properties = [
@@ -24891,7 +24899,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         image: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&q=80"
       }
     ];
-    return /* @__PURE__ */ React.createElement("div", { className: "pb-20" }, /* @__PURE__ */ React.createElement(Categories, null), /* @__PURE__ */ React.createElement("div", { className: "max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4 mt-8" }, /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8" }, properties.map((property) => /* @__PURE__ */ React.createElement(PropertyCard, { key: property.id, property })))));
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "pb-20", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Categories, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4 mt-8", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8", children: properties.map((property) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PropertyCard, { property }, property.id)) }) })
+    ] });
   };
   var Home_default = Home;
 
@@ -24899,7 +24910,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   var import_react28 = __toESM(require_react(), 1);
 
   // node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs
-  var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime4 = __toESM(require_jsx_runtime(), 1);
   var import_react14 = __toESM(require_react(), 1);
 
   // node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs
@@ -24917,7 +24928,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   }
 
   // node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs
-  var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
   var React13 = __toESM(require_react(), 1);
   var import_react10 = __toESM(require_react(), 1);
 
@@ -24926,7 +24937,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   var PresenceContext = (0, import_react7.createContext)(null);
 
   // node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs
-  var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
   var React12 = __toESM(require_react(), 1);
   var import_react9 = __toESM(require_react(), 1);
 
@@ -24994,7 +25005,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         document.head.removeChild(style);
       };
     }, [isPresent]);
-    return (0, import_jsx_runtime.jsx)(PopChildMeasure, { isPresent, childRef: ref, sizeRef: size, children: React12.cloneElement(children, { ref }) });
+    return (0, import_jsx_runtime2.jsx)(PopChildMeasure, { isPresent, childRef: ref, sizeRef: size, children: React12.cloneElement(children, { ref }) });
   }
 
   // node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs
@@ -25035,9 +25046,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       !isPresent && !presenceChildren.size && onExitComplete && onExitComplete();
     }, [isPresent]);
     if (mode === "popLayout") {
-      children = (0, import_jsx_runtime2.jsx)(PopChild, { isPresent, children });
+      children = (0, import_jsx_runtime3.jsx)(PopChild, { isPresent, children });
     }
-    return (0, import_jsx_runtime2.jsx)(PresenceContext.Provider, { value: context, children });
+    return (0, import_jsx_runtime3.jsx)(PresenceContext.Provider, { value: context, children });
   };
   function newChildrenMap() {
     return /* @__PURE__ */ new Map();
@@ -25126,7 +25137,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       console.warn(`You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.`);
     }
     const { forceRender } = (0, import_react14.useContext)(LayoutGroupContext);
-    return (0, import_jsx_runtime3.jsx)(import_jsx_runtime3.Fragment, { children: renderedChildren.map((child) => {
+    return (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, { children: renderedChildren.map((child) => {
       const key = getChildKey(child);
       const isPresent = propagate && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key);
       const onExit = () => {
@@ -25147,7 +25158,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           onExitComplete && onExitComplete();
         }
       };
-      return (0, import_jsx_runtime3.jsx)(PresenceChild, { isPresent, initial: !isInitialRender.current || initial ? void 0 : false, custom: isPresent ? void 0 : custom, presenceAffectsLayout, mode, onExitComplete: isPresent ? void 0 : onExit, children: child }, key);
+      return (0, import_jsx_runtime4.jsx)(PresenceChild, { isPresent, initial: !isInitialRender.current || initial ? void 0 : false, custom: isPresent ? void 0 : custom, presenceAffectsLayout, mode, onExitComplete: isPresent ? void 0 : onExit, children: child }, key);
     }) });
   };
 
@@ -25478,7 +25489,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   }
 
   // node_modules/framer-motion/dist/es/motion/index.mjs
-  var import_jsx_runtime4 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime5 = __toESM(require_jsx_runtime(), 1);
   var import_react21 = __toESM(require_react(), 1);
 
   // node_modules/framer-motion/dist/es/context/MotionContext/index.mjs
@@ -25704,7 +25715,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         MeasureLayout2 = layoutProjection.MeasureLayout;
         context.visualElement = useVisualElement(Component6, visualState, configAndProps, createVisualElement, layoutProjection.ProjectionNode);
       }
-      return (0, import_jsx_runtime4.jsxs)(MotionContext.Provider, { value: context, children: [MeasureLayout2 && context.visualElement ? (0, import_jsx_runtime4.jsx)(MeasureLayout2, { visualElement: context.visualElement, ...configAndProps }) : null, useRender(Component6, props, useMotionRef(visualState, context.visualElement, externalRef), visualState, isStatic, context.visualElement)] });
+      return (0, import_jsx_runtime5.jsxs)(MotionContext.Provider, { value: context, children: [MeasureLayout2 && context.visualElement ? (0, import_jsx_runtime5.jsx)(MeasureLayout2, { visualElement: context.visualElement, ...configAndProps }) : null, useRender(Component6, props, useMotionRef(visualState, context.visualElement, externalRef), visualState, isStatic, context.visualElement)] });
     }
     MotionComponent.displayName = `motion.${typeof Component6 === "string" ? Component6 : `create(${(_b = (_a = Component6.displayName) !== null && _a !== void 0 ? _a : Component6.name) !== null && _b !== void 0 ? _b : ""})`}`;
     const ForwardRefMotionComponent = (0, import_react21.forwardRef)(MotionComponent);
@@ -26162,8 +26173,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   }
 
   // node_modules/framer-motion/dist/es/render/svg/utils/transform-origin.mjs
-  function calcOrigin(origin, offset, size) {
-    return typeof origin === "string" ? origin : px.transform(offset + size * origin);
+  function calcOrigin(origin2, offset, size) {
+    return typeof origin2 === "string" ? origin2 : px.transform(offset + size * origin2);
   }
   function calcSVGTransformOrigin(dimensions, originX, originY) {
     const pxOriginX = calcOrigin(originX, dimensions.x, dimensions.width);
@@ -27812,8 +27823,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       if (!positionalKeys.has(name) || unresolvedKeyframes.length !== 2) {
         return;
       }
-      const [origin, target] = unresolvedKeyframes;
-      const originType = findDimensionValueType(origin);
+      const [origin2, target] = unresolvedKeyframes;
+      const originType = findDimensionValueType(origin2);
       const targetType = findDimensionValueType(target);
       if (originType === targetType)
         return;
@@ -28107,11 +28118,11 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
 
   // node_modules/framer-motion/dist/es/utils/mix/visibility.mjs
   var invisibleValues = /* @__PURE__ */ new Set(["none", "hidden"]);
-  function mixVisibility(origin, target) {
-    if (invisibleValues.has(origin)) {
-      return (p) => p <= 0 ? origin : target;
+  function mixVisibility(origin2, target) {
+    if (invisibleValues.has(origin2)) {
+      return (p) => p <= 0 ? origin2 : target;
     } else {
-      return (p) => p >= 1 ? target : origin;
+      return (p) => p >= 1 ? target : origin2;
     }
   }
 
@@ -28157,32 +28168,32 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       return output2;
     };
   }
-  function matchOrder(origin, target) {
+  function matchOrder(origin2, target) {
     var _a;
     const orderedOrigin = [];
     const pointers = { color: 0, var: 0, number: 0 };
     for (let i = 0; i < target.values.length; i++) {
       const type = target.types[i];
-      const originIndex = origin.indexes[type][pointers[type]];
-      const originValue = (_a = origin.values[originIndex]) !== null && _a !== void 0 ? _a : 0;
+      const originIndex = origin2.indexes[type][pointers[type]];
+      const originValue = (_a = origin2.values[originIndex]) !== null && _a !== void 0 ? _a : 0;
       orderedOrigin[i] = originValue;
       pointers[type]++;
     }
     return orderedOrigin;
   }
-  var mixComplex = (origin, target) => {
+  var mixComplex = (origin2, target) => {
     const template = complex.createTransformer(target);
-    const originStats = analyseComplexValue(origin);
+    const originStats = analyseComplexValue(origin2);
     const targetStats = analyseComplexValue(target);
     const canInterpolate = originStats.indexes.var.length === targetStats.indexes.var.length && originStats.indexes.color.length === targetStats.indexes.color.length && originStats.indexes.number.length >= targetStats.indexes.number.length;
     if (canInterpolate) {
-      if (invisibleValues.has(origin) && !targetStats.values.length || invisibleValues.has(target) && !originStats.values.length) {
-        return mixVisibility(origin, target);
+      if (invisibleValues.has(origin2) && !targetStats.values.length || invisibleValues.has(target) && !originStats.values.length) {
+        return mixVisibility(origin2, target);
       }
       return pipe(mixArray(matchOrder(originStats, targetStats), targetStats.values), template);
     } else {
-      warning2(true, `Complex values '${origin}' and '${target}' too different to mix. Ensure all colors are of the same type, and that each contains the same quantity of number and color values. Falling back to instant transition.`);
-      return mixImmediate(origin, target);
+      warning2(true, `Complex values '${origin2}' and '${target}' too different to mix. Ensure all colors are of the same type, and that each contains the same quantity of number and color values. Falling back to instant transition.`);
+      return mixImmediate(origin2, target);
     }
   };
 
@@ -28349,16 +28360,16 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       bounce
     } : optionsOrVisualDuration;
     let { restSpeed, restDelta } = options;
-    const origin = options.keyframes[0];
+    const origin2 = options.keyframes[0];
     const target = options.keyframes[options.keyframes.length - 1];
-    const state = { done: false, value: origin };
+    const state = { done: false, value: origin2 };
     const { stiffness, damping, mass, duration, velocity, isResolvedFromDuration } = getSpringOptions({
       ...options,
       velocity: -millisecondsToSeconds(options.velocity || 0)
     });
     const initialVelocity = velocity || 0;
     const dampingRatio = damping / (2 * Math.sqrt(stiffness * mass));
-    const initialDelta = target - origin;
+    const initialDelta = target - origin2;
     const undampedAngularFreq = millisecondsToSeconds(Math.sqrt(stiffness / mass));
     const isGranularScale = Math.abs(initialDelta) < 5;
     restSpeed || (restSpeed = isGranularScale ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default);
@@ -28409,10 +28420,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
 
   // node_modules/framer-motion/dist/es/animation/generators/inertia.mjs
   function inertia({ keyframes: keyframes2, velocity = 0, power = 0.8, timeConstant = 325, bounceDamping = 10, bounceStiffness = 500, modifyTarget, min, max, restDelta = 0.5, restSpeed }) {
-    const origin = keyframes2[0];
+    const origin2 = keyframes2[0];
     const state = {
       done: false,
-      value: origin
+      value: origin2
     };
     const isOutOfBounds = (v) => min !== void 0 && v < min || max !== void 0 && v > max;
     const nearestBoundary = (v) => {
@@ -28423,10 +28434,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       return Math.abs(min - v) < Math.abs(max - v) ? min : max;
     };
     let amplitude = power * velocity;
-    const ideal = origin + amplitude;
+    const ideal = origin2 + amplitude;
     const target = modifyTarget === void 0 ? ideal : modifyTarget(ideal);
     if (target !== ideal)
-      amplitude = target - origin;
+      amplitude = target - origin2;
     const calcDelta = (t) => -amplitude * Math.exp(-t / timeConstant);
     const calcLatest = (t) => target + calcDelta(t);
     const applyFriction = (t) => {
@@ -29813,8 +29824,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   function isNear(value, target, maxDistance) {
     return Math.abs(value - target) <= maxDistance;
   }
-  function calcAxisDelta(delta, source, target, origin = 0.5) {
-    delta.origin = origin;
+  function calcAxisDelta(delta, source, target, origin2 = 0.5) {
+    delta.origin = origin2;
     delta.originPoint = mixNumber(source.min, source.max, delta.origin);
     delta.scale = calcLength(target) / calcLength(source);
     delta.translate = mixNumber(target.min, target.max, delta.origin) - delta.originPoint;
@@ -29825,9 +29836,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       delta.translate = 0;
     }
   }
-  function calcBoxDelta(delta, source, target, origin) {
-    calcAxisDelta(delta.x, source.x, target.x, origin ? origin.originX : void 0);
-    calcAxisDelta(delta.y, source.y, target.y, origin ? origin.originY : void 0);
+  function calcBoxDelta(delta, source, target, origin2) {
+    calcAxisDelta(delta.x, source.x, target.x, origin2 ? origin2.originX : void 0);
+    calcAxisDelta(delta.y, source.y, target.y, origin2 ? origin2.originY : void 0);
   }
   function calcRelativeAxis(target, relative, parent) {
     target.min = parent.min + relative.min;
@@ -29882,15 +29893,15 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     };
   }
   function calcOrigin2(source, target) {
-    let origin = 0.5;
+    let origin2 = 0.5;
     const sourceLength = calcLength(source);
     const targetLength = calcLength(target);
     if (targetLength > sourceLength) {
-      origin = progress(target.min, target.max - sourceLength, source.min);
+      origin2 = progress(target.min, target.max - sourceLength, source.min);
     } else if (sourceLength > targetLength) {
-      origin = progress(source.min, source.max - targetLength, target.min);
+      origin2 = progress(source.min, source.max - targetLength, target.min);
     }
-    return clamp(0, 1, origin);
+    return clamp(0, 1, origin2);
   }
   function rebaseAxisConstraints(layout2, constraints) {
     const relativeConstraints = {};
@@ -30493,7 +30504,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   };
 
   // node_modules/framer-motion/dist/es/motion/features/layout/MeasureLayout.mjs
-  var import_jsx_runtime5 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime6 = __toESM(require_jsx_runtime(), 1);
   var import_react26 = __toESM(require_react(), 1);
 
   // node_modules/framer-motion/dist/es/projection/node/state.mjs
@@ -30641,7 +30652,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   function MeasureLayout(props) {
     const [isPresent, safeToRemove] = usePresence();
     const layoutGroup = (0, import_react26.useContext)(LayoutGroupContext);
-    return (0, import_jsx_runtime5.jsx)(MeasureLayoutWithContext, { ...props, layoutGroup, switchLayoutGroup: (0, import_react26.useContext)(SwitchLayoutGroupContext), isPresent, safeToRemove });
+    return (0, import_jsx_runtime6.jsx)(MeasureLayoutWithContext, { ...props, layoutGroup, switchLayoutGroup: (0, import_react26.useContext)(SwitchLayoutGroupContext), isPresent, safeToRemove });
   }
   var defaultScaleCorrectors = {
     borderRadius: {
@@ -30789,7 +30800,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }
     return point;
   }
-  function removeAxisDelta(axis, translate = 0, scale2 = 1, origin = 0.5, boxScale, originAxis = axis, sourceAxis = axis) {
+  function removeAxisDelta(axis, translate = 0, scale2 = 1, origin2 = 0.5, boxScale, originAxis = axis, sourceAxis = axis) {
     if (percent.test(translate)) {
       translate = parseFloat(translate);
       const relativeProgress = mixNumber(sourceAxis.min, sourceAxis.max, translate / 100);
@@ -30797,14 +30808,14 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }
     if (typeof translate !== "number")
       return;
-    let originPoint = mixNumber(originAxis.min, originAxis.max, origin);
+    let originPoint = mixNumber(originAxis.min, originAxis.max, origin2);
     if (axis === originAxis)
       originPoint -= translate;
     axis.min = removePointDelta(axis.min, translate, scale2, originPoint, boxScale);
     axis.max = removePointDelta(axis.max, translate, scale2, originPoint, boxScale);
   }
-  function removeAxisTransforms(axis, transforms, [key, scaleKey, originKey], origin, sourceAxis) {
-    removeAxisDelta(axis, transforms[key], transforms[scaleKey], transforms[originKey], transforms.scale, origin, sourceAxis);
+  function removeAxisTransforms(axis, transforms, [key, scaleKey, originKey], origin2, sourceAxis) {
+    removeAxisDelta(axis, transforms[key], transforms[scaleKey], transforms[originKey], transforms.scale, origin2, sourceAxis);
   }
   var xKeys = ["x", "scaleX", "originX"];
   var yKeys = ["y", "scaleY", "originY"];
@@ -32791,7 +32802,2852 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   // node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs
   var motion = /* @__PURE__ */ createDOMMotionComponentProxy(createMotionComponent);
 
+  // node_modules/axios/lib/helpers/bind.js
+  function bind(fn, thisArg) {
+    return function wrap() {
+      return fn.apply(thisArg, arguments);
+    };
+  }
+
+  // node_modules/axios/lib/utils.js
+  var { toString } = Object.prototype;
+  var { getPrototypeOf } = Object;
+  var { iterator, toStringTag } = Symbol;
+  var kindOf = /* @__PURE__ */ ((cache) => (thing) => {
+    const str = toString.call(thing);
+    return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
+  })(/* @__PURE__ */ Object.create(null));
+  var kindOfTest = (type) => {
+    type = type.toLowerCase();
+    return (thing) => kindOf(thing) === type;
+  };
+  var typeOfTest = (type) => (thing) => typeof thing === type;
+  var { isArray } = Array;
+  var isUndefined = typeOfTest("undefined");
+  function isBuffer(val) {
+    return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor) && isFunction(val.constructor.isBuffer) && val.constructor.isBuffer(val);
+  }
+  var isArrayBuffer = kindOfTest("ArrayBuffer");
+  function isArrayBufferView(val) {
+    let result;
+    if (typeof ArrayBuffer !== "undefined" && ArrayBuffer.isView) {
+      result = ArrayBuffer.isView(val);
+    } else {
+      result = val && val.buffer && isArrayBuffer(val.buffer);
+    }
+    return result;
+  }
+  var isString = typeOfTest("string");
+  var isFunction = typeOfTest("function");
+  var isNumber = typeOfTest("number");
+  var isObject = (thing) => thing !== null && typeof thing === "object";
+  var isBoolean = (thing) => thing === true || thing === false;
+  var isPlainObject = (val) => {
+    if (kindOf(val) !== "object") {
+      return false;
+    }
+    const prototype2 = getPrototypeOf(val);
+    return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
+  };
+  var isEmptyObject = (val) => {
+    if (!isObject(val) || isBuffer(val)) {
+      return false;
+    }
+    try {
+      return Object.keys(val).length === 0 && Object.getPrototypeOf(val) === Object.prototype;
+    } catch (e) {
+      return false;
+    }
+  };
+  var isDate = kindOfTest("Date");
+  var isFile = kindOfTest("File");
+  var isReactNativeBlob = (value) => {
+    return !!(value && typeof value.uri !== "undefined");
+  };
+  var isReactNative = (formData) => formData && typeof formData.getParts !== "undefined";
+  var isBlob = kindOfTest("Blob");
+  var isFileList = kindOfTest("FileList");
+  var isStream = (val) => isObject(val) && isFunction(val.pipe);
+  function getGlobal() {
+    if (typeof globalThis !== "undefined") return globalThis;
+    if (typeof self !== "undefined") return self;
+    if (typeof window !== "undefined") return window;
+    if (typeof global !== "undefined") return global;
+    return {};
+  }
+  var G = getGlobal();
+  var FormDataCtor = typeof G.FormData !== "undefined" ? G.FormData : void 0;
+  var isFormData = (thing) => {
+    if (!thing) return false;
+    if (FormDataCtor && thing instanceof FormDataCtor) return true;
+    const proto = getPrototypeOf(thing);
+    if (!proto || proto === Object.prototype) return false;
+    if (!isFunction(thing.append)) return false;
+    const kind = kindOf(thing);
+    return kind === "formdata" || // detect form-data instance
+    kind === "object" && isFunction(thing.toString) && thing.toString() === "[object FormData]";
+  };
+  var isURLSearchParams = kindOfTest("URLSearchParams");
+  var [isReadableStream, isRequest, isResponse, isHeaders] = [
+    "ReadableStream",
+    "Request",
+    "Response",
+    "Headers"
+  ].map(kindOfTest);
+  var trim = (str) => {
+    return str.trim ? str.trim() : str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
+  };
+  function forEach(obj, fn, { allOwnKeys = false } = {}) {
+    if (obj === null || typeof obj === "undefined") {
+      return;
+    }
+    let i;
+    let l;
+    if (typeof obj !== "object") {
+      obj = [obj];
+    }
+    if (isArray(obj)) {
+      for (i = 0, l = obj.length; i < l; i++) {
+        fn.call(null, obj[i], i, obj);
+      }
+    } else {
+      if (isBuffer(obj)) {
+        return;
+      }
+      const keys = allOwnKeys ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
+      const len = keys.length;
+      let key;
+      for (i = 0; i < len; i++) {
+        key = keys[i];
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+  function findKey(obj, key) {
+    if (isBuffer(obj)) {
+      return null;
+    }
+    key = key.toLowerCase();
+    const keys = Object.keys(obj);
+    let i = keys.length;
+    let _key;
+    while (i-- > 0) {
+      _key = keys[i];
+      if (key === _key.toLowerCase()) {
+        return _key;
+      }
+    }
+    return null;
+  }
+  var _global = (() => {
+    if (typeof globalThis !== "undefined") return globalThis;
+    return typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : global;
+  })();
+  var isContextDefined = (context) => !isUndefined(context) && context !== _global;
+  function merge() {
+    const { caseless, skipUndefined } = isContextDefined(this) && this || {};
+    const result = {};
+    const assignValue = (val, key) => {
+      if (key === "__proto__" || key === "constructor" || key === "prototype") {
+        return;
+      }
+      const targetKey = caseless && findKey(result, key) || key;
+      if (isPlainObject(result[targetKey]) && isPlainObject(val)) {
+        result[targetKey] = merge(result[targetKey], val);
+      } else if (isPlainObject(val)) {
+        result[targetKey] = merge({}, val);
+      } else if (isArray(val)) {
+        result[targetKey] = val.slice();
+      } else if (!skipUndefined || !isUndefined(val)) {
+        result[targetKey] = val;
+      }
+    };
+    for (let i = 0, l = arguments.length; i < l; i++) {
+      arguments[i] && forEach(arguments[i], assignValue);
+    }
+    return result;
+  }
+  var extend = (a, b2, thisArg, { allOwnKeys } = {}) => {
+    forEach(
+      b2,
+      (val, key) => {
+        if (thisArg && isFunction(val)) {
+          Object.defineProperty(a, key, {
+            value: bind(val, thisArg),
+            writable: true,
+            enumerable: true,
+            configurable: true
+          });
+        } else {
+          Object.defineProperty(a, key, {
+            value: val,
+            writable: true,
+            enumerable: true,
+            configurable: true
+          });
+        }
+      },
+      { allOwnKeys }
+    );
+    return a;
+  };
+  var stripBOM = (content) => {
+    if (content.charCodeAt(0) === 65279) {
+      content = content.slice(1);
+    }
+    return content;
+  };
+  var inherits = (constructor, superConstructor, props, descriptors) => {
+    constructor.prototype = Object.create(superConstructor.prototype, descriptors);
+    Object.defineProperty(constructor.prototype, "constructor", {
+      value: constructor,
+      writable: true,
+      enumerable: false,
+      configurable: true
+    });
+    Object.defineProperty(constructor, "super", {
+      value: superConstructor.prototype
+    });
+    props && Object.assign(constructor.prototype, props);
+  };
+  var toFlatObject = (sourceObj, destObj, filter3, propFilter) => {
+    let props;
+    let i;
+    let prop;
+    const merged = {};
+    destObj = destObj || {};
+    if (sourceObj == null) return destObj;
+    do {
+      props = Object.getOwnPropertyNames(sourceObj);
+      i = props.length;
+      while (i-- > 0) {
+        prop = props[i];
+        if ((!propFilter || propFilter(prop, sourceObj, destObj)) && !merged[prop]) {
+          destObj[prop] = sourceObj[prop];
+          merged[prop] = true;
+        }
+      }
+      sourceObj = filter3 !== false && getPrototypeOf(sourceObj);
+    } while (sourceObj && (!filter3 || filter3(sourceObj, destObj)) && sourceObj !== Object.prototype);
+    return destObj;
+  };
+  var endsWith = (str, searchString, position) => {
+    str = String(str);
+    if (position === void 0 || position > str.length) {
+      position = str.length;
+    }
+    position -= searchString.length;
+    const lastIndex = str.indexOf(searchString, position);
+    return lastIndex !== -1 && lastIndex === position;
+  };
+  var toArray = (thing) => {
+    if (!thing) return null;
+    if (isArray(thing)) return thing;
+    let i = thing.length;
+    if (!isNumber(i)) return null;
+    const arr = new Array(i);
+    while (i-- > 0) {
+      arr[i] = thing[i];
+    }
+    return arr;
+  };
+  var isTypedArray = /* @__PURE__ */ ((TypedArray) => {
+    return (thing) => {
+      return TypedArray && thing instanceof TypedArray;
+    };
+  })(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
+  var forEachEntry = (obj, fn) => {
+    const generator = obj && obj[iterator];
+    const _iterator = generator.call(obj);
+    let result;
+    while ((result = _iterator.next()) && !result.done) {
+      const pair = result.value;
+      fn.call(obj, pair[0], pair[1]);
+    }
+  };
+  var matchAll = (regExp, str) => {
+    let matches;
+    const arr = [];
+    while ((matches = regExp.exec(str)) !== null) {
+      arr.push(matches);
+    }
+    return arr;
+  };
+  var isHTMLForm = kindOfTest("HTMLFormElement");
+  var toCamelCase2 = (str) => {
+    return str.toLowerCase().replace(/[-_\s]([a-z\d])(\w*)/g, function replacer(m, p1, p2) {
+      return p1.toUpperCase() + p2;
+    });
+  };
+  var hasOwnProperty = (({ hasOwnProperty: hasOwnProperty2 }) => (obj, prop) => hasOwnProperty2.call(obj, prop))(Object.prototype);
+  var isRegExp = kindOfTest("RegExp");
+  var reduceDescriptors = (obj, reducer) => {
+    const descriptors = Object.getOwnPropertyDescriptors(obj);
+    const reducedDescriptors = {};
+    forEach(descriptors, (descriptor, name) => {
+      let ret;
+      if ((ret = reducer(descriptor, name, obj)) !== false) {
+        reducedDescriptors[name] = ret || descriptor;
+      }
+    });
+    Object.defineProperties(obj, reducedDescriptors);
+  };
+  var freezeMethods = (obj) => {
+    reduceDescriptors(obj, (descriptor, name) => {
+      if (isFunction(obj) && ["arguments", "caller", "callee"].indexOf(name) !== -1) {
+        return false;
+      }
+      const value = obj[name];
+      if (!isFunction(value)) return;
+      descriptor.enumerable = false;
+      if ("writable" in descriptor) {
+        descriptor.writable = false;
+        return;
+      }
+      if (!descriptor.set) {
+        descriptor.set = () => {
+          throw Error("Can not rewrite read-only method '" + name + "'");
+        };
+      }
+    });
+  };
+  var toObjectSet = (arrayOrString, delimiter) => {
+    const obj = {};
+    const define = (arr) => {
+      arr.forEach((value) => {
+        obj[value] = true;
+      });
+    };
+    isArray(arrayOrString) ? define(arrayOrString) : define(String(arrayOrString).split(delimiter));
+    return obj;
+  };
+  var noop2 = () => {
+  };
+  var toFiniteNumber = (value, defaultValue) => {
+    return value != null && Number.isFinite(value = +value) ? value : defaultValue;
+  };
+  function isSpecCompliantForm(thing) {
+    return !!(thing && isFunction(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
+  }
+  var toJSONObject = (obj) => {
+    const stack = new Array(10);
+    const visit = (source, i) => {
+      if (isObject(source)) {
+        if (stack.indexOf(source) >= 0) {
+          return;
+        }
+        if (isBuffer(source)) {
+          return source;
+        }
+        if (!("toJSON" in source)) {
+          stack[i] = source;
+          const target = isArray(source) ? [] : {};
+          forEach(source, (value, key) => {
+            const reducedValue = visit(value, i + 1);
+            !isUndefined(reducedValue) && (target[key] = reducedValue);
+          });
+          stack[i] = void 0;
+          return target;
+        }
+      }
+      return source;
+    };
+    return visit(obj, 0);
+  };
+  var isAsyncFn = kindOfTest("AsyncFunction");
+  var isThenable = (thing) => thing && (isObject(thing) || isFunction(thing)) && isFunction(thing.then) && isFunction(thing.catch);
+  var _setImmediate = ((setImmediateSupported, postMessageSupported) => {
+    if (setImmediateSupported) {
+      return setImmediate;
+    }
+    return postMessageSupported ? ((token, callbacks) => {
+      _global.addEventListener(
+        "message",
+        ({ source, data: data2 }) => {
+          if (source === _global && data2 === token) {
+            callbacks.length && callbacks.shift()();
+          }
+        },
+        false
+      );
+      return (cb) => {
+        callbacks.push(cb);
+        _global.postMessage(token, "*");
+      };
+    })(`axios@${Math.random()}`, []) : (cb) => setTimeout(cb);
+  })(typeof setImmediate === "function", isFunction(_global.postMessage));
+  var asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
+  var isIterable = (thing) => thing != null && isFunction(thing[iterator]);
+  var utils_default = {
+    isArray,
+    isArrayBuffer,
+    isBuffer,
+    isFormData,
+    isArrayBufferView,
+    isString,
+    isNumber,
+    isBoolean,
+    isObject,
+    isPlainObject,
+    isEmptyObject,
+    isReadableStream,
+    isRequest,
+    isResponse,
+    isHeaders,
+    isUndefined,
+    isDate,
+    isFile,
+    isReactNativeBlob,
+    isReactNative,
+    isBlob,
+    isRegExp,
+    isFunction,
+    isStream,
+    isURLSearchParams,
+    isTypedArray,
+    isFileList,
+    forEach,
+    merge,
+    extend,
+    trim,
+    stripBOM,
+    inherits,
+    toFlatObject,
+    kindOf,
+    kindOfTest,
+    endsWith,
+    toArray,
+    forEachEntry,
+    matchAll,
+    isHTMLForm,
+    hasOwnProperty,
+    hasOwnProp: hasOwnProperty,
+    // an alias to avoid ESLint no-prototype-builtins detection
+    reduceDescriptors,
+    freezeMethods,
+    toObjectSet,
+    toCamelCase: toCamelCase2,
+    noop: noop2,
+    toFiniteNumber,
+    findKey,
+    global: _global,
+    isContextDefined,
+    isSpecCompliantForm,
+    toJSONObject,
+    isAsyncFn,
+    isThenable,
+    setImmediate: _setImmediate,
+    asap,
+    isIterable
+  };
+
+  // node_modules/axios/lib/core/AxiosError.js
+  var AxiosError = class _AxiosError extends Error {
+    static from(error, code, config, request, response, customProps) {
+      const axiosError = new _AxiosError(error.message, code || error.code, config, request, response);
+      axiosError.cause = error;
+      axiosError.name = error.name;
+      if (error.status != null && axiosError.status == null) {
+        axiosError.status = error.status;
+      }
+      customProps && Object.assign(axiosError, customProps);
+      return axiosError;
+    }
+    /**
+     * Create an Error with the specified message, config, error code, request and response.
+     *
+     * @param {string} message The error message.
+     * @param {string} [code] The error code (for example, 'ECONNABORTED').
+     * @param {Object} [config] The config.
+     * @param {Object} [request] The request.
+     * @param {Object} [response] The response.
+     *
+     * @returns {Error} The created error.
+     */
+    constructor(message, code, config, request, response) {
+      super(message);
+      Object.defineProperty(this, "message", {
+        value: message,
+        enumerable: true,
+        writable: true,
+        configurable: true
+      });
+      this.name = "AxiosError";
+      this.isAxiosError = true;
+      code && (this.code = code);
+      config && (this.config = config);
+      request && (this.request = request);
+      if (response) {
+        this.response = response;
+        this.status = response.status;
+      }
+    }
+    toJSON() {
+      return {
+        // Standard
+        message: this.message,
+        name: this.name,
+        // Microsoft
+        description: this.description,
+        number: this.number,
+        // Mozilla
+        fileName: this.fileName,
+        lineNumber: this.lineNumber,
+        columnNumber: this.columnNumber,
+        stack: this.stack,
+        // Axios
+        config: utils_default.toJSONObject(this.config),
+        code: this.code,
+        status: this.status
+      };
+    }
+  };
+  AxiosError.ERR_BAD_OPTION_VALUE = "ERR_BAD_OPTION_VALUE";
+  AxiosError.ERR_BAD_OPTION = "ERR_BAD_OPTION";
+  AxiosError.ECONNABORTED = "ECONNABORTED";
+  AxiosError.ETIMEDOUT = "ETIMEDOUT";
+  AxiosError.ERR_NETWORK = "ERR_NETWORK";
+  AxiosError.ERR_FR_TOO_MANY_REDIRECTS = "ERR_FR_TOO_MANY_REDIRECTS";
+  AxiosError.ERR_DEPRECATED = "ERR_DEPRECATED";
+  AxiosError.ERR_BAD_RESPONSE = "ERR_BAD_RESPONSE";
+  AxiosError.ERR_BAD_REQUEST = "ERR_BAD_REQUEST";
+  AxiosError.ERR_CANCELED = "ERR_CANCELED";
+  AxiosError.ERR_NOT_SUPPORT = "ERR_NOT_SUPPORT";
+  AxiosError.ERR_INVALID_URL = "ERR_INVALID_URL";
+  AxiosError.ERR_FORM_DATA_DEPTH_EXCEEDED = "ERR_FORM_DATA_DEPTH_EXCEEDED";
+  var AxiosError_default = AxiosError;
+
+  // node_modules/axios/lib/helpers/null.js
+  var null_default = null;
+
+  // node_modules/axios/lib/helpers/toFormData.js
+  function isVisitable(thing) {
+    return utils_default.isPlainObject(thing) || utils_default.isArray(thing);
+  }
+  function removeBrackets(key) {
+    return utils_default.endsWith(key, "[]") ? key.slice(0, -2) : key;
+  }
+  function renderKey(path, key, dots) {
+    if (!path) return key;
+    return path.concat(key).map(function each(token, i) {
+      token = removeBrackets(token);
+      return !dots && i ? "[" + token + "]" : token;
+    }).join(dots ? "." : "");
+  }
+  function isFlatArray(arr) {
+    return utils_default.isArray(arr) && !arr.some(isVisitable);
+  }
+  var predicates = utils_default.toFlatObject(utils_default, {}, null, function filter2(prop) {
+    return /^is[A-Z]/.test(prop);
+  });
+  function toFormData(obj, formData, options) {
+    if (!utils_default.isObject(obj)) {
+      throw new TypeError("target must be an object");
+    }
+    formData = formData || new (null_default || FormData)();
+    options = utils_default.toFlatObject(
+      options,
+      {
+        metaTokens: true,
+        dots: false,
+        indexes: false
+      },
+      false,
+      function defined(option, source) {
+        return !utils_default.isUndefined(source[option]);
+      }
+    );
+    const metaTokens = options.metaTokens;
+    const visitor = options.visitor || defaultVisitor;
+    const dots = options.dots;
+    const indexes = options.indexes;
+    const _Blob = options.Blob || typeof Blob !== "undefined" && Blob;
+    const maxDepth2 = options.maxDepth === void 0 ? 100 : options.maxDepth;
+    const useBlob = _Blob && utils_default.isSpecCompliantForm(formData);
+    if (!utils_default.isFunction(visitor)) {
+      throw new TypeError("visitor must be a function");
+    }
+    function convertValue(value) {
+      if (value === null) return "";
+      if (utils_default.isDate(value)) {
+        return value.toISOString();
+      }
+      if (utils_default.isBoolean(value)) {
+        return value.toString();
+      }
+      if (!useBlob && utils_default.isBlob(value)) {
+        throw new AxiosError_default("Blob is not supported. Use a Buffer instead.");
+      }
+      if (utils_default.isArrayBuffer(value) || utils_default.isTypedArray(value)) {
+        return useBlob && typeof Blob === "function" ? new Blob([value]) : Buffer.from(value);
+      }
+      return value;
+    }
+    function defaultVisitor(value, key, path) {
+      let arr = value;
+      if (utils_default.isReactNative(formData) && utils_default.isReactNativeBlob(value)) {
+        formData.append(renderKey(path, key, dots), convertValue(value));
+        return false;
+      }
+      if (value && !path && typeof value === "object") {
+        if (utils_default.endsWith(key, "{}")) {
+          key = metaTokens ? key : key.slice(0, -2);
+          value = JSON.stringify(value);
+        } else if (utils_default.isArray(value) && isFlatArray(value) || (utils_default.isFileList(value) || utils_default.endsWith(key, "[]")) && (arr = utils_default.toArray(value))) {
+          key = removeBrackets(key);
+          arr.forEach(function each(el, index) {
+            !(utils_default.isUndefined(el) || el === null) && formData.append(
+              // eslint-disable-next-line no-nested-ternary
+              indexes === true ? renderKey([key], index, dots) : indexes === null ? key : key + "[]",
+              convertValue(el)
+            );
+          });
+          return false;
+        }
+      }
+      if (isVisitable(value)) {
+        return true;
+      }
+      formData.append(renderKey(path, key, dots), convertValue(value));
+      return false;
+    }
+    const stack = [];
+    const exposedHelpers = Object.assign(predicates, {
+      defaultVisitor,
+      convertValue,
+      isVisitable
+    });
+    function build(value, path, depth = 0) {
+      if (utils_default.isUndefined(value)) return;
+      if (depth > maxDepth2) {
+        throw new AxiosError_default(
+          "Object is too deeply nested (" + depth + " levels). Max depth: " + maxDepth2,
+          AxiosError_default.ERR_FORM_DATA_DEPTH_EXCEEDED
+        );
+      }
+      if (stack.indexOf(value) !== -1) {
+        throw Error("Circular reference detected in " + path.join("."));
+      }
+      stack.push(value);
+      utils_default.forEach(value, function each(el, key) {
+        const result = !(utils_default.isUndefined(el) || el === null) && visitor.call(formData, el, utils_default.isString(key) ? key.trim() : key, path, exposedHelpers);
+        if (result === true) {
+          build(el, path ? path.concat(key) : [key], depth + 1);
+        }
+      });
+      stack.pop();
+    }
+    if (!utils_default.isObject(obj)) {
+      throw new TypeError("data must be an object");
+    }
+    build(obj);
+    return formData;
+  }
+  var toFormData_default = toFormData;
+
+  // node_modules/axios/lib/helpers/AxiosURLSearchParams.js
+  function encode(str) {
+    const charMap = {
+      "!": "%21",
+      "'": "%27",
+      "(": "%28",
+      ")": "%29",
+      "~": "%7E",
+      "%20": "+"
+    };
+    return encodeURIComponent(str).replace(/[!'()~]|%20/g, function replacer(match) {
+      return charMap[match];
+    });
+  }
+  function AxiosURLSearchParams(params, options) {
+    this._pairs = [];
+    params && toFormData_default(params, this, options);
+  }
+  var prototype = AxiosURLSearchParams.prototype;
+  prototype.append = function append(name, value) {
+    this._pairs.push([name, value]);
+  };
+  prototype.toString = function toString2(encoder) {
+    const _encode2 = encoder ? function(value) {
+      return encoder.call(this, value, encode);
+    } : encode;
+    return this._pairs.map(function each(pair) {
+      return _encode2(pair[0]) + "=" + _encode2(pair[1]);
+    }, "").join("&");
+  };
+  var AxiosURLSearchParams_default = AxiosURLSearchParams;
+
+  // node_modules/axios/lib/helpers/buildURL.js
+  function encode2(val) {
+    return encodeURIComponent(val).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+");
+  }
+  function buildURL(url, params, options) {
+    if (!params) {
+      return url;
+    }
+    const _encode2 = options && options.encode || encode2;
+    const _options = utils_default.isFunction(options) ? {
+      serialize: options
+    } : options;
+    const serializeFn = _options && _options.serialize;
+    let serializedParams;
+    if (serializeFn) {
+      serializedParams = serializeFn(params, _options);
+    } else {
+      serializedParams = utils_default.isURLSearchParams(params) ? params.toString() : new AxiosURLSearchParams_default(params, _options).toString(_encode2);
+    }
+    if (serializedParams) {
+      const hashmarkIndex = url.indexOf("#");
+      if (hashmarkIndex !== -1) {
+        url = url.slice(0, hashmarkIndex);
+      }
+      url += (url.indexOf("?") === -1 ? "?" : "&") + serializedParams;
+    }
+    return url;
+  }
+
+  // node_modules/axios/lib/core/InterceptorManager.js
+  var InterceptorManager = class {
+    constructor() {
+      this.handlers = [];
+    }
+    /**
+     * Add a new interceptor to the stack
+     *
+     * @param {Function} fulfilled The function to handle `then` for a `Promise`
+     * @param {Function} rejected The function to handle `reject` for a `Promise`
+     * @param {Object} options The options for the interceptor, synchronous and runWhen
+     *
+     * @return {Number} An ID used to remove interceptor later
+     */
+    use(fulfilled, rejected, options) {
+      this.handlers.push({
+        fulfilled,
+        rejected,
+        synchronous: options ? options.synchronous : false,
+        runWhen: options ? options.runWhen : null
+      });
+      return this.handlers.length - 1;
+    }
+    /**
+     * Remove an interceptor from the stack
+     *
+     * @param {Number} id The ID that was returned by `use`
+     *
+     * @returns {void}
+     */
+    eject(id4) {
+      if (this.handlers[id4]) {
+        this.handlers[id4] = null;
+      }
+    }
+    /**
+     * Clear all interceptors from the stack
+     *
+     * @returns {void}
+     */
+    clear() {
+      if (this.handlers) {
+        this.handlers = [];
+      }
+    }
+    /**
+     * Iterate over all the registered interceptors
+     *
+     * This method is particularly useful for skipping over any
+     * interceptors that may have become `null` calling `eject`.
+     *
+     * @param {Function} fn The function to call for each interceptor
+     *
+     * @returns {void}
+     */
+    forEach(fn) {
+      utils_default.forEach(this.handlers, function forEachHandler(h) {
+        if (h !== null) {
+          fn(h);
+        }
+      });
+    }
+  };
+  var InterceptorManager_default = InterceptorManager;
+
+  // node_modules/axios/lib/defaults/transitional.js
+  var transitional_default = {
+    silentJSONParsing: true,
+    forcedJSONParsing: true,
+    clarifyTimeoutError: false,
+    legacyInterceptorReqResOrdering: true
+  };
+
+  // node_modules/axios/lib/platform/browser/classes/URLSearchParams.js
+  var URLSearchParams_default = typeof URLSearchParams !== "undefined" ? URLSearchParams : AxiosURLSearchParams_default;
+
+  // node_modules/axios/lib/platform/browser/classes/FormData.js
+  var FormData_default = typeof FormData !== "undefined" ? FormData : null;
+
+  // node_modules/axios/lib/platform/browser/classes/Blob.js
+  var Blob_default = typeof Blob !== "undefined" ? Blob : null;
+
+  // node_modules/axios/lib/platform/browser/index.js
+  var browser_default = {
+    isBrowser: true,
+    classes: {
+      URLSearchParams: URLSearchParams_default,
+      FormData: FormData_default,
+      Blob: Blob_default
+    },
+    protocols: ["http", "https", "file", "blob", "url", "data"]
+  };
+
+  // node_modules/axios/lib/platform/common/utils.js
+  var utils_exports = {};
+  __export(utils_exports, {
+    hasBrowserEnv: () => hasBrowserEnv,
+    hasStandardBrowserEnv: () => hasStandardBrowserEnv,
+    hasStandardBrowserWebWorkerEnv: () => hasStandardBrowserWebWorkerEnv,
+    navigator: () => _navigator,
+    origin: () => origin
+  });
+  var hasBrowserEnv = typeof window !== "undefined" && typeof document !== "undefined";
+  var _navigator = typeof navigator === "object" && navigator || void 0;
+  var hasStandardBrowserEnv = hasBrowserEnv && (!_navigator || ["ReactNative", "NativeScript", "NS"].indexOf(_navigator.product) < 0);
+  var hasStandardBrowserWebWorkerEnv = (() => {
+    return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
+    self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
+  })();
+  var origin = hasBrowserEnv && window.location.href || "http://localhost";
+
+  // node_modules/axios/lib/platform/index.js
+  var platform_default = {
+    ...utils_exports,
+    ...browser_default
+  };
+
+  // node_modules/axios/lib/helpers/toURLEncodedForm.js
+  function toURLEncodedForm(data2, options) {
+    return toFormData_default(data2, new platform_default.classes.URLSearchParams(), {
+      visitor: function(value, key, path, helpers) {
+        if (platform_default.isNode && utils_default.isBuffer(value)) {
+          this.append(key, value.toString("base64"));
+          return false;
+        }
+        return helpers.defaultVisitor.apply(this, arguments);
+      },
+      ...options
+    });
+  }
+
+  // node_modules/axios/lib/helpers/formDataToJSON.js
+  function parsePropPath(name) {
+    return utils_default.matchAll(/\w+|\[(\w*)]/g, name).map((match) => {
+      return match[0] === "[]" ? "" : match[1] || match[0];
+    });
+  }
+  function arrayToObject(arr) {
+    const obj = {};
+    const keys = Object.keys(arr);
+    let i;
+    const len = keys.length;
+    let key;
+    for (i = 0; i < len; i++) {
+      key = keys[i];
+      obj[key] = arr[key];
+    }
+    return obj;
+  }
+  function formDataToJSON(formData) {
+    function buildPath(path, value, target, index) {
+      let name = path[index++];
+      if (name === "__proto__") return true;
+      const isNumericKey = Number.isFinite(+name);
+      const isLast = index >= path.length;
+      name = !name && utils_default.isArray(target) ? target.length : name;
+      if (isLast) {
+        if (utils_default.hasOwnProp(target, name)) {
+          target[name] = utils_default.isArray(target[name]) ? target[name].concat(value) : [target[name], value];
+        } else {
+          target[name] = value;
+        }
+        return !isNumericKey;
+      }
+      if (!target[name] || !utils_default.isObject(target[name])) {
+        target[name] = [];
+      }
+      const result = buildPath(path, value, target[name], index);
+      if (result && utils_default.isArray(target[name])) {
+        target[name] = arrayToObject(target[name]);
+      }
+      return !isNumericKey;
+    }
+    if (utils_default.isFormData(formData) && utils_default.isFunction(formData.entries)) {
+      const obj = {};
+      utils_default.forEachEntry(formData, (name, value) => {
+        buildPath(parsePropPath(name), value, obj, 0);
+      });
+      return obj;
+    }
+    return null;
+  }
+  var formDataToJSON_default = formDataToJSON;
+
+  // node_modules/axios/lib/defaults/index.js
+  var own = (obj, key) => obj != null && utils_default.hasOwnProp(obj, key) ? obj[key] : void 0;
+  function stringifySafely(rawValue, parser, encoder) {
+    if (utils_default.isString(rawValue)) {
+      try {
+        (parser || JSON.parse)(rawValue);
+        return utils_default.trim(rawValue);
+      } catch (e) {
+        if (e.name !== "SyntaxError") {
+          throw e;
+        }
+      }
+    }
+    return (encoder || JSON.stringify)(rawValue);
+  }
+  var defaults = {
+    transitional: transitional_default,
+    adapter: ["xhr", "http", "fetch"],
+    transformRequest: [
+      function transformRequest(data2, headers) {
+        const contentType = headers.getContentType() || "";
+        const hasJSONContentType = contentType.indexOf("application/json") > -1;
+        const isObjectPayload = utils_default.isObject(data2);
+        if (isObjectPayload && utils_default.isHTMLForm(data2)) {
+          data2 = new FormData(data2);
+        }
+        const isFormData2 = utils_default.isFormData(data2);
+        if (isFormData2) {
+          return hasJSONContentType ? JSON.stringify(formDataToJSON_default(data2)) : data2;
+        }
+        if (utils_default.isArrayBuffer(data2) || utils_default.isBuffer(data2) || utils_default.isStream(data2) || utils_default.isFile(data2) || utils_default.isBlob(data2) || utils_default.isReadableStream(data2)) {
+          return data2;
+        }
+        if (utils_default.isArrayBufferView(data2)) {
+          return data2.buffer;
+        }
+        if (utils_default.isURLSearchParams(data2)) {
+          headers.setContentType("application/x-www-form-urlencoded;charset=utf-8", false);
+          return data2.toString();
+        }
+        let isFileList2;
+        if (isObjectPayload) {
+          const formSerializer = own(this, "formSerializer");
+          if (contentType.indexOf("application/x-www-form-urlencoded") > -1) {
+            return toURLEncodedForm(data2, formSerializer).toString();
+          }
+          if ((isFileList2 = utils_default.isFileList(data2)) || contentType.indexOf("multipart/form-data") > -1) {
+            const env = own(this, "env");
+            const _FormData = env && env.FormData;
+            return toFormData_default(
+              isFileList2 ? { "files[]": data2 } : data2,
+              _FormData && new _FormData(),
+              formSerializer
+            );
+          }
+        }
+        if (isObjectPayload || hasJSONContentType) {
+          headers.setContentType("application/json", false);
+          return stringifySafely(data2);
+        }
+        return data2;
+      }
+    ],
+    transformResponse: [
+      function transformResponse(data2) {
+        const transitional2 = own(this, "transitional") || defaults.transitional;
+        const forcedJSONParsing = transitional2 && transitional2.forcedJSONParsing;
+        const responseType = own(this, "responseType");
+        const JSONRequested = responseType === "json";
+        if (utils_default.isResponse(data2) || utils_default.isReadableStream(data2)) {
+          return data2;
+        }
+        if (data2 && utils_default.isString(data2) && (forcedJSONParsing && !responseType || JSONRequested)) {
+          const silentJSONParsing = transitional2 && transitional2.silentJSONParsing;
+          const strictJSONParsing = !silentJSONParsing && JSONRequested;
+          try {
+            return JSON.parse(data2, own(this, "parseReviver"));
+          } catch (e) {
+            if (strictJSONParsing) {
+              if (e.name === "SyntaxError") {
+                throw AxiosError_default.from(e, AxiosError_default.ERR_BAD_RESPONSE, this, null, own(this, "response"));
+              }
+              throw e;
+            }
+          }
+        }
+        return data2;
+      }
+    ],
+    /**
+     * A timeout in milliseconds to abort a request. If set to 0 (default) a
+     * timeout is not created.
+     */
+    timeout: 0,
+    xsrfCookieName: "XSRF-TOKEN",
+    xsrfHeaderName: "X-XSRF-TOKEN",
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: {
+      FormData: platform_default.classes.FormData,
+      Blob: platform_default.classes.Blob
+    },
+    validateStatus: function validateStatus(status) {
+      return status >= 200 && status < 300;
+    },
+    headers: {
+      common: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": void 0
+      }
+    }
+  };
+  utils_default.forEach(["delete", "get", "head", "post", "put", "patch"], (method) => {
+    defaults.headers[method] = {};
+  });
+  var defaults_default = defaults;
+
+  // node_modules/axios/lib/helpers/parseHeaders.js
+  var ignoreDuplicateOf = utils_default.toObjectSet([
+    "age",
+    "authorization",
+    "content-length",
+    "content-type",
+    "etag",
+    "expires",
+    "from",
+    "host",
+    "if-modified-since",
+    "if-unmodified-since",
+    "last-modified",
+    "location",
+    "max-forwards",
+    "proxy-authorization",
+    "referer",
+    "retry-after",
+    "user-agent"
+  ]);
+  var parseHeaders_default = (rawHeaders) => {
+    const parsed = {};
+    let key;
+    let val;
+    let i;
+    rawHeaders && rawHeaders.split("\n").forEach(function parser(line) {
+      i = line.indexOf(":");
+      key = line.substring(0, i).trim().toLowerCase();
+      val = line.substring(i + 1).trim();
+      if (!key || parsed[key] && ignoreDuplicateOf[key]) {
+        return;
+      }
+      if (key === "set-cookie") {
+        if (parsed[key]) {
+          parsed[key].push(val);
+        } else {
+          parsed[key] = [val];
+        }
+      } else {
+        parsed[key] = parsed[key] ? parsed[key] + ", " + val : val;
+      }
+    });
+    return parsed;
+  };
+
+  // node_modules/axios/lib/core/AxiosHeaders.js
+  var $internals = /* @__PURE__ */ Symbol("internals");
+  var INVALID_HEADER_VALUE_CHARS_RE = /[^\x09\x20-\x7E\x80-\xFF]/g;
+  function trimSPorHTAB(str) {
+    let start = 0;
+    let end = str.length;
+    while (start < end) {
+      const code = str.charCodeAt(start);
+      if (code !== 9 && code !== 32) {
+        break;
+      }
+      start += 1;
+    }
+    while (end > start) {
+      const code = str.charCodeAt(end - 1);
+      if (code !== 9 && code !== 32) {
+        break;
+      }
+      end -= 1;
+    }
+    return start === 0 && end === str.length ? str : str.slice(start, end);
+  }
+  function normalizeHeader(header) {
+    return header && String(header).trim().toLowerCase();
+  }
+  function sanitizeHeaderValue(str) {
+    return trimSPorHTAB(str.replace(INVALID_HEADER_VALUE_CHARS_RE, ""));
+  }
+  function normalizeValue(value) {
+    if (value === false || value == null) {
+      return value;
+    }
+    return utils_default.isArray(value) ? value.map(normalizeValue) : sanitizeHeaderValue(String(value));
+  }
+  function parseTokens(str) {
+    const tokens = /* @__PURE__ */ Object.create(null);
+    const tokensRE = /([^\s,;=]+)\s*(?:=\s*([^,;]+))?/g;
+    let match;
+    while (match = tokensRE.exec(str)) {
+      tokens[match[1]] = match[2];
+    }
+    return tokens;
+  }
+  var isValidHeaderName = (str) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(str.trim());
+  function matchHeaderValue(context, value, header, filter3, isHeaderNameFilter) {
+    if (utils_default.isFunction(filter3)) {
+      return filter3.call(this, value, header);
+    }
+    if (isHeaderNameFilter) {
+      value = header;
+    }
+    if (!utils_default.isString(value)) return;
+    if (utils_default.isString(filter3)) {
+      return value.indexOf(filter3) !== -1;
+    }
+    if (utils_default.isRegExp(filter3)) {
+      return filter3.test(value);
+    }
+  }
+  function formatHeader(header) {
+    return header.trim().toLowerCase().replace(/([a-z\d])(\w*)/g, (w, char, str) => {
+      return char.toUpperCase() + str;
+    });
+  }
+  function buildAccessors(obj, header) {
+    const accessorName = utils_default.toCamelCase(" " + header);
+    ["get", "set", "has"].forEach((methodName) => {
+      Object.defineProperty(obj, methodName + accessorName, {
+        value: function(arg1, arg2, arg3) {
+          return this[methodName].call(this, header, arg1, arg2, arg3);
+        },
+        configurable: true
+      });
+    });
+  }
+  var AxiosHeaders = class {
+    constructor(headers) {
+      headers && this.set(headers);
+    }
+    set(header, valueOrRewrite, rewrite) {
+      const self2 = this;
+      function setHeader(_value, _header, _rewrite) {
+        const lHeader = normalizeHeader(_header);
+        if (!lHeader) {
+          throw new Error("header name must be a non-empty string");
+        }
+        const key = utils_default.findKey(self2, lHeader);
+        if (!key || self2[key] === void 0 || _rewrite === true || _rewrite === void 0 && self2[key] !== false) {
+          self2[key || _header] = normalizeValue(_value);
+        }
+      }
+      const setHeaders = (headers, _rewrite) => utils_default.forEach(headers, (_value, _header) => setHeader(_value, _header, _rewrite));
+      if (utils_default.isPlainObject(header) || header instanceof this.constructor) {
+        setHeaders(header, valueOrRewrite);
+      } else if (utils_default.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
+        setHeaders(parseHeaders_default(header), valueOrRewrite);
+      } else if (utils_default.isObject(header) && utils_default.isIterable(header)) {
+        let obj = {}, dest, key;
+        for (const entry of header) {
+          if (!utils_default.isArray(entry)) {
+            throw TypeError("Object iterator must return a key-value pair");
+          }
+          obj[key = entry[0]] = (dest = obj[key]) ? utils_default.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
+        }
+        setHeaders(obj, valueOrRewrite);
+      } else {
+        header != null && setHeader(valueOrRewrite, header, rewrite);
+      }
+      return this;
+    }
+    get(header, parser) {
+      header = normalizeHeader(header);
+      if (header) {
+        const key = utils_default.findKey(this, header);
+        if (key) {
+          const value = this[key];
+          if (!parser) {
+            return value;
+          }
+          if (parser === true) {
+            return parseTokens(value);
+          }
+          if (utils_default.isFunction(parser)) {
+            return parser.call(this, value, key);
+          }
+          if (utils_default.isRegExp(parser)) {
+            return parser.exec(value);
+          }
+          throw new TypeError("parser must be boolean|regexp|function");
+        }
+      }
+    }
+    has(header, matcher) {
+      header = normalizeHeader(header);
+      if (header) {
+        const key = utils_default.findKey(this, header);
+        return !!(key && this[key] !== void 0 && (!matcher || matchHeaderValue(this, this[key], key, matcher)));
+      }
+      return false;
+    }
+    delete(header, matcher) {
+      const self2 = this;
+      let deleted = false;
+      function deleteHeader(_header) {
+        _header = normalizeHeader(_header);
+        if (_header) {
+          const key = utils_default.findKey(self2, _header);
+          if (key && (!matcher || matchHeaderValue(self2, self2[key], key, matcher))) {
+            delete self2[key];
+            deleted = true;
+          }
+        }
+      }
+      if (utils_default.isArray(header)) {
+        header.forEach(deleteHeader);
+      } else {
+        deleteHeader(header);
+      }
+      return deleted;
+    }
+    clear(matcher) {
+      const keys = Object.keys(this);
+      let i = keys.length;
+      let deleted = false;
+      while (i--) {
+        const key = keys[i];
+        if (!matcher || matchHeaderValue(this, this[key], key, matcher, true)) {
+          delete this[key];
+          deleted = true;
+        }
+      }
+      return deleted;
+    }
+    normalize(format) {
+      const self2 = this;
+      const headers = {};
+      utils_default.forEach(this, (value, header) => {
+        const key = utils_default.findKey(headers, header);
+        if (key) {
+          self2[key] = normalizeValue(value);
+          delete self2[header];
+          return;
+        }
+        const normalized = format ? formatHeader(header) : String(header).trim();
+        if (normalized !== header) {
+          delete self2[header];
+        }
+        self2[normalized] = normalizeValue(value);
+        headers[normalized] = true;
+      });
+      return this;
+    }
+    concat(...targets) {
+      return this.constructor.concat(this, ...targets);
+    }
+    toJSON(asStrings) {
+      const obj = /* @__PURE__ */ Object.create(null);
+      utils_default.forEach(this, (value, header) => {
+        value != null && value !== false && (obj[header] = asStrings && utils_default.isArray(value) ? value.join(", ") : value);
+      });
+      return obj;
+    }
+    [Symbol.iterator]() {
+      return Object.entries(this.toJSON())[Symbol.iterator]();
+    }
+    toString() {
+      return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
+    }
+    getSetCookie() {
+      return this.get("set-cookie") || [];
+    }
+    get [Symbol.toStringTag]() {
+      return "AxiosHeaders";
+    }
+    static from(thing) {
+      return thing instanceof this ? thing : new this(thing);
+    }
+    static concat(first, ...targets) {
+      const computed = new this(first);
+      targets.forEach((target) => computed.set(target));
+      return computed;
+    }
+    static accessor(header) {
+      const internals = this[$internals] = this[$internals] = {
+        accessors: {}
+      };
+      const accessors = internals.accessors;
+      const prototype2 = this.prototype;
+      function defineAccessor(_header) {
+        const lHeader = normalizeHeader(_header);
+        if (!accessors[lHeader]) {
+          buildAccessors(prototype2, _header);
+          accessors[lHeader] = true;
+        }
+      }
+      utils_default.isArray(header) ? header.forEach(defineAccessor) : defineAccessor(header);
+      return this;
+    }
+  };
+  AxiosHeaders.accessor([
+    "Content-Type",
+    "Content-Length",
+    "Accept",
+    "Accept-Encoding",
+    "User-Agent",
+    "Authorization"
+  ]);
+  utils_default.reduceDescriptors(AxiosHeaders.prototype, ({ value }, key) => {
+    let mapped = key[0].toUpperCase() + key.slice(1);
+    return {
+      get: () => value,
+      set(headerValue) {
+        this[mapped] = headerValue;
+      }
+    };
+  });
+  utils_default.freezeMethods(AxiosHeaders);
+  var AxiosHeaders_default = AxiosHeaders;
+
+  // node_modules/axios/lib/core/transformData.js
+  function transformData(fns, response) {
+    const config = this || defaults_default;
+    const context = response || config;
+    const headers = AxiosHeaders_default.from(context.headers);
+    let data2 = context.data;
+    utils_default.forEach(fns, function transform(fn) {
+      data2 = fn.call(config, data2, headers.normalize(), response ? response.status : void 0);
+    });
+    headers.normalize();
+    return data2;
+  }
+
+  // node_modules/axios/lib/cancel/isCancel.js
+  function isCancel(value) {
+    return !!(value && value.__CANCEL__);
+  }
+
+  // node_modules/axios/lib/cancel/CanceledError.js
+  var CanceledError = class extends AxiosError_default {
+    /**
+     * A `CanceledError` is an object that is thrown when an operation is canceled.
+     *
+     * @param {string=} message The message.
+     * @param {Object=} config The config.
+     * @param {Object=} request The request.
+     *
+     * @returns {CanceledError} The created error.
+     */
+    constructor(message, config, request) {
+      super(message == null ? "canceled" : message, AxiosError_default.ERR_CANCELED, config, request);
+      this.name = "CanceledError";
+      this.__CANCEL__ = true;
+    }
+  };
+  var CanceledError_default = CanceledError;
+
+  // node_modules/axios/lib/core/settle.js
+  function settle(resolve, reject, response) {
+    const validateStatus2 = response.config.validateStatus;
+    if (!response.status || !validateStatus2 || validateStatus2(response.status)) {
+      resolve(response);
+    } else {
+      reject(
+        new AxiosError_default(
+          "Request failed with status code " + response.status,
+          [AxiosError_default.ERR_BAD_REQUEST, AxiosError_default.ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4],
+          response.config,
+          response.request,
+          response
+        )
+      );
+    }
+  }
+
+  // node_modules/axios/lib/helpers/parseProtocol.js
+  function parseProtocol(url) {
+    const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url);
+    return match && match[1] || "";
+  }
+
+  // node_modules/axios/lib/helpers/speedometer.js
+  function speedometer(samplesCount, min) {
+    samplesCount = samplesCount || 10;
+    const bytes2 = new Array(samplesCount);
+    const timestamps = new Array(samplesCount);
+    let head = 0;
+    let tail = 0;
+    let firstSampleTS;
+    min = min !== void 0 ? min : 1e3;
+    return function push(chunkLength) {
+      const now2 = Date.now();
+      const startedAt = timestamps[tail];
+      if (!firstSampleTS) {
+        firstSampleTS = now2;
+      }
+      bytes2[head] = chunkLength;
+      timestamps[head] = now2;
+      let i = tail;
+      let bytesCount = 0;
+      while (i !== head) {
+        bytesCount += bytes2[i++];
+        i = i % samplesCount;
+      }
+      head = (head + 1) % samplesCount;
+      if (head === tail) {
+        tail = (tail + 1) % samplesCount;
+      }
+      if (now2 - firstSampleTS < min) {
+        return;
+      }
+      const passed = startedAt && now2 - startedAt;
+      return passed ? Math.round(bytesCount * 1e3 / passed) : void 0;
+    };
+  }
+  var speedometer_default = speedometer;
+
+  // node_modules/axios/lib/helpers/throttle.js
+  function throttle(fn, freq) {
+    let timestamp = 0;
+    let threshold = 1e3 / freq;
+    let lastArgs;
+    let timer;
+    const invoke = (args, now2 = Date.now()) => {
+      timestamp = now2;
+      lastArgs = null;
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+      fn(...args);
+    };
+    const throttled = (...args) => {
+      const now2 = Date.now();
+      const passed = now2 - timestamp;
+      if (passed >= threshold) {
+        invoke(args, now2);
+      } else {
+        lastArgs = args;
+        if (!timer) {
+          timer = setTimeout(() => {
+            timer = null;
+            invoke(lastArgs);
+          }, threshold - passed);
+        }
+      }
+    };
+    const flush = () => lastArgs && invoke(lastArgs);
+    return [throttled, flush];
+  }
+  var throttle_default = throttle;
+
+  // node_modules/axios/lib/helpers/progressEventReducer.js
+  var progressEventReducer = (listener, isDownloadStream, freq = 3) => {
+    let bytesNotified = 0;
+    const _speedometer = speedometer_default(50, 250);
+    return throttle_default((e) => {
+      const rawLoaded = e.loaded;
+      const total = e.lengthComputable ? e.total : void 0;
+      const loaded = total != null ? Math.min(rawLoaded, total) : rawLoaded;
+      const progressBytes = Math.max(0, loaded - bytesNotified);
+      const rate = _speedometer(progressBytes);
+      bytesNotified = Math.max(bytesNotified, loaded);
+      const data2 = {
+        loaded,
+        total,
+        progress: total ? loaded / total : void 0,
+        bytes: progressBytes,
+        rate: rate ? rate : void 0,
+        estimated: rate && total ? (total - loaded) / rate : void 0,
+        event: e,
+        lengthComputable: total != null,
+        [isDownloadStream ? "download" : "upload"]: true
+      };
+      listener(data2);
+    }, freq);
+  };
+  var progressEventDecorator = (total, throttled) => {
+    const lengthComputable = total != null;
+    return [
+      (loaded) => throttled[0]({
+        lengthComputable,
+        total,
+        loaded
+      }),
+      throttled[1]
+    ];
+  };
+  var asyncDecorator = (fn) => (...args) => utils_default.asap(() => fn(...args));
+
+  // node_modules/axios/lib/helpers/isURLSameOrigin.js
+  var isURLSameOrigin_default = platform_default.hasStandardBrowserEnv ? /* @__PURE__ */ ((origin2, isMSIE) => (url) => {
+    url = new URL(url, platform_default.origin);
+    return origin2.protocol === url.protocol && origin2.host === url.host && (isMSIE || origin2.port === url.port);
+  })(
+    new URL(platform_default.origin),
+    platform_default.navigator && /(msie|trident)/i.test(platform_default.navigator.userAgent)
+  ) : () => true;
+
+  // node_modules/axios/lib/helpers/cookies.js
+  var cookies_default = platform_default.hasStandardBrowserEnv ? (
+    // Standard browser envs support document.cookie
+    {
+      write(name, value, expires, path, domain, secure, sameSite) {
+        if (typeof document === "undefined") return;
+        const cookie = [`${name}=${encodeURIComponent(value)}`];
+        if (utils_default.isNumber(expires)) {
+          cookie.push(`expires=${new Date(expires).toUTCString()}`);
+        }
+        if (utils_default.isString(path)) {
+          cookie.push(`path=${path}`);
+        }
+        if (utils_default.isString(domain)) {
+          cookie.push(`domain=${domain}`);
+        }
+        if (secure === true) {
+          cookie.push("secure");
+        }
+        if (utils_default.isString(sameSite)) {
+          cookie.push(`SameSite=${sameSite}`);
+        }
+        document.cookie = cookie.join("; ");
+      },
+      read(name) {
+        if (typeof document === "undefined") return null;
+        const match = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
+        return match ? decodeURIComponent(match[1]) : null;
+      },
+      remove(name) {
+        this.write(name, "", Date.now() - 864e5, "/");
+      }
+    }
+  ) : (
+    // Non-standard browser env (web workers, react-native) lack needed support.
+    {
+      write() {
+      },
+      read() {
+        return null;
+      },
+      remove() {
+      }
+    }
+  );
+
+  // node_modules/axios/lib/helpers/isAbsoluteURL.js
+  function isAbsoluteURL(url) {
+    if (typeof url !== "string") {
+      return false;
+    }
+    return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
+  }
+
+  // node_modules/axios/lib/helpers/combineURLs.js
+  function combineURLs(baseURL, relativeURL) {
+    return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
+  }
+
+  // node_modules/axios/lib/core/buildFullPath.js
+  function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
+    let isRelativeUrl = !isAbsoluteURL(requestedURL);
+    if (baseURL && (isRelativeUrl || allowAbsoluteUrls === false)) {
+      return combineURLs(baseURL, requestedURL);
+    }
+    return requestedURL;
+  }
+
+  // node_modules/axios/lib/core/mergeConfig.js
+  var headersToObject = (thing) => thing instanceof AxiosHeaders_default ? { ...thing } : thing;
+  function mergeConfig(config1, config2) {
+    config2 = config2 || {};
+    const config = /* @__PURE__ */ Object.create(null);
+    Object.defineProperty(config, "hasOwnProperty", {
+      value: Object.prototype.hasOwnProperty,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    });
+    function getMergedValue(target, source, prop, caseless) {
+      if (utils_default.isPlainObject(target) && utils_default.isPlainObject(source)) {
+        return utils_default.merge.call({ caseless }, target, source);
+      } else if (utils_default.isPlainObject(source)) {
+        return utils_default.merge({}, source);
+      } else if (utils_default.isArray(source)) {
+        return source.slice();
+      }
+      return source;
+    }
+    function mergeDeepProperties(a, b2, prop, caseless) {
+      if (!utils_default.isUndefined(b2)) {
+        return getMergedValue(a, b2, prop, caseless);
+      } else if (!utils_default.isUndefined(a)) {
+        return getMergedValue(void 0, a, prop, caseless);
+      }
+    }
+    function valueFromConfig2(a, b2) {
+      if (!utils_default.isUndefined(b2)) {
+        return getMergedValue(void 0, b2);
+      }
+    }
+    function defaultToConfig2(a, b2) {
+      if (!utils_default.isUndefined(b2)) {
+        return getMergedValue(void 0, b2);
+      } else if (!utils_default.isUndefined(a)) {
+        return getMergedValue(void 0, a);
+      }
+    }
+    function mergeDirectKeys(a, b2, prop) {
+      if (utils_default.hasOwnProp(config2, prop)) {
+        return getMergedValue(a, b2);
+      } else if (utils_default.hasOwnProp(config1, prop)) {
+        return getMergedValue(void 0, a);
+      }
+    }
+    const mergeMap = {
+      url: valueFromConfig2,
+      method: valueFromConfig2,
+      data: valueFromConfig2,
+      baseURL: defaultToConfig2,
+      transformRequest: defaultToConfig2,
+      transformResponse: defaultToConfig2,
+      paramsSerializer: defaultToConfig2,
+      timeout: defaultToConfig2,
+      timeoutMessage: defaultToConfig2,
+      withCredentials: defaultToConfig2,
+      withXSRFToken: defaultToConfig2,
+      adapter: defaultToConfig2,
+      responseType: defaultToConfig2,
+      xsrfCookieName: defaultToConfig2,
+      xsrfHeaderName: defaultToConfig2,
+      onUploadProgress: defaultToConfig2,
+      onDownloadProgress: defaultToConfig2,
+      decompress: defaultToConfig2,
+      maxContentLength: defaultToConfig2,
+      maxBodyLength: defaultToConfig2,
+      beforeRedirect: defaultToConfig2,
+      transport: defaultToConfig2,
+      httpAgent: defaultToConfig2,
+      httpsAgent: defaultToConfig2,
+      cancelToken: defaultToConfig2,
+      socketPath: defaultToConfig2,
+      allowedSocketPaths: defaultToConfig2,
+      responseEncoding: defaultToConfig2,
+      validateStatus: mergeDirectKeys,
+      headers: (a, b2, prop) => mergeDeepProperties(headersToObject(a), headersToObject(b2), prop, true)
+    };
+    utils_default.forEach(Object.keys({ ...config1, ...config2 }), function computeConfigValue(prop) {
+      if (prop === "__proto__" || prop === "constructor" || prop === "prototype") return;
+      const merge2 = utils_default.hasOwnProp(mergeMap, prop) ? mergeMap[prop] : mergeDeepProperties;
+      const a = utils_default.hasOwnProp(config1, prop) ? config1[prop] : void 0;
+      const b2 = utils_default.hasOwnProp(config2, prop) ? config2[prop] : void 0;
+      const configValue = merge2(a, b2, prop);
+      utils_default.isUndefined(configValue) && merge2 !== mergeDirectKeys || (config[prop] = configValue);
+    });
+    return config;
+  }
+
+  // node_modules/axios/lib/helpers/resolveConfig.js
+  var resolveConfig_default = (config) => {
+    const newConfig = mergeConfig({}, config);
+    const own2 = (key) => utils_default.hasOwnProp(newConfig, key) ? newConfig[key] : void 0;
+    const data2 = own2("data");
+    let withXSRFToken = own2("withXSRFToken");
+    const xsrfHeaderName = own2("xsrfHeaderName");
+    const xsrfCookieName = own2("xsrfCookieName");
+    let headers = own2("headers");
+    const auth = own2("auth");
+    const baseURL = own2("baseURL");
+    const allowAbsoluteUrls = own2("allowAbsoluteUrls");
+    const url = own2("url");
+    newConfig.headers = headers = AxiosHeaders_default.from(headers);
+    newConfig.url = buildURL(
+      buildFullPath(baseURL, url, allowAbsoluteUrls),
+      config.params,
+      config.paramsSerializer
+    );
+    if (auth) {
+      headers.set(
+        "Authorization",
+        "Basic " + btoa(
+          (auth.username || "") + ":" + (auth.password ? unescape(encodeURIComponent(auth.password)) : "")
+        )
+      );
+    }
+    if (utils_default.isFormData(data2)) {
+      if (platform_default.hasStandardBrowserEnv || platform_default.hasStandardBrowserWebWorkerEnv) {
+        headers.setContentType(void 0);
+      } else if (utils_default.isFunction(data2.getHeaders)) {
+        const formHeaders = data2.getHeaders();
+        const allowedHeaders = ["content-type", "content-length"];
+        Object.entries(formHeaders).forEach(([key, val]) => {
+          if (allowedHeaders.includes(key.toLowerCase())) {
+            headers.set(key, val);
+          }
+        });
+      }
+    }
+    if (platform_default.hasStandardBrowserEnv) {
+      if (utils_default.isFunction(withXSRFToken)) {
+        withXSRFToken = withXSRFToken(newConfig);
+      }
+      const shouldSendXSRF = withXSRFToken === true || withXSRFToken == null && isURLSameOrigin_default(newConfig.url);
+      if (shouldSendXSRF) {
+        const xsrfValue = xsrfHeaderName && xsrfCookieName && cookies_default.read(xsrfCookieName);
+        if (xsrfValue) {
+          headers.set(xsrfHeaderName, xsrfValue);
+        }
+      }
+    }
+    return newConfig;
+  };
+
+  // node_modules/axios/lib/adapters/xhr.js
+  var isXHRAdapterSupported = typeof XMLHttpRequest !== "undefined";
+  var xhr_default = isXHRAdapterSupported && function(config) {
+    return new Promise(function dispatchXhrRequest(resolve, reject) {
+      const _config = resolveConfig_default(config);
+      let requestData = _config.data;
+      const requestHeaders = AxiosHeaders_default.from(_config.headers).normalize();
+      let { responseType, onUploadProgress, onDownloadProgress } = _config;
+      let onCanceled;
+      let uploadThrottled, downloadThrottled;
+      let flushUpload, flushDownload;
+      function done() {
+        flushUpload && flushUpload();
+        flushDownload && flushDownload();
+        _config.cancelToken && _config.cancelToken.unsubscribe(onCanceled);
+        _config.signal && _config.signal.removeEventListener("abort", onCanceled);
+      }
+      let request = new XMLHttpRequest();
+      request.open(_config.method.toUpperCase(), _config.url, true);
+      request.timeout = _config.timeout;
+      function onloadend() {
+        if (!request) {
+          return;
+        }
+        const responseHeaders = AxiosHeaders_default.from(
+          "getAllResponseHeaders" in request && request.getAllResponseHeaders()
+        );
+        const responseData = !responseType || responseType === "text" || responseType === "json" ? request.responseText : request.response;
+        const response = {
+          data: responseData,
+          status: request.status,
+          statusText: request.statusText,
+          headers: responseHeaders,
+          config,
+          request
+        };
+        settle(
+          function _resolve(value) {
+            resolve(value);
+            done();
+          },
+          function _reject(err) {
+            reject(err);
+            done();
+          },
+          response
+        );
+        request = null;
+      }
+      if ("onloadend" in request) {
+        request.onloadend = onloadend;
+      } else {
+        request.onreadystatechange = function handleLoad() {
+          if (!request || request.readyState !== 4) {
+            return;
+          }
+          if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf("file:") === 0)) {
+            return;
+          }
+          setTimeout(onloadend);
+        };
+      }
+      request.onabort = function handleAbort() {
+        if (!request) {
+          return;
+        }
+        reject(new AxiosError_default("Request aborted", AxiosError_default.ECONNABORTED, config, request));
+        request = null;
+      };
+      request.onerror = function handleError(event) {
+        const msg = event && event.message ? event.message : "Network Error";
+        const err = new AxiosError_default(msg, AxiosError_default.ERR_NETWORK, config, request);
+        err.event = event || null;
+        reject(err);
+        request = null;
+      };
+      request.ontimeout = function handleTimeout() {
+        let timeoutErrorMessage = _config.timeout ? "timeout of " + _config.timeout + "ms exceeded" : "timeout exceeded";
+        const transitional2 = _config.transitional || transitional_default;
+        if (_config.timeoutErrorMessage) {
+          timeoutErrorMessage = _config.timeoutErrorMessage;
+        }
+        reject(
+          new AxiosError_default(
+            timeoutErrorMessage,
+            transitional2.clarifyTimeoutError ? AxiosError_default.ETIMEDOUT : AxiosError_default.ECONNABORTED,
+            config,
+            request
+          )
+        );
+        request = null;
+      };
+      requestData === void 0 && requestHeaders.setContentType(null);
+      if ("setRequestHeader" in request) {
+        utils_default.forEach(requestHeaders.toJSON(), function setRequestHeader(val, key) {
+          request.setRequestHeader(key, val);
+        });
+      }
+      if (!utils_default.isUndefined(_config.withCredentials)) {
+        request.withCredentials = !!_config.withCredentials;
+      }
+      if (responseType && responseType !== "json") {
+        request.responseType = _config.responseType;
+      }
+      if (onDownloadProgress) {
+        [downloadThrottled, flushDownload] = progressEventReducer(onDownloadProgress, true);
+        request.addEventListener("progress", downloadThrottled);
+      }
+      if (onUploadProgress && request.upload) {
+        [uploadThrottled, flushUpload] = progressEventReducer(onUploadProgress);
+        request.upload.addEventListener("progress", uploadThrottled);
+        request.upload.addEventListener("loadend", flushUpload);
+      }
+      if (_config.cancelToken || _config.signal) {
+        onCanceled = (cancel) => {
+          if (!request) {
+            return;
+          }
+          reject(!cancel || cancel.type ? new CanceledError_default(null, config, request) : cancel);
+          request.abort();
+          request = null;
+        };
+        _config.cancelToken && _config.cancelToken.subscribe(onCanceled);
+        if (_config.signal) {
+          _config.signal.aborted ? onCanceled() : _config.signal.addEventListener("abort", onCanceled);
+        }
+      }
+      const protocol = parseProtocol(_config.url);
+      if (protocol && platform_default.protocols.indexOf(protocol) === -1) {
+        reject(
+          new AxiosError_default(
+            "Unsupported protocol " + protocol + ":",
+            AxiosError_default.ERR_BAD_REQUEST,
+            config
+          )
+        );
+        return;
+      }
+      request.send(requestData || null);
+    });
+  };
+
+  // node_modules/axios/lib/helpers/composeSignals.js
+  var composeSignals = (signals, timeout) => {
+    const { length } = signals = signals ? signals.filter(Boolean) : [];
+    if (timeout || length) {
+      let controller = new AbortController();
+      let aborted;
+      const onabort = function(reason) {
+        if (!aborted) {
+          aborted = true;
+          unsubscribe();
+          const err = reason instanceof Error ? reason : this.reason;
+          controller.abort(
+            err instanceof AxiosError_default ? err : new CanceledError_default(err instanceof Error ? err.message : err)
+          );
+        }
+      };
+      let timer = timeout && setTimeout(() => {
+        timer = null;
+        onabort(new AxiosError_default(`timeout of ${timeout}ms exceeded`, AxiosError_default.ETIMEDOUT));
+      }, timeout);
+      const unsubscribe = () => {
+        if (signals) {
+          timer && clearTimeout(timer);
+          timer = null;
+          signals.forEach((signal2) => {
+            signal2.unsubscribe ? signal2.unsubscribe(onabort) : signal2.removeEventListener("abort", onabort);
+          });
+          signals = null;
+        }
+      };
+      signals.forEach((signal2) => signal2.addEventListener("abort", onabort));
+      const { signal } = controller;
+      signal.unsubscribe = () => utils_default.asap(unsubscribe);
+      return signal;
+    }
+  };
+  var composeSignals_default = composeSignals;
+
+  // node_modules/axios/lib/helpers/trackStream.js
+  var streamChunk = function* (chunk, chunkSize) {
+    let len = chunk.byteLength;
+    if (!chunkSize || len < chunkSize) {
+      yield chunk;
+      return;
+    }
+    let pos = 0;
+    let end;
+    while (pos < len) {
+      end = pos + chunkSize;
+      yield chunk.slice(pos, end);
+      pos = end;
+    }
+  };
+  var readBytes = async function* (iterable, chunkSize) {
+    for await (const chunk of readStream(iterable)) {
+      yield* streamChunk(chunk, chunkSize);
+    }
+  };
+  var readStream = async function* (stream) {
+    if (stream[Symbol.asyncIterator]) {
+      yield* stream;
+      return;
+    }
+    const reader = stream.getReader();
+    try {
+      for (; ; ) {
+        const { done, value } = await reader.read();
+        if (done) {
+          break;
+        }
+        yield value;
+      }
+    } finally {
+      await reader.cancel();
+    }
+  };
+  var trackStream = (stream, chunkSize, onProgress, onFinish) => {
+    const iterator2 = readBytes(stream, chunkSize);
+    let bytes2 = 0;
+    let done;
+    let _onFinish = (e) => {
+      if (!done) {
+        done = true;
+        onFinish && onFinish(e);
+      }
+    };
+    return new ReadableStream(
+      {
+        async pull(controller) {
+          try {
+            const { done: done2, value } = await iterator2.next();
+            if (done2) {
+              _onFinish();
+              controller.close();
+              return;
+            }
+            let len = value.byteLength;
+            if (onProgress) {
+              let loadedBytes = bytes2 += len;
+              onProgress(loadedBytes);
+            }
+            controller.enqueue(new Uint8Array(value));
+          } catch (err) {
+            _onFinish(err);
+            throw err;
+          }
+        },
+        cancel(reason) {
+          _onFinish(reason);
+          return iterator2.return();
+        }
+      },
+      {
+        highWaterMark: 2
+      }
+    );
+  };
+
+  // node_modules/axios/lib/adapters/fetch.js
+  var DEFAULT_CHUNK_SIZE = 64 * 1024;
+  var { isFunction: isFunction2 } = utils_default;
+  var globalFetchAPI = (({ Request: Request2, Response: Response2 }) => ({
+    Request: Request2,
+    Response: Response2
+  }))(utils_default.global);
+  var { ReadableStream: ReadableStream2, TextEncoder: TextEncoder2 } = utils_default.global;
+  var test2 = (fn, ...args) => {
+    try {
+      return !!fn(...args);
+    } catch (e) {
+      return false;
+    }
+  };
+  var factory = (env) => {
+    env = utils_default.merge.call(
+      {
+        skipUndefined: true
+      },
+      globalFetchAPI,
+      env
+    );
+    const { fetch: envFetch, Request: Request2, Response: Response2 } = env;
+    const isFetchSupported = envFetch ? isFunction2(envFetch) : typeof fetch === "function";
+    const isRequestSupported = isFunction2(Request2);
+    const isResponseSupported = isFunction2(Response2);
+    if (!isFetchSupported) {
+      return false;
+    }
+    const isReadableStreamSupported = isFetchSupported && isFunction2(ReadableStream2);
+    const encodeText = isFetchSupported && (typeof TextEncoder2 === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder2()) : async (str) => new Uint8Array(await new Request2(str).arrayBuffer()));
+    const supportsRequestStream = isRequestSupported && isReadableStreamSupported && test2(() => {
+      let duplexAccessed = false;
+      const request = new Request2(platform_default.origin, {
+        body: new ReadableStream2(),
+        method: "POST",
+        get duplex() {
+          duplexAccessed = true;
+          return "half";
+        }
+      });
+      const hasContentType = request.headers.has("Content-Type");
+      if (request.body != null) {
+        request.body.cancel();
+      }
+      return duplexAccessed && !hasContentType;
+    });
+    const supportsResponseStream = isResponseSupported && isReadableStreamSupported && test2(() => utils_default.isReadableStream(new Response2("").body));
+    const resolvers = {
+      stream: supportsResponseStream && ((res) => res.body)
+    };
+    isFetchSupported && (() => {
+      ["text", "arrayBuffer", "blob", "formData", "stream"].forEach((type) => {
+        !resolvers[type] && (resolvers[type] = (res, config) => {
+          let method = res && res[type];
+          if (method) {
+            return method.call(res);
+          }
+          throw new AxiosError_default(
+            `Response type '${type}' is not supported`,
+            AxiosError_default.ERR_NOT_SUPPORT,
+            config
+          );
+        });
+      });
+    })();
+    const getBodyLength = async (body) => {
+      if (body == null) {
+        return 0;
+      }
+      if (utils_default.isBlob(body)) {
+        return body.size;
+      }
+      if (utils_default.isSpecCompliantForm(body)) {
+        const _request = new Request2(platform_default.origin, {
+          method: "POST",
+          body
+        });
+        return (await _request.arrayBuffer()).byteLength;
+      }
+      if (utils_default.isArrayBufferView(body) || utils_default.isArrayBuffer(body)) {
+        return body.byteLength;
+      }
+      if (utils_default.isURLSearchParams(body)) {
+        body = body + "";
+      }
+      if (utils_default.isString(body)) {
+        return (await encodeText(body)).byteLength;
+      }
+    };
+    const resolveBodyLength = async (headers, body) => {
+      const length = utils_default.toFiniteNumber(headers.getContentLength());
+      return length == null ? getBodyLength(body) : length;
+    };
+    return async (config) => {
+      let {
+        url,
+        method,
+        data: data2,
+        signal,
+        cancelToken,
+        timeout,
+        onDownloadProgress,
+        onUploadProgress,
+        responseType,
+        headers,
+        withCredentials = "same-origin",
+        fetchOptions
+      } = resolveConfig_default(config);
+      let _fetch = envFetch || fetch;
+      responseType = responseType ? (responseType + "").toLowerCase() : "text";
+      let composedSignal = composeSignals_default(
+        [signal, cancelToken && cancelToken.toAbortSignal()],
+        timeout
+      );
+      let request = null;
+      const unsubscribe = composedSignal && composedSignal.unsubscribe && (() => {
+        composedSignal.unsubscribe();
+      });
+      let requestContentLength;
+      try {
+        if (onUploadProgress && supportsRequestStream && method !== "get" && method !== "head" && (requestContentLength = await resolveBodyLength(headers, data2)) !== 0) {
+          let _request = new Request2(url, {
+            method: "POST",
+            body: data2,
+            duplex: "half"
+          });
+          let contentTypeHeader;
+          if (utils_default.isFormData(data2) && (contentTypeHeader = _request.headers.get("content-type"))) {
+            headers.setContentType(contentTypeHeader);
+          }
+          if (_request.body) {
+            const [onProgress, flush] = progressEventDecorator(
+              requestContentLength,
+              progressEventReducer(asyncDecorator(onUploadProgress))
+            );
+            data2 = trackStream(_request.body, DEFAULT_CHUNK_SIZE, onProgress, flush);
+          }
+        }
+        if (!utils_default.isString(withCredentials)) {
+          withCredentials = withCredentials ? "include" : "omit";
+        }
+        const isCredentialsSupported = isRequestSupported && "credentials" in Request2.prototype;
+        if (utils_default.isFormData(data2)) {
+          const contentType = headers.getContentType();
+          if (contentType && /^multipart\/form-data/i.test(contentType) && !/boundary=/i.test(contentType)) {
+            headers.delete("content-type");
+          }
+        }
+        const resolvedOptions = {
+          ...fetchOptions,
+          signal: composedSignal,
+          method: method.toUpperCase(),
+          headers: headers.normalize().toJSON(),
+          body: data2,
+          duplex: "half",
+          credentials: isCredentialsSupported ? withCredentials : void 0
+        };
+        request = isRequestSupported && new Request2(url, resolvedOptions);
+        let response = await (isRequestSupported ? _fetch(request, fetchOptions) : _fetch(url, resolvedOptions));
+        const isStreamResponse = supportsResponseStream && (responseType === "stream" || responseType === "response");
+        if (supportsResponseStream && (onDownloadProgress || isStreamResponse && unsubscribe)) {
+          const options = {};
+          ["status", "statusText", "headers"].forEach((prop) => {
+            options[prop] = response[prop];
+          });
+          const responseContentLength = utils_default.toFiniteNumber(response.headers.get("content-length"));
+          const [onProgress, flush] = onDownloadProgress && progressEventDecorator(
+            responseContentLength,
+            progressEventReducer(asyncDecorator(onDownloadProgress), true)
+          ) || [];
+          response = new Response2(
+            trackStream(response.body, DEFAULT_CHUNK_SIZE, onProgress, () => {
+              flush && flush();
+              unsubscribe && unsubscribe();
+            }),
+            options
+          );
+        }
+        responseType = responseType || "text";
+        let responseData = await resolvers[utils_default.findKey(resolvers, responseType) || "text"](
+          response,
+          config
+        );
+        !isStreamResponse && unsubscribe && unsubscribe();
+        return await new Promise((resolve, reject) => {
+          settle(resolve, reject, {
+            data: responseData,
+            headers: AxiosHeaders_default.from(response.headers),
+            status: response.status,
+            statusText: response.statusText,
+            config,
+            request
+          });
+        });
+      } catch (err) {
+        unsubscribe && unsubscribe();
+        if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
+          throw Object.assign(
+            new AxiosError_default(
+              "Network Error",
+              AxiosError_default.ERR_NETWORK,
+              config,
+              request,
+              err && err.response
+            ),
+            {
+              cause: err.cause || err
+            }
+          );
+        }
+        throw AxiosError_default.from(err, err && err.code, config, request, err && err.response);
+      }
+    };
+  };
+  var seedCache = /* @__PURE__ */ new Map();
+  var getFetch = (config) => {
+    let env = config && config.env || {};
+    const { fetch: fetch2, Request: Request2, Response: Response2 } = env;
+    const seeds = [Request2, Response2, fetch2];
+    let len = seeds.length, i = len, seed, target, map = seedCache;
+    while (i--) {
+      seed = seeds[i];
+      target = map.get(seed);
+      target === void 0 && map.set(seed, target = i ? /* @__PURE__ */ new Map() : factory(env));
+      map = target;
+    }
+    return target;
+  };
+  var adapter = getFetch();
+
+  // node_modules/axios/lib/adapters/adapters.js
+  var knownAdapters = {
+    http: null_default,
+    xhr: xhr_default,
+    fetch: {
+      get: getFetch
+    }
+  };
+  utils_default.forEach(knownAdapters, (fn, value) => {
+    if (fn) {
+      try {
+        Object.defineProperty(fn, "name", { value });
+      } catch (e) {
+      }
+      Object.defineProperty(fn, "adapterName", { value });
+    }
+  });
+  var renderReason = (reason) => `- ${reason}`;
+  var isResolvedHandle = (adapter2) => utils_default.isFunction(adapter2) || adapter2 === null || adapter2 === false;
+  function getAdapter(adapters, config) {
+    adapters = utils_default.isArray(adapters) ? adapters : [adapters];
+    const { length } = adapters;
+    let nameOrAdapter;
+    let adapter2;
+    const rejectedReasons = {};
+    for (let i = 0; i < length; i++) {
+      nameOrAdapter = adapters[i];
+      let id4;
+      adapter2 = nameOrAdapter;
+      if (!isResolvedHandle(nameOrAdapter)) {
+        adapter2 = knownAdapters[(id4 = String(nameOrAdapter)).toLowerCase()];
+        if (adapter2 === void 0) {
+          throw new AxiosError_default(`Unknown adapter '${id4}'`);
+        }
+      }
+      if (adapter2 && (utils_default.isFunction(adapter2) || (adapter2 = adapter2.get(config)))) {
+        break;
+      }
+      rejectedReasons[id4 || "#" + i] = adapter2;
+    }
+    if (!adapter2) {
+      const reasons = Object.entries(rejectedReasons).map(
+        ([id4, state]) => `adapter ${id4} ` + (state === false ? "is not supported by the environment" : "is not available in the build")
+      );
+      let s = length ? reasons.length > 1 ? "since :\n" + reasons.map(renderReason).join("\n") : " " + renderReason(reasons[0]) : "as no adapter specified";
+      throw new AxiosError_default(
+        `There is no suitable adapter to dispatch the request ` + s,
+        "ERR_NOT_SUPPORT"
+      );
+    }
+    return adapter2;
+  }
+  var adapters_default = {
+    /**
+     * Resolve an adapter from a list of adapter names or functions.
+     * @type {Function}
+     */
+    getAdapter,
+    /**
+     * Exposes all known adapters
+     * @type {Object<string, Function|Object>}
+     */
+    adapters: knownAdapters
+  };
+
+  // node_modules/axios/lib/core/dispatchRequest.js
+  function throwIfCancellationRequested(config) {
+    if (config.cancelToken) {
+      config.cancelToken.throwIfRequested();
+    }
+    if (config.signal && config.signal.aborted) {
+      throw new CanceledError_default(null, config);
+    }
+  }
+  function dispatchRequest(config) {
+    throwIfCancellationRequested(config);
+    config.headers = AxiosHeaders_default.from(config.headers);
+    config.data = transformData.call(config, config.transformRequest);
+    if (["post", "put", "patch"].indexOf(config.method) !== -1) {
+      config.headers.setContentType("application/x-www-form-urlencoded", false);
+    }
+    const adapter2 = adapters_default.getAdapter(config.adapter || defaults_default.adapter, config);
+    return adapter2(config).then(
+      function onAdapterResolution(response) {
+        throwIfCancellationRequested(config);
+        response.data = transformData.call(config, config.transformResponse, response);
+        response.headers = AxiosHeaders_default.from(response.headers);
+        return response;
+      },
+      function onAdapterRejection(reason) {
+        if (!isCancel(reason)) {
+          throwIfCancellationRequested(config);
+          if (reason && reason.response) {
+            reason.response.data = transformData.call(
+              config,
+              config.transformResponse,
+              reason.response
+            );
+            reason.response.headers = AxiosHeaders_default.from(reason.response.headers);
+          }
+        }
+        return Promise.reject(reason);
+      }
+    );
+  }
+
+  // node_modules/axios/lib/env/data.js
+  var VERSION = "1.15.2";
+
+  // node_modules/axios/lib/helpers/validator.js
+  var validators = {};
+  ["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i) => {
+    validators[type] = function validator(thing) {
+      return typeof thing === type || "a" + (i < 1 ? "n " : " ") + type;
+    };
+  });
+  var deprecatedWarnings = {};
+  validators.transitional = function transitional(validator, version2, message) {
+    function formatMessage(opt, desc) {
+      return "[Axios v" + VERSION + "] Transitional option '" + opt + "'" + desc + (message ? ". " + message : "");
+    }
+    return (value, opt, opts) => {
+      if (validator === false) {
+        throw new AxiosError_default(
+          formatMessage(opt, " has been removed" + (version2 ? " in " + version2 : "")),
+          AxiosError_default.ERR_DEPRECATED
+        );
+      }
+      if (version2 && !deprecatedWarnings[opt]) {
+        deprecatedWarnings[opt] = true;
+        console.warn(
+          formatMessage(
+            opt,
+            " has been deprecated since v" + version2 + " and will be removed in the near future"
+          )
+        );
+      }
+      return validator ? validator(value, opt, opts) : true;
+    };
+  };
+  validators.spelling = function spelling(correctSpelling) {
+    return (value, opt) => {
+      console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
+      return true;
+    };
+  };
+  function assertOptions(options, schema, allowUnknown) {
+    if (typeof options !== "object") {
+      throw new AxiosError_default("options must be an object", AxiosError_default.ERR_BAD_OPTION_VALUE);
+    }
+    const keys = Object.keys(options);
+    let i = keys.length;
+    while (i-- > 0) {
+      const opt = keys[i];
+      const validator = Object.prototype.hasOwnProperty.call(schema, opt) ? schema[opt] : void 0;
+      if (validator) {
+        const value = options[opt];
+        const result = value === void 0 || validator(value, opt, options);
+        if (result !== true) {
+          throw new AxiosError_default(
+            "option " + opt + " must be " + result,
+            AxiosError_default.ERR_BAD_OPTION_VALUE
+          );
+        }
+        continue;
+      }
+      if (allowUnknown !== true) {
+        throw new AxiosError_default("Unknown option " + opt, AxiosError_default.ERR_BAD_OPTION);
+      }
+    }
+  }
+  var validator_default = {
+    assertOptions,
+    validators
+  };
+
+  // node_modules/axios/lib/core/Axios.js
+  var validators2 = validator_default.validators;
+  var Axios = class {
+    constructor(instanceConfig) {
+      this.defaults = instanceConfig || {};
+      this.interceptors = {
+        request: new InterceptorManager_default(),
+        response: new InterceptorManager_default()
+      };
+    }
+    /**
+     * Dispatch a request
+     *
+     * @param {String|Object} configOrUrl The config specific for this request (merged with this.defaults)
+     * @param {?Object} config
+     *
+     * @returns {Promise} The Promise to be fulfilled
+     */
+    async request(configOrUrl, config) {
+      try {
+        return await this._request(configOrUrl, config);
+      } catch (err) {
+        if (err instanceof Error) {
+          let dummy = {};
+          Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
+          const stack = (() => {
+            if (!dummy.stack) {
+              return "";
+            }
+            const firstNewlineIndex = dummy.stack.indexOf("\n");
+            return firstNewlineIndex === -1 ? "" : dummy.stack.slice(firstNewlineIndex + 1);
+          })();
+          try {
+            if (!err.stack) {
+              err.stack = stack;
+            } else if (stack) {
+              const firstNewlineIndex = stack.indexOf("\n");
+              const secondNewlineIndex = firstNewlineIndex === -1 ? -1 : stack.indexOf("\n", firstNewlineIndex + 1);
+              const stackWithoutTwoTopLines = secondNewlineIndex === -1 ? "" : stack.slice(secondNewlineIndex + 1);
+              if (!String(err.stack).endsWith(stackWithoutTwoTopLines)) {
+                err.stack += "\n" + stack;
+              }
+            }
+          } catch (e) {
+          }
+        }
+        throw err;
+      }
+    }
+    _request(configOrUrl, config) {
+      if (typeof configOrUrl === "string") {
+        config = config || {};
+        config.url = configOrUrl;
+      } else {
+        config = configOrUrl || {};
+      }
+      config = mergeConfig(this.defaults, config);
+      const { transitional: transitional2, paramsSerializer, headers } = config;
+      if (transitional2 !== void 0) {
+        validator_default.assertOptions(
+          transitional2,
+          {
+            silentJSONParsing: validators2.transitional(validators2.boolean),
+            forcedJSONParsing: validators2.transitional(validators2.boolean),
+            clarifyTimeoutError: validators2.transitional(validators2.boolean),
+            legacyInterceptorReqResOrdering: validators2.transitional(validators2.boolean)
+          },
+          false
+        );
+      }
+      if (paramsSerializer != null) {
+        if (utils_default.isFunction(paramsSerializer)) {
+          config.paramsSerializer = {
+            serialize: paramsSerializer
+          };
+        } else {
+          validator_default.assertOptions(
+            paramsSerializer,
+            {
+              encode: validators2.function,
+              serialize: validators2.function
+            },
+            true
+          );
+        }
+      }
+      if (config.allowAbsoluteUrls !== void 0) {
+      } else if (this.defaults.allowAbsoluteUrls !== void 0) {
+        config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
+      } else {
+        config.allowAbsoluteUrls = true;
+      }
+      validator_default.assertOptions(
+        config,
+        {
+          baseUrl: validators2.spelling("baseURL"),
+          withXsrfToken: validators2.spelling("withXSRFToken")
+        },
+        true
+      );
+      config.method = (config.method || this.defaults.method || "get").toLowerCase();
+      let contextHeaders = headers && utils_default.merge(headers.common, headers[config.method]);
+      headers && utils_default.forEach(["delete", "get", "head", "post", "put", "patch", "common"], (method) => {
+        delete headers[method];
+      });
+      config.headers = AxiosHeaders_default.concat(contextHeaders, headers);
+      const requestInterceptorChain = [];
+      let synchronousRequestInterceptors = true;
+      this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+        if (typeof interceptor.runWhen === "function" && interceptor.runWhen(config) === false) {
+          return;
+        }
+        synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
+        const transitional3 = config.transitional || transitional_default;
+        const legacyInterceptorReqResOrdering = transitional3 && transitional3.legacyInterceptorReqResOrdering;
+        if (legacyInterceptorReqResOrdering) {
+          requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
+        } else {
+          requestInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
+        }
+      });
+      const responseInterceptorChain = [];
+      this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+        responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
+      });
+      let promise;
+      let i = 0;
+      let len;
+      if (!synchronousRequestInterceptors) {
+        const chain = [dispatchRequest.bind(this), void 0];
+        chain.unshift(...requestInterceptorChain);
+        chain.push(...responseInterceptorChain);
+        len = chain.length;
+        promise = Promise.resolve(config);
+        while (i < len) {
+          promise = promise.then(chain[i++], chain[i++]);
+        }
+        return promise;
+      }
+      len = requestInterceptorChain.length;
+      let newConfig = config;
+      while (i < len) {
+        const onFulfilled = requestInterceptorChain[i++];
+        const onRejected = requestInterceptorChain[i++];
+        try {
+          newConfig = onFulfilled(newConfig);
+        } catch (error) {
+          onRejected.call(this, error);
+          break;
+        }
+      }
+      try {
+        promise = dispatchRequest.call(this, newConfig);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+      i = 0;
+      len = responseInterceptorChain.length;
+      while (i < len) {
+        promise = promise.then(responseInterceptorChain[i++], responseInterceptorChain[i++]);
+      }
+      return promise;
+    }
+    getUri(config) {
+      config = mergeConfig(this.defaults, config);
+      const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);
+      return buildURL(fullPath, config.params, config.paramsSerializer);
+    }
+  };
+  utils_default.forEach(["delete", "get", "head", "options"], function forEachMethodNoData(method) {
+    Axios.prototype[method] = function(url, config) {
+      return this.request(
+        mergeConfig(config || {}, {
+          method,
+          url,
+          data: (config || {}).data
+        })
+      );
+    };
+  });
+  utils_default.forEach(["post", "put", "patch"], function forEachMethodWithData(method) {
+    function generateHTTPMethod(isForm) {
+      return function httpMethod(url, data2, config) {
+        return this.request(
+          mergeConfig(config || {}, {
+            method,
+            headers: isForm ? {
+              "Content-Type": "multipart/form-data"
+            } : {},
+            url,
+            data: data2
+          })
+        );
+      };
+    }
+    Axios.prototype[method] = generateHTTPMethod();
+    Axios.prototype[method + "Form"] = generateHTTPMethod(true);
+  });
+  var Axios_default = Axios;
+
+  // node_modules/axios/lib/cancel/CancelToken.js
+  var CancelToken = class _CancelToken {
+    constructor(executor) {
+      if (typeof executor !== "function") {
+        throw new TypeError("executor must be a function.");
+      }
+      let resolvePromise;
+      this.promise = new Promise(function promiseExecutor(resolve) {
+        resolvePromise = resolve;
+      });
+      const token = this;
+      this.promise.then((cancel) => {
+        if (!token._listeners) return;
+        let i = token._listeners.length;
+        while (i-- > 0) {
+          token._listeners[i](cancel);
+        }
+        token._listeners = null;
+      });
+      this.promise.then = (onfulfilled) => {
+        let _resolve;
+        const promise = new Promise((resolve) => {
+          token.subscribe(resolve);
+          _resolve = resolve;
+        }).then(onfulfilled);
+        promise.cancel = function reject() {
+          token.unsubscribe(_resolve);
+        };
+        return promise;
+      };
+      executor(function cancel(message, config, request) {
+        if (token.reason) {
+          return;
+        }
+        token.reason = new CanceledError_default(message, config, request);
+        resolvePromise(token.reason);
+      });
+    }
+    /**
+     * Throws a `CanceledError` if cancellation has been requested.
+     */
+    throwIfRequested() {
+      if (this.reason) {
+        throw this.reason;
+      }
+    }
+    /**
+     * Subscribe to the cancel signal
+     */
+    subscribe(listener) {
+      if (this.reason) {
+        listener(this.reason);
+        return;
+      }
+      if (this._listeners) {
+        this._listeners.push(listener);
+      } else {
+        this._listeners = [listener];
+      }
+    }
+    /**
+     * Unsubscribe from the cancel signal
+     */
+    unsubscribe(listener) {
+      if (!this._listeners) {
+        return;
+      }
+      const index = this._listeners.indexOf(listener);
+      if (index !== -1) {
+        this._listeners.splice(index, 1);
+      }
+    }
+    toAbortSignal() {
+      const controller = new AbortController();
+      const abort = (err) => {
+        controller.abort(err);
+      };
+      this.subscribe(abort);
+      controller.signal.unsubscribe = () => this.unsubscribe(abort);
+      return controller.signal;
+    }
+    /**
+     * Returns an object that contains a new `CancelToken` and a function that, when called,
+     * cancels the `CancelToken`.
+     */
+    static source() {
+      let cancel;
+      const token = new _CancelToken(function executor(c) {
+        cancel = c;
+      });
+      return {
+        token,
+        cancel
+      };
+    }
+  };
+  var CancelToken_default = CancelToken;
+
+  // node_modules/axios/lib/helpers/spread.js
+  function spread(callback) {
+    return function wrap(arr) {
+      return callback.apply(null, arr);
+    };
+  }
+
+  // node_modules/axios/lib/helpers/isAxiosError.js
+  function isAxiosError(payload) {
+    return utils_default.isObject(payload) && payload.isAxiosError === true;
+  }
+
+  // node_modules/axios/lib/helpers/HttpStatusCode.js
+  var HttpStatusCode = {
+    Continue: 100,
+    SwitchingProtocols: 101,
+    Processing: 102,
+    EarlyHints: 103,
+    Ok: 200,
+    Created: 201,
+    Accepted: 202,
+    NonAuthoritativeInformation: 203,
+    NoContent: 204,
+    ResetContent: 205,
+    PartialContent: 206,
+    MultiStatus: 207,
+    AlreadyReported: 208,
+    ImUsed: 226,
+    MultipleChoices: 300,
+    MovedPermanently: 301,
+    Found: 302,
+    SeeOther: 303,
+    NotModified: 304,
+    UseProxy: 305,
+    Unused: 306,
+    TemporaryRedirect: 307,
+    PermanentRedirect: 308,
+    BadRequest: 400,
+    Unauthorized: 401,
+    PaymentRequired: 402,
+    Forbidden: 403,
+    NotFound: 404,
+    MethodNotAllowed: 405,
+    NotAcceptable: 406,
+    ProxyAuthenticationRequired: 407,
+    RequestTimeout: 408,
+    Conflict: 409,
+    Gone: 410,
+    LengthRequired: 411,
+    PreconditionFailed: 412,
+    PayloadTooLarge: 413,
+    UriTooLong: 414,
+    UnsupportedMediaType: 415,
+    RangeNotSatisfiable: 416,
+    ExpectationFailed: 417,
+    ImATeapot: 418,
+    MisdirectedRequest: 421,
+    UnprocessableEntity: 422,
+    Locked: 423,
+    FailedDependency: 424,
+    TooEarly: 425,
+    UpgradeRequired: 426,
+    PreconditionRequired: 428,
+    TooManyRequests: 429,
+    RequestHeaderFieldsTooLarge: 431,
+    UnavailableForLegalReasons: 451,
+    InternalServerError: 500,
+    NotImplemented: 501,
+    BadGateway: 502,
+    ServiceUnavailable: 503,
+    GatewayTimeout: 504,
+    HttpVersionNotSupported: 505,
+    VariantAlsoNegotiates: 506,
+    InsufficientStorage: 507,
+    LoopDetected: 508,
+    NotExtended: 510,
+    NetworkAuthenticationRequired: 511,
+    WebServerIsDown: 521,
+    ConnectionTimedOut: 522,
+    OriginIsUnreachable: 523,
+    TimeoutOccurred: 524,
+    SslHandshakeFailed: 525,
+    InvalidSslCertificate: 526
+  };
+  Object.entries(HttpStatusCode).forEach(([key, value]) => {
+    HttpStatusCode[value] = key;
+  });
+  var HttpStatusCode_default = HttpStatusCode;
+
+  // node_modules/axios/lib/axios.js
+  function createInstance(defaultConfig2) {
+    const context = new Axios_default(defaultConfig2);
+    const instance = bind(Axios_default.prototype.request, context);
+    utils_default.extend(instance, Axios_default.prototype, context, { allOwnKeys: true });
+    utils_default.extend(instance, context, null, { allOwnKeys: true });
+    instance.create = function create(instanceConfig) {
+      return createInstance(mergeConfig(defaultConfig2, instanceConfig));
+    };
+    return instance;
+  }
+  var axios = createInstance(defaults_default);
+  axios.Axios = Axios_default;
+  axios.CanceledError = CanceledError_default;
+  axios.CancelToken = CancelToken_default;
+  axios.isCancel = isCancel;
+  axios.VERSION = VERSION;
+  axios.toFormData = toFormData_default;
+  axios.AxiosError = AxiosError_default;
+  axios.Cancel = axios.CanceledError;
+  axios.all = function all(promises) {
+    return Promise.all(promises);
+  };
+  axios.spread = spread;
+  axios.isAxiosError = isAxiosError;
+  axios.mergeConfig = mergeConfig;
+  axios.AxiosHeaders = AxiosHeaders_default;
+  axios.formToJSON = (thing) => formDataToJSON_default(utils_default.isHTMLForm(thing) ? new FormData(thing) : thing);
+  axios.getAdapter = adapters_default.getAdapter;
+  axios.HttpStatusCode = HttpStatusCode_default;
+  axios.default = axios;
+  var axios_default = axios;
+
+  // node_modules/axios/index.js
+  var {
+    Axios: Axios2,
+    AxiosError: AxiosError2,
+    CanceledError: CanceledError2,
+    isCancel: isCancel2,
+    CancelToken: CancelToken2,
+    VERSION: VERSION2,
+    all: all2,
+    Cancel,
+    isAxiosError: isAxiosError2,
+    spread: spread2,
+    toFormData: toFormData2,
+    AxiosHeaders: AxiosHeaders2,
+    HttpStatusCode: HttpStatusCode2,
+    formToJSON,
+    getAdapter: getAdapter2,
+    mergeConfig: mergeConfig2
+  } = axios_default;
+
+  // src/services/api.ts
+  var API_BASE_URL = "http://localhost:8080/api";
+  var api = axios_default.create({
+    baseURL: API_BASE_URL,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  api.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
+  var propertyService = {
+    getMissions: async () => {
+      const response = await api.get("/agent/missions");
+      return response.data;
+    },
+    validateProperty: async (id4, panoramaUrl) => {
+      const response = await api.post(`/agent/validate/${id4}`, { panorama_url: panoramaUrl });
+      return response.data;
+    },
+    getOwnerProperties: async () => {
+      const response = await api.get("/owner/properties");
+      return response.data;
+    },
+    createProperty: async (data2) => {
+      const response = await api.post("/owner/properties", data2);
+      return response.data;
+    }
+  };
+  var api_default = api;
+
   // src/pages/auth/Login.tsx
+  var import_jsx_runtime7 = __toESM(require_jsx_runtime(), 1);
   var Login = () => {
     const [email, setEmail] = (0, import_react28.useState)("");
     const [password, setPassword] = (0, import_react28.useState)("");
@@ -32800,60 +35656,104 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     const handleLogin = async (e) => {
       e.preventDefault();
       setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-        if (email.includes("admin")) {
+      try {
+        const response = await api_default.post("/auth/login", { email, password });
+        const { token, user } = response.data.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+        if (user.role === "admin") {
           navigate("/dashboard/admin");
-        } else if (email.includes("agent")) {
+        } else if (user.role === "agent") {
           navigate("/dashboard/agent");
         } else {
           navigate("/dashboard/owner");
         }
-      }, 1500);
+      } catch (error) {
+        console.error("Erreur de connexion:", error);
+        alert(error.response?.data?.message || "Erreur lors de la connexion");
+      } finally {
+        setIsLoading(false);
+      }
     };
-    return /* @__PURE__ */ React.createElement("div", { className: "min-h-[calc(100vh-160px)] flex items-center justify-center py-12" }, /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "min-h-[calc(100vh-160px)] flex items-center justify-center py-12", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
       motion.div,
       {
         initial: { opacity: 0, y: 20 },
         animate: { opacity: 1, y: 0 },
         transition: { duration: 0.5 },
-        className: "w-full max-w-md"
-      },
-      /* @__PURE__ */ React.createElement("div", { className: "bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-8 border border-slate-100 overflow-hidden relative" }, /* @__PURE__ */ React.createElement("div", { className: "absolute top-0 right-0 -mt-16 -mr-16 w-32 h-32 bg-indigo-50 rounded-full blur-3xl" }), /* @__PURE__ */ React.createElement("div", { className: "text-center mb-10 relative" }, /* @__PURE__ */ React.createElement("div", { className: "inline-flex p-3 bg-indigo-50 rounded-2xl text-indigo-600 mb-4" }, /* @__PURE__ */ React.createElement(Shield, { className: "w-8 h-8" })), /* @__PURE__ */ React.createElement("h1", { className: "text-3xl font-bold text-slate-900 mb-2" }, "Bon retour"), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, "Connectez-vous pour g\xE9rer vos biens fonciers s\xE9curis\xE9s")), /* @__PURE__ */ React.createElement("form", { onSubmit: handleLogin, className: "space-y-6 relative" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-2" }, "Adresse Email"), /* @__PURE__ */ React.createElement("div", { className: "relative" }, /* @__PURE__ */ React.createElement("div", { className: "absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400" }, /* @__PURE__ */ React.createElement(Mail, { className: "w-5 h-5" })), /* @__PURE__ */ React.createElement(
-        "input",
-        {
-          type: "email",
-          value: email,
-          onChange: (e) => setEmail(e.target.value),
-          className: "w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all outline-none text-slate-700 placeholder-slate-400",
-          placeholder: "jean.dupont@exemple.cd",
-          required: true
-        }
-      ))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-2" }, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700" }, "Mot de passe"), /* @__PURE__ */ React.createElement(Link, { to: "/forgot-password", className: "text-sm font-medium text-indigo-600 hover:text-indigo-700" }, "Oubli\xE9 ?")), /* @__PURE__ */ React.createElement("div", { className: "relative" }, /* @__PURE__ */ React.createElement("div", { className: "absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400" }, /* @__PURE__ */ React.createElement(Lock, { className: "w-5 h-5" })), /* @__PURE__ */ React.createElement(
-        "input",
-        {
-          type: "password",
-          value: password,
-          onChange: (e) => setPassword(e.target.value),
-          className: "w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all outline-none text-slate-700 placeholder-slate-400",
-          placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
-          required: true
-        }
-      ))), /* @__PURE__ */ React.createElement(
-        "button",
-        {
-          type: "submit",
-          disabled: isLoading,
-          className: "w-full flex items-center justify-center space-x-2 py-3.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-all shadow-lg shadow-indigo-200 active:scale-[0.98] disabled:opacity-70 disabled:active:scale-100"
-        },
-        isLoading ? /* @__PURE__ */ React.createElement("div", { className: "w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", null, "Se connecter"), /* @__PURE__ */ React.createElement(ArrowRight, { className: "w-5 h-5" }))
-      )), /* @__PURE__ */ React.createElement("div", { className: "mt-8 text-center" }, /* @__PURE__ */ React.createElement("p", { className: "text-slate-600 text-sm" }, "Nouveau sur KivuMarket+ ?", " ", /* @__PURE__ */ React.createElement(Link, { to: "/register", className: "font-semibold text-indigo-600 hover:text-indigo-700 transition-colors" }, "Cr\xE9er un compte"))))
-    ));
+        className: "w-full max-w-md",
+        children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-8 border border-slate-100 overflow-hidden relative", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "absolute top-0 right-0 -mt-16 -mr-16 w-32 h-32 bg-indigo-50 rounded-full blur-3xl" }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "text-center mb-10 relative", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "inline-flex p-3 bg-indigo-50 rounded-2xl text-indigo-600 mb-4", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Shield, { className: "w-8 h-8" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h1", { className: "text-3xl font-bold text-slate-900 mb-2", children: "Bon retour" }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "text-slate-500", children: "Connectez-vous pour g\xE9rer vos biens fonciers s\xE9curis\xE9s" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("form", { onSubmit: handleLogin, className: "space-y-6 relative", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-2", children: "Adresse Email" }),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "relative", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Mail, { className: "w-5 h-5" }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+                  "input",
+                  {
+                    type: "email",
+                    value: email,
+                    onChange: (e) => setEmail(e.target.value),
+                    className: "w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all outline-none text-slate-700 placeholder-slate-400",
+                    placeholder: "jean.dupont@exemple.cd",
+                    required: true
+                  }
+                )
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex items-center justify-between mb-2", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("label", { className: "block text-sm font-medium text-slate-700", children: "Mot de passe" }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Link, { to: "/forgot-password", className: "text-sm font-medium text-indigo-600 hover:text-indigo-700", children: "Oubli\xE9 ?" })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "relative", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Lock, { className: "w-5 h-5" }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+                  "input",
+                  {
+                    type: "password",
+                    value: password,
+                    onChange: (e) => setPassword(e.target.value),
+                    className: "w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all outline-none text-slate-700 placeholder-slate-400",
+                    placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+                    required: true
+                  }
+                )
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+              "button",
+              {
+                type: "submit",
+                disabled: isLoading,
+                className: "w-full flex items-center justify-center space-x-2 py-3.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-all shadow-lg shadow-indigo-200 active:scale-[0.98] disabled:opacity-70 disabled:active:scale-100",
+                children: isLoading ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "Se connecter" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(ArrowRight, { className: "w-5 h-5" })
+                ] })
+              }
+            )
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "mt-8 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("p", { className: "text-slate-600 text-sm", children: [
+            "Nouveau sur KivuMarket+ ?",
+            " ",
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Link, { to: "/register", className: "font-semibold text-indigo-600 hover:text-indigo-700 transition-colors", children: "Cr\xE9er un compte" })
+          ] }) })
+        ] })
+      }
+    ) });
   };
   var Login_default = Login;
 
   // src/pages/auth/Register.tsx
   var import_react29 = __toESM(require_react(), 1);
+  var import_jsx_runtime8 = __toESM(require_jsx_runtime(), 1);
   var Register = () => {
     const [step, setStep] = (0, import_react29.useState)(1);
     const [formData, setFormData] = (0, import_react29.useState)({
@@ -32878,128 +35778,178 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       { id: "acheteur", title: "Acheteur", icon: User, desc: "Je cherche \xE0 acheter un bien" },
       { id: "proprietaire", title: "Propri\xE9taire", icon: MapPin, desc: "Je veux vendre ou certifier mon bien" }
     ];
-    return /* @__PURE__ */ React.createElement("div", { className: "min-h-[calc(100vh-160px)] flex items-center justify-center py-12" }, /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "min-h-[calc(100vh-160px)] flex items-center justify-center py-12", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
       motion.div,
       {
         initial: { opacity: 0, y: 20 },
         animate: { opacity: 1, y: 0 },
-        className: "w-full max-w-lg"
-      },
-      /* @__PURE__ */ React.createElement("div", { className: "bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-8 border border-slate-100 overflow-hidden relative" }, /* @__PURE__ */ React.createElement("div", { className: "absolute top-0 right-0 -mt-20 -mr-20 w-40 h-40 bg-violet-50 rounded-full blur-3xl" }), /* @__PURE__ */ React.createElement("div", { className: "text-center mb-10 relative" }, /* @__PURE__ */ React.createElement("div", { className: "inline-flex p-3 bg-violet-50 rounded-2xl text-violet-600 mb-4" }, /* @__PURE__ */ React.createElement(Shield, { className: "w-8 h-8" })), /* @__PURE__ */ React.createElement("h1", { className: "text-3xl font-bold text-slate-900 mb-2" }, "Cr\xE9er un compte"), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, "Rejoignez la premi\xE8re plateforme fonci\xE8re s\xE9curis\xE9e du Kivu")), /* @__PURE__ */ React.createElement("div", { className: "flex mb-8 relative" }, /* @__PURE__ */ React.createElement("div", { className: "absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -z-10 -translate-y-1/2" }), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between w-full z-10" }, [1, 2].map((s) => /* @__PURE__ */ React.createElement(
-        "div",
-        {
-          key: s,
-          className: `w-8 h-8 rounded-full flex items-center justify-center font-medium text-sm transition-colors ${step >= s ? "bg-violet-600 text-white shadow-lg shadow-violet-200" : "bg-slate-100 text-slate-400"}`
-        },
-        s
-      )))), /* @__PURE__ */ React.createElement("form", { onSubmit: step === 2 ? handleRegister : (e) => {
-        e.preventDefault();
-        setStep(2);
-      }, className: "space-y-6 relative" }, /* @__PURE__ */ React.createElement(AnimatePresence, { mode: "wait" }, step === 1 ? /* @__PURE__ */ React.createElement(
-        motion.div,
-        {
-          key: "step1",
-          initial: { opacity: 0, x: -20 },
-          animate: { opacity: 1, x: 0 },
-          exit: { opacity: 0, x: 20 },
-          className: "space-y-4"
-        },
-        /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-4" }, "Je suis un..."),
-        /* @__PURE__ */ React.createElement("div", { className: "grid gap-4" }, roles.map((r) => {
-          const Icon2 = r.icon;
-          const isSelected = formData.role === r.id;
-          return /* @__PURE__ */ React.createElement(
-            "div",
+        className: "w-full max-w-lg",
+        children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-8 border border-slate-100 overflow-hidden relative", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "absolute top-0 right-0 -mt-20 -mr-20 w-40 h-40 bg-violet-50 rounded-full blur-3xl" }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "text-center mb-10 relative", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "inline-flex p-3 bg-violet-50 rounded-2xl text-violet-600 mb-4", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Shield, { className: "w-8 h-8" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h1", { className: "text-3xl font-bold text-slate-900 mb-2", children: "Cr\xE9er un compte" }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "text-slate-500", children: "Rejoignez la premi\xE8re plateforme fonci\xE8re s\xE9curis\xE9e du Kivu" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex mb-8 relative", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -z-10 -translate-y-1/2" }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "flex justify-between w-full z-10", children: [1, 2].map((s) => /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+              "div",
+              {
+                className: `w-8 h-8 rounded-full flex items-center justify-center font-medium text-sm transition-colors ${step >= s ? "bg-violet-600 text-white shadow-lg shadow-violet-200" : "bg-slate-100 text-slate-400"}`,
+                children: s
+              },
+              s
+            )) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("form", { onSubmit: step === 2 ? handleRegister : (e) => {
+            e.preventDefault();
+            setStep(2);
+          }, className: "space-y-6 relative", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(AnimatePresence, { mode: "wait", children: step === 1 ? /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
+            motion.div,
             {
-              key: r.id,
-              onClick: () => setFormData({ ...formData, role: r.id }),
-              className: `cursor-pointer p-4 rounded-xl border-2 transition-all flex items-center space-x-4 ${isSelected ? "border-violet-600 bg-violet-50/50" : "border-slate-100 hover:border-violet-200 hover:bg-slate-50"}`
+              initial: { opacity: 0, x: -20 },
+              animate: { opacity: 1, x: 0 },
+              exit: { opacity: 0, x: 20 },
+              className: "space-y-4",
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-4", children: "Je suis un..." }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "grid gap-4", children: roles.map((r) => {
+                  const Icon2 = r.icon;
+                  const isSelected = formData.role === r.id;
+                  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
+                    "div",
+                    {
+                      onClick: () => setFormData({ ...formData, role: r.id }),
+                      className: `cursor-pointer p-4 rounded-xl border-2 transition-all flex items-center space-x-4 ${isSelected ? "border-violet-600 bg-violet-50/50" : "border-slate-100 hover:border-violet-200 hover:bg-slate-50"}`,
+                      children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: `p-3 rounded-lg ${isSelected ? "bg-violet-600 text-white" : "bg-slate-100 text-slate-500"}`, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Icon2, { className: "w-5 h-5" }) }),
+                        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h3", { className: `font-semibold ${isSelected ? "text-violet-900" : "text-slate-700"}`, children: r.title }),
+                          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: `text-sm ${isSelected ? "text-violet-600/80" : "text-slate-500"}`, children: r.desc })
+                        ] }),
+                        isSelected && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "ml-auto w-5 h-5 rounded-full bg-violet-600 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "w-2 h-2 bg-white rounded-full" }) })
+                      ]
+                    },
+                    r.id
+                  );
+                }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+                  "button",
+                  {
+                    type: "submit",
+                    className: "w-full mt-6 py-3.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-medium transition-all shadow-lg shadow-slate-200",
+                    children: "Continuer"
+                  }
+                )
+              ]
             },
-            /* @__PURE__ */ React.createElement("div", { className: `p-3 rounded-lg ${isSelected ? "bg-violet-600 text-white" : "bg-slate-100 text-slate-500"}` }, /* @__PURE__ */ React.createElement(Icon2, { className: "w-5 h-5" })),
-            /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h3", { className: `font-semibold ${isSelected ? "text-violet-900" : "text-slate-700"}` }, r.title), /* @__PURE__ */ React.createElement("p", { className: `text-sm ${isSelected ? "text-violet-600/80" : "text-slate-500"}` }, r.desc)),
-            isSelected && /* @__PURE__ */ React.createElement("div", { className: "ml-auto w-5 h-5 rounded-full bg-violet-600 flex items-center justify-center" }, /* @__PURE__ */ React.createElement("div", { className: "w-2 h-2 bg-white rounded-full" }))
-          );
-        })),
-        /* @__PURE__ */ React.createElement(
-          "button",
-          {
-            type: "submit",
-            className: "w-full mt-6 py-3.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-medium transition-all shadow-lg shadow-slate-200"
-          },
-          "Continuer"
-        )
-      ) : /* @__PURE__ */ React.createElement(
-        motion.div,
-        {
-          key: "step2",
-          initial: { opacity: 0, x: -20 },
-          animate: { opacity: 1, x: 0 },
-          exit: { opacity: 0, x: 20 },
-          className: "space-y-5"
-        },
-        /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-4" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-2" }, "Pr\xE9nom"), /* @__PURE__ */ React.createElement(
-          "input",
-          {
-            type: "text",
-            value: formData.prenom,
-            onChange: (e) => setFormData({ ...formData, prenom: e.target.value }),
-            className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all outline-none text-slate-700",
-            placeholder: "Jean",
-            required: true
-          }
-        )), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-2" }, "Nom"), /* @__PURE__ */ React.createElement(
-          "input",
-          {
-            type: "text",
-            value: formData.nom,
-            onChange: (e) => setFormData({ ...formData, nom: e.target.value }),
-            className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all outline-none text-slate-700",
-            placeholder: "Dupont",
-            required: true
-          }
-        ))),
-        /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-2" }, "Adresse Email"), /* @__PURE__ */ React.createElement("div", { className: "relative" }, /* @__PURE__ */ React.createElement("div", { className: "absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400" }, /* @__PURE__ */ React.createElement(Mail, { className: "w-5 h-5" })), /* @__PURE__ */ React.createElement(
-          "input",
-          {
-            type: "email",
-            value: formData.email,
-            onChange: (e) => setFormData({ ...formData, email: e.target.value }),
-            className: "w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all outline-none text-slate-700",
-            placeholder: "jean.dupont@exemple.cd",
-            required: true
-          }
-        ))),
-        /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-2" }, "Mot de passe"), /* @__PURE__ */ React.createElement("div", { className: "relative" }, /* @__PURE__ */ React.createElement("div", { className: "absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400" }, /* @__PURE__ */ React.createElement(Lock, { className: "w-5 h-5" })), /* @__PURE__ */ React.createElement(
-          "input",
-          {
-            type: "password",
-            value: formData.password,
-            onChange: (e) => setFormData({ ...formData, password: e.target.value }),
-            className: "w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all outline-none text-slate-700",
-            placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
-            required: true,
-            minLength: 8
-          }
-        ))),
-        /* @__PURE__ */ React.createElement("div", { className: "flex space-x-3 pt-2" }, /* @__PURE__ */ React.createElement(
-          "button",
-          {
-            type: "button",
-            onClick: () => setStep(1),
-            className: "w-1/3 py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium transition-all"
-          },
-          "Retour"
-        ), /* @__PURE__ */ React.createElement(
-          "button",
-          {
-            type: "submit",
-            disabled: isLoading,
-            className: "w-2/3 flex items-center justify-center space-x-2 py-3.5 px-4 bg-violet-600 hover:bg-violet-700 text-white rounded-xl font-medium transition-all shadow-lg shadow-violet-200 active:scale-[0.98] disabled:opacity-70 disabled:active:scale-100"
-          },
-          isLoading ? /* @__PURE__ */ React.createElement("div", { className: "w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ React.createElement("span", null, "Cr\xE9er le compte")
-        ))
-      ))), /* @__PURE__ */ React.createElement("div", { className: "mt-8 text-center" }, /* @__PURE__ */ React.createElement("p", { className: "text-slate-600 text-sm" }, "D\xE9j\xE0 un compte ?", " ", /* @__PURE__ */ React.createElement(Link, { to: "/login", className: "font-semibold text-violet-600 hover:text-violet-700 transition-colors" }, "Se connecter"))))
-    ));
+            "step1"
+          ) : /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
+            motion.div,
+            {
+              initial: { opacity: 0, x: -20 },
+              animate: { opacity: 1, x: 0 },
+              exit: { opacity: 0, x: 20 },
+              className: "space-y-5",
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "grid grid-cols-2 gap-4", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-2", children: "Pr\xE9nom" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+                      "input",
+                      {
+                        type: "text",
+                        value: formData.prenom,
+                        onChange: (e) => setFormData({ ...formData, prenom: e.target.value }),
+                        className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all outline-none text-slate-700",
+                        placeholder: "Jean",
+                        required: true
+                      }
+                    )
+                  ] }),
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-2", children: "Nom" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+                      "input",
+                      {
+                        type: "text",
+                        value: formData.nom,
+                        onChange: (e) => setFormData({ ...formData, nom: e.target.value }),
+                        className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all outline-none text-slate-700",
+                        placeholder: "Dupont",
+                        required: true
+                      }
+                    )
+                  ] })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-2", children: "Adresse Email" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "relative", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Mail, { className: "w-5 h-5" }) }),
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+                      "input",
+                      {
+                        type: "email",
+                        value: formData.email,
+                        onChange: (e) => setFormData({ ...formData, email: e.target.value }),
+                        className: "w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all outline-none text-slate-700",
+                        placeholder: "jean.dupont@exemple.cd",
+                        required: true
+                      }
+                    )
+                  ] })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-2", children: "Mot de passe" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "relative", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Lock, { className: "w-5 h-5" }) }),
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+                      "input",
+                      {
+                        type: "password",
+                        value: formData.password,
+                        onChange: (e) => setFormData({ ...formData, password: e.target.value }),
+                        className: "w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all outline-none text-slate-700",
+                        placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+                        required: true,
+                        minLength: 8
+                      }
+                    )
+                  ] })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex space-x-3 pt-2", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+                    "button",
+                    {
+                      type: "button",
+                      onClick: () => setStep(1),
+                      className: "w-1/3 py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium transition-all",
+                      children: "Retour"
+                    }
+                  ),
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+                    "button",
+                    {
+                      type: "submit",
+                      disabled: isLoading,
+                      className: "w-2/3 flex items-center justify-center space-x-2 py-3.5 px-4 bg-violet-600 hover:bg-violet-700 text-white rounded-xl font-medium transition-all shadow-lg shadow-violet-200 active:scale-[0.98] disabled:opacity-70 disabled:active:scale-100",
+                      children: isLoading ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: "Cr\xE9er le compte" })
+                    }
+                  )
+                ] })
+              ]
+            },
+            "step2"
+          ) }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "mt-8 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { className: "text-slate-600 text-sm", children: [
+            "D\xE9j\xE0 un compte ?",
+            " ",
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Link, { to: "/login", className: "font-semibold text-violet-600 hover:text-violet-700 transition-colors", children: "Se connecter" })
+          ] }) })
+        ] })
+      }
+    ) });
   };
   var Register_default = Register;
 
@@ -33047,7 +35997,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     FetchResponse: () => FetchResponse,
     FetchUrlFeeDataNetworkPlugin: () => FetchUrlFeeDataNetworkPlugin,
     FixedNumber: () => FixedNumber,
-    Fragment: () => Fragment10,
+    Fragment: () => Fragment11,
     FunctionFragment: () => FunctionFragment,
     GasCostPlugin: () => GasCostPlugin,
     HDNodeVoidWallet: () => HDNodeVoidWallet,
@@ -33756,9 +36706,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
      *  Create a new **EventPayload** for %%emitter%% with
      *  the %%listener%% and for %%filter%%.
      */
-    constructor(emitter, listener, filter2) {
+    constructor(emitter, listener, filter3) {
       this.#listener = listener;
-      defineProperties(this, { emitter, filter: filter2 });
+      defineProperties(this, { emitter, filter: filter3 });
     }
     /**
      *  Unregister the triggered listener for future events.
@@ -34759,7 +37709,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     return (/* @__PURE__ */ new Date()).getTime();
   }
   function unpercent(value) {
-    return toUtf8Bytes(value.replace(/%([0-9a-f][0-9a-f])/gi, (all, code) => {
+    return toUtf8Bytes(value.replace(/%([0-9a-f][0-9a-f])/gi, (all3, code) => {
       return String.fromCharCode(parseInt(code, 16));
     }));
   }
@@ -34845,7 +37795,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     const name = (signed2 ? "" : "u") + "fixed" + String(width) + "x" + String(decimals);
     return { signed: signed2, width, decimals, name };
   }
-  function toString(val, decimals) {
+  function toString3(val, decimals) {
     let negative = "";
     if (val < BN_03) {
       negative = "-";
@@ -34894,7 +37844,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       assertPrivate(guard, _guard, "FixedNumber");
       this.#val = value;
       this.#format = format;
-      const _value = toString(value, format.decimals);
+      const _value = toString3(value, format.decimals);
       defineProperties(this, { format: format.name, _value });
       this.#tens = getTens(format.decimals);
     }
@@ -35935,10 +38885,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }
   };
   var toStr = {}.toString;
-  function checkOpts(defaults, opts) {
+  function checkOpts(defaults2, opts) {
     if (opts !== void 0 && toStr.call(opts) !== "[object Object]")
       throw new Error("Options should be object or undefined");
-    const merged = Object.assign(defaults, opts);
+    const merged = Object.assign(defaults2, opts);
     return merged;
   }
   function wrapConstructor(hashCons) {
@@ -36267,18 +39217,18 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       this.H = IV[7] | 0;
     }
     get() {
-      const { A, B, C, D, E, F, G, H } = this;
-      return [A, B, C, D, E, F, G, H];
+      const { A, B, C, D, E, F, G: G2, H } = this;
+      return [A, B, C, D, E, F, G2, H];
     }
     // prettier-ignore
-    set(A, B, C, D, E, F, G, H) {
+    set(A, B, C, D, E, F, G2, H) {
       this.A = A | 0;
       this.B = B | 0;
       this.C = C | 0;
       this.D = D | 0;
       this.E = E | 0;
       this.F = F | 0;
-      this.G = G | 0;
+      this.G = G2 | 0;
       this.H = H | 0;
     }
     process(view2, offset) {
@@ -36291,14 +39241,14 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         const s1 = rotr(W2, 17) ^ rotr(W2, 19) ^ W2 >>> 10;
         SHA256_W[i] = s1 + SHA256_W[i - 7] + s0 + SHA256_W[i - 16] | 0;
       }
-      let { A, B, C, D, E, F, G, H } = this;
+      let { A, B, C, D, E, F, G: G2, H } = this;
       for (let i = 0; i < 64; i++) {
         const sigma1 = rotr(E, 6) ^ rotr(E, 11) ^ rotr(E, 25);
-        const T13 = H + sigma1 + Chi(E, F, G) + SHA256_K[i] + SHA256_W[i] | 0;
+        const T13 = H + sigma1 + Chi(E, F, G2) + SHA256_K[i] + SHA256_W[i] | 0;
         const sigma0 = rotr(A, 2) ^ rotr(A, 13) ^ rotr(A, 22);
         const T22 = sigma0 + Maj(A, B, C) | 0;
-        H = G;
-        G = F;
+        H = G2;
+        G2 = F;
         F = E;
         E = D + T13 | 0;
         D = C;
@@ -36312,9 +39262,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       D = D + this.D | 0;
       E = E + this.E | 0;
       F = F + this.F | 0;
-      G = G + this.G | 0;
+      G2 = G2 + this.G | 0;
       H = H + this.H | 0;
-      this.set(A, B, C, D, E, F, G, H);
+      this.set(A, B, C, D, E, F, G2, H);
     }
     roundClean() {
       SHA256_W.fill(0);
@@ -36592,7 +39542,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   var sha512 = /* @__PURE__ */ wrapConstructor(() => new SHA512());
 
   // node_modules/ethers/lib.esm/crypto/crypto-browser.js
-  function getGlobal() {
+  function getGlobal2() {
     if (typeof self !== "undefined") {
       return self;
     }
@@ -36604,7 +39554,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }
     throw new Error("unable to locate global object");
   }
-  var anyGlobal = getGlobal();
+  var anyGlobal = getGlobal2();
   var crypto2 = anyGlobal.crypto || anyGlobal.msCrypto;
   function createHash(algo) {
     switch (algo) {
@@ -37286,8 +40236,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   Object.freeze(sha2562);
 
   // node_modules/@noble/curves/esm/abstract/utils.js
-  var utils_exports = {};
-  __export(utils_exports, {
+  var utils_exports2 = {};
+  __export(utils_exports2, {
     bitGet: () => bitGet,
     bitLen: () => bitLen,
     bitMask: () => bitMask,
@@ -37481,7 +40431,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     field: (val, object2) => object2.Fp.isValid(val),
     hash: (val) => typeof val === "function" && Number.isSafeInteger(val.outputLen)
   };
-  function validateObject(object2, validators, optValidators = {}) {
+  function validateObject(object2, validators3, optValidators = {}) {
     const checkField = (fieldName, type, isOptional) => {
       const checkVal = validatorFns[type];
       if (typeof checkVal !== "function")
@@ -37493,7 +40443,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         throw new Error(`Invalid param ${String(fieldName)}=${val} (${typeof val}), expected ${type}`);
       }
     };
-    for (const [fieldName, type] of Object.entries(validators))
+    for (const [fieldName, type] of Object.entries(validators3))
       checkField(fieldName, type, false);
     for (const [fieldName, type] of Object.entries(optValidators))
       checkField(fieldName, type, true);
@@ -37910,7 +40860,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }
     return Object.freeze({ ...opts });
   }
-  var { bytesToNumberBE: b2n, hexToBytes: h2b } = utils_exports;
+  var { bytesToNumberBE: b2n, hexToBytes: h2b } = utils_exports2;
   var DER = {
     // asn.1 DER encoding utils
     Err: class DERErr extends Error {
@@ -38299,8 +41249,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
        * @returns non-zero affine point
        */
       multiplyAndAddUnsafe(Q, a, b2) {
-        const G = Point2.BASE;
-        const mul = (P, a2) => a2 === _0n5 || a2 === _1n5 || !P.equals(G) ? P.multiplyUnsafe(a2) : P.multiply(a2);
+        const G2 = Point2.BASE;
+        const mul = (P, a2) => a2 === _0n5 || a2 === _1n5 || !P.equals(G2) ? P.multiplyUnsafe(a2) : P.multiply(a2);
         const sum = mul(this, a).add(mul(Q, b2));
         return sum.is0() ? void 0 : sum;
       }
@@ -42351,7 +45301,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       let recs = [];
       for (let cp of V) {
         let gs = GROUPS.filter((g) => group_has_cp(g, cp));
-        let rec = recs.find(({ G }) => gs.some((g) => G.has(g)));
+        let rec = recs.find(({ G: G2 }) => gs.some((g) => G2.has(g)));
         if (!rec) {
           rec = { G: /* @__PURE__ */ new Set(), V: [] };
           recs.push(rec);
@@ -42360,8 +45310,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         set_add_many(rec.G, gs);
       }
       let union = recs.flatMap((x) => Array_from(x.G));
-      for (let { G, V: V2 } of recs) {
-        let complement = new Set(union.filter((g) => !G.has(g)));
+      for (let { G: G2, V: V2 } of recs) {
+        let complement = new Set(union.filter((g) => !G2.has(g)));
         for (let cp of V2) {
           M.set(cp, complement);
         }
@@ -42745,10 +45695,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   var regexBytes = new RegExp("^bytes([0-9]+)$");
   var regexNumber = new RegExp("^(u?int)([0-9]*)$");
   var regexArray = new RegExp("^(.*)\\[([0-9]*)\\]$");
-  function _pack(type, value, isArray) {
+  function _pack(type, value, isArray2) {
     switch (type) {
       case "address":
-        if (isArray) {
+        if (isArray2) {
           return getBytes(zeroPadValue(value, 32));
         }
         return getBytes(getAddress(value));
@@ -42758,7 +45708,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         return getBytes(value);
       case "bool":
         value = !!value ? "0x01" : "0x00";
-        if (isArray) {
+        if (isArray2) {
           return getBytes(zeroPadValue(value, 32));
         }
         return getBytes(value);
@@ -42768,7 +45718,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       let signed2 = match[1] === "int";
       let size = parseInt(match[2] || "256");
       assertArgument((!match[2] || match[2] === String(size)) && size % 8 === 0 && size !== 0 && size <= 256, "invalid number type", "type", type);
-      if (isArray) {
+      if (isArray2) {
         size = 256;
       }
       if (signed2) {
@@ -42781,7 +45731,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       const size = parseInt(match[1]);
       assertArgument(String(size) === match[1] && size !== 0 && size <= 32, "invalid bytes type", "type", type);
       assertArgument(dataLength(value) === size, `invalid value for ${type}`, "value", value);
-      if (isArray) {
+      if (isArray2) {
         return getBytes(zeroPadBytes(value, 32));
       }
       return value;
@@ -43947,7 +46897,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       return value && value[internal] === ParamTypeInternal;
     }
   };
-  var Fragment10 = class _Fragment {
+  var Fragment11 = class _Fragment {
     /**
      *  The type of the fragment.
      */
@@ -44046,7 +46996,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       return StructFragment.isFragment(value);
     }
   };
-  var NamedFragment = class extends Fragment10 {
+  var NamedFragment = class extends Fragment11 {
     /**
      *  The name of the fragment.
      */
@@ -44206,7 +47156,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       return value && value[internal] === EventFragmentInternal;
     }
   };
-  var ConstructorFragment = class _ConstructorFragment extends Fragment10 {
+  var ConstructorFragment = class _ConstructorFragment extends Fragment11 {
     /**
      *  Whether the constructor can receive an endowment.
      */
@@ -44277,7 +47227,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       return value && value[internal] === ConstructorFragmentInternal;
     }
   };
-  var FallbackFragment = class _FallbackFragment extends Fragment10 {
+  var FallbackFragment = class _FallbackFragment extends Fragment11 {
     /**
      *  If the function can be sent value during invocation.
      */
@@ -44933,7 +47883,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       const frags = [];
       for (const a of abi) {
         try {
-          frags.push(Fragment10.from(a));
+          frags.push(Fragment11.from(a));
         } catch (error) {
           console.log(`[Warning] Invalid Fragment ${JSON.stringify(a)}:`, error.message);
         }
@@ -47134,8 +50084,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     /**
      *  @_event:
      */
-    constructor(contract, listener, filter2, log) {
-      super(contract, listener, filter2);
+    constructor(contract, listener, filter3, log) {
+      super(contract, listener, filter3);
       defineProperties(this, { log });
     }
     /**
@@ -47161,8 +50111,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     /**
      *  @_ignore:
      */
-    constructor(contract, listener, filter2, fragment, _log) {
-      super(contract, listener, filter2, new EventLog(_log, contract.interface, fragment));
+    constructor(contract, listener, filter3, fragment, _log) {
+      super(contract, listener, filter3, new EventLog(_log, contract.interface, fragment));
       const args = contract.interface.decodeEventLog(fragment, this.log.data, this.log.topics);
       defineProperties(this, { args, fragment });
     }
@@ -47549,7 +50499,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     let sub = subs.get(tag);
     if (!sub) {
       const address = addr ? addr : contract;
-      const filter2 = { address, topics };
+      const filter3 = { address, topics };
       const listener = (log) => {
         let foundFragment = fragment;
         if (foundFragment == null) {
@@ -47575,7 +50525,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         if (starting.length) {
           return;
         }
-        starting.push(provider.on(filter2, listener));
+        starting.push(provider.on(filter3, listener));
       };
       const stop = async () => {
         if (starting.length == 0) {
@@ -47584,7 +50534,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         let started = starting;
         starting = [];
         await Promise.all(started);
-        provider.off(filter2, listener);
+        provider.off(filter3, listener);
       };
       sub = { tag, listeners: [], start, stop };
       subs.set(tag, sub);
@@ -47889,10 +50839,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       const { addr, addrPromise } = getInternal(this);
       const address = addr ? addr : await addrPromise;
       const { fragment, topics } = await getSubInfo(this, event);
-      const filter2 = { address, topics, fromBlock, toBlock };
+      const filter3 = { address, topics, fromBlock, toBlock };
       const provider = getProvider(this.runner);
       assert(provider, "contract runner does not have a provider", "UNSUPPORTED_OPERATION", { operation: "queryFilter" });
-      return (await provider.getLogs(filter2)).map((log) => {
+      return (await provider.getLogs(filter3)).map((log) => {
         let foundFragment = fragment;
         if (foundFragment == null) {
           try {
@@ -49447,9 +52397,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   };
   var PollingOrphanSubscriber = class extends OnBlockSubscriber {
     #filter;
-    constructor(provider, filter2) {
+    constructor(provider, filter3) {
       super(provider);
-      this.#filter = copy(filter2);
+      this.#filter = copy(filter3);
     }
     async _poll(blockNumber, provider) {
       throw new Error("@TODO");
@@ -49485,9 +52435,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
      *  Create a new **PollingTransactionSubscriber** attached to
      *  %%provider%%, listening for %%filter%%.
      */
-    constructor(provider, filter2) {
+    constructor(provider, filter3) {
       this.#provider = provider;
-      this.#filter = copy(filter2);
+      this.#filter = copy(filter3);
       this.#poller = this.#poll.bind(this);
       this.#running = false;
       this.#blockNumber = -2;
@@ -49496,10 +52446,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       if (this.#blockNumber === -2) {
         return;
       }
-      const filter2 = copy(this.#filter);
-      filter2.fromBlock = this.#blockNumber + 1;
-      filter2.toBlock = blockNumber;
-      const logs = await this.#provider.getLogs(filter2);
+      const filter3 = copy(this.#filter);
+      filter3.fromBlock = this.#blockNumber + 1;
+      filter3.toBlock = blockNumber;
+      const logs = await this.#provider.getLogs(filter3);
       if (logs.length === 0) {
         if (this.#blockNumber < blockNumber - 60) {
           this.#blockNumber = blockNumber - 60;
@@ -49627,7 +52577,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }
     if (_event.address || _event.topics) {
       const event = _event;
-      const filter2 = {
+      const filter3 = {
         topics: (event.topics || []).map((t) => {
           if (t == null) {
             return null;
@@ -49658,9 +52608,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         if (promises.length) {
           await Promise.all(promises);
         }
-        filter2.address = concisify(addresses.map((a) => a.toLowerCase()));
+        filter3.address = concisify(addresses.map((a) => a.toLowerCase()));
       }
-      return { filter: filter2, tag: getTag("event", filter2), type: "event" };
+      return { filter: filter3, tag: getTag("event", filter3), type: "event" };
     }
     assertArgument(false, "unknown ProviderEvent", "event", _event);
   }
@@ -49939,8 +52889,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
      *  names or [[Addressable]] object and returning if already a valid
      *  filter.
      */
-    _getFilter(filter2) {
-      const topics = (filter2.topics || []).map((t) => {
+    _getFilter(filter3) {
+      const topics = (filter3.topics || []).map((t) => {
         if (t == null) {
           return null;
         }
@@ -49949,7 +52899,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         }
         return t.toLowerCase();
       });
-      const blockHash = "blockHash" in filter2 ? filter2.blockHash : void 0;
+      const blockHash = "blockHash" in filter3 ? filter3.blockHash : void 0;
       const resolve = (_address, fromBlock2, toBlock2) => {
         let address2 = void 0;
         switch (_address.length) {
@@ -49967,41 +52917,41 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
             throw new Error("invalid filter");
           }
         }
-        const filter3 = {};
+        const filter4 = {};
         if (address2) {
-          filter3.address = address2;
+          filter4.address = address2;
         }
         if (topics.length) {
-          filter3.topics = topics;
+          filter4.topics = topics;
         }
         if (fromBlock2) {
-          filter3.fromBlock = fromBlock2;
+          filter4.fromBlock = fromBlock2;
         }
         if (toBlock2) {
-          filter3.toBlock = toBlock2;
+          filter4.toBlock = toBlock2;
         }
         if (blockHash) {
-          filter3.blockHash = blockHash;
+          filter4.blockHash = blockHash;
         }
-        return filter3;
+        return filter4;
       };
       let address = [];
-      if (filter2.address) {
-        if (Array.isArray(filter2.address)) {
-          for (const addr of filter2.address) {
+      if (filter3.address) {
+        if (Array.isArray(filter3.address)) {
+          for (const addr of filter3.address) {
             address.push(this._getAddress(addr));
           }
         } else {
-          address.push(this._getAddress(filter2.address));
+          address.push(this._getAddress(filter3.address));
         }
       }
       let fromBlock = void 0;
-      if ("fromBlock" in filter2) {
-        fromBlock = this._getBlockTag(filter2.fromBlock);
+      if ("fromBlock" in filter3) {
+        fromBlock = this._getBlockTag(filter3.fromBlock);
       }
       let toBlock = void 0;
-      if ("toBlock" in filter2) {
-        toBlock = this._getBlockTag(filter2.toBlock);
+      if ("toBlock" in filter3) {
+        toBlock = this._getBlockTag(filter3.toBlock);
       }
       if (address.filter((a) => typeof a !== "string").length || fromBlock != null && typeof fromBlock !== "string" || toBlock != null && typeof toBlock !== "string") {
         return Promise.all([Promise.all(address), fromBlock, toBlock]).then((result) => {
@@ -50312,13 +53262,13 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }
     // Bloom-filter Queries
     async getLogs(_filter) {
-      let filter2 = this._getFilter(_filter);
-      if (isPromise(filter2)) {
-        filter2 = await filter2;
+      let filter3 = this._getFilter(_filter);
+      if (isPromise(filter3)) {
+        filter3 = await filter3;
       }
       const { network, params } = await resolveProperties({
         network: this.getNetwork(),
-        params: this.#perform({ method: "getLogs", filter: filter2 })
+        params: this.#perform({ method: "getLogs", filter: filter3 })
       });
       return params.map((p) => this._wrapLog(p, network));
     }
@@ -51199,9 +54149,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
      *  Creates a new **FilterIdEventSubscriber** attached to %%provider%%
      *  listening for %%filter%%.
      */
-    constructor(provider, filter2) {
+    constructor(provider, filter3) {
       super(provider);
-      this.#event = copy3(filter2);
+      this.#event = copy3(filter3);
     }
     _recover(provider) {
       return new PollingEventSubscriber(provider, this.#event);
@@ -52535,14 +55485,14 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       };
       request.processFunc = async (request2, response2) => {
         const result2 = response2.hasBody() ? JSON.parse(toUtf8String(response2.body)) : {};
-        const throttle = (typeof result2.result === "string" ? result2.result : "").toLowerCase().indexOf("rate limit") >= 0;
+        const throttle2 = (typeof result2.result === "string" ? result2.result : "").toLowerCase().indexOf("rate limit") >= 0;
         if (module === "proxy") {
-          if (result2 && result2.status == 0 && result2.message == "NOTOK" && throttle) {
+          if (result2 && result2.status == 0 && result2.message == "NOTOK" && throttle2) {
             this.emit("debug", { action: "receiveError", id: id4, reason: "proxy-NOTOK", error: result2 });
             response2.throwThrottleError(result2.result, THROTTLE);
           }
         } else {
-          if (throttle) {
+          if (throttle2) {
             this.emit("debug", { action: "receiveError", id: id4, reason: "null result", error: result2.result });
             response2.throwThrottleError(result2.result, THROTTLE);
           }
@@ -52907,7 +55857,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   };
 
   // node_modules/ethers/lib.esm/providers/ws-browser.js
-  function getGlobal2() {
+  function getGlobal3() {
     if (typeof self !== "undefined") {
       return self;
     }
@@ -52919,7 +55869,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }
     throw new Error("unable to locate global object");
   }
-  var _WebSocket = getGlobal2().WebSocket;
+  var _WebSocket = getGlobal3().WebSocket;
 
   // node_modules/ethers/lib.esm/providers/provider-socket.js
   var SocketSubscriber = class {
@@ -52938,9 +55888,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
      *  Creates a new **SocketSubscriber** attached to %%provider%% listening
      *  to %%filter%%.
      */
-    constructor(provider, filter2) {
+    constructor(provider, filter3) {
       this.#provider = provider;
-      this.#filter = JSON.stringify(filter2);
+      this.#filter = JSON.stringify(filter3);
       this.#filterId = null;
       this.#paused = null;
       this.#emitPromise = null;
@@ -53034,9 +55984,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     /**
      *  @_ignore:
      */
-    constructor(provider, filter2) {
-      super(provider, ["logs", filter2]);
-      this.#logFilter = JSON.stringify(filter2);
+    constructor(provider, filter3) {
+      super(provider, ["logs", filter3]);
+      this.#logFilter = JSON.stringify(filter3);
     }
     async _emit(provider, message) {
       provider.emit(this.logFilter, provider._wrapLog(message, provider._network));
@@ -54684,7 +57634,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       data2 = data2.split(subsChrs[i]).join(subs.substring(2 * i, 2 * i + 2));
     }
     const clumps = [];
-    const leftover = data2.replace(/(:|([0-9])|([A-Z][a-z]*))/g, (all, item, semi, word) => {
+    const leftover = data2.replace(/(:|([0-9])|([A-Z][a-z]*))/g, (all3, item, semi, word) => {
       if (semi) {
         for (let i = parseInt(semi); i >= 0; i--) {
           clumps.push(";");
@@ -56246,7 +59196,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       const positions = decodeBits(parseInt(match[3]), match[4]);
       const charCode = parseInt(match[2]);
       const regex = new RegExp(`([${match[1]}])`, "g");
-      words2 = words2.replace(regex, (all, letter) => {
+      words2 = words2.replace(regex, (all3, letter) => {
         const rem = --positions[posOffset];
         if (rem === 0) {
           letter = String.fromCharCode(letter.charCodeAt(0), charCode);
@@ -56288,25 +59238,107 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     en: LangEn.wordlist()
   };
 
+  // src/services/ipfs.ts
+  var PINATA_API_KEY = "";
+  var PINATA_SECRET_KEY = "";
+  var ipfsService = {
+    /**
+     * Upload un fichier sur IPFS.
+     */
+    uploadFile: async (file) => {
+      if (!PINATA_API_KEY || !PINATA_SECRET_KEY) {
+        console.warn("Pinata API Keys non configur\xE9es. Simulation de l'upload IPFS...");
+        return {
+          ipfsHash: "QmSimulatedHash" + Math.random().toString(36).substring(7),
+          url: URL.createObjectURL(file)
+        };
+      }
+      const formData = new FormData();
+      formData.append("file", file);
+      const response = await axios_default.post("https://api.pinata.cloud/pinning/pinFileToIPFS", formData, {
+        maxBodyLength: Infinity,
+        headers: {
+          "Content-Type": `multipart/form-data;`,
+          pinata_api_key: PINATA_API_KEY,
+          pinata_secret_api_key: PINATA_SECRET_KEY
+        }
+      });
+      return {
+        ipfsHash: response.data.IpfsHash,
+        url: `https://gateway.pinata.cloud/ipfs/${response.data.IpfsHash}`
+      };
+    },
+    /**
+     * Upload des métadonnées JSON sur IPFS.
+     */
+    uploadMetadata: async (metadata) => {
+      if (!PINATA_API_KEY || !PINATA_SECRET_KEY) {
+        return {
+          ipfsHash: "QmSimulatedMetadataHash" + Math.random().toString(36).substring(7)
+        };
+      }
+      const response = await axios_default.post("https://api.pinata.cloud/pinning/pinJSONToIPFS", metadata, {
+        headers: {
+          pinata_api_key: PINATA_API_KEY,
+          pinata_secret_api_key: PINATA_SECRET_KEY
+        }
+      });
+      return {
+        ipfsHash: response.data.IpfsHash,
+        url: `https://gateway.pinata.cloud/ipfs/${response.data.IpfsHash}`
+      };
+    }
+  };
+
   // src/services/web3.ts
   var KIVU_TITLE_ABI = [
-    "function mintTitle(string memory _uri, string memory _docHash, string memory _coords) external returns (uint256)",
+    "function mintTitle(string calldata _uri, bytes32 _docHash, string calldata _coords) external returns (uint256)",
     "function verifyTitle(uint256 _tokenId) external",
     "function depositEscrow(uint256 _tokenId) external payable",
     "function releaseFunds(uint256 _tokenId) external",
-    "function refundBuyer(uint256 _tokenId) external",
-    "function titles(uint256 tokenId) external view returns (string docHash, string coordinates, bool isVerified, uint256 escrowAmount, address buyer, address seller)",
+    "function adminResolve(uint256 _tokenId, bool _releaseToSeller) external",
+    "function setPlatformFee(uint256 _fee) external",
+    "function titles(uint256 tokenId) external view returns (bytes32 docHash, uint256 escrowAmount, address buyer, address seller, bool isVerified, string coordinates)",
     "function ownerOf(uint256 tokenId) external view returns (address)",
-    "event TitleMinted(uint256 indexed tokenId, string docHash, address owner)",
+    "event TitleMinted(uint256 indexed tokenId, bytes32 docHash, address owner)",
     "event TitleVerified(uint256 indexed tokenId, address agent)",
     "event EscrowDeposited(uint256 indexed tokenId, uint256 amount, address buyer)",
-    "event SaleFinalized(uint256 indexed tokenId, address newOwner, uint256 amount)"
+    "event SaleFinalized(uint256 indexed tokenId, address newOwner, uint256 amount)",
+    "event DisputeResolved(uint256 indexed tokenId, bool releaseToSeller, address resolver)"
   ];
   var CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
   var Web3Service = class {
     static provider = null;
     static async getProvider() {
       if (!window.ethereum) throw new Error("MetaMask n'est pas install\xE9");
+      try {
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x7A69" }]
+          // 31337 en hexadécimal
+        });
+      } catch (switchError) {
+        if (switchError.code === 4902) {
+          try {
+            await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainId: "0x7A69",
+                  chainName: "GoChain Testnet",
+                  nativeCurrency: { name: "GO", symbol: "GO", decimals: 18 },
+                  rpcUrls: ["https://testnet-rpc.gochain.io"],
+                  blockExplorerUrls: ["https://testnet-explorer.gochain.io"]
+                }
+              ]
+            });
+          } catch (addError) {
+            throw new Error("Impossible de configurer GoChain Testnet automatiquement.");
+          }
+        } else {
+          throw new Error("Erreur de connexion au r\xE9seau GoChain Testnet.");
+        }
+      }
       if (!this.provider) this.provider = new ethers_exports.BrowserProvider(window.ethereum);
       return this.provider;
     }
@@ -56316,6 +59348,28 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       return accounts[0];
     }
     // --- ANCRAGE (Orientation 1) ---
+    /**
+     * Crée les métadonnées IPFS pour un titre et retourne le CID.
+     */
+    static async createPropertyMetadata(propertyData, documents) {
+      const metadata = {
+        name: `KivuMarket Title: ${propertyData.titre}`,
+        description: propertyData.description,
+        image: propertyData.imageUrl || "",
+        external_url: `https://kivumarket.app/property/${propertyData.id}`,
+        attributes: [
+          { trait_type: "Commune", value: propertyData.commune },
+          { trait_type: "Prix", value: propertyData.prix },
+          { trait_type: "Vendeur", value: propertyData.sellerName }
+        ],
+        properties: {
+          documents,
+          coordinates: propertyData.coords
+        }
+      };
+      const result = await ipfsService.uploadMetadata(metadata);
+      return `ipfs://${result.ipfsHash}`;
+    }
     static async mintPropertyTitle(metadataUri, docHash, coords) {
       const provider = await this.getProvider();
       const signer = await provider.getSigner();
@@ -56355,17 +59409,18 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       const details = await contract.titles(tokenId);
       return {
         docHash: details[0],
-        coordinates: details[1],
-        isVerified: details[2],
-        escrowAmount: ethers_exports.formatEther(details[3]),
-        buyer: details[4],
-        seller: details[5],
+        escrowAmount: ethers_exports.formatEther(details[1]),
+        buyer: details[2],
+        seller: details[3],
+        isVerified: details[4],
+        coordinates: details[5],
         owner: await contract.ownerOf(tokenId)
       };
     }
   };
 
   // src/pages/PropertyDetail.tsx
+  var import_jsx_runtime9 = __toESM(require_jsx_runtime(), 1);
   var PropertyDetail = () => {
     const { id: id4 } = useParams();
     const [loading, setLoading] = (0, import_react30.useState)(false);
@@ -56418,291 +59473,677 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         setLoading(false);
       }
     };
-    return /* @__PURE__ */ React.createElement("div", { className: "bg-white" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-[2520px] mx-auto xl:px-20 md:px-10 px-4 pt-6 pb-20" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-col gap-4" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between" }, /* @__PURE__ */ React.createElement(Link, { to: "/", className: "flex items-center text-slate-800 hover:underline font-semibold gap-1" }, /* @__PURE__ */ React.createElement(ChevronLeft, { className: "w-4 h-4" }), "Retour"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-4" }, /* @__PURE__ */ React.createElement("button", { className: "flex items-center gap-2 underline font-semibold hover:bg-slate-50 p-2 rounded-lg transition" }, /* @__PURE__ */ React.createElement(Share, { className: "w-4 h-4" }), "Partager"), /* @__PURE__ */ React.createElement("button", { className: "flex items-center gap-2 underline font-semibold hover:bg-slate-50 p-2 rounded-lg transition" }, /* @__PURE__ */ React.createElement(Heart, { className: "w-4 h-4" }), "Enregistrer"))), /* @__PURE__ */ React.createElement("h1", { className: "text-3xl font-bold text-slate-900" }, property.titre), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between text-sm" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-4 font-semibold text-slate-800 underline" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ React.createElement(Star, { className: "w-4 h-4 fill-slate-900" }), /* @__PURE__ */ React.createElement("span", null, "4.9")), /* @__PURE__ */ React.createElement("span", null, property.quartier, ", ", property.commune)), blockchainData?.isVerified ? /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1 text-emerald-700 font-bold bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100" }, /* @__PURE__ */ React.createElement(ShieldCheck, { className: "w-4 h-4" }), "Titre Certifi\xE9 par Agent") : /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1 text-amber-700 font-bold bg-amber-50 px-3 py-1 rounded-full border border-amber-100" }, /* @__PURE__ */ React.createElement(ShieldCheck, { className: "w-4 h-4" }), "En attente de certification physique"))), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-2 mt-6 rounded-2xl overflow-hidden aspect-[16/9] md:aspect-[21/9]" }, /* @__PURE__ */ React.createElement("div", { className: "h-full w-full" }, /* @__PURE__ */ React.createElement("img", { src: property.images[0], className: "object-cover w-full h-full hover:brightness-90 transition cursor-pointer", alt: "Main" })), /* @__PURE__ */ React.createElement("div", { className: "hidden md:block h-full w-full" }, /* @__PURE__ */ React.createElement("img", { src: property.images[1], className: "object-cover w-full h-full hover:brightness-90 transition cursor-pointer", alt: "Secondary" }))), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-12 mt-12" }, /* @__PURE__ */ React.createElement("div", { className: "md:col-span-2 space-y-8" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between items-center border-b border-slate-200 pb-6" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", { className: "text-2xl font-bold text-slate-900" }, "Propri\xE9taire NFT : ", blockchainData?.owner ? `${blockchainData.owner.substring(0, 6)}...${blockchainData.owner.substring(38)}` : "Chargement..."), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, "ID du Jeton (NFT) : #", id4, " \u2022 Hash : ", blockchainData?.docHash || "...")), /* @__PURE__ */ React.createElement("div", { className: "w-14 h-14 bg-slate-900 text-white rounded-full flex items-center justify-center font-bold text-xl" }, /* @__PURE__ */ React.createElement(User, { className: "w-6 h-6" }))), /* @__PURE__ */ React.createElement("div", { className: "space-y-6 border-b border-slate-200 pb-12" }, /* @__PURE__ */ React.createElement("div", { className: "flex gap-4" }, /* @__PURE__ */ React.createElement(ShieldCheck, { className: "w-8 h-8 text-rose-500 mt-1" }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h3", { className: "font-bold text-lg" }, "Ancrage Immuable (NFT)"), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, "Ce bien est repr\xE9sent\xE9 par un jeton ERC-721 unique. Le hash du titre est grav\xE9 sur Ethereum."))), /* @__PURE__ */ React.createElement("div", { className: "flex gap-4" }, /* @__PURE__ */ React.createElement(BadgeCheck, { className: "w-8 h-8 text-rose-500 mt-1" }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h3", { className: "font-bold text-lg" }, "Localisation GPS : ", blockchainData?.coordinates || "..."), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, "Les coordonn\xE9es g\xE9ographiques sont inscrites dans les m\xE9tadonn\xE9es du NFT."))), /* @__PURE__ */ React.createElement("div", { className: "flex gap-4" }, /* @__PURE__ */ React.createElement(Lock, { className: "w-8 h-8 text-rose-500 mt-1" }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h3", { className: "font-bold text-lg" }, "Escrow Financier (D\xE9p\xF4t : ", blockchainData?.escrowAmount || "0", " ETH)"), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, "Paiement s\xE9curis\xE9. Les fonds ne sont lib\xE9r\xE9s qu'apr\xE8s le transfert l\xE9gal du titre.")))), /* @__PURE__ */ React.createElement("div", { className: "py-6" }, /* @__PURE__ */ React.createElement("p", { className: "text-lg text-slate-700 leading-relaxed" }, property.description))), /* @__PURE__ */ React.createElement("div", { className: "md:col-span-1" }, /* @__PURE__ */ React.createElement("div", { className: "sticky top-28 bg-white border border-slate-200 rounded-3xl p-6 shadow-xl shadow-slate-100 space-y-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between items-end" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-2xl font-bold" }, "$", property.prix), /* @__PURE__ */ React.createElement("span", { className: "text-slate-500" }, "total"))), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl border border-slate-400 p-4 space-y-4" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between text-sm" }, /* @__PURE__ */ React.createElement("span", { className: "font-bold uppercase text-[10px]" }, "Statut Transaction"), /* @__PURE__ */ React.createElement("span", { className: "font-semibold text-rose-600" }, blockchainData?.escrowAmount > 0 ? "Fonds bloqu\xE9s" : "Disponible")), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between text-sm" }, /* @__PURE__ */ React.createElement("span", { className: "font-bold uppercase text-[10px]" }, "Certification"), /* @__PURE__ */ React.createElement("span", { className: "font-semibold" }, blockchainData?.isVerified ? "V\xE9rifi\xE9" : "En attente"))), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: handlePurchase,
-        disabled: loading || blockchainData?.escrowAmount > 0,
-        className: "w-full py-4 bg-rose-500 hover:bg-rose-600 text-white rounded-xl font-bold text-lg shadow-lg shadow-rose-100 transition disabled:bg-slate-300 flex items-center justify-center gap-3"
-      },
-      loading ? "Chargement..." : blockchainData?.escrowAmount > 0 ? "D\xE9j\xE0 r\xE9serv\xE9" : /* @__PURE__ */ React.createElement(React.Fragment, null, "Acheter via Escrow", /* @__PURE__ */ React.createElement(ArrowRight, { className: "w-5 h-5" }))
-    ), txStatus && /* @__PURE__ */ React.createElement("div", { className: "p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs font-medium text-slate-600 flex gap-2" }, /* @__PURE__ */ React.createElement(Info, { className: "w-4 h-4 flex-shrink-0" }), /* @__PURE__ */ React.createElement("span", null, txStatus)), /* @__PURE__ */ React.createElement("div", { className: "pt-4 border-t border-slate-200 text-center text-xs text-slate-400" }, "L'adresse de l'acheteur sera enregistr\xE9e sur le contrat."))))));
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "bg-white", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "max-w-[2520px] mx-auto xl:px-20 md:px-10 px-4 pt-6 pb-20", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex flex-col gap-4", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center justify-between", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(Link, { to: "/", className: "flex items-center text-slate-800 hover:underline font-semibold gap-1", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ChevronLeft, { className: "w-4 h-4" }),
+            "Retour"
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("button", { className: "flex items-center gap-2 underline font-semibold hover:bg-slate-50 p-2 rounded-lg transition", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Share, { className: "w-4 h-4" }),
+              "Partager"
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("button", { className: "flex items-center gap-2 underline font-semibold hover:bg-slate-50 p-2 rounded-lg transition", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Heart, { className: "w-4 h-4" }),
+              "Enregistrer"
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h1", { className: "text-3xl font-bold text-slate-900", children: property.titre }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center justify-between text-sm", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-4 font-semibold text-slate-800 underline", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-1", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Star, { className: "w-4 h-4 fill-slate-900" }),
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "4.9" })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { children: [
+              property.quartier,
+              ", ",
+              property.commune
+            ] })
+          ] }),
+          blockchainData?.isVerified ? /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-1 text-emerald-700 font-bold bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ShieldCheck, { className: "w-4 h-4" }),
+            "Titre Certifi\xE9 par Agent"
+          ] }) : /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-1 text-amber-700 font-bold bg-amber-50 px-3 py-1 rounded-full border border-amber-100", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ShieldCheck, { className: "w-4 h-4" }),
+            "En attente de certification physique"
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-2 mt-6 rounded-2xl overflow-hidden aspect-[16/9] md:aspect-[21/9]", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "h-full w-full", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("img", { src: property.images[0], className: "object-cover w-full h-full hover:brightness-90 transition cursor-pointer", alt: "Main" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "hidden md:block h-full w-full", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("img", { src: property.images[1], className: "object-cover w-full h-full hover:brightness-90 transition cursor-pointer", alt: "Secondary" }) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-12 mt-12", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "md:col-span-2 space-y-8", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex justify-between items-center border-b border-slate-200 pb-6", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("h2", { className: "text-2xl font-bold text-slate-900", children: [
+                "Propri\xE9taire NFT : ",
+                blockchainData?.owner ? `${blockchainData.owner.substring(0, 6)}...${blockchainData.owner.substring(38)}` : "Chargement..."
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("p", { className: "text-slate-500", children: [
+                "ID du Jeton (NFT) : #",
+                id4,
+                " \u2022 Hash : ",
+                blockchainData?.docHash || "..."
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-14 h-14 bg-slate-900 text-white rounded-full flex items-center justify-center font-bold text-xl", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(User, { className: "w-6 h-6" }) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "space-y-6 border-b border-slate-200 pb-12", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex gap-4", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ShieldCheck, { className: "w-8 h-8 text-rose-500 mt-1" }),
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { className: "font-bold text-lg", children: "Ancrage Immuable (NFT)" }),
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "text-slate-500", children: "Ce bien est repr\xE9sent\xE9 par un jeton ERC-721 unique. Le hash du titre est grav\xE9 sur Ethereum." })
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex gap-4", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(BadgeCheck, { className: "w-8 h-8 text-rose-500 mt-1" }),
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("h3", { className: "font-bold text-lg", children: [
+                  "Localisation GPS : ",
+                  blockchainData?.coordinates || "..."
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "text-slate-500", children: "Les coordonn\xE9es g\xE9ographiques sont inscrites dans les m\xE9tadonn\xE9es du NFT." })
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex gap-4", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Lock, { className: "w-8 h-8 text-rose-500 mt-1" }),
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("h3", { className: "font-bold text-lg", children: [
+                  "Escrow Financier (D\xE9p\xF4t : ",
+                  blockchainData?.escrowAmount || "0",
+                  " ETH)"
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "text-slate-500", children: "Paiement s\xE9curis\xE9. Les fonds ne sont lib\xE9r\xE9s qu'apr\xE8s le transfert l\xE9gal du titre." })
+              ] })
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "py-6", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "text-lg text-slate-700 leading-relaxed", children: property.description }) })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "md:col-span-1", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "sticky top-28 bg-white border border-slate-200 rounded-3xl p-6 shadow-xl shadow-slate-100 space-y-6", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "flex justify-between items-end", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-1", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-2xl font-bold", children: [
+              "$",
+              property.prix
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-slate-500", children: "total" })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "rounded-xl border border-slate-400 p-4 space-y-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex justify-between text-sm", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "font-bold uppercase text-[10px]", children: "Statut Transaction" }),
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "font-semibold text-rose-600", children: blockchainData?.escrowAmount > 0 ? "Fonds bloqu\xE9s" : "Disponible" })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex justify-between text-sm", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "font-bold uppercase text-[10px]", children: "Certification" }),
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "font-semibold", children: blockchainData?.isVerified ? "V\xE9rifi\xE9" : "En attente" })
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+            "button",
+            {
+              onClick: handlePurchase,
+              disabled: loading || blockchainData?.escrowAmount > 0,
+              className: "w-full py-4 bg-rose-500 hover:bg-rose-600 text-white rounded-xl font-bold text-lg shadow-lg shadow-rose-100 transition disabled:bg-slate-300 flex items-center justify-center gap-3",
+              children: loading ? "Chargement..." : blockchainData?.escrowAmount > 0 ? "D\xE9j\xE0 r\xE9serv\xE9" : /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(import_jsx_runtime9.Fragment, { children: [
+                "Acheter via Escrow",
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ArrowRight, { className: "w-5 h-5" })
+              ] })
+            }
+          ),
+          txStatus && /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs font-medium text-slate-600 flex gap-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Info, { className: "w-4 h-4 flex-shrink-0" }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: txStatus })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "pt-4 border-t border-slate-200 text-center text-xs text-slate-400", children: "L'adresse de l'acheteur sera enregistr\xE9e sur le contrat." })
+        ] }) })
+      ] })
+    ] }) });
   };
   var PropertyDetail_default = PropertyDetail;
 
   // src/pages/dashboard/OwnerDashboard.tsx
   var import_react31 = __toESM(require_react(), 1);
+  var import_jsx_runtime10 = __toESM(require_jsx_runtime(), 1);
   var OwnerDashboard = () => {
     const [activeTab, setActiveTab] = (0, import_react31.useState)("mes-biens");
-    const properties = [
-      {
-        id: 1,
-        titre: "Parcelle r\xE9sidentielle - Muhumba",
-        commune: "Ibanda",
-        prix: "50000",
-        statut: "valide",
-        date: "12 Oct 2026",
-        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        id: 2,
-        titre: "Maison 4 pi\xE8ces - Panzi",
-        commune: "Ibanda",
-        prix: "35000",
-        statut: "en_attente",
-        date: "24 Oct 2026",
-        image: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    const [properties, setProperties] = (0, import_react31.useState)([]);
+    const [loading, setLoading] = (0, import_react31.useState)(false);
+    const [status, setStatus] = (0, import_react31.useState)(null);
+    const [formData, setFormData] = (0, import_react31.useState)({
+      titre: "",
+      type: "terrain",
+      commune: "ibanda",
+      prix: "",
+      description: "",
+      coords: "-2.5000, 28.8600"
+    });
+    const [file, setFile] = (0, import_react31.useState)(null);
+    (0, import_react31.useEffect)(() => {
+      fetchProperties();
+    }, []);
+    const fetchProperties = async () => {
+      try {
+        const res = await propertyService.getMissions();
+      } catch (err) {
+        console.error(err);
       }
-    ];
+    };
+    const handleFileChange = (e) => {
+      if (e.target.files) setFile(e.target.files[0]);
+    };
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      if (!file) {
+        alert("Veuillez uploader le document foncier.");
+        return;
+      }
+      setLoading(true);
+      try {
+        setStatus("\xC9tape 1/3 : Upload du document sur IPFS...");
+        const docResult = await ipfsService.uploadFile(file);
+        setStatus("\xC9tape 2/3 : G\xE9n\xE9ration des m\xE9tadonn\xE9es NFT...");
+        const user = JSON.parse(localStorage.getItem("user") || "{}");
+        const metadataUri = await Web3Service.createPropertyMetadata({
+          ...formData,
+          sellerName: user.name
+        }, [docResult.url]);
+        setStatus("\xC9tape 3/3 : Signature et Mint sur la Blockchain...");
+        const docHash = "0x" + Math.random().toString(16).padEnd(64, "0").slice(2, 66);
+        await Web3Service.mintPropertyTitle(metadataUri, docHash, formData.coords);
+        setStatus("Finalisation : Enregistrement en base de donn\xE9es...");
+        await propertyService.createProperty({
+          ...formData,
+          document_hash: docHash,
+          metadata_url: metadataUri,
+          image_url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750"
+          // Image par défaut
+        });
+        setStatus("Succ\xE8s ! Votre bien est en attente de certification.");
+        setTimeout(() => {
+          setActiveTab("mes-biens");
+          setStatus(null);
+        }, 2e3);
+      } catch (error) {
+        console.error(error);
+        setStatus("Erreur : " + (error.message || "\xC9chec de l'op\xE9ration"));
+      } finally {
+        setLoading(false);
+      }
+    };
     const getStatusBadge = (statut) => {
       switch (statut) {
         case "valide":
-          return /* @__PURE__ */ React.createElement("span", { className: "inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-medium" }, /* @__PURE__ */ React.createElement(CircleCheckBig, { className: "w-3 h-3" }), /* @__PURE__ */ React.createElement("span", null, "Valid\xE9"));
+          return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { className: "inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-medium", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(CircleCheckBig, { className: "w-3 h-3" }),
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "Valid\xE9" })
+          ] });
         case "en_attente":
-          return /* @__PURE__ */ React.createElement("span", { className: "inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-medium" }, /* @__PURE__ */ React.createElement(Clock, { className: "w-3 h-3" }), /* @__PURE__ */ React.createElement("span", null, "En attente"));
+          return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { className: "inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-medium", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Clock, { className: "w-3 h-3" }),
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "En attente" })
+          ] });
         default:
-          return /* @__PURE__ */ React.createElement("span", { className: "inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-medium" }, /* @__PURE__ */ React.createElement(TriangleAlert, { className: "w-3 h-3" }), /* @__PURE__ */ React.createElement("span", null, "Inconnu"));
+          return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { className: "inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-medium", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Clock, { className: "w-3 h-3" }),
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "En attente" })
+          ] });
       }
     };
-    return /* @__PURE__ */ React.createElement("div", { className: "max-w-6xl mx-auto" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", { className: "text-3xl font-bold text-slate-900 mb-2" }, "Espace Propri\xE9taire"), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, "G\xE9rez vos biens et suivez leur processus de certification.")), /* @__PURE__ */ React.createElement("div", { className: "flex bg-white p-1 rounded-xl shadow-sm border border-slate-200" }, /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => setActiveTab("mes-biens"),
-        className: `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === "mes-biens" ? "bg-indigo-50 text-indigo-700" : "text-slate-600 hover:text-slate-900"}`
-      },
-      "Mes Biens"
-    ), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => setActiveTab("nouveau"),
-        className: `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === "nouveau" ? "bg-indigo-50 text-indigo-700" : "text-slate-600 hover:text-slate-900"}`
-      },
-      "Ajouter un bien"
-    ))), activeTab === "mes-biens" ? /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" }, properties.map((prop, index) => /* @__PURE__ */ React.createElement(
-      motion.div,
-      {
-        key: prop.id,
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { delay: index * 0.1 },
-        className: "bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow group"
-      },
-      /* @__PURE__ */ React.createElement("div", { className: "relative h-48 overflow-hidden" }, /* @__PURE__ */ React.createElement("img", { src: prop.image, alt: prop.titre, className: "w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" }), /* @__PURE__ */ React.createElement("div", { className: "absolute top-4 right-4" }, getStatusBadge(prop.statut))),
-      /* @__PURE__ */ React.createElement("div", { className: "p-5" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-start justify-between mb-2" }, /* @__PURE__ */ React.createElement("h3", { className: "font-bold text-slate-900 line-clamp-1", title: prop.titre }, prop.titre)), /* @__PURE__ */ React.createElement("div", { className: "flex items-center text-slate-500 text-sm mb-4 space-x-1" }, /* @__PURE__ */ React.createElement(MapPin, { className: "w-4 h-4" }), /* @__PURE__ */ React.createElement("span", null, prop.commune)), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between pt-4 border-t border-slate-100" }, /* @__PURE__ */ React.createElement("div", { className: "text-lg font-bold text-indigo-600" }, "$", prop.prix), /* @__PURE__ */ React.createElement("button", { className: "text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors flex items-center space-x-1" }, /* @__PURE__ */ React.createElement(FileText, { className: "w-4 h-4" }), /* @__PURE__ */ React.createElement("span", null, "D\xE9tails"))))
-    )), /* @__PURE__ */ React.createElement(
-      motion.div,
-      {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { delay: properties.length * 0.1 },
-        onClick: () => setActiveTab("nouveau"),
-        className: "bg-slate-50/50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-8 cursor-pointer hover:bg-indigo-50 hover:border-indigo-200 transition-colors group min-h-[340px]"
-      },
-      /* @__PURE__ */ React.createElement("div", { className: "w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm text-slate-400 group-hover:text-indigo-600 group-hover:scale-110 transition-all mb-4" }, /* @__PURE__ */ React.createElement(Plus, { className: "w-8 h-8" })),
-      /* @__PURE__ */ React.createElement("h3", { className: "font-semibold text-slate-700 group-hover:text-indigo-900" }, "Ajouter un nouveau bien"),
-      /* @__PURE__ */ React.createElement("p", { className: "text-sm text-slate-500 text-center mt-2" }, "Soumettez votre bien foncier pour certification par un agent agr\xE9\xE9.")
-    )) : /* @__PURE__ */ React.createElement(
-      motion.div,
-      {
-        initial: { opacity: 0, scale: 0.98 },
-        animate: { opacity: 1, scale: 1 },
-        className: "bg-white rounded-3xl shadow-sm border border-slate-200 p-8"
-      },
-      /* @__PURE__ */ React.createElement("div", { className: "flex items-center space-x-4 mb-8 pb-6 border-b border-slate-100" }, /* @__PURE__ */ React.createElement("div", { className: "p-3 bg-indigo-50 text-indigo-600 rounded-xl" }, /* @__PURE__ */ React.createElement(House, { className: "w-6 h-6" })), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", { className: "text-xl font-bold text-slate-900" }, "Soumettre un bien"), /* @__PURE__ */ React.createElement("p", { className: "text-sm text-slate-500" }, "Remplissez les informations de votre bien pour commencer le processus."))),
-      /* @__PURE__ */ React.createElement("form", { className: "space-y-6" }, /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-2" }, "Titre du bien"), /* @__PURE__ */ React.createElement("input", { type: "text", className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 outline-none transition-all", placeholder: "Ex: Parcelle r\xE9sidentielle..." })), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-2" }, "Type de bien"), /* @__PURE__ */ React.createElement("select", { className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 outline-none transition-all" }, /* @__PURE__ */ React.createElement("option", { value: "terrain" }, "Terrain"), /* @__PURE__ */ React.createElement("option", { value: "maison" }, "Maison"), /* @__PURE__ */ React.createElement("option", { value: "appartement" }, "Appartement"))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-2" }, "Commune"), /* @__PURE__ */ React.createElement("select", { className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 outline-none transition-all" }, /* @__PURE__ */ React.createElement("option", { value: "ibanda" }, "Ibanda"), /* @__PURE__ */ React.createElement("option", { value: "kadutu" }, "Kadutu"), /* @__PURE__ */ React.createElement("option", { value: "bagira" }, "Bagira"))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-2" }, "Prix (USD)"), /* @__PURE__ */ React.createElement("input", { type: "number", className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 outline-none transition-all", placeholder: "Ex: 50000" }))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "block text-sm font-medium text-slate-700 mb-2" }, "Description"), /* @__PURE__ */ React.createElement("textarea", { rows: 4, className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 outline-none transition-all resize-none", placeholder: "D\xE9crivez votre bien en d\xE9tail..." })), /* @__PURE__ */ React.createElement("div", { className: "pt-6 border-t border-slate-100 flex justify-end space-x-4" }, /* @__PURE__ */ React.createElement("button", { type: "button", onClick: () => setActiveTab("mes-biens"), className: "px-6 py-3 text-slate-600 font-medium hover:bg-slate-50 rounded-xl transition-colors" }, "Annuler"), /* @__PURE__ */ React.createElement("button", { type: "button", className: "px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow-lg shadow-indigo-200 transition-all active:scale-[0.98]" }, "Enregistrer et continuer")))
-    ));
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "max-w-6xl mx-auto", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h1", { className: "text-3xl font-bold text-slate-900 mb-2", children: "Mon Patrimoine Immobilier" }),
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-slate-500", children: "G\xE9rez vos titres fonciers num\xE9riques et suivez vos ventes en cours." })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "flex bg-white p-1 rounded-xl shadow-sm border border-slate-200", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+            "button",
+            {
+              onClick: () => setActiveTab("mes-biens"),
+              className: `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === "mes-biens" ? "bg-indigo-50 text-indigo-700" : "text-slate-600 hover:text-slate-900"}`,
+              children: "Mes Titres"
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+            "button",
+            {
+              onClick: () => setActiveTab("nouveau"),
+              className: `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === "nouveau" ? "bg-indigo-50 text-indigo-700" : "text-slate-600 hover:text-slate-900"}`,
+              children: "Ancrer un nouveau bien"
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-6 mb-8", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "bg-white p-6 rounded-2xl border border-slate-200 shadow-sm", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-sm text-slate-500 mb-1", children: "Total Biens Ancr\xE9s" }),
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-2xl font-bold text-slate-900", children: properties.length })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "bg-white p-6 rounded-2xl border border-slate-200 shadow-sm", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-sm text-slate-500 mb-1", children: "Ventes en S\xE9questre" }),
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-2xl font-bold text-amber-600", children: properties.filter((p) => p.escrow_status === "locked").length })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "bg-white p-6 rounded-2xl border border-indigo-100 bg-indigo-50/30 shadow-sm", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-sm text-indigo-600 font-medium mb-1", children: "Gains cumul\xE9s" }),
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-2xl font-bold text-indigo-700", children: "$0.00" })
+        ] })
+      ] }),
+      activeTab === "mes-biens" ? /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6", children: [
+        properties.map((prop, index) => /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+          motion.div,
+          {
+            initial: { opacity: 0, y: 20 },
+            animate: { opacity: 1, y: 0 },
+            transition: { delay: index * 0.1 },
+            className: "bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow group",
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "relative h-48 overflow-hidden", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("img", { src: prop.image, alt: prop.titre, className: "w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "absolute top-4 right-4", children: getStatusBadge(prop.statut) })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "p-5", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "flex items-start justify-between mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h3", { className: "font-bold text-slate-900 line-clamp-1", title: prop.titre, children: prop.titre }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "flex items-center text-slate-500 text-sm mb-4 space-x-1", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(MapPin, { className: "w-4 h-4" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: prop.commune })
+                ] }),
+                prop.escrow_status === "locked" && /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "mb-4 p-2 bg-amber-50 rounded-lg border border-amber-100 flex items-center space-x-2 text-xs text-amber-700 font-medium", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(TriangleAlert, { className: "w-4 h-4" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "Fonds verrouill\xE9s en s\xE9questre par un acheteur" })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "flex items-center justify-between pt-4 border-t border-slate-100", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "text-lg font-bold text-indigo-600", children: [
+                    "$",
+                    prop.prix
+                  ] }),
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("button", { className: "text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors flex items-center space-x-1", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(FileText, { className: "w-4 h-4" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "G\xE9rer le titre" })
+                  ] })
+                ] })
+              ] })
+            ]
+          },
+          prop.id
+        )),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+          motion.div,
+          {
+            initial: { opacity: 0, y: 20 },
+            animate: { opacity: 1, y: 0 },
+            transition: { delay: properties.length * 0.1 },
+            onClick: () => setActiveTab("nouveau"),
+            className: "bg-slate-50/50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-8 cursor-pointer hover:bg-indigo-50 hover:border-indigo-200 transition-colors group min-h-[340px]",
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm text-slate-400 group-hover:text-indigo-600 group-hover:scale-110 transition-all mb-4", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Plus, { className: "w-8 h-8" }) }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h3", { className: "font-semibold text-slate-700 group-hover:text-indigo-900", children: "Ajouter un nouveau bien" }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-sm text-slate-500 text-center mt-2", children: "Soumettez votre bien foncier pour certification par un agent agr\xE9\xE9." })
+            ]
+          }
+        )
+      ] }) : /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+        motion.div,
+        {
+          initial: { opacity: 0, scale: 0.98 },
+          animate: { opacity: 1, scale: 1 },
+          className: "bg-white rounded-3xl shadow-sm border border-slate-200 p-8",
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "flex items-center space-x-4 mb-8 pb-6 border-b border-slate-100", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "p-3 bg-indigo-50 text-indigo-600 rounded-xl", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(House, { className: "w-6 h-6" }) }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h2", { className: "text-xl font-bold text-slate-900", children: "Soumettre un bien" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "text-sm text-slate-500", children: "Remplissez les informations de votre bien pour commencer le processus." })
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("form", { className: "space-y-6", onSubmit: handleSubmit, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-2", children: "Titre du bien" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+                    "input",
+                    {
+                      type: "text",
+                      required: true,
+                      value: formData.titre,
+                      onChange: (e) => setFormData({ ...formData, titre: e.target.value }),
+                      className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 outline-none transition-all",
+                      placeholder: "Ex: Parcelle r\xE9sidentielle..."
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-2", children: "Type de bien" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+                    "select",
+                    {
+                      value: formData.type,
+                      onChange: (e) => setFormData({ ...formData, type: e.target.value }),
+                      className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 outline-none transition-all",
+                      children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("option", { value: "terrain", children: "Terrain" }),
+                        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("option", { value: "maison", children: "Maison" }),
+                        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("option", { value: "appartement", children: "Appartement" })
+                      ]
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-2", children: "Commune" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+                    "select",
+                    {
+                      value: formData.commune,
+                      onChange: (e) => setFormData({ ...formData, commune: e.target.value }),
+                      className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 outline-none transition-all",
+                      children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("option", { value: "ibanda", children: "Ibanda" }),
+                        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("option", { value: "kadutu", children: "Kadutu" }),
+                        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("option", { value: "bagira", children: "Bagira" })
+                      ]
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-2", children: "Prix (USD)" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+                    "input",
+                    {
+                      type: "number",
+                      required: true,
+                      value: formData.prix,
+                      onChange: (e) => setFormData({ ...formData, prix: e.target.value }),
+                      className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 outline-none transition-all",
+                      placeholder: "Ex: 50000"
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("label", { className: "block text-sm font-medium text-slate-700 mb-2", children: "Description" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+                  "textarea",
+                  {
+                    rows: 4,
+                    value: formData.description,
+                    onChange: (e) => setFormData({ ...formData, description: e.target.value }),
+                    className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 outline-none transition-all resize-none",
+                    placeholder: "D\xE9crivez votre bien en d\xE9tail..."
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "p-6 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("label", { className: "flex flex-col items-center justify-center cursor-pointer", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Upload, { className: "w-8 h-8 text-slate-400 mb-2" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "text-sm font-medium text-slate-600", children: file ? file.name : "Cliquez pour uploader le Titre Foncier (PDF/JPG)" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("input", { type: "file", className: "hidden", onChange: handleFileChange, accept: ".pdf,.jpg,.jpeg,.png" })
+              ] }) }),
+              status && /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "p-4 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center space-x-3 text-indigo-700 text-sm font-medium", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(LoaderCircle, { className: "w-5 h-5 animate-spin" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: status })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "pt-6 border-t border-slate-100 flex justify-end space-x-4", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("button", { type: "button", disabled: loading, onClick: () => setActiveTab("mes-biens"), className: "px-6 py-3 text-slate-600 font-medium hover:bg-slate-50 rounded-xl transition-colors", children: "Annuler" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+                  "button",
+                  {
+                    type: "submit",
+                    disabled: loading,
+                    className: "px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow-lg shadow-indigo-200 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2",
+                    children: [
+                      loading && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(LoaderCircle, { className: "w-4 h-4 animate-spin" }),
+                      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "Soumettre sur la Blockchain" })
+                    ]
+                  }
+                )
+              ] })
+            ] })
+          ]
+        }
+      )
+    ] });
   };
   var OwnerDashboard_default = OwnerDashboard;
 
   // src/pages/dashboard/AgentDashboard.tsx
   var import_react32 = __toESM(require_react(), 1);
+  var import_jsx_runtime11 = __toESM(require_jsx_runtime(), 1);
   var AgentDashboard = () => {
     const [activeTab, setActiveTab] = (0, import_react32.useState)("missions");
     const [selectedMission, setSelectedMission] = (0, import_react32.useState)(null);
     const [loading, setLoading] = (0, import_react32.useState)(false);
     const [status, setStatus] = (0, import_react32.useState)(null);
-    const missions = [
-      {
-        id: 0,
-        // TokenId sur la blockchain
-        titre: "Maison 4 pi\xE8ces - Panzi",
-        owner: "Jean Dupont",
-        commune: "Ibanda",
-        prix: "35000",
-        superficie: "350m\xB2",
-        date: "24 Oct 2026",
-        docs: ["Titre Foncier PDF", "Plan Cadastral JPG"],
-        status: "assigne"
-      },
-      {
-        id: 1,
-        titre: "Terrain vide Nguba",
-        owner: "Marie Claire",
-        commune: "Ibanda",
-        prix: "85000",
-        superficie: "600m\xB2",
-        date: "25 Oct 2026",
-        docs: ["Titre Foncier PDF"],
-        status: "assigne"
-      }
-    ];
-    const handleVerify = async (tokenId) => {
-      setLoading(true);
-      setStatus("Connexion \xE0 la Blockchain...");
+    const [step, setStep] = (0, import_react32.useState)(1);
+    const [gpsCoords, setGpsCoords] = (0, import_react32.useState)("");
+    const [inspectionPhoto, setInspectionPhoto] = (0, import_react32.useState)(null);
+    const [isUploading, setIsUploading] = (0, import_react32.useState)(false);
+    const [missions, setMissions] = (0, import_react32.useState)([]);
+    (0, import_react32.useEffect)(() => {
+      fetchMissions();
+    }, []);
+    const fetchMissions = async () => {
       try {
-        await Web3Service.connectWallet();
-        setStatus("Envoi de la certification (Oracle Agent)...");
-        await Web3Service.verifyProperty(tokenId);
-        setStatus("Succ\xE8s ! Titre certifi\xE9 sur Ethereum.");
-        setTimeout(() => setSelectedMission(null), 2e3);
+        setLoading(true);
+        const data2 = await propertyService.getMissions();
+        setMissions(data2.data || []);
       } catch (error) {
-        console.error(error);
-        setStatus("Erreur : " + (error.message || "Transaction rejet\xE9e"));
+        console.error("Erreur missions:", error);
       } finally {
         setLoading(false);
       }
     };
-    return /* @__PURE__ */ React.createElement("div", { className: "max-w-7xl mx-auto xl:px-20 md:px-10 px-4 py-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", { className: "text-3xl font-bold text-slate-900 tracking-tight" }, "Espace Agent Foncier"), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500 mt-1" }, "Inspection terrain et certification immuable (Oracle Humain).")), /* @__PURE__ */ React.createElement("div", { className: "flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200" }, /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => setActiveTab("missions"),
-        className: `flex items-center space-x-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${activeTab === "missions" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"}`
-      },
-      /* @__PURE__ */ React.createElement(Clock, { className: "w-4 h-4" }),
-      /* @__PURE__ */ React.createElement("span", null, "Missions en attente")
-    ), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => setActiveTab("historique"),
-        className: `flex items-center space-x-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${activeTab === "historique" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"}`
-      },
-      /* @__PURE__ */ React.createElement(CircleCheckBig, { className: "w-4 h-4" }),
-      /* @__PURE__ */ React.createElement("span", null, "Historique")
-    ))), /* @__PURE__ */ React.createElement(AnimatePresence, { mode: "wait" }, activeTab === "missions" ? /* @__PURE__ */ React.createElement(
-      motion.div,
-      {
-        key: "missions",
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        className: "grid grid-cols-1 gap-6"
-      },
-      missions.map((mission) => /* @__PURE__ */ React.createElement("div", { key: mission.id, className: "bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-col lg:flex-row justify-between gap-8" }, /* @__PURE__ */ React.createElement("div", { className: "flex-1" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center space-x-3 mb-3" }, /* @__PURE__ */ React.createElement("span", { className: "px-3 py-1 bg-amber-50 text-amber-700 rounded-lg text-xs font-bold uppercase tracking-wider border border-amber-100" }, "\xC0 inspecter"), /* @__PURE__ */ React.createElement("span", { className: "text-sm text-slate-400 flex items-center" }, /* @__PURE__ */ React.createElement(Clock, { className: "w-3 h-3 mr-1" }), "ID Jeton : #", mission.id)), /* @__PURE__ */ React.createElement("h2", { className: "text-2xl font-bold text-slate-900 mb-2" }, mission.titre), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap items-center gap-6 text-slate-600 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center" }, /* @__PURE__ */ React.createElement(MapPin, { className: "w-5 h-5 mr-2 text-slate-400" }), /* @__PURE__ */ React.createElement("span", { className: "font-medium" }, mission.commune)), /* @__PURE__ */ React.createElement("div", { className: "flex items-center" }, /* @__PURE__ */ React.createElement(FileText, { className: "w-5 h-5 mr-2 text-slate-400" }), /* @__PURE__ */ React.createElement("span", null, "Propri\xE9taire : ", /* @__PURE__ */ React.createElement("span", { className: "font-bold text-slate-900" }, mission.owner))))), /* @__PURE__ */ React.createElement("div", { className: "lg:w-72 flex flex-col justify-center" }, /* @__PURE__ */ React.createElement(
-        "button",
-        {
-          onClick: () => setSelectedMission(mission),
-          className: "w-full flex items-center justify-center space-x-2 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-200"
-        },
-        /* @__PURE__ */ React.createElement(Eye, { className: "w-5 h-5" }),
-        /* @__PURE__ */ React.createElement("span", null, "Examiner & Certifier")
-      )))))
-    ) : /* @__PURE__ */ React.createElement("div", { className: "text-center py-20 bg-white rounded-3xl border border-slate-200" }, /* @__PURE__ */ React.createElement(CircleCheckBig, { className: "w-12 h-12 text-slate-300 mx-auto mb-4" }), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500 font-medium" }, "Aucun historique de certification r\xE9cent."))), selectedMission && /* @__PURE__ */ React.createElement("div", { className: "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md" }, /* @__PURE__ */ React.createElement(
-      motion.div,
-      {
-        initial: { opacity: 0, scale: 0.95, y: 20 },
-        animate: { opacity: 1, scale: 1, y: 0 },
-        className: "bg-white rounded-[32px] w-full max-w-2xl overflow-hidden shadow-2xl"
-      },
-      /* @__PURE__ */ React.createElement("div", { className: "p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", { className: "text-2xl font-bold text-slate-900" }, "Certification Blockchain"), /* @__PURE__ */ React.createElement("p", { className: "text-sm text-slate-500" }, `Signature de l'\xE9tat "isVerified" pour le Jeton #`, selectedMission.id)), /* @__PURE__ */ React.createElement("button", { onClick: () => setSelectedMission(null), className: "p-2 hover:bg-white rounded-full transition shadow-sm border border-slate-200" }, /* @__PURE__ */ React.createElement(CircleX, { className: "w-6 h-6 text-slate-400" }))),
-      /* @__PURE__ */ React.createElement("div", { className: "p-8 space-y-8" }, /* @__PURE__ */ React.createElement("div", { className: "p-6 bg-indigo-50 rounded-2xl border border-indigo-100 flex gap-4" }, /* @__PURE__ */ React.createElement(Info, { className: "w-6 h-6 text-indigo-600 flex-shrink-0" }), /* @__PURE__ */ React.createElement("div", { className: "text-sm text-indigo-800" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold mb-1" }, "R\xF4le d'Oracle Humain"), /* @__PURE__ */ React.createElement("p", null, "Votre signature sur la blockchain atteste que vous avez physiquement v\xE9rifi\xE9 l'existence du terrain et la v\xE9racit\xE9 des documents."))), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, /* @__PURE__ */ React.createElement("h3", { className: "text-sm font-bold text-slate-400 uppercase tracking-widest" }, "Preuves Terrain"), /* @__PURE__ */ React.createElement("div", { className: "p-6 border-2 border-dashed border-slate-200 rounded-2xl text-center" }, /* @__PURE__ */ React.createElement(Camera, { className: "w-8 h-8 mx-auto mb-2 text-slate-300" }), /* @__PURE__ */ React.createElement("p", { className: "text-xs font-bold text-slate-500" }, "Ajouter les photos g\xE9o-tagu\xE9es de l'inspection"))), status && /* @__PURE__ */ React.createElement("div", { className: `p-4 rounded-xl text-sm font-bold ${status.includes("Succ\xE8s") ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-slate-100 text-slate-700"}` }, loading && /* @__PURE__ */ React.createElement(LoaderCircle, { className: "w-4 h-4 animate-spin inline mr-2" }), status)),
-      /* @__PURE__ */ React.createElement("div", { className: "p-8 bg-slate-50 border-t border-slate-100 flex gap-4" }, /* @__PURE__ */ React.createElement(
-        "button",
-        {
-          onClick: () => setSelectedMission(null),
-          className: "flex-1 py-4 bg-white border border-slate-200 text-slate-700 rounded-2xl font-bold"
-        },
-        "Annuler"
-      ), /* @__PURE__ */ React.createElement(
-        "button",
-        {
-          onClick: () => handleVerify(selectedMission.id),
-          disabled: loading,
-          className: "flex-[2] py-4 bg-emerald-600 text-white rounded-2xl font-bold hover:bg-emerald-700 shadow-lg shadow-emerald-100 transition-all flex items-center justify-center space-x-2 disabled:bg-slate-300"
-        },
-        /* @__PURE__ */ React.createElement(ShieldCheck, { className: "w-5 h-5" }),
-        /* @__PURE__ */ React.createElement("span", null, "Signer la Certification")
-      ))
-    )));
+    const handleFileChange = (e) => {
+      if (e.target.files && e.target.files[0]) {
+        setInspectionPhoto(e.target.files[0]);
+      }
+    };
+    const handleVerify = async (tokenId) => {
+      setLoading(true);
+      setStatus("Ancrage sur IPFS...");
+      try {
+        let photoIpfsUrl = "";
+        if (inspectionPhoto) {
+          setIsUploading(true);
+          const result = await ipfsService.uploadFile(inspectionPhoto);
+          photoIpfsUrl = result.url;
+          setIsUploading(false);
+        }
+        setStatus("Signature MetaMask...");
+        await Web3Service.connectWallet();
+        setStatus("Certification Blockchain...");
+        await Web3Service.verifyProperty(tokenId);
+        setStatus("Finalisation Backend...");
+        await propertyService.validateProperty(selectedMission.id, photoIpfsUrl);
+        setStatus("Termin\xE9 !");
+        setTimeout(() => {
+          setSelectedMission(null);
+          setStep(1);
+          setStatus(null);
+          fetchMissions();
+        }, 2e3);
+      } catch (error) {
+        console.error(error);
+        setStatus("Erreur");
+      } finally {
+        setLoading(false);
+        setIsUploading(false);
+      }
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "min-h-screen bg-slate-50/50 p-8", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "max-w-6xl mx-auto", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h1", { className: "text-3xl font-black mb-8", children: "Console Agent" }),
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "grid grid-cols-1 gap-6", children: missions.map((m) => /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "bg-white p-6 rounded-3xl border shadow-sm flex justify-between items-center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h3", { className: "font-bold text-xl", children: m.titre }),
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-slate-500", children: m.commune })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("button", { onClick: () => setSelectedMission(m), className: "bg-slate-900 text-white px-6 py-3 rounded-xl font-bold", children: "Inspecter" })
+      ] }, m.id)) }),
+      selectedMission && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "bg-white w-full max-w-md rounded-[32px] p-8", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("h2", { className: "text-2xl font-bold mb-6", children: [
+          "Certification #",
+          selectedMission.id
+        ] }),
+        step === 1 ? /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "space-y-4", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("input", { type: "text", placeholder: "GPS", value: gpsCoords, onChange: (e) => setGpsCoords(e.target.value), className: "w-full p-4 border rounded-xl" }),
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("input", { type: "file", onChange: handleFileChange, className: "w-full" }),
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("button", { onClick: () => setStep(2), className: "w-full py-4 bg-slate-900 text-white rounded-xl font-bold", children: "Suivant" })
+        ] }) : /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "space-y-4 text-center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { children: "Pr\xEAt pour la signature blockchain" }),
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("button", { onClick: () => handleVerify(selectedMission.id), disabled: loading, className: "w-full py-4 bg-emerald-600 text-white rounded-xl font-bold", children: "Signer" }),
+          status && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-sm font-bold text-emerald-600", children: status })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("button", { onClick: () => setSelectedMission(null), className: "mt-4 text-slate-400 w-full", children: "Annuler" })
+      ] }) })
+    ] }) });
   };
   var AgentDashboard_default = AgentDashboard;
 
   // src/pages/dashboard/AdminDashboard.tsx
   var import_react33 = __toESM(require_react(), 1);
+  var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
   var AdminDashboard = () => {
-    const [activeTab, setActiveTab] = (0, import_react33.useState)("agents");
+    const [activeTab, setActiveTab] = (0, import_react33.useState)("transactions");
     const [loading, setLoading] = (0, import_react33.useState)(false);
     const [txStatus, setTxStatus] = (0, import_react33.useState)(null);
+    const stats = [
+      { label: "Volume S\xE9questre", value: "45,250 $", icon: Coins, color: "text-rose-600", bg: "bg-rose-50" },
+      { label: "Frais (2.5%)", value: "1,131 $", icon: TrendingUp, color: "text-emerald-600", bg: "bg-emerald-50" },
+      { label: "Litiges", value: "2", icon: ShieldAlert, color: "text-amber-600", bg: "bg-amber-50" }
+    ];
     const transactions = [
-      {
-        id: 0,
-        // TokenId
-        propriete: "Villa Nguba #0",
-        vendeur: "0x123...456",
-        acheteur: "0x789...012",
-        montant: "12.5 ETH",
-        status: "Verified",
-        // Déjà certifié par l'agent
-        date: "26 Oct 2026"
-      }
+      { id: 0, propriete: "Villa Nguba", vendeur: "0x123", acheteur: "0x789", montant: "125k $", isDisputed: false },
+      { id: 1, propriete: "Terrain Panzi", vendeur: "0xABC", acheteur: "0x999", montant: "15k $", isDisputed: true }
     ];
     const handleFinalize = async (tokenId) => {
       setLoading(true);
-      setTxStatus("Finalisation de la vente sur la blockchain...");
+      setTxStatus("Envoi sur la blockchain...");
       try {
         await Web3Service.connectWallet();
         await Web3Service.finalizeSale(tokenId);
-        setTxStatus("Vente finalis\xE9e avec succ\xE8s ! NFT transf\xE9r\xE9 et fonds lib\xE9r\xE9s.");
+        setTxStatus("Succ\xE8s : Vente finalis\xE9e.");
       } catch (error) {
-        console.error(error);
-        setTxStatus("Erreur : " + (error.message || "\xC9chec de la transaction"));
+        setTxStatus("Erreur");
       } finally {
         setLoading(false);
       }
     };
-    return /* @__PURE__ */ React.createElement("div", { className: "max-w-[1600px] mx-auto xl:px-20 md:px-10 px-4 py-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", { className: "text-4xl font-black text-slate-900 tracking-tight" }, "Console d'Arbitrage Admin"), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500 mt-2 text-lg" }, "Supervision des transactions et r\xE9solution des litiges immobiliers.")), /* @__PURE__ */ React.createElement("div", { className: "flex bg-slate-100 p-2 rounded-[24px] border border-slate-200" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setActiveTab("agents"), className: `px-8 py-3 rounded-[20px] text-sm font-bold transition-all ${activeTab === "agents" ? "bg-white text-slate-900 shadow-xl shadow-slate-200" : "text-slate-500"}` }, "Agents"), /* @__PURE__ */ React.createElement("button", { onClick: () => setActiveTab("transactions"), className: `px-8 py-3 rounded-[20px] text-sm font-bold transition-all ${activeTab === "transactions" ? "bg-white text-slate-900 shadow-xl shadow-slate-200" : "text-slate-500"}` }, "S\xE9questres"), /* @__PURE__ */ React.createElement("button", { onClick: () => setActiveTab("litiges"), className: `px-8 py-3 rounded-[20px] text-sm font-bold transition-all ${activeTab === "litiges" ? "bg-white text-slate-900 shadow-xl shadow-slate-200" : "text-slate-500"}` }, "Litiges"))), /* @__PURE__ */ React.createElement(AnimatePresence, { mode: "wait" }, activeTab === "transactions" && /* @__PURE__ */ React.createElement(motion.div, { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, className: "space-y-6" }, /* @__PURE__ */ React.createElement("div", { className: "bg-white rounded-[32px] border border-slate-200 overflow-hidden shadow-sm" }, /* @__PURE__ */ React.createElement("table", { className: "w-full text-left" }, /* @__PURE__ */ React.createElement("thead", { className: "bg-slate-50 border-b border-slate-100" }, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", { className: "px-8 py-6 text-xs font-black uppercase text-slate-400 tracking-widest" }, "Bien (NFT)"), /* @__PURE__ */ React.createElement("th", { className: "px-8 py-6 text-xs font-black uppercase text-slate-400 tracking-widest" }, "S\xE9questre"), /* @__PURE__ */ React.createElement("th", { className: "px-8 py-6 text-xs font-black uppercase text-slate-400 tracking-widest" }, "Statut Blockchain"), /* @__PURE__ */ React.createElement("th", { className: "px-8 py-6 text-xs font-black uppercase text-slate-400 tracking-widest text-right" }, "Action"))), /* @__PURE__ */ React.createElement("tbody", { className: "divide-y divide-slate-50" }, transactions.map((tx) => /* @__PURE__ */ React.createElement("tr", { key: tx.id, className: "hover:bg-slate-50/50 transition" }, /* @__PURE__ */ React.createElement("td", { className: "px-8 py-8" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-4" }, /* @__PURE__ */ React.createElement("div", { className: "w-12 h-12 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center" }, /* @__PURE__ */ React.createElement(Building2, { className: "w-6 h-6" })), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "font-bold text-slate-900" }, tx.propriete), /* @__PURE__ */ React.createElement("div", { className: "text-xs text-slate-400 font-medium" }, "TokenID #", tx.id)))), /* @__PURE__ */ React.createElement("td", { className: "px-8 py-8" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 text-rose-600 font-black" }, /* @__PURE__ */ React.createElement(Coins, { className: "w-4 h-4" }), tx.montant)), /* @__PURE__ */ React.createElement("td", { className: "px-8 py-8" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 text-emerald-600 bg-emerald-50 w-fit px-4 py-1.5 rounded-full border border-emerald-100 text-xs font-black" }, /* @__PURE__ */ React.createElement(ShieldCheck, { className: "w-4 h-4" }), "CERTIFI\xC9 PAR AGENT")), /* @__PURE__ */ React.createElement("td", { className: "px-8 py-8 text-right" }, /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => handleFinalize(tx.id),
-        disabled: loading,
-        className: "px-6 py-3 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition shadow-lg shadow-slate-200 flex items-center gap-2 ml-auto disabled:bg-slate-300"
-      },
-      loading ? /* @__PURE__ */ React.createElement(LoaderCircle, { className: "w-4 h-4 animate-spin" }) : /* @__PURE__ */ React.createElement(Gavel, { className: "w-4 h-4" }),
-      "Lib\xE9rer les fonds"
-    ))))))), txStatus && /* @__PURE__ */ React.createElement("div", { className: "p-6 bg-slate-900 text-white rounded-[24px] flex items-center gap-4 shadow-2xl" }, /* @__PURE__ */ React.createElement(Info, { className: "w-6 h-6 text-rose-400" }), /* @__PURE__ */ React.createElement("span", { className: "font-bold tracking-tight" }, txStatus))), activeTab === "agents" && /* @__PURE__ */ React.createElement(motion.div, { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, className: "grid grid-cols-1 md:grid-cols-3 gap-6" }, /* @__PURE__ */ React.createElement("div", { className: "bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm border-dashed flex flex-col items-center justify-center text-center space-y-4 min-h-[300px]" }, /* @__PURE__ */ React.createElement("div", { className: "w-16 h-16 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center" }, /* @__PURE__ */ React.createElement(Plus, { className: "w-8 h-8" })), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h3", { className: "font-bold text-slate-900" }, "Nouvel Agent"), /* @__PURE__ */ React.createElement("p", { className: "text-sm text-slate-500" }, "Ajouter un oracle certifi\xE9."))))));
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "min-h-screen bg-slate-50/50 p-8", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "max-w-6xl mx-auto", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h1", { className: "text-3xl font-black mb-10", children: "Console d'Arbitrage" }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-6 mb-12", children: stats.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-white p-6 rounded-[24px] border shadow-sm", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: `${s.bg} ${s.color} w-10 h-10 rounded-xl flex items-center justify-center mb-4`, children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(s.icon, { className: "w-5 h-5" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-xs font-bold text-slate-400 uppercase", children: s.label }),
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-2xl font-black text-slate-900", children: s.value })
+      ] }, i)) }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "bg-white rounded-[32px] border overflow-hidden shadow-sm", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("table", { className: "w-full text-left", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("thead", { className: "bg-slate-50 border-b", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("tr", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("th", { className: "px-6 py-4 text-[10px] font-black uppercase text-slate-400", children: "Propri\xE9t\xE9" }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("th", { className: "px-6 py-4 text-[10px] font-black uppercase text-slate-400", children: "Montant" }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("th", { className: "px-6 py-4 text-[10px] font-black uppercase text-slate-400", children: "\xC9tat" }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("th", { className: "px-6 py-4 text-[10px] font-black uppercase text-slate-400 text-right", children: "Actions" })
+        ] }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("tbody", { className: "divide-y divide-slate-50", children: transactions.map((tx) => /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("tr", { className: "hover:bg-slate-50/50 transition", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("td", { className: "px-6 py-6 font-bold", children: tx.propriete }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("td", { className: "px-6 py-6 text-rose-600 font-black", children: tx.montant }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("td", { className: "px-6 py-6", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: `px-3 py-1 rounded-full text-[10px] font-black ${tx.isDisputed ? "bg-amber-50 text-amber-600" : "bg-emerald-50 text-emerald-600"}`, children: tx.isDisputed ? "LITIGE" : "OK" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("td", { className: "px-6 py-6 text-right", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("button", { onClick: () => handleFinalize(tx.id), disabled: loading || tx.isDisputed, className: "bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-bold disabled:bg-slate-200", children: "Lib\xE9rer" }) })
+        ] }, tx.id)) })
+      ] }) }),
+      txStatus && /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mt-8 p-6 bg-slate-900 text-white rounded-2xl flex items-center gap-4", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Info, { className: "w-5 h-5 text-rose-400" }),
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "font-bold", children: txStatus })
+      ] })
+    ] }) });
   };
   var AdminDashboard_default = AdminDashboard;
 
   // src/components/layout/Navbar.tsx
   var import_react34 = __toESM(require_react(), 1);
+  var import_jsx_runtime13 = __toESM(require_jsx_runtime(), 1);
   var Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = (0, import_react34.useState)(false);
-    return /* @__PURE__ */ React.createElement("nav", { className: "sticky top-0 z-50 bg-white border-b border-slate-200" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-row items-center justify-between gap-3 md:gap-0 py-4" }, /* @__PURE__ */ React.createElement(Link, { to: "/", className: "flex items-center space-x-2 w-full md:w-auto" }, /* @__PURE__ */ React.createElement("div", { className: "text-rose-500" }, /* @__PURE__ */ React.createElement(Shield, { className: "w-8 h-8" })), /* @__PURE__ */ React.createElement("span", { className: "hidden md:block text-xl font-bold text-rose-500 tracking-tight" }, "KivuMarket")), /* @__PURE__ */ React.createElement("div", { className: "hidden sm:block cursor-pointer" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-row items-center border border-slate-200 rounded-full py-2 px-4 shadow-sm hover:shadow-md transition bg-white" }, /* @__PURE__ */ React.createElement("div", { className: "text-sm font-semibold px-4 border-r border-slate-200" }, "Bukavu"), /* @__PURE__ */ React.createElement("div", { className: "text-sm font-semibold px-4 border-r border-slate-200" }, "Acheter"), /* @__PURE__ */ React.createElement("div", { className: "text-sm pl-4 pr-2 text-slate-500 flex flex-row items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "hidden sm:block" }, "Certifi\xE9 par agent"), /* @__PURE__ */ React.createElement("div", { className: "p-2 bg-rose-500 rounded-full text-white" }, /* @__PURE__ */ React.createElement(Search, { className: "w-4 h-4" }))))), /* @__PURE__ */ React.createElement("div", { className: "flex flex-row items-center gap-3" }, /* @__PURE__ */ React.createElement(
-      Link,
-      {
-        to: "/dashboard/owner",
-        className: "hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-slate-50 transition cursor-pointer"
-      },
-      "Vendre ou certifier mon bien"
-    ), /* @__PURE__ */ React.createElement("div", { className: "hidden md:flex p-3 rounded-full hover:bg-slate-50 transition cursor-pointer" }, /* @__PURE__ */ React.createElement(Globe, { className: "w-5 h-5 text-slate-700" })), /* @__PURE__ */ React.createElement("div", { className: "relative" }, /* @__PURE__ */ React.createElement(
-      "div",
-      {
-        onClick: () => setIsMenuOpen(!isMenuOpen),
-        className: "p-4 md:py-1.5 md:px-2 border border-slate-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition bg-white"
-      },
-      /* @__PURE__ */ React.createElement(Menu, { className: "w-5 h-5 text-slate-500" }),
-      /* @__PURE__ */ React.createElement("div", { className: "hidden md:block" }, /* @__PURE__ */ React.createElement(CircleUser, { className: "w-8 h-8 text-slate-500" }))
-    ), isMenuOpen && /* @__PURE__ */ React.createElement("div", { className: "absolute rounded-xl shadow-lg w-[240px] bg-white overflow-hidden right-0 top-12 text-sm border border-slate-100" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-col cursor-pointer" }, /* @__PURE__ */ React.createElement(Link, { to: "/login", className: "px-4 py-3 font-semibold hover:bg-slate-50 transition" }, "Connexion"), /* @__PURE__ */ React.createElement(Link, { to: "/register", className: "px-4 py-3 hover:bg-slate-50 transition border-b border-slate-200" }, "Inscription"), /* @__PURE__ */ React.createElement(Link, { to: "/dashboard/owner", className: "px-4 py-3 hover:bg-slate-50 transition" }, "Mettre mon bien sur KivuMarket"), /* @__PURE__ */ React.createElement(Link, { to: "/how-it-works", className: "px-4 py-3 hover:bg-slate-50 transition" }, "Centre d'aide"))))))), /* @__PURE__ */ React.createElement("div", { className: "sm:hidden px-4 pb-4" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-row items-center border border-slate-200 rounded-full py-2 px-4 shadow-sm" }, /* @__PURE__ */ React.createElement(Search, { className: "w-5 h-5 text-slate-800" }), /* @__PURE__ */ React.createElement("div", { className: "flex flex-col ml-3" }, /* @__PURE__ */ React.createElement("div", { className: "text-sm font-semibold" }, "O\xF9 chercher ?"), /* @__PURE__ */ React.createElement("div", { className: "text-xs text-slate-500" }, "Ibanda \u2022 Kadutu \u2022 Bagira")))));
+    return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("nav", { className: "sticky top-0 z-50 bg-white border-b border-slate-200", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "flex flex-row items-center justify-between gap-3 md:gap-0 py-4", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(Link, { to: "/", className: "flex items-center space-x-2 w-full md:w-auto", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "text-rose-500", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Shield, { className: "w-8 h-8" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "hidden md:block text-xl font-bold text-rose-500 tracking-tight", children: "KivuMarket" })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "hidden sm:block cursor-pointer", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "flex flex-row items-center border border-slate-200 rounded-full py-2 px-4 shadow-sm hover:shadow-md transition bg-white", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "text-sm font-semibold px-4 border-r border-slate-200", children: "Bukavu" }),
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "text-sm font-semibold px-4 border-r border-slate-200", children: "Acheter" }),
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "text-sm pl-4 pr-2 text-slate-500 flex flex-row items-center gap-3", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "hidden sm:block", children: "Certifi\xE9 par agent" }),
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "p-2 bg-rose-500 rounded-full text-white", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Search, { className: "w-4 h-4" }) })
+          ] })
+        ] }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "flex flex-row items-center gap-3", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+            Link,
+            {
+              to: "/dashboard/owner",
+              className: "hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-slate-50 transition cursor-pointer",
+              children: "Vendre ou certifier mon bien"
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "hidden md:flex p-3 rounded-full hover:bg-slate-50 transition cursor-pointer", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Globe, { className: "w-5 h-5 text-slate-700" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "relative", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
+              "div",
+              {
+                onClick: () => setIsMenuOpen(!isMenuOpen),
+                className: "p-4 md:py-1.5 md:px-2 border border-slate-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition bg-white",
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Menu, { className: "w-5 h-5 text-slate-500" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "hidden md:block", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(CircleUser, { className: "w-8 h-8 text-slate-500" }) })
+                ]
+              }
+            ),
+            isMenuOpen && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "absolute rounded-xl shadow-lg w-[240px] bg-white overflow-hidden right-0 top-12 text-sm border border-slate-100", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "flex flex-col cursor-pointer", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Link, { to: "/login", className: "px-4 py-3 font-semibold hover:bg-slate-50 transition", children: "Connexion" }),
+              /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Link, { to: "/register", className: "px-4 py-3 hover:bg-slate-50 transition border-b border-slate-200", children: "Inscription" }),
+              /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Link, { to: "/dashboard/owner", className: "px-4 py-3 hover:bg-slate-50 transition", children: "Mettre mon bien sur KivuMarket" }),
+              /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Link, { to: "/how-it-works", className: "px-4 py-3 hover:bg-slate-50 transition", children: "Centre d'aide" })
+            ] }) })
+          ] })
+        ] })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "sm:hidden px-4 pb-4", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "flex flex-row items-center border border-slate-200 rounded-full py-2 px-4 shadow-sm", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Search, { className: "w-5 h-5 text-slate-800" }),
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "flex flex-col ml-3", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "text-sm font-semibold", children: "O\xF9 chercher ?" }),
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "text-xs text-slate-500", children: "Ibanda \u2022 Kadutu \u2022 Bagira" })
+        ] })
+      ] }) })
+    ] });
   };
   var Navbar_default = Navbar;
 
   // src/App.tsx
+  var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
   function App() {
-    return /* @__PURE__ */ React.createElement("div", { className: "min-h-screen bg-white" }, /* @__PURE__ */ React.createElement(Navbar_default, null), /* @__PURE__ */ React.createElement("main", { className: "pb-20" }, /* @__PURE__ */ React.createElement(Routes, null, /* @__PURE__ */ React.createElement(Route, { path: "/", element: /* @__PURE__ */ React.createElement(Home_default, null) }), /* @__PURE__ */ React.createElement(Route, { path: "/login", element: /* @__PURE__ */ React.createElement(Login_default, null) }), /* @__PURE__ */ React.createElement(Route, { path: "/register", element: /* @__PURE__ */ React.createElement(Register_default, null) }), /* @__PURE__ */ React.createElement(Route, { path: "/property/:id", element: /* @__PURE__ */ React.createElement(PropertyDetail_default, null) }), /* @__PURE__ */ React.createElement(Route, { path: "/dashboard/owner", element: /* @__PURE__ */ React.createElement(OwnerDashboard_default, null) }), /* @__PURE__ */ React.createElement(Route, { path: "/dashboard/agent", element: /* @__PURE__ */ React.createElement(AgentDashboard_default, null) }), /* @__PURE__ */ React.createElement(Route, { path: "/dashboard/admin", element: /* @__PURE__ */ React.createElement(AdminDashboard_default, null) }))), /* @__PURE__ */ React.createElement("footer", { className: "bg-slate-50 border-t border-slate-200 py-8" }, /* @__PURE__ */ React.createElement("div", { className: "container mx-auto px-4 text-center" }, /* @__PURE__ */ React.createElement("p", null, "\xA9 2026 KivuMarket+. La technologie au service de la s\xE9curit\xE9 fonci\xE8re \xE0 Bukavu."))));
+    return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "min-h-screen bg-white", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Navbar_default, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("main", { className: "pb-20", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(Routes, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Route, { path: "/", element: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Home_default, {}) }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Route, { path: "/login", element: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Login_default, {}) }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Route, { path: "/register", element: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Register_default, {}) }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Route, { path: "/property/:id", element: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(PropertyDetail_default, {}) }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Route, { path: "/dashboard/owner", element: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(OwnerDashboard_default, {}) }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Route, { path: "/dashboard/agent", element: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(AgentDashboard_default, {}) }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Route, { path: "/dashboard/admin", element: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(AdminDashboard_default, {}) })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("footer", { className: "bg-slate-50 border-t border-slate-200 py-8", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "container mx-auto px-4 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("p", { children: "\xA9 2026 KivuMarket+. La technologie au service de la s\xE9curit\xE9 fonci\xE8re \xE0 Bukavu." }) }) })
+    ] });
   }
   var App_default = App;
 
   // src/main.tsx
+  var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
   import_client.default.createRoot(document.getElementById("root")).render(
-    /* @__PURE__ */ import_react35.default.createElement(import_react35.default.StrictMode, null, /* @__PURE__ */ import_react35.default.createElement(BrowserRouter, null, /* @__PURE__ */ import_react35.default.createElement(App_default, null)))
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(import_react35.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(BrowserRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(App_default, {}) }) })
   );
 })();
 /*! Bundled license information:
@@ -56786,17 +60227,12 @@ lucide-react/dist/esm/Icon.mjs:
 lucide-react/dist/esm/createLucideIcon.mjs:
 lucide-react/dist/esm/icons/arrow-right.mjs:
 lucide-react/dist/esm/icons/badge-check.mjs:
-lucide-react/dist/esm/icons/building-2.mjs:
-lucide-react/dist/esm/icons/camera.mjs:
 lucide-react/dist/esm/icons/chevron-left.mjs:
 lucide-react/dist/esm/icons/circle-check-big.mjs:
 lucide-react/dist/esm/icons/circle-user.mjs:
-lucide-react/dist/esm/icons/circle-x.mjs:
 lucide-react/dist/esm/icons/clock.mjs:
 lucide-react/dist/esm/icons/coins.mjs:
-lucide-react/dist/esm/icons/eye.mjs:
 lucide-react/dist/esm/icons/file-text.mjs:
-lucide-react/dist/esm/icons/gavel.mjs:
 lucide-react/dist/esm/icons/globe.mjs:
 lucide-react/dist/esm/icons/heart.mjs:
 lucide-react/dist/esm/icons/house.mjs:
@@ -56811,10 +60247,13 @@ lucide-react/dist/esm/icons/menu.mjs:
 lucide-react/dist/esm/icons/plus.mjs:
 lucide-react/dist/esm/icons/search.mjs:
 lucide-react/dist/esm/icons/share.mjs:
+lucide-react/dist/esm/icons/shield-alert.mjs:
 lucide-react/dist/esm/icons/shield-check.mjs:
 lucide-react/dist/esm/icons/shield.mjs:
 lucide-react/dist/esm/icons/star.mjs:
+lucide-react/dist/esm/icons/trending-up.mjs:
 lucide-react/dist/esm/icons/triangle-alert.mjs:
+lucide-react/dist/esm/icons/upload.mjs:
 lucide-react/dist/esm/icons/user.mjs:
 lucide-react/dist/esm/lucide-react.mjs:
   (**

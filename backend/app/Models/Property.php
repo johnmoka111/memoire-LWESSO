@@ -74,11 +74,18 @@ final class Property extends Model
     public function getPendingMissions(?int $agentId = null): array
     {
         if ($agentId) {
-            $sql = "SELECT * FROM {$this->table} WHERE agent_id = ? AND statut = 'assigne'";
+            $sql = "SELECT p.*, u.nom as owner_name 
+                    FROM {$this->table} p 
+                    JOIN users u ON p.owner_id = u.id 
+                    WHERE p.agent_id = ? AND p.statut = 'assigne'";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$agentId]);
             return $stmt->fetchAll();
         }
-        return $this->db->query("SELECT * FROM {$this->table} WHERE statut = 'en_attente'")->fetchAll();
+        $sql = "SELECT p.*, u.nom as owner_name 
+                FROM {$this->table} p 
+                JOIN users u ON p.owner_id = u.id 
+                WHERE p.statut = 'en_attente'";
+        return $this->db->query($sql)->fetchAll();
     }
 }

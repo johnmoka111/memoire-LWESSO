@@ -71,6 +71,13 @@ final class PropertyController extends Controller
     public function missions(Request $request): void
     {
         $missions = $this->propertyModel->getPendingMissions((int) $request->user['id']);
+        
+        // Attacher les documents à chaque mission
+        $documentModel = new Document();
+        foreach ($missions as &$mission) {
+            $mission['documents'] = $documentModel->getDocumentsByProperty((int) $mission['id']);
+        }
+        
         Response::success($missions);
     }
 

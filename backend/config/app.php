@@ -26,7 +26,7 @@ define('GCS_PROJECT',     getenv('GCS_PROJECT')     ?: 'kivu-market-project');
 define('GCS_CREDENTIALS', getenv('GCS_CREDENTIALS') ?: ROOT_PATH . '/config/gcs-key.json');
 
 // ─── Blockchain (Sepolia testnet → Ethereum mainnet) ─────────────────────────
-define('ETH_RPC_URL',      getenv('ETH_RPC_URL')      ?: 'https://sepolia.infura.io/v3/YOUR_INFURA_KEY');
+define('ETH_RPC_URL',      getenv('ETH_RPC_URL')      ?: 'https://testnet-rpc.gochain.io');
 define('CONTRACT_ADDRESS', getenv('CONTRACT_ADDRESS') ?: '0x0000000000000000000000000000000000000000');
 define('ADMIN_WALLET',     getenv('ADMIN_WALLET')     ?: '0x90C63377CD5A073913ebAdaDbCEd0d27AD5c120e');
 define('ADMIN_PRIVATE_KEY',getenv('ADMIN_PRIVATE_KEY')?: 'CLÉ_PRIVÉE_SECRETE_DE_L_ADMIN');
