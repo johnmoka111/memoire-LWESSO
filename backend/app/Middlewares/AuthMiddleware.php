@@ -10,6 +10,9 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Exception;
 
+// Marge de tolérance pour le décalage horaire (secondes)
+JWT::$leeway = 60;
+
 /**
  * Vérifie si l'utilisateur est authentifié via un token JWT.
  */
@@ -28,7 +31,7 @@ final class AuthMiddleware
             // On injecte les données de l'utilisateur dans la requête
             $request->user = (array) $decoded->data;
         } catch (Exception $e) {
-            Response::error('Token invalide ou expiré.', 401);
+            Response::error('Token invalide ou expiré : ' . $e->getMessage(), 401);
         }
     }
 }

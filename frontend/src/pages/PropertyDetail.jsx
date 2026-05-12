@@ -53,7 +53,10 @@ const PropertyDetail = () => {
   const [buying, setBuying] = useState(false);
 
   useEffect(() => {
-    axios.get(`${API_URL}/properties/${id}`)
+    const token = localStorage.getItem('token');
+    const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+
+    axios.get(`${API_URL}/properties/${id}`, config)
       .then(res => setProperty(res.data.data))
       .catch(() => setProperty(MOCK))
       .finally(() => setLoading(false));

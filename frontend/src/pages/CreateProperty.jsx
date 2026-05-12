@@ -8,6 +8,7 @@ import { API_URL } from '../config';
 import { KIVU_LOCATIONS } from '../data/locations';
 
 const CreateProperty = () => {
+  const token = localStorage.getItem('token');
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const totalSteps = 4;

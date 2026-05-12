@@ -34,11 +34,12 @@ const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
+        const token = localStorage.getItem('token');
+        const config = { headers: { Authorization: `Bearer ${token}` } };
+        
         const [transactionsRes, propertiesRes] = await Promise.all([
-          axios.get(`${API_URL}/transactions`),
-          axios.get(`${API_URL}/properties`)
+          axios.get(`${API_URL}/transactions`, config),
+          axios.get(`${API_URL}/properties`, config)
         ]);
         
         const myProps = propertiesRes.data.data?.filter(p => p.owner_id === user.id) || [];

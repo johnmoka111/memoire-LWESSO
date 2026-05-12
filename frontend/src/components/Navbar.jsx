@@ -61,6 +61,16 @@ const Navbar = () => {
             <Link to="/dashboard" className="w-9 h-9 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
               <User size={18} className="text-white" />
             </Link>
+            <button 
+              onClick={() => {
+                localStorage.clear();
+                window.location.href = '/#/login';
+              }}
+              className="p-2 text-slate-500 hover:text-red-500 transition-colors"
+              title="Déconnexion"
+            >
+              <Shield size={18} />
+            </button>
           </div>
         ) : (
           <div className="flex items-center gap-4">

@@ -54,9 +54,12 @@ const Properties = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`${API_URL}/properties`)
+    const token = localStorage.getItem('token');
+    const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+    
+    axios.get(`${API_URL}/properties`, config)
       .then(res => setListings(res.data.data || []))
-      .catch(() => setListings([])) // Empty or use MOCK if needed
+      .catch(() => setListings([]))
       .finally(() => setLoading(false));
   }, []);
 
