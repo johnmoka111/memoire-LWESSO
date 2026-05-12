@@ -30,9 +30,11 @@ const Validations = () => {
 
   const fetchData = async () => {
     try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
       const [propRes, agentRes] = await Promise.all([
-        axios.get(`${API_URL}/properties`), 
-        axios.get(`${API_URL}/admin/agents`)
+        axios.get(`${API_URL}/properties`, config), 
+        axios.get(`${API_URL}/admin/agents`, config)
       ]);
       
       // Filtrer pour ne garder que ceux en attente d'assignation
@@ -49,8 +51,11 @@ const Validations = () => {
   const handleAssign = async (propertyId) => {
     if (!selectedAgent) return;
     try {
+      const token = localStorage.getItem('token');
       await axios.post(`${API_URL}/properties/${propertyId}/assign`, {
         agent_id: selectedAgent
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
       });
       setAssigningId(null);
       setSelectedAgent('');

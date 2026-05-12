@@ -31,7 +31,7 @@ const Login = () => {
       // MOCK pour les tests si l'API n'est pas lancée ou pour admin par défaut
       if (email === 'admin@kivumarket.cd' && (password === 'Admin@Kivu2026!' || password === 'admin')) {
          console.log('Utilisation du compte Admin par défaut');
-         localStorage.setItem('token', 'mock_token_admin');
+         localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7fX0.mock_signature');
          localStorage.setItem('user', JSON.stringify({
            prenom: 'Admin', 
            role: 'admin',
