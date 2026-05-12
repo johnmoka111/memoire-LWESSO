@@ -1,78 +1,79 @@
-# 🏘️ KivuMarket+ : Sécurisation Foncière par Blockchain (Bukavu, RDC)
+# KivuMarket+ : Plateforme de Securisation Fonciere par Blockchain
 
-**KivuMarket+** est une plateforme immobilière de nouvelle génération conçue spécifiquement pour le contexte de la ville de Bukavu. Elle lutte contre la spoliation foncière et les fraudes aux titres de propriété en utilisant la puissance de la Blockchain Ethereum.
-
----
-
-## 🚀 Vision du Projet
-À Bukavu, l'insécurité foncière (doubles ventes, faux titres) est un frein majeur au développement. KivuMarket+ résout ce problème par trois piliers :
-1.  **L'Ancrage Immuable** : Chaque titre est converti en NFT (ERC-721). Son empreinte (Hash) est gravée à jamais sur la blockchain.
-2.  **L'Oracle Agent** : Un agent certifié doit physiquement valider le terrain sur place pour débloquer la vente sur la blockchain.
-3.  **Le Séquestre (Escrow)** : Les fonds sont bloqués de manière sécurisée et ne sont libérés au vendeur que lorsque toutes les conditions légales sont remplies.
+KivuMarket+ est un systeme d'information geographique et transactionnel concu pour resoudre les problemes de spoliation fonciere a Bukavu (RDC). Ce document detaille l'architecture technique, l'etat actuel du developpement et les etapes restantes pour la finalisation du projet.
 
 ---
 
-## 🛠️ Architecture Technique
-*   **Blockchain** : Solidity, Hardhat, Ethers.js, OpenZeppelin (ERC-721).
-*   **Frontend** : React.js, **esbuild** (Bundler ultra-rapide), Tailwind CSS v4.
-*   **Backend** : PHP (Architecture MVC), MySQL.
-*   **Portefeuille** : MetaMask (Intégration Web3).
+## 1. Architecture Technique
+
+### 1.1. Frontend
+- Technologie : React.js avec Tailwind CSS v4.
+- Bundler : esbuild (configure pour une compilation ultra-rapide).
+- Gestion d'etat : Hooks React (useState, useEffect) et localStorage pour la persistence des jetons JWT.
+- Communication : Axios (configure pour gerer le multipart/form-data pour les images).
+
+### 1.2. Backend
+- Technologie : PHP 8.2 (Architecture MVC personnalisee).
+- Securite : Authentification par JSON Web Tokens (JWT).
+- Base de donnees : MySQL (via PDO).
+- Serveur Web : Apache (XAMPP) avec une configuration specifique pour le routage en sous-repertoire.
+
+### 1.3. Stockage
+- Les documents legaux et les photos sont stockes physiquement dans le dossier : `backend/storage/uploads/`.
+- Les metadonnees et les chemins sont references dans la table `documents` de la base de donnees.
 
 ---
 
-## 📦 Guide d'Installation (De A à Z)
+## 2. Etat Actuel du Travail (Termine et Operationnel)
 
-Si vous changez de PC ou si un nouveau développeur rejoint le projet, suivez ces étapes dans l'ordre exact :
+### 2.1. Gestion des Utilisateurs et Agents
+- Systeme d'inscription et de connexion fonctionnel (Proprietaires et Agents).
+- Gestion des juridictions (Province, Ville, Commune) pour les agents.
+- Dashboard d'administration permettant la creation et l'activation des comptes agents certificateurs.
 
-### 1. Prérequis Système
-Installez les outils suivants :
-*   [Node.js (v18+)](https://nodejs.org/)
-*   [XAMPP](https://www.apachefriends.org/) (pour PHP et MySQL)
-*   [Git](https://git-scm.com/)
-*   [MetaMask Extension](https://metamask.io/) (dans votre navigateur)
+### 2.2. Soumission de Proprietes
+- Formulaire multi-etapes interactif.
+- Upload multi-photos (jusqu'a 5 images avec apercu dynamique) fonctionnel.
+- Upload de documents legaux (Titre foncier en PDF ou Image) fonctionnel.
+- Gestion de la hierarchie geographique du Sud-Kivu integree.
 
-### 2. Configuration de la Blockchain (Hardhat)
-Le cœur du système se trouve dans le dossier `/blockchain`.
-```bash
-cd blockchain
-npm install
-```
-**Pour lancer la simulation locale :**
-1.  Ouvrez un terminal et lancez le nœud local : `npx hardhat node`
-2.  Dans un autre terminal, déployez le contrat : `npx hardhat run scripts/deploy.js --network localhost`
-3.  Copiez l'adresse du contrat affichée et mettez-la à jour dans `frontend/src/services/web3.ts`.
-
-### 3. Configuration du Frontend (React + esbuild)
-Le frontend utilise esbuild pour une vitesse de compilation instantanée.
-```bash
-cd frontend
-npm install
-npm run dev
-```
-L'application sera disponible sur `http://localhost:3001`.
-
-### 4. Configuration du Backend (PHP)
-1.  Démarrez Apache et MySQL via le panneau XAMPP.
-2.  Importez le fichier `database/schema.sql` dans votre phpMyAdmin.
-3.  Configurez vos accès base de données dans `backend/config/app.php`.
+### 2.3. Stabilisation Infrastructurelle (Critique)
+- Resolution des erreurs reseau (Network Error) liees a la taille des fichiers via FormData.
+- Configuration du routage Apache pour supporter les espaces dans les noms de dossiers (ex: "kivu market").
+- Parametrage automatique des limites PHP (upload_max_filesize, post_max_size) pour supporter les photos haute resolution.
 
 ---
 
-## 🧪 Simulation de Test (Scénario de Vente)
+## 3. Ce qui ne marche pas encore (En cours de developpement)
 
-Pour tester le système sans dépenser d'argent réel :
-1.  Connectez MetaMask au réseau local **Hardhat** (RPC: `http://127.0.0.1:8545`, Chain ID: `31337`).
-2.  Importez l'un des comptes de test fournis par Hardhat (via sa clé privée).
-3.  **Flux** : 
-    *   **Vendeur** : Mint son titre (crée le NFT).
-    *   **Acheteur** : Clique sur "Acheter via Escrow" et paie en GO/ETH.
-    *   **Agent** : Inspecte le terrain et clique sur "Signer la certification" dans son dashboard.
-    *   **Admin** : Clique sur "Libérer les fonds" pour terminer la vente.
+### 3.1. Integration Blockchain de bout en bout
+- Bien que le service `BlockchainService.php` existe, l'ancrage automatique (hashing) lors de la validation d'un agent n'est pas encore declenche depuis le frontend.
+- La signature MetaMask pour les transactions de vente via le contrat Escrow doit etre finalisee sur la page des transactions.
+
+### 3.2. Workflow de Validation Agent
+- Le filtrage automatique des annonces par commune (un agent ne devrait voir que les biens de sa commune d'affectation) doit etre affine dans le controlleur.
+- L'interface de signature de l'agent (Validations.jsx) est presente mais ne communique pas encore les donnees de certification a la blockchain.
+
+### 3.3. Geolocation Interactive
+- Le systeme utilise actuellement des coordonnees saisies manuellement. L'integration d'une carte interactive (Leaflet ou Google Maps) pour selectionner le point exact du terrain manque encore.
+
+### 3.4. Notifications et Feedback
+- Il n'y a pas encore de systeme d'alerte (Email ou In-app) pour prevenir un proprietaire quand son bien a ete valide ou rejete par un agent.
 
 ---
 
-## 📜 Licences & Sécurité
-Ce projet utilise les standards de sécurité **OpenZeppelin**. Les contrats incluent des protections contre les attaques de réentrée (`ReentrancyGuard`) et une gestion stricte des droits (`Ownable`).
+## 4. Maintenance et Diagnostic
+
+### 4.1. Fichiers de configuration cles
+- Frontend API : `frontend/src/config.js` (Contient l'URL de base vers le backend).
+- Backend App : `backend/config/app.php` (Contient les parametres DB et Blockchain).
+- Routage : `backend/public/index.php` et `backend/public/.htaccess`.
+
+### 4.2. Diagnostic des erreurs
+En cas d'erreur reseau persistante :
+1. Verifier que le serveur Apache est lance sur le port 80.
+2. S'assurer que le dossier `backend/storage/uploads/` dispose des droits d'ecriture.
+3. Verifier le fichier `backend/request.log` (s'il est active) pour voir si la requete atteint le serveur.
 
 ---
-*Développé avec passion pour sécuriser le futur immobilier de Bukavu.*
+Ce projet est dans une phase de stabilisation finale. Le pipeline de creation de contenu est operationnel, l'etape suivante consiste a boucler la boucle de confiance via la validation agent et l'ancrage blockchain.
