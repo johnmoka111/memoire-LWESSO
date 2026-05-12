@@ -6,8 +6,8 @@ flowchart LR
     Front <--> API[API PHP / Backend]
     
     subgraph Confiance ["Couche de Sécurité & Confiance"]
-        API <--> DB[(MySQL : Données de base)]
-        API <--> BC{{Blockchain GoChain : Certificats & Hash}}
+        API <--> DB[("MySQL : Données de base")]
+        API <--> BC{{"Blockchain GoChain : Certificats & Hash"}}
     end
     
     BC -.-> Ledger[Registre Immuable]
