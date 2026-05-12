@@ -1,6 +1,7 @@
 RewriteEngine On
-RewriteCond %{HTTP:Authorization} ^(.*)
-RewriteRule .* - [e:HTTP_AUTHORIZATION:%1]
+
+# Correction pour passer l'en-tête Authorization à PHP (Standard XAMPP)
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
