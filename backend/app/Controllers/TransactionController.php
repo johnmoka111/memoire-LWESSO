@@ -31,6 +31,7 @@ final class TransactionController extends Controller
     {
         $userId = $request->user['id'];
         $role = $request->user['role'];
+        $params = [];
 
         $sql = "SELECT t.*, p.titre as property_title 
                 FROM transactions t 
@@ -38,12 +39,16 @@ final class TransactionController extends Controller
         
         if ($role === 'acheteur') {
             $sql .= " WHERE t.acheteur_id = ?";
+            $params[] = $userId;
         } elseif ($role === 'proprietaire') {
             $sql .= " WHERE p.owner_id = ?";
+            $params[] = $userId;
         }
         
+        $sql .= " ORDER BY t.created_at DESC";
+        
         $stmt = \App\Core\Database::getInstance()->prepare($sql);
-        $stmt->execute([$userId]);
+        $stmt->execute($params);
         Response::success($stmt->fetchAll());
     }
 
@@ -61,6 +66,20 @@ final class TransactionController extends Controller
 
         if (!empty($errors)) {
             Response::error('Données de transaction invalides', 422, $errors);
+        }
+
+        // --- SÉCURITÉ : Vérification Blockchain (Verification que la transaction existe et a réussi) ---
+        $blockchain = new BlockchainService();
+        $txHash = $request->input('tx_creation');
+        $receipt = $blockchain->getTransactionReceipt($txHash);
+
+        if (!$receipt) {
+            Response::error("La transaction blockchain n'a pas pu être vérifiée ou n'existe pas encore.", 400);
+        }
+
+        // Sur la plupart des réseaux EVM, status '0x1' signifie succès
+        if (($receipt['status'] ?? null) !== '0x1') {
+            Response::error("La transaction blockchain a échoué (statut invalide).", 400);
         }
 
         $id = $this->transactionModel->createEscrow([

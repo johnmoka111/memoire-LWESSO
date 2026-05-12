@@ -29,7 +29,7 @@ final class User extends Model
      */
     public function create(array $data): int
     {
-        $sql = "INSERT INTO {$this->table} (nom, prenom, email, password, role, wallet_address) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO {$this->table} (nom, prenom, email, password, role, wallet_address, avatar_url, province, ville, commune) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
             $data['nom'],
@@ -37,7 +37,11 @@ final class User extends Model
             $data['email'],
             password_hash($data['password'], PASSWORD_BCRYPT, ['cost' => 12]),
             $data['role'] ?? 'acheteur',
-            $data['wallet_address'] ?? null
+            $data['wallet_address'] ?? null,
+            $data['avatar_url'] ?? null,
+            $data['province'] ?? null,
+            $data['ville'] ?? null,
+            $data['commune'] ?? null
         ]);
         return (int) $this->db->lastInsertId();
     }

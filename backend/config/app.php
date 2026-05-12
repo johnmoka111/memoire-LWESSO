@@ -9,16 +9,16 @@ define('APP_ENV',     getenv('APP_ENV') ?: 'development');
 define('APP_URL',     getenv('APP_URL')  ?: 'http://localhost:8080');
 
 // ─── JWT ─────────────────────────────────────────────────────────────────────
-define('JWT_SECRET',  getenv('JWT_SECRET')  ?: 'CHANGE_ME_KIVU_SECRET_KEY_2026');
+define('JWT_SECRET',  getenv('JWT_SECRET')  ?: 'kivu_market_secret_key_2026');
 define('JWT_EXPIRE',  (int)(getenv('JWT_EXPIRE') ?: 3600 * 24 * 7)); // 7 jours
 
 // ─── PHPMailer / SMTP (Gmail) ────────────────────────────────────────────────
-define('MAIL_HOST',     'smtp.gmail.com');
-define('MAIL_PORT',     587);
-define('MAIL_USERNAME', 'johnmoka2024@gmail.com');
-define('MAIL_PASSWORD', 'fbqf rsds kjnm wifv');
-define('MAIL_FROM',     'johnmoka2024@gmail.com');
-define('MAIL_FROM_NAME','KivuMarket');
+define('MAIL_HOST',     getenv('MAIL_HOST')     ?: 'smtp.gmail.com');
+define('MAIL_PORT',     (int)(getenv('MAIL_PORT') ?: 587));
+define('MAIL_USERNAME', getenv('MAIL_USERNAME') ?: '');
+define('MAIL_PASSWORD', getenv('MAIL_PASSWORD') ?: '');
+define('MAIL_FROM',     getenv('MAIL_FROM')     ?: 'noreply@kivumarket.com');
+define('MAIL_FROM_NAME',getenv('MAIL_FROM_NAME') ?: 'KivuMarket');
 
 // ─── Google Cloud Storage ─────────────────────────────────────────────────────
 define('GCS_BUCKET',      getenv('GCS_BUCKET')      ?: 'kivumarket-files');
@@ -27,9 +27,9 @@ define('GCS_CREDENTIALS', getenv('GCS_CREDENTIALS') ?: ROOT_PATH . '/config/gcs-
 
 // ─── Blockchain (Sepolia testnet → Ethereum mainnet) ─────────────────────────
 define('ETH_RPC_URL',      getenv('ETH_RPC_URL')      ?: 'https://testnet-rpc.gochain.io');
-define('CONTRACT_ADDRESS', getenv('CONTRACT_ADDRESS') ?: '0x0000000000000000000000000000000000000000');
-define('ADMIN_WALLET',     getenv('ADMIN_WALLET')     ?: '0x90C63377CD5A073913ebAdaDbCEd0d27AD5c120e');
-define('ADMIN_PRIVATE_KEY',getenv('ADMIN_PRIVATE_KEY')?: 'CLÉ_PRIVÉE_SECRETE_DE_L_ADMIN');
+define('CONTRACT_ADDRESS', getenv('CONTRACT_ADDRESS') ?: '');
+define('ADMIN_WALLET',     getenv('ADMIN_WALLET')     ?: '');
+define('ADMIN_PRIVATE_KEY',getenv('ADMIN_PRIVATE_KEY') ?: '');
 
 // ─── CoinGecko (oracle prix ETH → USD → CDF) ─────────────────────────────────
 define('COINGECKO_API', 'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,cdf');

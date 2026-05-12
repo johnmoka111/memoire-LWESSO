@@ -37,6 +37,21 @@ final class DocumentController extends Controller
             Response::error('Fichier et ID de propriété requis', 400);
         }
 
+        // --- SÉCURITÉ : Validation du type de fichier ---
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $mimeType = $file['type'];
+
+        // On vérifie si l'extension ou le type MIME est autorisé (config/app.php)
+        if (!in_array($mimeType, UPLOAD_ALLOWED) && !in_array('image/'.$extension, UPLOAD_ALLOWED)) {
+            Response::error('Type de fichier non autorisé. Autorisés : ' . implode(', ', UPLOAD_ALLOWED), 400);
+        }
+
+        // Protection contre les scripts (ex: .php, .phtml, .exe)
+        $forbidden = ['php', 'phtml', 'php3', 'php4', 'php5', 'phps', 'exe', 'sh', 'bat'];
+        if (in_array($extension, $forbidden)) {
+            Response::error('Extension de fichier interdite pour des raisons de sécurité.', 403);
+        }
+
         // 1. Calcul du Hash SHA256 (pour la blockchain)
         $fileContent = file_get_contents($file['tmp_name']);
         $sha256 = hash('sha256', $fileContent);
@@ -50,7 +65,8 @@ final class DocumentController extends Controller
             ]);
             $bucket = $storage->bucket(GCS_BUCKET);
             
-            $objectName = bin2hex(random_bytes(8)) . '_' . $file['name'];
+            // On renomme le fichier avec un hash pour éviter l'écrasement et les injections de noms
+            $objectName = bin2hex(random_bytes(16)) . '.' . $extension;
             $object = $bucket->upload($fileContent, [
                 'name' => $objectName
             ]);
@@ -64,7 +80,7 @@ final class DocumentController extends Controller
                 'type' => $type,
                 'nom_fichier' => $file['name'],
                 'file_url' => $fileUrl,
-                'mime_type' => $file['type'],
+                'mime_type' => $mimeType,
                 'taille_bytes' => $file['size'],
                 'sha256_hash' => $sha256
             ]);
@@ -78,7 +94,13 @@ final class DocumentController extends Controller
         } catch (Exception $e) {
             // En développement, on peut simuler l'upload local si GCS n'est pas configuré
             if (APP_ENV === 'development') {
-                $localPath = STORAGE_PATH . time() . '_' . $file['name'];
+                $objectName = bin2hex(random_bytes(16)) . '.' . $extension;
+                $localPath = STORAGE_PATH . $objectName;
+                
+                if (!is_dir(STORAGE_PATH)) {
+                    mkdir(STORAGE_PATH, 0755, true);
+                }
+
                 move_uploaded_file($file['tmp_name'], $localPath);
                 
                 $docId = $this->documentModel->register([
@@ -87,7 +109,7 @@ final class DocumentController extends Controller
                     'type' => $type,
                     'nom_fichier' => $file['name'],
                     'file_url' => $localPath,
-                    'mime_type' => $file['type'],
+                    'mime_type' => $mimeType,
                     'taille_bytes' => $file['size'],
                     'sha256_hash' => $sha256
                 ]);

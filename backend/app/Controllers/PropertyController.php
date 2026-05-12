@@ -51,18 +51,59 @@ final class PropertyController extends Controller
      */
     public function store(Request $request): void
     {
-        $errors = $request->validate([
-            'titre' => 'required|max:255',
-            'prix' => 'required|numeric',
-            'commune' => 'required'
-        ]);
+        try {
+            if (!$request->user) {
+                Response::error('Utilisateur non authentifié', 401);
+            }
 
-        if (!empty($errors)) {
-            Response::error('Données invalides', 422, $errors);
+            $ownerId = (int) $request->user['id'];
+            
+            // Validation basique des champs requis
+            if (!$request->input('titre') || !$request->input('prix') || !$request->input('commune')) {
+                Response::error('Champs titre, prix et commune obligatoires', 400);
+            }
+
+            $propertyId = $this->propertyModel->create($request->all(), $ownerId);
+
+            // Gestion du document principal (Titre Foncier)
+            if ($file = $request->file('document')) {
+                $this->handleUpload($file, $propertyId, $ownerId, 'titre_foncier');
+            }
+
+            // Gestion des photos (Max 5)
+            $photoCount = (int) $request->input('photo_count', 0);
+            for ($i = 0; $i < $photoCount; $i++) {
+                if ($photo = $request->file("photo_{$i}")) {
+                    $this->handleUpload($photo, $propertyId, $ownerId, 'photo');
+                }
+            }
+
+            Response::success(['id' => $propertyId], 'Annonce créée avec succès', 201);
+
+        } catch (\Exception $e) {
+            Response::error('Erreur interne : ' . $e->getMessage(), 500);
         }
+    }
 
-        $id = $this->propertyModel->create($request->all(), $request->user['id']);
-        Response::success(['id' => $id], 'Annonce créée, en attente de validation par un agent', 201);
+    private function handleUpload(array $file, int $propertyId, int $userId, string $type): void
+    {
+        $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $filename = uniqid('prop_' . $propertyId . '_') . '.' . $ext;
+        $targetPath = STORAGE_PATH . $filename;
+
+        if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+            $docModel = new \App\Models\Document();
+            $docModel->register([
+                'property_id' => $propertyId,
+                'uploaded_by' => $userId,
+                'type' => $type,
+                'nom_fichier' => $file['name'],
+                'file_url' => '/storage/uploads/' . $filename,
+                'mime_type' => $file['type'],
+                'taille_bytes' => $file['size'],
+                'sha256_hash' => hash_file('sha256', $targetPath)
+            ]);
+        }
     }
 
     /**
@@ -129,6 +170,20 @@ final class PropertyController extends Controller
         
         if (!$panoramaUrl) {
             Response::error('Le lien du panorama 360° est requis pour la validation', 400);
+        }
+
+        // --- SÉCURITÉ : Vérifier si l'agent est bien assigné à cette propriété ---
+        $property = $this->propertyModel->find($propertyId);
+        if (!$property) {
+            Response::error('Annonce introuvable', 404);
+        }
+
+        if ((int)$property['agent_id'] !== (int)$request->user['id']) {
+            Response::error('Accès refusé. Vous n\'êtes pas l\'agent assigné à cette propriété.', 403);
+        }
+
+        if ($property['statut'] !== 'assigne') {
+            Response::error('Cette annonce n\'est pas dans un état permettant la validation terrain.', 400);
         }
 
         // 1. Validation de l'annonce en base de données

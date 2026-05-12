@@ -22,13 +22,25 @@ final class Request
         $this->query   = $_GET;
         $this->headers = getallheaders() ?: [];
 
+        // Fallback pour Apache qui cache parfois l'Authorization header
+        if (!isset($this->headers['Authorization']) && isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            $this->headers['Authorization'] = $_SERVER['HTTP_AUTHORIZATION'];
+        } elseif (!isset($this->headers['Authorization']) && isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+            $this->headers['Authorization'] = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+        }
+
         // Décoder le body JSON automatiquement
         $raw = file_get_contents('php://input');
         if (!empty($raw)) {
             $decoded = json_decode($raw, true);
             if (json_last_error() === JSON_ERROR_NONE) {
-                $this->body = $decoded;
+                $this->body = array_merge($this->body, $decoded);
             }
+        }
+
+        // Fusionner avec $_POST pour les requêtes multipart/form-data (Uploads)
+        if (!empty($_POST)) {
+            $this->body = array_merge($this->body, $_POST);
         }
     }
 

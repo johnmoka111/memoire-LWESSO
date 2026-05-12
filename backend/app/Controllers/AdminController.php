@@ -27,12 +27,15 @@ final class AdminController extends Controller
      */
     public function createAgent(Request $request): void
     {
-        // Validation des données
+        // Validation des données enrichies
         $errors = $request->validate([
             'nom' => 'required|max:100',
             'prenom' => 'required|max:100',
             'email' => 'required|email',
-            'telephone' => 'required'
+            'telephone' => 'required',
+            'province' => 'required',
+            'ville' => 'required',
+            'commune' => 'required'
         ]);
 
         if (!empty($errors)) {
@@ -44,46 +47,45 @@ final class AdminController extends Controller
             Response::error('Cet email est déjà utilisé', 409);
         }
 
-        // Algorithme de génération de mot de passe (Tâche 1.2)
-        $temporaryPassword = bin2hex(random_bytes(4)); // Génère 8 caractères aléatoires
+        // Génération de mot de passe provisoire
+        $temporaryPassword = bin2hex(random_bytes(4)); 
 
-        // Préparation des données pour le modèle
+        // Préparation des données
         $agentData = [
             'nom' => $request->input('nom'),
             'prenom' => $request->input('prenom'),
             'email' => $request->input('email'),
             'password' => $temporaryPassword,
-            'role' => 'agent'
+            'role' => 'agent',
+            'avatar_url' => $request->input('photo_passeport'),
+            'province' => $request->input('province'),
+            'ville' => $request->input('ville'),
+            'commune' => $request->input('commune')
         ];
 
         // Création de l'utilisateur
         $userId = $this->userModel->create($agentData);
 
-        // Envoi des identifiants par Email
-        $subject = "Vos accès Agent Foncier - KivuMarket+";
-        $message = "
-            <h1>Bienvenue dans l'équipe KivuMarket+, " . $request->input('prenom') . "</h1>
-            <p>Votre compte agent a été créé par l'administrateur.</p>
-            <p><strong>Vos identifiants de connexion :</strong></p>
-            <ul>
-                <li>Email : " . $request->input('email') . "</li>
-                <li>Mot de passe provisoire : <strong>" . $temporaryPassword . "</strong></li>
-            </ul>
-            <p>Veuillez vous connecter pour commencer la certification des biens fonciers.</p>
-        ";
-
-        MailService::send(
-            $request->input('email'),
-            $subject,
-            $message,
-            'agent_creation',
-            $userId
-        );
+        // Tentative d'envoi d'email (silencieuse pour éviter le Network Error si le SMTP est mal configuré)
+        try {
+            $subject = "Accès Agent KivuMarket+ — " . $request->input('commune');
+            $message = "Bonjour " . $request->input('prenom') . ",\n\nVotre compte agent pour la juridiction " . $request->input('commune') . " a été créé.\n\nIdentifiants :\nEmail: " . $request->input('email') . "\nMot de passe: " . $temporaryPassword;
+            
+            MailService::send(
+                $request->input('email'),
+                $subject,
+                $message,
+                'agent_creation',
+                $userId
+            );
+        } catch (\Exception $e) {
+            // On ignore l'erreur de mail pour ne pas bloquer la création de l'agent en local
+        }
 
         Response::success([
             'agent_id' => $userId,
             'temporary_password' => $temporaryPassword
-        ], 'Compte agent créé avec succès et identifiants envoyés par email');
+        ], 'Compte agent créé avec succès');
     }
 
     /**
@@ -91,7 +93,7 @@ final class AdminController extends Controller
      */
     public function listAgents(Request $request): void
     {
-        $sql = "SELECT id, nom, prenom, email, created_at FROM users WHERE role = 'agent' ORDER BY created_at DESC";
+        $sql = "SELECT id, nom, prenom, email, avatar_url, province, ville, commune, created_at FROM users WHERE role = 'agent' ORDER BY created_at DESC";
         $stmt = $this->userModel->db()->prepare($sql);
         $stmt->execute();
         $agents = $stmt->fetchAll();

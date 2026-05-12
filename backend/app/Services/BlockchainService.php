@@ -69,7 +69,7 @@ final class BlockchainService
         $txHashResult = null;
 
         try {
-            $this->contract->at(CONTRACT_ADDRESS)->send('adminResolve', $escrowId, $releaseToSeller, $reason, [
+            $this->contract->at(CONTRACT_ADDRESS)->send('adminResolve', $escrowId, $releaseToSeller, [
                 'from' => ADMIN_WALLET,
                 'gas' => '0x200000'
             ], function ($err, $txHash) use (&$txHashResult) {
@@ -80,6 +80,26 @@ final class BlockchainService
             return $txHashResult;
         } catch (Exception $e) {
             error_log("Erreur arbitrage blockchain : " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Vérifie le statut d'une transaction sur la blockchain.
+     * @param string $txHash Le hash de la transaction à vérifier.
+     * @return array|null Les détails du reçu de transaction ou null.
+     */
+    public function getTransactionReceipt(string $txHash): ?array
+    {
+        $receiptResult = null;
+        try {
+            $this->web3->eth->getTransactionReceipt($txHash, function ($err, $receipt) use (&$receiptResult) {
+                if ($err !== null) throw new Exception($err->getMessage());
+                $receiptResult = $receipt;
+            });
+            return $receiptResult ? (array) $receiptResult : null;
+        } catch (Exception $e) {
+            error_log("Erreur récupération reçu blockchain : " . $e->getMessage());
             return null;
         }
     }

@@ -18,19 +18,32 @@ final class Transaction extends Model
      */
     public function createEscrow(array $data): int
     {
-        $sql = "INSERT INTO {$this->table} 
-                (property_id, acheteur_id, escrow_id, contract_address, montant_eth, tx_creation, etat) 
-                VALUES (?, ?, ?, ?, ?, ?, 'cree')";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([
-            $data['property_id'],
-            $data['acheteur_id'],
-            $data['escrow_id'],
-            $data['contract_address'],
-            $data['montant_eth'],
-            $data['tx_creation']
-        ]);
-        return (int) $this->db->lastInsertId();
+        $this->db->beginTransaction();
+        try {
+            $sql = "INSERT INTO {$this->table} 
+                    (property_id, acheteur_id, escrow_id, contract_address, montant_eth, tx_creation, etat) 
+                    VALUES (?, ?, ?, ?, ?, ?, 'cree')";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                $data['property_id'],
+                $data['acheteur_id'],
+                $data['escrow_id'],
+                $data['contract_address'],
+                $data['montant_eth'],
+                $data['tx_creation']
+            ]);
+            $id = (int) $this->db->lastInsertId();
+
+            // Mettre à jour le statut du bien
+            $sqlProp = "UPDATE properties SET statut = 'vendu' WHERE id = ?";
+            $this->db->prepare($sqlProp)->execute([$data['property_id']]);
+
+            $this->db->commit();
+            return $id;
+        } catch (\Exception $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
     }
 
     /**

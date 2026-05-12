@@ -1,29 +1,80 @@
 [
   {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
     "anonymous": false,
     "inputs": [
-      { "indexed": true, "name": "docHash", "type": "bytes32" },
-      { "indexed": true, "name": "anchoredBy", "type": "address" }
+      { "indexed": true, "name": "tokenId", "type": "uint256" },
+      { "indexed": false, "name": "amount", "type": "uint256" },
+      { "indexed": false, "name": "buyer", "type": "address" }
     ],
-    "name": "DocumentAnchored",
+    "name": "EscrowDeposited",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "tokenId", "type": "uint256" },
+      { "indexed": false, "name": "newOwner", "type": "address" },
+      { "indexed": false, "name": "amount", "type": "uint256" }
+    ],
+    "name": "SaleFinalized",
     "type": "event"
   },
   {
     "inputs": [
-      { "name": "_docHash", "type": "bytes32" }
+      { "name": "_tokenId", "type": "uint256" }
     ],
-    "name": "storeDocumentHash",
+    "name": "depositEscrow",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "name": "_tokenId", "type": "uint256" }
+    ],
+    "name": "releaseFunds",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
-      { "name": "_docHash", "type": "bytes32" }
+      { "name": "_tokenId", "type": "uint256" },
+      { "name": "_releaseToSeller", "type": "bool" }
     ],
-    "name": "anchoredDocuments",
+    "name": "adminResolve",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "name": "tokenId", "type": "uint256" }
+    ],
+    "name": "ownerOf",
     "outputs": [
-      { "name": "", "type": "bool" }
+      { "name": "", "type": "address" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "name": "tokenId", "type": "uint256" }
+    ],
+    "name": "titles",
+    "outputs": [
+      { "name": "docHash", "type": "string" },
+      { "name": "coordinates", "type": "string" },
+      { "name": "isVerified", "type": "bool" },
+      { "name": "escrowAmount", "type": "uint256" },
+      { "name": "buyer", "type": "address" },
+      { "name": "seller", "type": "address" }
     ],
     "stateMutability": "view",
     "type": "function"

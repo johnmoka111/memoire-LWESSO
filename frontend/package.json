@@ -1,28 +1,28 @@
 {
-  "name": "kivumarket-frontend",
-  "private": true,
+  "name": "kivu-market-frontend",
   "version": "1.0.0",
-  "type": "module",
+  "description": "Frontend KivuMarket+ avec React et esbuild",
+  "main": "src/index.jsx",
   "scripts": {
-    "dev": "node esbuild.config.cjs --dev",
-    "build": "node esbuild.config.cjs"
+    "dev": "concurrently \"node build.js --serve\" \"npx tailwindcss -i ./src/styles/index.css -o ./public/dist/index.css --watch\"",
+    "build": "npx tailwindcss -i ./src/styles/index.css -o ./public/dist/index.css --minify; node build.js"
   },
   "dependencies": {
     "axios": "^1.7.0",
-    "clsx": "^2.1.0",
-    "ethers": "^6.13.0",
-    "framer-motion": "^11.0.0",
+    "framer-motion": "^11.11.0",
     "lucide-react": "*",
+    "pannellum": "^2.5.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.0.0",
-    "tailwind-merge": "^2.3.0"
+    "react-router-dom": "^7.0.0"
   },
   "devDependencies": {
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "esbuild": "^0.28.0",
-    "tailwindcss": "^4.0.0",
-    "typescript": "^5.6.0"
-  }
+    "autoprefixer": "^10.5.0",
+    "concurrently": "^9.2.1",
+    "esbuild": "^0.24.0",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^3.4.19"
+  },
+  "author": "KivuMarket Team",
+  "license": "ISC"
 }

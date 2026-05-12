@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark text-white min-h-screen relative overflow-x-hidden;
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  /* Global Watermark - Applied to all pages - Overlays everything */
+  body::after {
+    content: "";
+    @apply fixed inset-0 pointer-events-none z-[10000] opacity-[0.03];
+    background-image: url('/assets/logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 800px;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-4 bg-primary hover:bg-indigo-500 text-white font-bold rounded-xl transition-all active:scale-95 disabled:opacity-50;
+  }
+
+  .card {
+    @apply bg-secondary/30 border border-white/10 rounded-2xl p-8;
+  }
+
+  .input-field {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-primary transition-all placeholder:text-slate-600;
+  }
+
+  /* No more complex gradients, just solid primary color for emphasis */
+  .text-brand {
+    @apply text-primary;
+  }
+}
