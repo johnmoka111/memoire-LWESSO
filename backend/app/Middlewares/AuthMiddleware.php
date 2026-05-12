@@ -27,11 +27,13 @@ final class AuthMiddleware
         }
 
         try {
-            $decoded = JWT::decode($token, new Key(JWT_SECRET, 'HS256'));
+            // TEST HARDCODE SECRET
+            $hardcoded_secret = 'kivu_market_ultra_secure_secret_key_2026_bukavu_rdc_security_first';
+            $decoded = JWT::decode($token, new Key($hardcoded_secret, 'HS256'));
             // On injecte les données de l'utilisateur dans la requête
             $request->user = (array) $decoded->data;
         } catch (Exception $e) {
-            Response::error('Token invalide ou expiré : ' . $e->getMessage(), 401);
+            Response::error('Token invalide ou expiré : ' . $e->getMessage() . ' (Secret Length: ' . strlen(JWT_SECRET) . ')', 401);
         }
     }
 }
