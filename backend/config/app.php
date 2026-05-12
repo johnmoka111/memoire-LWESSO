@@ -9,8 +9,8 @@ define('APP_ENV',     getenv('APP_ENV') ?: 'development');
 define('APP_URL',     getenv('APP_URL')  ?: 'http://localhost:8080');
 
 // ─── JWT ─────────────────────────────────────────────────────────────────────
-define('JWT_SECRET',  getenv('JWT_SECRET')  ?: 'kivu_market_secret_key_2026');
-define('JWT_EXPIRE',  (int)(getenv('JWT_EXPIRE') ?: 3600 * 24 * 7)); // 7 jours
+define('JWT_SECRET',  'kivu_market_ultra_secure_secret_key_2026_bukavu_rdc_security_first');
+define('JWT_EXPIRE',  3600 * 24 * 7); // 7 jours
 
 // ─── PHPMailer / SMTP (Gmail) ────────────────────────────────────────────────
 define('MAIL_HOST',     getenv('MAIL_HOST')     ?: 'smtp.gmail.com');
