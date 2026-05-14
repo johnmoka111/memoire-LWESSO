@@ -1,86 +1,209 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, MapPin, CheckCircle, ArrowRight, Wallet, Globe, Lock } from 'lucide-react';
+import { Shield, MapPin, CheckCircle, ArrowRight, Wallet, Globe, Lock, Sparkles, TrendingUp, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="min-h-screen bg-gradient-to-br from-[#0A0A0F] via-[#0F0F1A] to-[#0A0A0F] text-white overflow-x-hidden">
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-8 pt-20 pb-32 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold mb-8">
-              <Shield size={14} />
-              <span>Standard de Sécurité Foncière 2.0</span>
-            </div>
-            
-            <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-8 leading-[0.9]">
-              L'Immobilier <br />
-              <span className="text-primary">Sans Risque.</span>
-            </h1>
-            
-            <p className="text-xl text-slate-400 max-w-lg mb-12 leading-relaxed">
-              KivuMarket+ sécurise vos achats à Bukavu grâce à la validation terrain et l'escrow blockchain.
-            </p>
+      <main className="relative">
+        {/* Effet de fond global */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] opacity-30" />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-indigo-500/20 rounded-full blur-[100px] opacity-20" />
+        </div>
 
-            <div className="flex flex-col sm:flex-row gap-5">
-              <Link to="/properties" className="btn-primary flex items-center justify-center gap-3">
-                Explorer les annonces <ArrowRight size={20} />
-              </Link>
-              <Link to="/register" className="px-10 py-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-bold transition-all">
-                Devenir Propriétaire
-              </Link>
-            </div>
-          </motion.div>
+        <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10 pt-16 md:pt-20 lg:pt-24 pb-24 md:pb-32 relative z-10">
 
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative"
+          {/* Section Hero */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="space-y-6 md:space-y-8"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-primary/5 rounded-full border border-primary/30 backdrop-blur-sm">
+                <Sparkles size={14} className="text-primary" />
+                <span className="text-[10px] md:text-xs font-bold text-primary uppercase tracking-[0.2em]">Standard de Sécurité Foncière 2.0</span>
+              </div>
+
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.1]">
+                L'Immobilier <br />
+                <span className="bg-gradient-to-r from-primary via-indigo-400 to-primary bg-clip-text text-transparent">Sans Risque.</span>
+              </h1>
+
+              <p className="text-base md:text-lg lg:text-xl text-slate-400 max-w-lg leading-relaxed">
+                KivuMarket+ sécurise vos achats à Bukavu grâce à la validation terrain et l'escrow blockchain. Achetez, vendez et gérez vos biens en toute confiance.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Link
+                  to="/properties"
+                  className="group px-8 py-4 bg-gradient-to-r from-primary to-indigo-500 hover:from-primary/90 hover:to-indigo-500/90 rounded-xl font-bold text-white transition-all active:scale-95 shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
+                >
+                  Explorer les annonces
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-8 py-4 rounded-xl bg-white/[0.03] border border-white/10 hover:bg-white/10 hover:border-white/20 font-bold text-white transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
+                >
+                  Devenir Propriétaire
+                </Link>
+              </div>
+
+              {/* Badge de confiance supplémentaire */}
+              <div className="flex items-center gap-6 pt-6 text-slate-500 text-xs">
+                <div className="flex items-center gap-2">
+                  <Award size={14} className="text-primary" />
+                  <span>Notarisation blockchain</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Shield size={14} className="text-primary" />
+                  <span>Escrow certifié</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+              className="relative flex justify-center"
+            >
+              <div className="relative w-full max-w-md lg:max-w-lg">
+                {/* Cercle décoratif */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-indigo-500/20 rounded-full blur-3xl opacity-50" />
+
+                <div className="relative z-10 bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-sm rounded-3xl border border-white/10 p-8 md:p-12 shadow-2xl">
+                  <img
+                    src="/assets/logo.png"
+                    alt="KivuMarket+ Logo"
+                    className="w-full max-w-[280px] mx-auto object-contain"
+                  />
+                </div>
+
+                {/* Badge flottant 1 */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20, y: -20 }}
+                  animate={{ opacity: 1, x: 0, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                  className="absolute -top-6 -right-6 md:-top-8 md:-right-8 bg-gradient-to-br from-emerald-500/90 to-emerald-600/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 flex items-center gap-2 shadow-2xl border border-emerald-400/30"
+                >
+                  <CheckCircle size={18} className="text-white" />
+                  <div className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-white">Titre Vérifié</div>
+                </motion.div>
+
+                {/* Badge flottant 2 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20, y: 20 }}
+                  animate={{ opacity: 1, x: 0, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  className="absolute -bottom-6 -left-6 md:-bottom-8 md:-left-8 bg-gradient-to-br from-primary/90 to-indigo-500/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 flex items-center gap-2 shadow-2xl border border-primary/30"
+                >
+                  <Wallet size={18} className="text-white" />
+                  <div className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-white">Escrow Actif</div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Section des valeurs avec cartes améliorées */}
+          <motion.section
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="mt-28 md:mt-36 lg:mt-40"
           >
-            <div className="relative aspect-square max-w-[500px] mx-auto">
-              <div className="relative z-10 w-full h-full card flex items-center justify-center">
-                <img src="/assets/logo.png" alt="KivuMarket+ Logo" className="w-4/5 h-4/5 object-contain" />
+            <div className="text-center mb-12 md:mb-16">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10 mb-4">
+                <TrendingUp size={12} className="text-primary" />
+                <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Pourquoi nous choisir</span>
               </div>
-              
-              <div className="absolute -top-4 -right-4 card p-4 flex items-center gap-3 shadow-2xl">
-                <CheckCircle size={18} className="text-emerald-500" />
-                <div className="text-xs font-bold uppercase tracking-widest">Titre Vérifié</div>
-              </div>
-              
-              <div className="absolute bottom-10 -left-10 card p-4 flex items-center gap-3 shadow-2xl">
-                <Wallet size={18} className="text-primary" />
-                <div className="text-xs font-bold uppercase tracking-widest">Escrow Actif</div>
-              </div>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+                Une confiance <span className="text-primary">inébranlable</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {[
+                {
+                  icon: <Globe size={26} />,
+                  title: 'Transparence Totale',
+                  desc: 'Accédez à l\'historique complet de chaque parcelle, des origines aux transactions récentes, via la blockchain.',
+                  color: 'from-blue-500/20 to-blue-600/10',
+                  iconColor: 'text-blue-400'
+                },
+                {
+                  icon: <Lock size={26} />,
+                  title: 'Paiement Sécurisé',
+                  desc: 'Les fonds sont séquestrés et libérés uniquement après le transfert effectif du titre de propriété.',
+                  color: 'from-emerald-500/20 to-emerald-600/10',
+                  iconColor: 'text-emerald-400'
+                },
+                {
+                  icon: <Shield size={26} />,
+                  title: 'Zéro Fraude',
+                  desc: 'Chaque bien est unique, certifié et ancré sur la blockchain, rendant toute falsification impossible.',
+                  color: 'from-purple-500/20 to-purple-600/10',
+                  iconColor: 'text-purple-400'
+                }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  className="group relative bg-gradient-to-br from-white/[0.03] to-white/[0.01] backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 transition-all hover:border-white/20 hover:shadow-2xl hover:shadow-primary/5 overflow-hidden"
+                >
+                  {/* Effet de shine */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
+                  <div className={`absolute -right-6 -top-6 w-32 h-32 rounded-full bg-gradient-to-br ${item.color} blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+
+                  <div className="relative z-10">
+                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-6 ${item.iconColor} group-hover:scale-110 transition-transform duration-300`}>
+                      {item.icon}
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{item.title}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* Section statistiques rapides (optionnelle pour plus de crédibilité) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="mt-20 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center"
+          >
+            <div>
+              <p className="text-3xl font-bold text-primary">50+</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mt-1">Biens vérifiés</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-primary">100%</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mt-1">Sécurité escrow</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-primary">24/7</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mt-1">Support dédié</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-primary">Blockchain</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mt-1">GoChain réseau</p>
             </div>
           </motion.div>
         </div>
-
-        <section className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { icon: <Globe size={24} />, title: 'Transparence Totale', desc: 'Accédez à l\'historique complet de chaque parcelle.' },
-            { icon: <Lock size={24} />, title: 'Paiement Sécurisé', desc: 'Fonds libérés après transfert effectif du titre.' },
-            { icon: <Shield size={24} />, title: 'Zéro Fraude', desc: 'Chaque bien est unique et ancré sur la blockchain.' }
-          ].map((item, i) => (
-            <motion.div 
-              key={i}
-              className="card group hover:border-primary/50 transition-all"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                {item.icon}
-              </div>
-              <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-              <p className="text-slate-400 leading-relaxed">{item.desc}</p>
-            </motion.div>
-          ))}
-        </section>
       </main>
     </div>
   );
