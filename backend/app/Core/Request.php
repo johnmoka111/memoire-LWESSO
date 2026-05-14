@@ -20,13 +20,21 @@ final class Request
     public function __construct()
     {
         $this->query   = $_GET;
-        $this->headers = getallheaders() ?: [];
+        $this->headers = function_exists('getallheaders') ? getallheaders() : [];
 
-        // Fallback pour Apache qui cache parfois l'Authorization header
-        if (!isset($this->headers['Authorization']) && isset($_SERVER['HTTP_AUTHORIZATION'])) {
-            $this->headers['Authorization'] = $_SERVER['HTTP_AUTHORIZATION'];
-        } elseif (!isset($this->headers['Authorization']) && isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
-            $this->headers['Authorization'] = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+        // Fallback robuste pour Apache (Authorization header masqué)
+        $authHeader = $this->headers['Authorization'] ?? $this->headers['authorization'] ?? '';
+
+        if (empty($authHeader)) {
+            if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+                $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
+            } elseif (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+                $authHeader = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+            }
+        }
+        
+        if (!empty($authHeader)) {
+            $this->headers['Authorization'] = $authHeader;
         }
 
         // Décoder le body JSON automatiquement

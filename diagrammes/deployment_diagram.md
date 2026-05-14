@@ -11,10 +11,10 @@ graph TB
         IPFS["Stockage IPFS (Images/Docs)"]
     end
 
-    subgraph "Réseau Blockchain (GoChain Testnet)"
-        SC_Escrow["Smart Contract Escrow"]
-        SC_NFT["Smart Contract KivuTitle (NFT)"]
-        Nodes["Noeuds de Validation"]
+    subgraph "Réseau Blockchain (Ethereum Network)"
+        SC_Escrow["Smart Contract Escrow (Solidity)"]
+        SC_NFT["Smart Contract KivuTitle (NFT - ERC721)"]
+        Nodes["Noeuds de Validation (ETH)"]
     end
 
     %% Connexions Cote Client

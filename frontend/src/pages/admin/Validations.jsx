@@ -33,7 +33,7 @@ const Validations = () => {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
       const [propRes, agentRes] = await Promise.all([
-        axios.get(`${API_URL}/properties`, config), 
+        axios.get(`${API_URL}/admin/properties`, config), 
         axios.get(`${API_URL}/admin/agents`, config)
       ]);
       

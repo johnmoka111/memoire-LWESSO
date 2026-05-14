@@ -7,16 +7,16 @@ graph TD
     end
 
     subgraph "Kivu Market+ (Système)"
-        UC1((S'authentifier))
-        UC2((Soumettre une propriété))
-        UC3((Consulter le catalogue))
-        UC4((Lancer un achat - Escrow))
-        UC5((Inspecter le bien))
-        UC6((Certifier sur Blockchain))
-        UC7((Gérer les agents))
-        UC8((Arbitrer un litige))
-        UC9((Suivre ses transactions))
-        UC10((Uploader Documents))
+        UC1(("S'authentifier"))
+        UC2(("Soumettre une propriété"))
+        UC3(("Consulter le catalogue"))
+        UC4(("Lancer un achat - Escrow"))
+        UC5(("Inspecter le bien"))
+        UC6(("Certifier sur Blockchain"))
+        UC7(("Gérer les agents"))
+        UC8(("Arbitrer un litige"))
+        UC9(("Suivre ses transactions"))
+        UC10(("Uploader Documents"))
     end
 
     %% Relations de base

@@ -20,27 +20,13 @@ const Login = () => {
     
     try {
       // Test de l'API réelle
-      const res = await axios.post(`${API_URL}/login`, { email, password });
+      const res = await axios.post(`${API_URL}/auth/login`, { email, password });
       console.log('Connexion API réussie');
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user', JSON.stringify(res.data.user));
+      localStorage.setItem('token', res.data.data.token);
+      localStorage.setItem('user', JSON.stringify(res.data.data.user));
       navigate('/dashboard');
     } catch (err) {
-      console.log('Erreur API ou Timeout, vérification du mock...');
-      
-      // MOCK pour les tests si l'API n'est pas lancée ou pour admin par défaut
-      if (email === 'admin@kivumarket.cd' && (password === 'Admin@Kivu2026!' || password === 'admin')) {
-         console.log('Utilisation du compte Admin par défaut');
-         localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7fX0.mock_signature');
-         localStorage.setItem('user', JSON.stringify({
-           prenom: 'Admin', 
-           role: 'admin',
-           email: 'admin@kivumarket.cd'
-         }));
-         navigate('/dashboard');
-         return;
-      }
-
+      console.error('Erreur API:', err);
       setError(err.response?.data?.message || 'Impossible de contacter le serveur. Vérifiez vos identifiants ou votre connexion.');
     } finally {
       setStepLoading(false); // Fix variable name if needed, but let's stick to state

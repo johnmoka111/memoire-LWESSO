@@ -56,7 +56,8 @@ const SidebarLink = ({ to, icon: Icon, label, active, onClick }) => {
 
 const Sidebar = () => {
   const location = useLocation();
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const storedUser = localStorage.getItem('user');
+  const user = (storedUser && storedUser !== 'undefined') ? JSON.parse(storedUser) : {};
   const [showSecurityModal, setShowSecurityModal] = useState(false);
   const [pendingPath, setPendingPath] = useState('');
   const isActive = (path) => location.pathname === path;

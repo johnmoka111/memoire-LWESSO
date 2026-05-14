@@ -4,7 +4,8 @@ import { Shield, User, ArrowLeft } from 'lucide-react';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const storedUser = localStorage.getItem('user');
+  const user = (storedUser && storedUser !== 'undefined') ? JSON.parse(storedUser) : {};
   const navigate = useNavigate();
   const location = useLocation();
 

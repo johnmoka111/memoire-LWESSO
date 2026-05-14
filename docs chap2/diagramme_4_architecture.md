@@ -2,9 +2,9 @@ flowchart LR
     User((Utilisateur)) --> Front[Frontend React]
     Front --> API[API PHP / Backend]
 
-    subgraph Confiance
+    subgraph Confiance ["Couche de Sécurité & Confiance"]
         API <--> DB[("MySQL : Données de base")]
-        API <--> BC{{"Blockchain GoChain : Certificats & Hash"}}
+        API <--> BC{{"Blockchain Ethereum (Solidity) : Certificats & Hash"}}
     end
 
     BC -.-> Ledger[Registre Immuable]

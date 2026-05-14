@@ -15,7 +15,8 @@ final class RoleMiddleware
 {
     public function handle(Request $request, string $role): void
     {
-        if (!$request->user || $request->user['role'] !== $role) {
+        // L'administrateur a tous les droits
+        if (!$request->user || ($request->user['role'] !== $role && $request->user['role'] !== 'admin')) {
             Response::error("Accès refusé. Rôle '{$role}' requis.", 403);
         }
     }

@@ -42,15 +42,15 @@ classDiagram
         +upload()
     }
 
-    class BlockchainService {
-        +mintTitle()
+    class EthereumService {
+        +mintTitleNFT()
         +depositToEscrow()
         +finalizeSale()
-        +adminResolve()
+        +adminResolveDispute()
     }
 
     User "1" -- "*" Property : owns
     Property "1" -- "*" Document : has
     Property "1" -- "1" Transaction : involved in
     User "1" -- "*" Transaction : buys
-    Property .. BlockchainService : reflected on
+    Property .. EthereumService : reflected on

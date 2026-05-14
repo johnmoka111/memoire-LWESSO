@@ -11,7 +11,7 @@
   /* Global Watermark - Applied to all pages - Overlays everything */
   body::after {
     content: "";
-    @apply fixed inset-0 pointer-events-none z-[10000] opacity-[0.03];
+    @apply fixed inset-0 pointer-events-none z-[-1] opacity-[0.05];
     background-image: url('/assets/logo.png');
     background-repeat: no-repeat;
     background-position: center;

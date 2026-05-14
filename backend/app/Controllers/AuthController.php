@@ -95,7 +95,14 @@ final class AuthController extends Controller
                 'id' => $user['id'],
                 'nom' => $user['nom'],
                 'prenom' => $user['prenom'],
-                'role' => $user['role']
+                'email' => $user['email'],
+                'role' => $user['role'],
+                'telephone' => $user['telephone'] ?? '',
+                'avatar_url' => $user['avatar_url'] ?? null,
+                'province' => $user['province'] ?? '',
+                'ville' => $user['ville'] ?? '',
+                'commune' => $user['commune'] ?? '',
+                'wallet_address' => $user['wallet_address'] ?? null
             ]
         ], 'Connexion réussie');
     }

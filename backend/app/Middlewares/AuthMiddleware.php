@@ -20,20 +20,26 @@ final class AuthMiddleware
 {
     public function handle(Request $request): void
     {
-        $token = $request->bearerToken();
+        $authHeader = $request->header('Authorization', '');
+        $token = null;
+
+        // Extraction du jeton via regex (plus fiable)
+        if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
+            $token = $matches[1];
+        }
 
         if (!$token) {
-            Response::error('Token manquant. Authentification requise.', 401);
+            Response::error('Token manquant ou format invalide. Authentification requise.', 401);
         }
 
         try {
-            // TEST HARDCODE SECRET
-            $hardcoded_secret = 'kivu_market_ultra_secure_secret_key_2026_bukavu_rdc_security_first';
-            $decoded = JWT::decode($token, new Key($hardcoded_secret, 'HS256'));
+            // Utilisation du Secret défini dans config/app.php
+            $decoded = JWT::decode($token, new Key(JWT_SECRET, 'HS256'));
+            
             // On injecte les données de l'utilisateur dans la requête
             $request->user = (array) $decoded->data;
         } catch (Exception $e) {
-            Response::error('Token invalide ou expiré : ' . $e->getMessage() . ' (Secret Length: ' . strlen(JWT_SECRET) . ')', 401);
+            Response::error('Signature du token invalide : ' . $e->getMessage() . ' (Verify Secret Length: ' . strlen(JWT_SECRET) . ')', 401);
         }
     }
 }

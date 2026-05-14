@@ -35,6 +35,21 @@ final class PropertyController extends Controller
     }
 
     /**
+     * Liste TOUTES les annonces pour l'administration.
+     */
+    public function adminList(Request $request): void
+    {
+        $sql = "SELECT p.*, u.nom as owner_name 
+                FROM properties p 
+                JOIN users u ON p.owner_id = u.id 
+                ORDER BY p.created_at DESC";
+        $stmt = $this->propertyModel->db()->prepare($sql);
+        $stmt->execute();
+        $properties = $stmt->fetchAll();
+        Response::success($properties);
+    }
+
+    /**
      * Détail d'une annonce.
      */
     public function show(Request $request, array $params): void
@@ -57,13 +72,14 @@ final class PropertyController extends Controller
             }
 
             $ownerId = (int) $request->user['id'];
+            $data = $request->all();
             
-            // Validation basique des champs requis
-            if (!$request->input('titre') || !$request->input('prix') || !$request->input('commune')) {
-                Response::error('Champs titre, prix et commune obligatoires', 400);
+            // Si c'est un agent qui crée, on l'assigne automatiquement comme agent du bien
+            if ($request->user['role'] === 'agent') {
+                $data['agent_id'] = $ownerId;
             }
 
-            $propertyId = $this->propertyModel->create($request->all(), $ownerId);
+            $propertyId = $this->propertyModel->create($data, $ownerId);
 
             // Gestion du document principal (Titre Foncier)
             if ($file = $request->file('document')) {
@@ -210,5 +226,44 @@ final class PropertyController extends Controller
         } else {
             Response::error('Erreur lors de la validation');
         }
+    /**
+     * Récupère les statistiques pour le dashboard selon le rôle.
+     */
+    public function getDashboardStats(Request $request): void
+    {
+        $userId = (int) $request->user['id'];
+        $role = $request->user['role'];
+        $db = $this->propertyModel->db();
+
+        $stats = [
+            'total_properties' => 0,
+            'active_escrow' => 0,
+            'recent_transactions' => 0
+        ];
+
+        if ($role === 'admin') {
+            $stats['total_properties'] = (int) $db->query("SELECT COUNT(*) FROM properties")->fetchColumn();
+            $stats['active_escrow'] = (float) ($db->query("SELECT SUM(montant_usd) FROM transactions WHERE etat = 'cree'")->fetchColumn() ?: 0);
+            $stats['recent_transactions'] = (int) $db->query("SELECT COUNT(*) FROM transactions")->fetchColumn();
+        } elseif ($role === 'agent') {
+            // Un agent voit les biens de sa commune OU ceux qui sont en attente de validation/assignés
+            $agentInfo = (new User())->find($userId);
+            $commune = $agentInfo['commune'] ?? '';
+            
+            // On compte : les biens assignés à l'agent + les biens de sa commune + les biens sans agent encore (en attente)
+            $sql = "SELECT COUNT(*) FROM properties WHERE agent_id = ? OR owner_id = ? OR (commune = ? AND agent_id IS NULL) OR (statut = 'en_attente')";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$userId, $userId, $commune]);
+            $stats['total_properties'] = (int) $stmt->fetchColumn();
+            
+            $stats['active_escrow'] = 0;
+            $stats['recent_transactions'] = (int) $db->query("SELECT COUNT(*) FROM transactions t JOIN properties p ON t.property_id = p.id WHERE p.commune = '$commune'")->fetchColumn();
+        } else {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM properties WHERE owner_id = ?");
+            $stmt->execute([$userId]);
+            $stats['total_properties'] = (int) $stmt->fetchColumn();
+        }
+
+        Response::success($stats);
     }
 }

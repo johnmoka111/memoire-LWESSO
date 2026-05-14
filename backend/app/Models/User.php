@@ -45,4 +45,26 @@ final class User extends Model
         ]);
         return (int) $this->db->lastInsertId();
     }
+    /**
+     * Met à jour les informations d'un utilisateur.
+     */
+    public function update(int $id, array $data): bool
+    {
+        $fields = [];
+        $params = [];
+        
+        foreach ($data as $key => $value) {
+            // Liste blanche des champs autorisés à la modification directe
+            if (in_array($key, ['nom', 'prenom', 'telephone', 'avatar_url', 'province', 'ville', 'commune'])) {
+                $fields[] = "$key = ?";
+                $params[] = $value;
+            }
+        }
+
+        if (empty($fields)) return false;
+
+        $params[] = $id;
+        $sql = "UPDATE {$this->table} SET " . implode(', ', $fields) . " WHERE id = ?";
+        return $this->db->prepare($sql)->execute($params);
+    }
 }
