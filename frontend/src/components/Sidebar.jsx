@@ -13,7 +13,8 @@ import {
   ChevronRight,
   Shield,
   X,
-  User as UserIcon
+  User as UserIcon,
+  MessageSquare
 } from 'lucide-react';
 
 const SidebarLink = ({ to, icon: Icon, label, active, onClick }) => {
@@ -74,7 +75,7 @@ const Sidebar = () => {
 
   const confirmSecurityExit = () => {
     localStorage.clear();
-    window.location.href = `/#${pendingPath}`;
+    window.location.href = '/#/';
   };
 
   return (
@@ -117,13 +118,21 @@ const Sidebar = () => {
             label="Annonces Publiques" 
           />
           
-          {(user.role === 'admin' || user.role === 'agent' || user.role === 'proprietaire') && (
-            <SidebarLink to="/properties/create" icon={PlusCircle} label="Ajouter un bien" active={isActive('/properties/create')} />
+          <SidebarLink to="/messages" icon={MessageSquare} label="Mes Messages" active={isActive('/messages')} />
+
+          <SidebarLink to="/properties/create" icon={PlusCircle} label="Ajouter un bien" active={isActive('/properties/create')} />
+
+          {/* Missions pour l'agent */}
+          {user.role === 'agent' && (
+            <SidebarLink to="/agent/missions" icon={ShieldCheck} label="Mes Missions" active={isActive('/agent/missions')} />
           )}
 
-          <SidebarLink to="/transactions" icon={Wallet} label="Mes Transactions" active={isActive('/transactions')} />
+          {/* Transactions uniquement pour ceux qui achètent/vendent */}
+          {user.role !== 'agent' && (
+            <SidebarLink to="/transactions" icon={Wallet} label="Mes Transactions" active={isActive('/transactions')} />
+          )}
           
-          {user.role === 'admin' && (
+          {['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) && (
             <>
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 mt-8 mb-4 px-4">Administration</p>
               <SidebarLink to="/admin/agents" icon={Users} label="Gestion des Agents" active={isActive('/admin/agents')} />
@@ -135,7 +144,10 @@ const Sidebar = () => {
         <div className="pt-6 border-t border-white/5 space-y-2">
           <SidebarLink to="/settings" icon={Settings} label="Paramètres" active={isActive('/settings')} />
           <button 
-            onClick={handleLogout}
+            onClick={() => {
+                localStorage.clear();
+                window.location.href = '/#/';
+            }}
             className="flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-red-400 hover:bg-red-500/10 transition-all font-bold text-sm"
           >
             <LogOut size={20} />

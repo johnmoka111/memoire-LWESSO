@@ -13,11 +13,20 @@ use App\Core\Response;
  */
 final class RoleMiddleware
 {
-    public function handle(Request $request, string $role): void
+    public function handle(Request $request, string $rolesString): void
     {
-        // L'administrateur a tous les droits
-        if (!$request->user || ($request->user['role'] !== $role && $request->user['role'] !== 'admin')) {
-            Response::error("Accès refusé. Rôle '{$role}' requis.", 403);
+        if (!$request->user) {
+            Response::error("Utilisateur non authentifié.", 401);
         }
+
+        $allowedRoles = explode(',', $rolesString);
+        $userRole = $request->user['role'];
+
+        // L'admin et le superadmin ont généralement tous les droits par défaut ici
+        if (in_array($userRole, $allowedRoles) || $userRole === 'admin' || $userRole === 'superadmin') {
+            return;
+        }
+
+        Response::error("Accès refusé. Rôles autorisés : {$rolesString}", 403);
     }
 }

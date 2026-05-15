@@ -95,7 +95,7 @@ const TransactionItem = ({ tx, index }) => {
 };
 
 const Dashboard = () => {
-  const [stats, setStats] = useState({ transactions: [], properties: [], balance: 0, total_properties: 0 });
+  const [stats, setStats] = useState({ transactions: [], properties: [], balance: 0, total_properties: 0, total_agents: 0 });
   const [loading, setLoading] = useState(true);
   const [greeting, setGreeting] = useState('');
   const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -112,15 +112,21 @@ const Dashboard = () => {
         const token = localStorage.getItem('token');
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
-        const [statsRes, transactionsRes] = await Promise.all([
+        const [statsRes, activityRes] = await Promise.all([
           axios.get(`${API_URL}/dashboard/stats`, config),
-          axios.get(`${API_URL}/transactions`, config)
+          ['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim())
+            ? axios.get(`${API_URL}/properties`, config)
+            : user.role === 'agent' 
+              ? axios.get(`${API_URL}/agent/missions`, config) 
+              : axios.get(`${API_URL}/transactions`, config)
         ]);
 
         setStats({
-          transactions: transactionsRes.data.data || [],
+          ...statsRes.data.data,
+          transactions: activityRes.data.data || [],
           balance: statsRes.data.data?.active_escrow || 0,
-          total_properties: statsRes.data.data?.total_properties || 0
+          total_properties: statsRes.data.data?.total_properties || 0,
+          total_agents: statsRes.data.data?.total_agents || 0
         });
       } catch (err) {
         console.error("Erreur chargement dashboard", err);
@@ -136,7 +142,7 @@ const Dashboard = () => {
   const totalVolume = stats.transactions.reduce((sum, tx) => sum + parseFloat(tx.montant_usd || 0), 0);
   const recentTransactions = stats.transactions.slice(0, 5);
 
-  const canCreateProperty = user.role === 'proprietaire' || user.role === 'admin' || user.role === 'agent';
+  const canCreateProperty = user.role === 'proprietaire' || user.role === 'admin' || user.role === 'superadmin';
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-[#0A0A0F] via-[#0F0F1A] to-[#0A0A0F] text-white">
@@ -194,19 +200,19 @@ const Dashboard = () => {
                   trendValue="+8%"
                 />
                 <StatCard
-                  label="Propriétés en ligne"
-                  value={stats.total_properties}
-                  icon={Building2}
-                  color="bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-400"
-                  subValue={user.role === 'agent' ? "Dans votre secteur" : "Total catalogue"}
+                  label={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "Total Agents" : "Propriétés"}
+                  value={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? (stats.total_agents || 0) : stats.total_properties}
+                  icon={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? Users : Building2}
+                  color={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "bg-gradient-to-br from-blue-500/20 to-indigo-500/20 text-blue-400" : "bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-400"}
+                  subValue={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "Agents actifs" : "Total catalogue"}
                 />
                 <StatCard
-                  label="Transactions"
-                  value={stats.transactions.length}
-                  icon={Activity}
+                  label={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "Catalogue" : "Transactions"}
+                  value={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? stats.total_properties : stats.transactions.length}
+                  icon={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? Building2 : Activity}
                   color="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 text-blue-400"
-                  subValue="Dont pending"
-                  trend={pendingTransactions > 0}
+                  subValue={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "Tous les biens" : "Dont pending"}
+                  trend={!['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) && pendingTransactions > 0}
                   trendValue={`${pendingTransactions} en attente`}
                 />
                 <StatCard
@@ -214,7 +220,7 @@ const Dashboard = () => {
                   value={`${totalVolume.toLocaleString()} $`}
                   icon={DollarSign}
                   color="bg-gradient-to-br from-purple-500/20 to-pink-500/20 text-purple-400"
-                  subValue="Transactionnel cumulé"
+                  subValue="Cumulé"
                 />
               </div>
             )}
@@ -226,10 +232,17 @@ const Dashboard = () => {
                 <div className="bg-gradient-to-br from-white/[0.02] to-transparent border border-white/10 rounded-2xl overflow-hidden">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 border-b border-white/10 bg-white/[0.02]">
                     <div>
-                      <h3 className="text-xl font-bold text-white">Activité récente</h3>
-                      <p className="text-xs text-slate-500 mt-1">Dernières transactions immobilières</p>
+                      <h3 className="text-xl font-bold text-white">
+                        {['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? 'Toutes les propriétés' : user.role === 'agent' ? 'Missions assignées' : 'Activité récente'}
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-1">
+                        {['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? 'Gestion globale du catalogue' : user.role === 'agent' ? 'Dernières expertises terrain à effectuer' : 'Dernières transactions immobilières'}
+                      </p>
                     </div>
-                    <Link to="/transactions" className="mt-3 sm:mt-0 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+                    <Link 
+                      to={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "/properties" : user.role === 'agent' ? "/agent/missions" : "/transactions"} 
+                      className="mt-3 sm:mt-0 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                    >
                       Voir tout <ChevronRight size={16} />
                     </Link>
                   </div>
@@ -240,14 +253,55 @@ const Dashboard = () => {
                         <div className="w-20 h-20 bg-white/[0.02] rounded-full flex items-center justify-center mb-4">
                           <AlertCircle size={32} className="text-slate-600" />
                         </div>
-                        <p className="text-sm font-semibold text-slate-400">Aucune transaction récente</p>
+                        <p className="text-sm font-semibold text-slate-400">
+                          {user.role === 'agent' ? 'Aucune mission en attente' : 'Aucune transaction récente'}
+                        </p>
                         <p className="text-[10px] text-slate-600 uppercase tracking-wider mt-1">Le flux est actuellement vide</p>
                       </div>
                     ) : (
                       <div className="space-y-3">
-                        {recentTransactions.map((tx, idx) => (
-                          <TransactionItem key={tx.id || idx} tx={tx} index={idx} />
-                        ))}
+                        {recentTransactions.map((item, idx) => {
+                          if (user.role === 'agent' || ['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim())) {
+                            // Rendu spécifique pour une mission ou une propriété admin
+                            const isMission = user.role === 'agent';
+                            return (
+                              <motion.div
+                                key={item.id || idx}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: idx * 0.05 }}
+                                className="flex flex-col sm:flex-row sm:items-center justify-between p-5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-primary/20 hover:bg-white/[0.04] transition-all group"
+                              >
+                                <div className="flex items-center gap-4">
+                                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform ${isMission ? 'bg-primary/20 text-primary' : 'bg-blue-500/20 text-blue-400'}`}>
+                                    {isMission ? <ShieldCheck size={18} /> : <Building2 size={18} />}
+                                  </div>
+                                  <div>
+                                    <p className="font-bold text-white text-sm tracking-tight">{item.titre}</p>
+                                    <p className="text-[10px] text-slate-500 uppercase tracking-wider font-medium">{item.quartier}, {item.commune}</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-6 mt-3 sm:mt-0">
+                                  <div className="text-right">
+                                    <p className="font-bold text-white text-base">${parseFloat(item.prix || 0).toLocaleString()}</p>
+                                    <span className={`text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                                      item.statut === 'valide' ? 'bg-emerald-500/20 text-emerald-400' : 
+                                      item.statut === 'en_attente' ? 'bg-amber-500/20 text-amber-400' : 
+                                      'bg-primary/20 text-primary'
+                                    }`}>
+                                      {item.statut === 'valide' ? 'Validé' : item.statut === 'en_attente' ? 'À Valider' : 'En cours'}
+                                    </span>
+                                  </div>
+                                  <Link to={`/properties/${item.id}`} className="p-2 hover:bg-white/5 rounded-lg transition-colors">
+                                    <ChevronRight size={16} className="text-slate-600 group-hover:text-primary" />
+                                  </Link>
+                                </div>
+                              </motion.div>
+                            );
+                          }
+                          // Rendu classique pour transaction
+                          return <TransactionItem key={item.id || idx} tx={item} index={idx} />;
+                        })}
                       </div>
                     )}
                   </div>

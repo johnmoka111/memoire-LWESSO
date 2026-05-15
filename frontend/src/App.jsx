@@ -10,7 +10,9 @@ import CreateProperty from './pages/CreateProperty';
 import Transactions from './pages/Transactions';
 import Agents from './pages/admin/Agents';
 import Validations from './pages/admin/Validations';
+import AgentMissions from './pages/AgentMissions';
 import Settings from './pages/Settings';
+import Notifications from './pages/Notifications';
 import MobileNav from './components/MobileNav';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -36,15 +38,31 @@ function App() {
         <Route 
           path="/properties/create" 
           element={
-            <ProtectedRoute roles={['admin', 'agent', 'proprietaire']}>
+            <ProtectedRoute roles={['admin', 'superadmin', 'proprietaire', 'acheteur']}>
               <CreateProperty />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/messages" 
+          element={
+            <ProtectedRoute>
+              <Notifications />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/agent/missions" 
+          element={
+            <ProtectedRoute roles={['agent', 'admin', 'superadmin']}>
+              <AgentMissions />
             </ProtectedRoute>
           } 
         />
         <Route 
           path="/transactions" 
           element={
-            <ProtectedRoute>
+            <ProtectedRoute roles={['proprietaire', 'acheteur', 'admin', 'superadmin']}>
               <Transactions />
             </ProtectedRoute>
           } 

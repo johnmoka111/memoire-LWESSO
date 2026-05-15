@@ -19,13 +19,14 @@ final class Document extends Model
     public function register(array $data): int
     {
         $sql = "INSERT INTO {$this->table} 
-                (property_id, uploaded_by, type, nom_fichier, file_url, mime_type, taille_bytes, sha256_hash) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                (property_id, uploaded_by, type, description, nom_fichier, file_url, mime_type, taille_bytes, sha256_hash) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
             $data['property_id'],
             $data['uploaded_by'],
             $data['type'],
+            $data['description'] ?? null,
             $data['nom_fichier'],
             $data['file_url'],
             $data['mime_type'],

@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Document;
 use App\Services\MailService;
 use App\Services\BlockchainService;
+use App\Models\Notification;
 
 /**
  * Contrôleur pour les annonces immobilières.
@@ -50,14 +51,39 @@ final class PropertyController extends Controller
     }
 
     /**
-     * Détail d'une annonce.
+     * Détails d'une annonce.
      */
     public function show(Request $request, array $params): void
     {
-        $property = $this->propertyModel->find((int) $params['id']);
+        $id = (int) $params['id'];
+        $property = $this->propertyModel->findWithDetails($id);
+
         if (!$property) {
-            Response::error('Annonce introuvable', 404);
+            Response::error('Propriété non trouvée', 404);
         }
+
+        // Récupérer les documents associés (photos et titres)
+        $documentModel = new Document();
+        $documents = $documentModel->getDocumentsByProperty((int) $property['id']);
+        
+        $photos = [];
+        $titres = [];
+        foreach ($documents as $doc) {
+            $item = [
+                'url' => $doc['file_url'],
+                'description' => $doc['description'] ?? ''
+            ];
+            
+            if ($doc['type'] === 'photo') {
+                $photos[] = $item;
+            } elseif ($doc['type'] === 'titre_foncier') {
+                $titres[] = $doc;
+            }
+        }
+        
+        $property['photos'] = $photos;
+        $property['titres_fonciers'] = $titres;
+
         Response::success($property);
     }
 
@@ -86,11 +112,12 @@ final class PropertyController extends Controller
                 $this->handleUpload($file, $propertyId, $ownerId, 'titre_foncier');
             }
 
-            // Gestion des photos (Max 5)
+            // Gestion des photos (ILLIMITÉES avec descriptions)
             $photoCount = (int) $request->input('photo_count', 0);
             for ($i = 0; $i < $photoCount; $i++) {
                 if ($photo = $request->file("photo_{$i}")) {
-                    $this->handleUpload($photo, $propertyId, $ownerId, 'photo');
+                    $description = $request->input("photo_desc_{$i}", "");
+                    $this->handleUpload($photo, $propertyId, $ownerId, 'photo', $description);
                 }
             }
 
@@ -101,20 +128,34 @@ final class PropertyController extends Controller
         }
     }
 
-    private function handleUpload(array $file, int $propertyId, int $userId, string $type): void
+    private function handleUpload(array $file, int $propertyId, int $userId, string $type, string $description = ''): void
     {
         $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
         $filename = uniqid('prop_' . $propertyId . '_') . '.' . $ext;
-        $targetPath = STORAGE_PATH . $filename;
+        
+        // Dossier de stockage physique
+        $storageDir = ROOT_PATH . '/storage/uploads/';
+        if (!is_dir($storageDir)) {
+            mkdir($storageDir, 0777, true);
+        }
+        
+        $targetPath = $storageDir . $filename;
 
         if (move_uploaded_file($file['tmp_name'], $targetPath)) {
             $docModel = new \App\Models\Document();
+            
+            // On enregistre un chemin relatif que le serveur pourra servir
+            // Sous XAMPP, on peut y accéder via : http://localhost/kivu%20market/backend/storage/uploads/
+            $baseUrl = "http://localhost/kivu%20market/backend/storage/uploads/";
+            $fileUrl = $baseUrl . $filename;
+
             $docModel->register([
                 'property_id' => $propertyId,
                 'uploaded_by' => $userId,
                 'type' => $type,
+                'description' => $description,
                 'nom_fichier' => $file['name'],
-                'file_url' => '/storage/uploads/' . $filename,
+                'file_url' => $fileUrl,
                 'mime_type' => $file['type'],
                 'taille_bytes' => $file['size'],
                 'sha256_hash' => hash_file('sha256', $targetPath)
@@ -220,12 +261,58 @@ final class PropertyController extends Controller
                 }
             }
 
+            // 3. Notification par Email au Propriétaire
+            if ($property['owner_id']) {
+                $userModel = new \App\Models\User();
+                $owner = $userModel->find((int)$property['owner_id']);
+                
+                if ($owner) {
+                    \App\Services\MailService::send(
+                        $owner['email'],
+                        "Bonne nouvelle ! Votre annonce est en ligne",
+                        "<h1>Annonce Validée !</h1>
+                         <p>Bonjour {$owner['nom']},</p>
+                         <p>Votre bien <strong>{$property['titre']}</strong> situé à <strong>{$property['quartier']}, {$property['commune']}</strong> a été validé par notre agent terrain.</p>
+                         <p>Il est désormais visible par tous nos utilisateurs sur la plateforme KivuMarket+.</p>
+                         <br>
+                         <p><em>L'équipe KivuMarket+</em></p>",
+                        'validation_owner',
+                        (int)$owner['id']
+                    );
+
+                    // Notification Interne
+                    (new Notification())->create([
+                        'user_id' => $owner['id'],
+                        'title' => "Annonce Validée : " . $property['titre'],
+                        'message' => "Votre bien situé à {$property['commune']} a été validé par l'agent terrain et est maintenant en ligne.",
+                        'type' => 'success'
+                    ]);
+                }
+            }
+
+            // 4. Notification par Email à l'Administrateur
+            \App\Services\MailService::send(
+                MAIL_FROM, // Admin email par défaut
+                "Mission terminée : Bien validé à {$property['commune']}",
+                "<h1>Validation Terrain Effectuée</h1>
+                 <p>L'agent <strong>{$request->user['prenom']} {$request->user['nom']}</strong> a validé le bien suivant :</p>
+                 <ul>
+                    <li><strong>Bien :</strong> {$property['titre']}</li>
+                    <li><strong>Localisation :</strong> {$property['quartier']}, {$property['commune']}</li>
+                    <li><strong>Documents ancrés :</strong> {$anchoredCount}</li>
+                 </ul>
+                 <p>Le bien est maintenant public.</p>",
+                'validation_admin'
+            );
+
             Response::success([
                 'anchored_documents' => $anchoredCount
-            ], 'Annonce validée et documents ancrés sur la blockchain avec succès');
+            ], 'Annonce validée, documents ancrés et notifications envoyées avec succès');
         } else {
             Response::error('Erreur lors de la validation');
         }
+    }
+
     /**
      * Récupère les statistiques pour le dashboard selon le rôle.
      */
@@ -241,29 +328,114 @@ final class PropertyController extends Controller
             'recent_transactions' => 0
         ];
 
-        if ($role === 'admin') {
-            $stats['total_properties'] = (int) $db->query("SELECT COUNT(*) FROM properties")->fetchColumn();
-            $stats['active_escrow'] = (float) ($db->query("SELECT SUM(montant_usd) FROM transactions WHERE etat = 'cree'")->fetchColumn() ?: 0);
-            $stats['recent_transactions'] = (int) $db->query("SELECT COUNT(*) FROM transactions")->fetchColumn();
-        } elseif ($role === 'agent') {
-            // Un agent voit les biens de sa commune OU ceux qui sont en attente de validation/assignés
-            $agentInfo = (new User())->find($userId);
-            $commune = $agentInfo['commune'] ?? '';
+        if (in_array(strtolower(trim($role)), ['admin', 'superadmin', 'administrateur'])) {
+            try {
+                $stats['total_properties'] = (int) $db->query("SELECT COUNT(*) FROM properties")->fetchColumn();
+            } catch (\Exception $e) { $stats['total_properties'] = 0; }
+
+            try {
+                $stats['total_agents'] = (int) $db->query("SELECT COUNT(*) FROM users WHERE LOWER(role) = 'agent'")->fetchColumn();
+            } catch (\Exception $e) { $stats['total_agents'] = 0; }
+
+            try {
+                $stats['active_escrow'] = (float) ($db->query("SELECT SUM(montant_usd) FROM transactions WHERE etat = 'cree'")->fetchColumn() ?: 0);
+                $stats['recent_transactions'] = (int) $db->query("SELECT COUNT(*) FROM transactions")->fetchColumn();
+            } catch (\Exception $e) {
+                $stats['active_escrow'] = 0;
+                $stats['recent_transactions'] = 0;
+            }
+        } elseif (strtolower(trim($role)) === 'agent') {
+            try {
+                $agentInfo = (new User())->find($userId);
+                $commune = $agentInfo['commune'] ?? '';
+                
+                $sql = "SELECT COUNT(*) FROM properties WHERE agent_id = ? OR owner_id = ? OR (commune = ? AND agent_id IS NULL) OR (statut = 'en_attente')";
+                $stmt = $db->prepare($sql);
+                $stmt->execute([$userId, $userId, $commune]);
+                $stats['total_properties'] = (int) $stmt->fetchColumn();
+            } catch (\Exception $e) { $stats['total_properties'] = 0; }
             
-            // On compte : les biens assignés à l'agent + les biens de sa commune + les biens sans agent encore (en attente)
-            $sql = "SELECT COUNT(*) FROM properties WHERE agent_id = ? OR owner_id = ? OR (commune = ? AND agent_id IS NULL) OR (statut = 'en_attente')";
-            $stmt = $db->prepare($sql);
-            $stmt->execute([$userId, $userId, $commune]);
-            $stats['total_properties'] = (int) $stmt->fetchColumn();
-            
-            $stats['active_escrow'] = 0;
-            $stats['recent_transactions'] = (int) $db->query("SELECT COUNT(*) FROM transactions t JOIN properties p ON t.property_id = p.id WHERE p.commune = '$commune'")->fetchColumn();
+            try {
+                $stats['recent_transactions'] = (int) $db->query("SELECT COUNT(*) FROM transactions t JOIN properties p ON t.property_id = p.id WHERE p.commune = '$commune'")->fetchColumn();
+            } catch (\Exception $e) { $stats['recent_transactions'] = 0; }
         } else {
-            $stmt = $db->prepare("SELECT COUNT(*) FROM properties WHERE owner_id = ?");
-            $stmt->execute([$userId]);
-            $stats['total_properties'] = (int) $stmt->fetchColumn();
+            try {
+                $stmt = $db->prepare("SELECT COUNT(*) FROM properties WHERE owner_id = ?");
+                $stmt->execute([$userId]);
+                $stats['total_properties'] = (int) $stmt->fetchColumn();
+            } catch (\Exception $e) { $stats['total_properties'] = 0; }
         }
 
         Response::success($stats);
+    }
+    /**
+     * Rejet d'une annonce par l'agent (Litige).
+     */
+    public function reject(Request $request, array $params): void
+    {
+        $propertyId = (int) $params['id'];
+        $reason = $request->input('reason', 'Raison non spécifiée');
+        
+        $property = $this->propertyModel->find($propertyId);
+        if (!$property) {
+            Response::error('Annonce introuvable', 404);
+        }
+
+        if ((int)$property['agent_id'] !== (int)$request->user['id']) {
+            Response::error('Accès refusé. Vous n\'êtes pas l\'agent assigné.', 403);
+        }
+
+        if ($this->propertyModel->reject($propertyId, (int)$request->user['id'], $reason)) {
+            // Notification au Propriétaire
+            if ($property['owner_id']) {
+                $userModel = new \App\Models\User();
+                $owner = $userModel->find((int)$property['owner_id']);
+                
+                if ($owner) {
+                    \App\Services\MailService::send(
+                        $owner['email'],
+                        "Action Requise : Votre annonce a été suspendue",
+                        "<h1>Annonce Suspendue / Rejetée</h1>
+                         <p>Bonjour {$owner['nom']},</p>
+                         <p>Nous vous informons que votre bien <strong>{$property['titre']}</strong> a été examiné par notre agent terrain et a été <strong>rejeté</strong> pour la raison suivante :</p>
+                         <div style='background: #fff5f5; border: 1px solid #feb2b2; padding: 15px; border-radius: 8px; margin: 20px 0;'>
+                            <strong>Motif du rejet :</strong><br>
+                            {$reason}
+                         </div>
+                         <p>Votre annonce n'est plus visible publiquement. Veuillez contacter le support ou corriger les informations nécessaires.</p>
+                         <br>
+                         <p><em>L'équipe de Sécurité KivuMarket+</em></p>",
+                        'rejet_owner',
+                        (int)$owner['id']
+                    );
+
+                    // Notification Interne
+                    (new Notification())->create([
+                        'user_id' => $owner['id'],
+                        'title' => "Action Requise : Votre annonce a été rejetée",
+                        'message' => "Votre bien {$property['titre']} a été rejeté pour le motif suivant : {$reason}. Veuillez corriger les informations.",
+                        'type' => 'danger'
+                    ]);
+                }
+            }
+
+            // Notification à l'Admin
+            \App\Services\MailService::send(
+                MAIL_FROM,
+                "ALERTE LITIGE : Bien rejeté par agent",
+                "<h1>Signalement de Litige</h1>
+                 <p>L'agent <strong>{$request->user['prenom']} {$request->user['nom']}</strong> a rejeté un bien lors de sa visite terrain.</p>
+                 <ul>
+                    <li><strong>Bien :</strong> {$property['titre']}</li>
+                    <li><strong>Localisation :</strong> {$property['commune']}</li>
+                    <li><strong>Motif :</strong> {$reason}</li>
+                 </ul>",
+                'rejet_admin'
+            );
+
+            Response::success(null, 'Annonce rejetée et notifications envoyées.');
+        } else {
+            Response::error('Erreur lors du rejet.');
+        }
     }
 }

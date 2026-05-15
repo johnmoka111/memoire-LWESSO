@@ -33,11 +33,9 @@ const PropertyCard = ({ property, index }) => {
       onHoverEnd={() => setIsHovered(false)}
       className="group relative bg-gradient-to-br from-white/[0.04] to-white/[0.01] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden transition-all hover:border-white/20 hover:shadow-2xl hover:shadow-primary/5"
     >
-      {/* Effet de lumière au survol */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
       <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-40 transition-opacity duration-700" />
 
-      {/* Image / zone visuelle */}
       <div className="relative h-56 bg-gradient-to-br from-white/[0.02] to-transparent flex items-center justify-center overflow-hidden">
         {property.image_url ? (
           <img src={property.image_url} alt={property.titre} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -54,7 +52,6 @@ const PropertyCard = ({ property, index }) => {
           {property.statut === 'vendu' && 'Vendu'}
         </div>
 
-        {/* Badge de vérification */}
         {property.statut === 'valide' && (
           <div className="absolute top-4 left-4 px-2 py-1 rounded-full bg-emerald-500/20 backdrop-blur-sm border border-emerald-500/30">
             <div className="flex items-center gap-1">
@@ -65,7 +62,6 @@ const PropertyCard = ({ property, index }) => {
         )}
       </div>
 
-      {/* Contenu de la carte */}
       <div className="p-5 md:p-6">
         <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors line-clamp-1">
           {property.titre}
@@ -75,15 +71,14 @@ const PropertyCard = ({ property, index }) => {
           <span className="truncate">{property.commune}, Bukavu</span>
         </div>
 
-        {/* Métriques supplémentaires */}
         <div className="flex items-center gap-4 mb-5 text-[10px] text-slate-500">
           <div className="flex items-center gap-1">
             <Layers size={12} />
-            <span>{property.surface || 'N/C'} m²</span>
+            <span>{property.superficie || 'N/C'} m²</span>
           </div>
           <div className="flex items-center gap-1">
             <Building2 size={12} />
-            <span>{property.type || 'Terrain'}</span>
+            <span>{property.type_bien || 'Bien'}</span>
           </div>
         </div>
 
@@ -142,7 +137,7 @@ const FilterSidebar = ({ filters, setFilters, availableCommunes, onClose }) => {
           <div>
             <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2 block">Statut</label>
             <select
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm"
+              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white"
               value={localFilters.statut}
               onChange={e => setLocalFilters({ ...localFilters, statut: e.target.value })}
             >
@@ -153,30 +148,15 @@ const FilterSidebar = ({ filters, setFilters, availableCommunes, onClose }) => {
               <option value="vendu">Vendu</option>
             </select>
           </div>
-
           <div>
             <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2 block">Commune</label>
             <select
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm"
+              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white"
               value={localFilters.commune}
               onChange={e => setLocalFilters({ ...localFilters, commune: e.target.value })}
             >
               <option value="all">Toutes</option>
               {availableCommunes.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-          </div>
-
-          <div>
-            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2 block">Type de bien</label>
-            <select
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm"
-              value={localFilters.type}
-              onChange={e => setLocalFilters({ ...localFilters, type: e.target.value })}
-            >
-              <option value="all">Tous</option>
-              <option value="terrain">Terrain</option>
-              <option value="maison">Maison</option>
-              <option value="appartement">Appartement</option>
             </select>
           </div>
 
@@ -186,7 +166,7 @@ const FilterSidebar = ({ filters, setFilters, availableCommunes, onClose }) => {
               <input
                 type="number"
                 placeholder="0"
-                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm"
+                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white"
                 value={localFilters.minPrice}
                 onChange={e => setLocalFilters({ ...localFilters, minPrice: e.target.value })}
               />
@@ -196,7 +176,7 @@ const FilterSidebar = ({ filters, setFilters, availableCommunes, onClose }) => {
               <input
                 type="number"
                 placeholder="Illimité"
-                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm"
+                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white"
                 value={localFilters.maxPrice}
                 onChange={e => setLocalFilters({ ...localFilters, maxPrice: e.target.value })}
               />
@@ -206,7 +186,7 @@ const FilterSidebar = ({ filters, setFilters, availableCommunes, onClose }) => {
 
         <div className="flex gap-3 mt-8 pt-4 border-t border-white/10">
           <button onClick={handleReset} className="flex-1 py-3 bg-white/5 hover:bg-white/10 rounded-xl text-sm font-semibold transition-all">Réinitialiser</button>
-          <button onClick={handleApply} className="flex-1 py-3 bg-gradient-to-r from-primary to-indigo-500 rounded-xl text-sm font-bold transition-all">Appliquer</button>
+          <button onClick={handleApply} className="flex-1 py-3 bg-gradient-to-r from-primary to-indigo-500 rounded-xl text-sm font-bold transition-all text-white">Appliquer</button>
         </div>
       </motion.div>
     </div>
@@ -226,7 +206,6 @@ const Properties = () => {
     maxPrice: ''
   });
 
-  // Récupération des propriétés
   useEffect(() => {
     const token = localStorage.getItem('token');
     const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
@@ -237,17 +216,14 @@ const Properties = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // Extraire les communes uniques pour le filtre
   const availableCommunes = useMemo(() => {
     const communes = new Set(listings.map(p => p.commune).filter(Boolean));
     return Array.from(communes);
   }, [listings]);
 
-  // Filtrage des propriétés
   const filteredListings = useMemo(() => {
     let filtered = [...listings];
 
-    // Filtre recherche textuelle
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(p =>
@@ -257,22 +233,18 @@ const Properties = () => {
       );
     }
 
-    // Filtre statut
     if (filters.statut !== 'all') {
       filtered = filtered.filter(p => p.statut === filters.statut);
     }
 
-    // Filtre commune
     if (filters.commune !== 'all') {
       filtered = filtered.filter(p => p.commune === filters.commune);
     }
 
-    // Filtre type
     if (filters.type !== 'all') {
-      filtered = filtered.filter(p => p.type === filters.type);
+      filtered = filtered.filter(p => p.type_bien === filters.type);
     }
 
-    // Filtre prix
     if (filters.minPrice) {
       filtered = filtered.filter(p => parseFloat(p.prix) >= parseFloat(filters.minPrice));
     }
@@ -283,19 +255,20 @@ const Properties = () => {
     return filtered;
   }, [listings, searchQuery, filters]);
 
-  // Composant de filtres desktop
   const FilterDesktop = () => (
-    <div className="hidden md:block w-80 flex-shrink-0 space-y-6">
-      <div className="bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 rounded-2xl p-5">
-        <h3 className="font-bold text-white mb-5 flex items-center gap-2"><Filter size={16} /> Filtres</h3>
-
-        <div className="space-y-4">
-          <div>
-            <label className="text-[10px] font-bold uppercase text-slate-500 block mb-2">Statut</label>
-            <select
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm"
+    <div className="hidden md:block w-72 shrink-0">
+      <div className="sticky top-24 space-y-8 bg-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-md">
+        <div className="flex items-center gap-2 text-white font-bold mb-4">
+          <Filter size={18} className="text-primary" /> Filtres
+        </div>
+        
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <label className="text-[10px] font-bold uppercase text-slate-500 block">Statut</label>
+            <select 
+              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:border-primary outline-none"
               value={filters.statut}
-              onChange={e => setFilters({ ...filters, statut: e.target.value })}
+              onChange={e => setFilters({...filters, statut: e.target.value})}
             >
               <option value="all">Tous</option>
               <option value="valide">Validé</option>
@@ -304,23 +277,25 @@ const Properties = () => {
               <option value="vendu">Vendu</option>
             </select>
           </div>
-          <div>
-            <label className="text-[10px] font-bold uppercase text-slate-500 block mb-2">Commune</label>
-            <select
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm"
+
+          <div className="space-y-3">
+            <label className="text-[10px] font-bold uppercase text-slate-500 block">Commune</label>
+            <select 
+              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:border-primary outline-none"
               value={filters.commune}
-              onChange={e => setFilters({ ...filters, commune: e.target.value })}
+              onChange={e => setFilters({...filters, commune: e.target.value})}
             >
               <option value="all">Toutes</option>
               {availableCommunes.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
-          <div>
-            <label className="text-[10px] font-bold uppercase text-slate-500 block mb-2">Type</label>
-            <select
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm"
+
+          <div className="space-y-3">
+            <label className="text-[10px] font-bold uppercase text-slate-500 block">Type</label>
+            <select 
+              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:border-primary outline-none"
               value={filters.type}
-              onChange={e => setFilters({ ...filters, type: e.target.value })}
+              onChange={e => setFilters({...filters, type: e.target.value})}
             >
               <option value="all">Tous</option>
               <option value="terrain">Terrain</option>
@@ -328,79 +303,74 @@ const Properties = () => {
               <option value="appartement">Appartement</option>
             </select>
           </div>
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <label className="text-[10px] font-bold uppercase text-slate-500 block mb-2">Min ($)</label>
-              <input
-                type="number"
-                placeholder="0"
-                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 py-2 text-sm"
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase text-slate-500 block">Min ($)</label>
+              <input 
+                type="number" 
+                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 py-2 text-sm text-white outline-none"
                 value={filters.minPrice}
-                onChange={e => setFilters({ ...filters, minPrice: e.target.value })}
+                onChange={e => setFilters({...filters, minPrice: e.target.value})}
               />
             </div>
-            <div>
-              <label className="text-[10px] font-bold uppercase text-slate-500 block mb-2">Max ($)</label>
-              <input
-                type="number"
-                placeholder="∞"
-                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 py-2 text-sm"
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase text-slate-500 block">Max ($)</label>
+              <input 
+                type="number" 
+                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 py-2 text-sm text-white outline-none"
                 value={filters.maxPrice}
-                onChange={e => setFilters({ ...filters, maxPrice: e.target.value })}
+                onChange={e => setFilters({...filters, maxPrice: e.target.value})}
               />
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Statistiques rapides */}
-      <div className="bg-gradient-to-r from-primary/10 to-transparent border border-primary/20 rounded-2xl p-5">
-        <div className="flex items-center gap-3 mb-3">
-          <TrendingUp size={16} className="text-primary" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Marché actif</span>
-        </div>
-        <p className="text-2xl font-bold text-white">{filteredListings.length}</p>
-        <p className="text-[10px] text-slate-500">biens correspondants</p>
+        {(filters.statut !== 'all' || filters.commune !== 'all' || filters.type !== 'all' || filters.minPrice || filters.maxPrice) && (
+          <button 
+            onClick={() => setFilters({ statut: 'all', commune: 'all', type: 'all', minPrice: '', maxPrice: '' })}
+            className="w-full py-3 text-[10px] font-black uppercase tracking-widest text-primary hover:text-white border border-primary/20 hover:bg-primary/10 rounded-xl transition-all"
+          >
+            Réinitialiser
+          </button>
+        )}
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0A0A0F] via-[#0F0F1A] to-[#0A0A0F] text-white">
+    <div className="min-h-screen bg-dark pb-20">
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-20">
-        {/* En-tête avec dégradé */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/15 via-primary/5 to-transparent border border-white/10 p-6 md:p-8 mb-10">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px]" />
-          <div className="relative z-10">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3">
-              Annonces <span className="text-primary">Vérifiées</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        {/* Header avec barre de recherche */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
+          <div className="max-w-xl">
+            <h1 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">
+              Découvrez le <span className="text-primary italic">Marché Kivu</span>
             </h1>
-            <p className="text-slate-400 max-w-2xl text-base md:text-lg">
-              Sélection de biens immobiliers à Bukavu sécurisés par validation terrain et blockchain.
-            </p>
+            <p className="text-slate-400 text-sm md:text-base">Explorez des biens certifiés sur la blockchain au Sud-Kivu.</p>
           </div>
-        </div>
 
-        {/* Barre de recherche et filtres */}
-        <div className="flex flex-col md:flex-row gap-4 mb-10">
-          <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
-            <input
-              type="text"
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl pl-11 pr-4 py-3.5 text-sm focus:border-primary/50 focus:bg-white/[0.05] outline-none transition-all placeholder:text-slate-600"
-              placeholder="Rechercher par titre, commune, quartier..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+          <div className="relative group w-full md:w-96">
+            <div className="absolute inset-0 bg-primary/20 blur-xl group-focus-within:bg-primary/30 transition-all opacity-0 group-focus-within:opacity-100" />
+            <div className="relative flex items-center bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 backdrop-blur-md focus-within:border-primary/50 transition-all">
+              <Search className="text-slate-500 mr-3 shrink-0" size={20} />
+              <input
+                type="text"
+                placeholder="Quartier, type, mot-clé..."
+                className="bg-transparent border-none text-white w-full focus:ring-0 outline-none text-sm"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+              />
+              <button 
+                onClick={() => setShowFilters(true)}
+                className="md:hidden ml-3 p-2 bg-white/5 rounded-lg text-primary hover:bg-white/10 transition-all"
+              >
+                <SlidersHorizontal size={18} />
+              </button>
+            </div>
           </div>
-          <button
-            onClick={() => setShowFilters(true)}
-            className="md:hidden flex items-center justify-center gap-2 px-5 py-3.5 bg-white/[0.03] border border-white/10 rounded-xl text-sm font-semibold hover:bg-white/10 transition-all"
-          >
-            <SlidersHorizontal size={18} /> Filtres
-          </button>
         </div>
 
         {/* Grille principale avec sidebar filtres desktop */}
@@ -408,13 +378,33 @@ const Properties = () => {
           <FilterDesktop />
 
           <div className="flex-1">
+            <div className="flex items-center justify-between mb-8">
+              <p className="text-slate-400 text-sm">
+                <span className="text-white font-bold">{filteredListings.length}</span> {filteredListings.length > 1 ? 'biens disponibles' : 'bien disponible'}
+              </p>
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <span>Trier par:</span>
+                <select className="bg-transparent border-none text-primary font-bold focus:ring-0 cursor-pointer outline-none">
+                  <option className="bg-dark">Plus récents</option>
+                  <option className="bg-dark">Prix croissant</option>
+                  <option className="bg-dark">Prix décroissant</option>
+                </select>
+              </div>
+            </div>
+
             {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {[1, 2, 3, 4, 5, 6].map(i => (
                   <div key={i} className="h-96 bg-white/[0.02] rounded-2xl animate-pulse border border-white/5" />
                 ))}
               </div>
-            ) : filteredListings.length === 0 ? (
+            ) : filteredListings.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {filteredListings.map((property, idx) => (
+                  <PropertyCard key={property.id} property={property} index={idx} />
+                ))}
+              </div>
+            ) : (
               <div className="flex flex-col items-center justify-center py-20 text-center">
                 <div className="w-24 h-24 bg-white/[0.02] rounded-full flex items-center justify-center mb-6">
                   <AlertCircle size={40} className="text-slate-600" />
@@ -422,33 +412,11 @@ const Properties = () => {
                 <h3 className="text-xl font-bold text-slate-400 mb-2">Aucun bien trouvé</h3>
                 <p className="text-slate-500 text-sm">Essayez de modifier vos critères de recherche ou de filtres.</p>
               </div>
-            ) : (
-              <>
-                <div className="flex justify-between items-center mb-6">
-                  <p className="text-sm text-slate-500">
-                    <span className="font-bold text-white">{filteredListings.length}</span> résultat(s)
-                  </p>
-                  {(filters.statut !== 'all' || filters.commune !== 'all' || filters.type !== 'all' || filters.minPrice || filters.maxPrice) && (
-                    <button
-                      onClick={() => setFilters({ statut: 'all', commune: 'all', type: 'all', minPrice: '', maxPrice: '' })}
-                      className="text-[10px] font-bold uppercase text-primary hover:underline"
-                    >
-                      Réinitialiser les filtres
-                    </button>
-                  )}
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {filteredListings.map((property, idx) => (
-                    <PropertyCard key={property.id} property={property} index={idx} />
-                  ))}
-                </div>
-              </>
             )}
           </div>
         </div>
-      </main>
+      </div>
 
-      {/* Modal filtres mobile */}
       <AnimatePresence>
         {showFilters && (
           <FilterSidebar

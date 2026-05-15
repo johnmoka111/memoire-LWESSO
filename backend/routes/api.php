@@ -14,14 +14,15 @@ $router->post('/api/auth/login',    'AuthController@login');
 $router->get('/api/properties',             'PropertyController@index');
 $router->get('/api/dashboard/stats',        'PropertyController@getDashboardStats', ['auth']);
 $router->get('/api/properties/{id}',        'PropertyController@show');
-$router->post('/api/properties',            'PropertyController@store', ['auth', 'role:proprietaire']);
-$router->post('/api/properties/{id}/assign', 'PropertyController@assign', ['auth', 'role:admin']);
+$router->post('/api/properties',            'PropertyController@store', ['auth', 'role:proprietaire,admin,superadmin']);
+$router->post('/api/properties/{id}/assign', 'PropertyController@assign', ['auth', 'role:admin,superadmin']);
 $router->put('/api/properties/{id}',        'PropertyController@update', ['auth']); // Propriétaire ou Agent
 $router->delete('/api/properties/{id}',     'PropertyController@destroy', ['auth', 'role:admin']);
 
 // ─── AGENT / MISSIONS ───────────────────────────────────────────────────────
 $router->get('/api/agent/missions',         'PropertyController@missions', ['auth', 'role:agent']);
 $router->post('/api/agent/validate/{id}',    'PropertyController@validate', ['auth', 'role:agent']);
+$router->post('/api/agent/reject/{id}',      'PropertyController@reject', ['auth', 'role:agent']);
 
 // ─── DOCUMENTS ──────────────────────────────────────────────────────────────
 $router->post('/api/documents/upload',      'DocumentController@upload', ['auth']);
@@ -41,6 +42,10 @@ $router->put('/api/admin/agents/{id}',      'AdminController@updateAgent', ['aut
 $router->post('/api/admin/agents/{id}/reset-password', 'AdminController@resetAgentPassword', ['auth', 'role:admin']);
 $router->delete('/api/admin/agents/{id}',    'AdminController@deleteAgent', ['auth', 'role:admin']);
 $router->get('/api/admin/properties',       'PropertyController@adminList', ['auth', 'role:admin']);
+
+// ─── NOTIFICATIONS ──────────────────────────────────────────────────────────
+$router->get('/api/notifications',          'NotificationController@index', ['auth']);
+$router->post('/api/notifications/{id}/read', 'NotificationController@markAsRead', ['auth']);
 
 // ─── DISPATCH ───────────────────────────────────────────────────────────────
 $router->dispatch($method, $uri);

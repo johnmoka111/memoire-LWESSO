@@ -68,32 +68,47 @@ final class AdminController extends Controller
 
         // Envoi d'email professionnel
         try {
-            $subject = "🎯 Vos accès Agent - KivuMarket+";
+            $subject = "Activation de compte Agent - KivuMarket+";
             $htmlBody = "
-                <div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; border-radius: 10px; padding: 20px;'>
-                    <div style='text-align: center; margin-bottom: 20px;'>
-                        <h1 style='color: #4F46E5;'>KivuMarket+</h1>
-                    </div>
-                    <p>Bonjour <strong>{$agentData['prenom']}</strong>,</p>
-                    <p>Votre compte agent a été activé avec succès dans le système de gestion foncière <strong>KivuMarket+</strong>.</p>
-                    
-                    <div style='background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;'>
-                        <h3 style='margin-top: 0;'>📍 Affectation</h3>
-                        <p><strong>Province :</strong> {$agentData['province']}<br>
-                           <strong>Ville :</strong> {$agentData['ville']}<br>
-                           <strong>Commune :</strong> {$agentData['commune']}</p>
+                <div style='font-family: \"Segoe UI\", Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 4px; padding: 40px; color: #1e293b;'>
+                    <div style='border-bottom: 2px solid #0f172a; padding-bottom: 20px; margin-bottom: 30px;'>
+                        <h1 style='color: #0f172a; margin: 0; font-size: 24px; letter-spacing: -0.025em;'>KIVUMARKET+</h1>
+                        <p style='color: #64748b; font-size: 12px; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 0.1em;'>Système de Gestion Foncière</p>
                     </div>
 
-                    <div style='background: #4F46E5; color: white; padding: 15px; border-radius: 8px; margin: 20px 0;'>
-                        <h3 style='margin-top: 0;'>🔑 Vos Identifiants</h3>
-                        <p><strong>Email :</strong> {$agentData['email']}<br>
-                           <strong>Mot de passe :</strong> <span style='font-family: monospace; font-size: 1.2em;'>{$temporaryPassword}</span></p>
+                    <p style='font-size: 16px; line-height: 1.6;'>Bonjour {$agentData['prenom']},</p>
+                    <p style='font-size: 16px; line-height: 1.6;'>Votre compte agent a été activé avec succès dans le système de gestion foncière KivuMarket+.</p>
+                    
+                    <div style='margin: 30px 0; border: 1px solid #e2e8f0; border-radius: 4px;'>
+                        <div style='background: #f8fafc; padding: 15px; border-bottom: 1px solid #e2e8f0;'>
+                            <h3 style='margin: 0; font-size: 14px; text-transform: uppercase; color: #475569;'>Affectation territoriale</h3>
+                        </div>
+                        <div style='padding: 20px;'>
+                            <table style='width: 100%; font-size: 14px;'>
+                                <tr><td style='color: #64748b; padding-bottom: 5px;'>Province :</td><td style='font-weight: 600;'>{$agentData['province']}</td></tr>
+                                <tr><td style='color: #64748b; padding-bottom: 5px;'>Ville :</td><td style='font-weight: 600;'>{$agentData['ville']}</td></tr>
+                                <tr><td style='color: #64748b;'>Commune :</td><td style='font-weight: 600;'>{$agentData['commune']}</td></tr>
+                            </table>
+                        </div>
                     </div>
 
-                    <p style='font-size: 0.9em; color: #666;'>Pour votre sécurité, nous vous recommandons de changer ce mot de passe lors de votre première connexion.</p>
+                    <div style='margin: 30px 0; background: #0f172a; color: #ffffff; border-radius: 4px; padding: 25px;'>
+                        <h3 style='margin: 0 0 15px 0; font-size: 14px; text-transform: uppercase; opacity: 0.8;'>Identifiants de connexion</h3>
+                        <p style='margin: 5px 0; font-size: 14px;'>Identifiant : <strong>{$agentData['email']}</strong></p>
+                        <p style='margin: 5px 0; font-size: 14px;'>Mot de passe : <span style='font-family: monospace; font-size: 16px; background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 2px;'>{$temporaryPassword}</span></p>
+                    </div>
+
+                    <p style='font-size: 13px; color: #64748b; font-style: italic;'>
+                        Par mesure de sécurité, nous vous recommandons de modifier ce mot de passe lors de votre première session.
+                    </p>
                     
-                    <div style='text-align: center; margin-top: 30px;'>
-                        <a href='http://localhost:3000' style='background: #4F46E5; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;'>Accéder à mon espace</a>
+                    <div style='margin-top: 40px; text-align: center;'>
+                        <a href='http://localhost:3000/#/login' style='display: inline-block; background: #0f172a; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 14px;'>ACCÉDER À MON ESPACE</a>
+                    </div>
+
+                    <div style='margin-top: 50px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #94a3b8; text-align: center;'>
+                        Ceci est un message automatique, merci de ne pas y répondre.<br>
+                        &copy; " . date('Y') . " KivuMarket+ - Sécurité Foncière Blockchain.
                     </div>
                 </div>
             ";
@@ -130,16 +145,26 @@ final class AdminController extends Controller
 
         if ($success) {
             // Envoyer le nouvel email
-            $subject = "🔑 Réinitialisation de vos accès - KivuMarket+";
+            $subject = "Réinitialisation des accès - KivuMarket+";
             $htmlBody = "
-                <div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee;'>
-                    <h2>Nouveaux accès KivuMarket+</h2>
-                    <p>Bonjour <strong>{$agent['prenom']}</strong>,</p>
-                    <p>Votre mot de passe a été réinitialisé par l'administrateur.</p>
-                    <div style='background: #f4f4f4; padding: 15px; border-radius: 10px;'>
-                        <p><strong>Nouveau mot de passe :</strong> <span style='font-family: monospace; font-size: 1.5em;'>{$newPassword}</span></p>
+                <div style='font-family: \"Segoe UI\", Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 4px; padding: 40px; color: #1e293b;'>
+                    <div style='border-bottom: 2px solid #0f172a; padding-bottom: 20px; margin-bottom: 30px;'>
+                        <h1 style='color: #0f172a; margin: 0; font-size: 24px;'>KIVUMARKET+</h1>
                     </div>
-                    <p>Vous pouvez maintenant vous connecter avec ce nouveau code.</p>
+
+                    <p style='font-size: 16px;'>Bonjour {$agent['prenom']},</p>
+                    <p style='font-size: 16px;'>Votre mot de passe a été réinitialisé par l'administration.</p>
+                    
+                    <div style='margin: 30px 0; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 25px;'>
+                        <p style='margin: 0; font-size: 14px; color: #64748b; text-transform: uppercase;'>Nouveau mot de passe provisoire</p>
+                        <p style='margin: 10px 0 0 0; font-family: monospace; font-size: 24px; color: #0f172a; font-weight: bold;'>{$newPassword}</p>
+                    </div>
+
+                    <p style='font-size: 14px; color: #64748b;'>Vous pouvez désormais vous connecter à votre espace agent avec ce nouveau code.</p>
+                    
+                    <div style='margin-top: 40px; text-align: center;'>
+                        <a href='http://localhost:3000/#/login' style='display: inline-block; background: #0f172a; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 4px; font-weight: 600;'>SE CONNECTER</a>
+                    </div>
                 </div>
             ";
             MailService::send($agent['email'], $subject, $htmlBody, 'password_reset', $id);
@@ -171,14 +196,24 @@ final class AdminController extends Controller
         $id = (int) $params['id'];
         $data = $request->all();
         
-        // On construit la requête dynamiquement pour ne mettre à jour que ce qui est envoyé
+        // Récupérer l'ancien état pour comparer l'affectation
+        $oldAgent = $this->userModel->find($id);
+        if (!$oldAgent) {
+            Response::error('Agent non trouvé');
+        }
+
+        // On construit la requête dynamiquement
         $fields = [];
         $values = [];
-        
         $allowedFields = ['nom', 'prenom', 'telephone', 'province', 'ville', 'commune', 'is_active', 'avatar_url'];
         
+        $assignmentChanged = false;
         foreach ($allowedFields as $field) {
             if (isset($data[$field])) {
+                // Vérifier si l'affectation a changé
+                if (in_array($field, ['province', 'ville', 'commune']) && $data[$field] !== $oldAgent[$field]) {
+                    $assignmentChanged = true;
+                }
                 $fields[] = "{$field} = ?";
                 $values[] = $data[$field];
             }
@@ -195,6 +230,51 @@ final class AdminController extends Controller
         $success = $stmt->execute($values);
         
         if ($success) {
+            // Envoyer un mail si l'affectation a changé
+            if ($assignmentChanged) {
+                try {
+                    $subject = "Mise à jour de votre affectation - KivuMarket+";
+                    $htmlBody = "
+                        <div style='font-family: \"Segoe UI\", Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 4px; padding: 40px; color: #1e293b;'>
+                            <div style='border-bottom: 2px solid #0f172a; padding-bottom: 20px; margin-bottom: 30px;'>
+                                <h1 style='color: #0f172a; margin: 0; font-size: 24px; letter-spacing: -0.025em;'>KIVUMARKET+</h1>
+                                <p style='color: #64748b; font-size: 12px; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 0.1em;'>Système de Gestion Foncière</p>
+                            </div>
+
+                            <p style='font-size: 16px; line-height: 1.6;'>Bonjour {$oldAgent['prenom']},</p>
+                            <p style='font-size: 16px; line-height: 1.6;'>Votre affectation territoriale a été modifiée par l'administration.</p>
+                            
+                            <div style='margin: 30px 0; border: 1px solid #e2e8f0; border-radius: 4px;'>
+                                <div style='background: #f8fafc; padding: 15px; border-bottom: 1px solid #e2e8f0;'>
+                                    <h3 style='margin: 0; font-size: 14px; text-transform: uppercase; color: #475569;'>Nouvelle affectation</h3>
+                                </div>
+                                <div style='padding: 20px;'>
+                                    <table style='width: 100%; font-size: 14px;'>
+                                        <tr><td style='color: #64748b; padding-bottom: 5px;'>Province :</td><td style='font-weight: 600;'>" . ($data['province'] ?? $oldAgent['province']) . "</td></tr>
+                                        <tr><td style='color: #64748b; padding-bottom: 5px;'>Ville :</td><td style='font-weight: 600;'>" . ($data['ville'] ?? $oldAgent['ville']) . "</td></tr>
+                                        <tr><td style='color: #64748b;'>Commune :</td><td style='font-weight: 600;'>" . ($data['commune'] ?? $oldAgent['commune']) . "</td></tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <p style='font-size: 14px; color: #64748b; line-height: 1.6;'>
+                                Vous êtes désormais chargé de la validation des titres et de l'expertise terrain dans cette zone géographique. Toutes vos missions en cours restent accessibles dans votre espace agent.
+                            </p>
+                            
+                            <div style='margin-top: 40px; text-align: center;'>
+                                <a href='http://localhost:3000/#/login' style='display: inline-block; background: #0f172a; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 14px;'>ACCÉDER À MON ESPACE</a>
+                            </div>
+
+                            <div style='margin-top: 50px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #94a3b8; text-align: center;'>
+                                Ceci est un message automatique, merci de ne pas y répondre.<br>
+                                &copy; " . date('Y') . " KivuMarket+ - Sécurité Foncière Blockchain.
+                            </div>
+                        </div>
+                    ";
+                    MailService::send($oldAgent['email'], $subject, $htmlBody, 'assignment_change', $id);
+                } catch (\Exception $e) {}
+            }
+
             Response::success(null, 'Informations de l\'agent mises à jour');
         } else {
             Response::error('Erreur lors de la mise à jour', 500);
