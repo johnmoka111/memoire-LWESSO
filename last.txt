@@ -1,0 +1,12 @@
+Je vérifie à nouveau le statut du commit.
+
+C'est fait ! Voici le récapitulatif des actions effectuées pour finaliser cette étape de **KivuMarket+** :
+
+1.  **Documentation (README.md)** : J'ai rédigé un nouveau fichier README complet, structuré et professionnel, détaillant l'architecture technique, les nouvelles fonctionnalités (Carte Leaflet plein écran, centre de messages) et les instructions d'installation, le tout sans emojis.
+2.  **Sauvegarde (Git)** :
+    *   `git add .` : Tous les nouveaux fichiers (modèles de notifications, contrôleurs, pages React, scripts de diagnostic) ont été indexés.
+    *   `git commit` : J'ai validé l'ensemble des changements sous le message *"Stabilization: Map integration, Notification center, and Role access updates"*.
+
+Le projet est désormais dans un état stable et documenté, prêt pour la suite.
+
+Souhaitez-vous que j'ajoute une section "Contributeurs" ou une licence spécifique dans le README ?
