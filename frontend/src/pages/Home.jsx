@@ -81,7 +81,7 @@ const Home = () => {
 
                 <div className="relative z-10 bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-sm rounded-3xl border border-white/10 p-8 md:p-12 shadow-2xl">
                   <img
-                    src="/assets/logo.png"
+                    src="assets/logo.png"
                     alt="KivuMarket+ Logo"
                     className="w-full max-w-[280px] mx-auto object-contain"
                   />

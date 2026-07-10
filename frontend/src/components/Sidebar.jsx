@@ -101,7 +101,7 @@ const Sidebar = () => {
           className="flex items-center gap-3 mb-10 px-2 cursor-pointer group"
         >
           <div className="w-8 h-8 rounded-lg bg-white/5 p-1 group-hover:bg-primary/10 transition-colors">
-            <img src="/assets/logo.png" alt="KivuMarket+" className="w-full h-full object-contain" />
+            <img src="assets/logo.png" alt="KivuMarket+" className="w-full h-full object-contain" />
           </div>
           <span className="font-black text-lg tracking-tighter group-hover:text-primary transition-colors">
             KivuMarket<span className="text-primary">+</span>

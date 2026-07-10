@@ -7,7 +7,7 @@ async function run() {
   const context = await esbuild.context({
     entryPoints: ['src/index.jsx'],
     bundle: true,
-    outfile: 'public/dist/index.js',
+    outfile: 'public/dist/app.js',
     format: 'esm',
     jsx: 'automatic',
     loader: { '.js': 'jsx', '.jsx': 'jsx', '.png': 'file', '.svg': 'file' },

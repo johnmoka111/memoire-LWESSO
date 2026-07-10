@@ -41,7 +41,7 @@ const PropertyCard = ({ property, index }) => {
           <img src={property.image_url} alt={property.titre} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
         ) : (
           <>
-            <img src="/assets/logo.png" alt="Watermark" className="absolute w-24 h-24 opacity-10" />
+            <img src="assets/logo.png" alt="Watermark" className="absolute w-24 h-24 opacity-10" />
             <HomeIcon size={56} className="text-white/10 relative z-10" />
           </>
         )}

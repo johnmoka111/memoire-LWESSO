@@ -203,7 +203,7 @@ const Dashboard = () => {
                   label={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "Total Agents" : "Propriétés"}
                   value={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? (stats.total_agents || 0) : stats.total_properties}
                   icon={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? Users : Building2}
-                  color={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "bg-gradient-to-br from-emerald-400 to-cyan-400 text-black shadow-lg shadow-cyan-500/50" : "bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-400"}
+                  color={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "bg-gradient-to-br from-blue-500/20 to-indigo-500/20 text-blue-400" : "bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-400"}
                   subValue={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "Agents actifs" : "Total catalogue"}
                 />
                 <StatCard
