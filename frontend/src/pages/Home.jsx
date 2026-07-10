@@ -37,7 +37,7 @@ const Home = () => {
               </h1>
 
               <p className="text-base md:text-lg lg:text-xl text-slate-400 max-w-lg leading-relaxed">
-                KivuMarket+ sécurise vos achats à Bukavu grâce à la validation terrain et l'escrow blockchain. Achetez, vendez et gérez vos biens en toute confiance.
+                KivuMobilier sécurise vos achats à Bukavu grâce à la validation terrain et l'escrow blockchain. Achetez, vendez et gérez vos biens en toute confiance.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -82,7 +82,7 @@ const Home = () => {
                 <div className="relative z-10 bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-sm rounded-3xl border border-white/10 p-8 md:p-12 shadow-2xl">
                   <img
                     src="assets/logo.png"
-                    alt="KivuMarket+ Logo"
+                    alt="KivuMobilier Logo"
                     className="w-full max-w-[280px] mx-auto object-contain"
                   />
                 </div>

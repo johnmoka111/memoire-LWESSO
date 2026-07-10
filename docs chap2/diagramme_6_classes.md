@@ -1,4 +1,4 @@
-# Diagramme de Classes - KivuMarket+
+# Diagramme de Classes - KivuMobilier
 
 ```mermaid
 classDiagram

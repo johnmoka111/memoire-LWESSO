@@ -1,6 +1,6 @@
-# KivuMarket+ : Plateforme de Sécurisation Foncière par Blockchain
+# KivuMobilier : Plateforme de Sécurisation Foncière par Blockchain
 
-KivuMarket+ est un écosystème technologique complet conçu pour apporter transparence, sécurité et fiabilité au marché immobilier et foncier du Sud-Kivu, particulièrement à Bukavu. En combinant une interface utilisateur premium, un backend robuste et la technologie blockchain, la plateforme vise à prévenir les conflits de spoliation et à garantir l'intégrité des transactions.
+KivuMobilier est un écosystème technologique complet conçu pour apporter transparence, sécurité et fiabilité au marché immobilier et foncier du Sud-Kivu, particulièrement à Bukavu. En combinant une interface utilisateur premium, un backend robuste et la technologie blockchain, la plateforme vise à prévenir les conflits de spoliation et à garantir l'intégrité des transactions.
 
 ---
 

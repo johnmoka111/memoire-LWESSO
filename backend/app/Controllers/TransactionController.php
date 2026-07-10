@@ -101,7 +101,7 @@ final class TransactionController extends Controller
     {
         $id = (int)$request->input('transaction_id');
         $decision = $request->input('decision'); // 'libere' (vendeur) ou 'rembourse' (acheteur)
-        $reason = $request->input('reason', 'Arbitrage administratif KivuMarket+');
+        $reason = $request->input('reason', 'Arbitrage administratif KivuMobilier');
 
         if (!$id || !in_array($decision, ['libere', 'rembourse'])) {
             Response::error('ID transaction et décision (libere/rembourse) requis', 400);
@@ -139,7 +139,7 @@ final class TransactionController extends Controller
         // Au vendeur
         MailService::send(
             $txData['seller_email'],
-            "Décision d'arbitrage - KivuMarket+",
+            "Décision d'arbitrage - KivuMobilier",
             "<h1>Arbitrage rendu</h1><p>Bonjour {$txData['seller_name']}, l'administrateur a tranché : <strong>{$decision}</strong>. Motif : {$reason}</p>",
             'dispute_resolution'
         );
@@ -147,7 +147,7 @@ final class TransactionController extends Controller
         // À l'acheteur
         MailService::send(
             $txData['buyer_email'],
-            "Décision d'arbitrage - KivuMarket+",
+            "Décision d'arbitrage - KivuMobilier",
             "<h1>Arbitrage rendu</h1><p>Bonjour {$txData['buyer_name']}, l'administrateur a tranché : <strong>{$decision}</strong>. Motif : {$reason}</p>",
             'dispute_resolution'
         );

@@ -1,6 +1,6 @@
-# Rapport d'État de Réalisation - Projet KivuMarket+
+# Rapport d'État de Réalisation - Projet KivuMobilier
 
-*Ce document dresse un bilan technique et fonctionnel de l'état d'avancement du projet KivuMarket+, détaillant les implémentations achevées, l'architecture technologique et les défis restants selon le cahier des charges.*
+*Ce document dresse un bilan technique et fonctionnel de l'état d'avancement du projet KivuMobilier, détaillant les implémentations achevées, l'architecture technologique et les défis restants selon le cahier des charges.*
 
 ---
 
@@ -48,10 +48,10 @@ Les technologies ont été choisies avec une forte dimension académique (maîtr
 
 ## 4. Ce qui ne marche pas encore (Défis et Limites selon le Contexte)
 
-Dans le cadre du développement global de KivuMarket+, certains modules restent à implémenter, à stabiliser, ou représentent des limites assumées :
+Dans le cadre du développement global de KivuMobilier, certains modules restent à implémenter, à stabiliser, ou représentent des limites assumées :
 
 - **Exécution réelle du Smart Contract d'Escrow avec des fonds** : Actuellement, la logique du contrat Solidity existe, mais l'intégration de bout en bout où un *Acheteur* connecte son portefeuille MetaMask et bloque de réels fonds cryptographiques sur le réseau principal (Mainnet) reste en phase expérimentale/test.
 - **Oracle de Conversion de Devises (USD/CDF)** : La plateforme gère nativement de la cryptomonnaie pour l'Escrow, mais l'affichage précis en temps réel des taux de change vers le Franc Congolais ou le Dollar Américain nécessite encore la stabilisation d'un Oracle externe (ex: CoinGecko API) sans ralentir l'application.
 - **Upload des Visites 360° (Google Cloud Storage)** : L'enregistrement et l'affichage des lourds panoramas 360° posent encore un défi de performance réseau. L'interface agent est prête, mais l'upload systématique sans erreur vers un cloud externe avec compression d'images (pour rester sous les 2 Mo) n'est pas encore à 100 % stable.
-- **Absence de connexion avec le Cadastre Foncier de l'État** : Le système repose sur l'honnêteté et la vérification de l'agent de terrain. KivuMarket+ n'est pas techniquement relié aux bases de données du Ministère des Affaires Foncières, ce qui maintient un facteur d'intervention humaine dans la chaîne de vérification (potentiel goulot d'étranglement ou risque résiduel de corruption de l'agent).
+- **Absence de connexion avec le Cadastre Foncier de l'État** : Le système repose sur l'honnêteté et la vérification de l'agent de terrain. KivuMobilier n'est pas techniquement relié aux bases de données du Ministère des Affaires Foncières, ce qui maintient un facteur d'intervention humaine dans la chaîne de vérification (potentiel goulot d'étranglement ou risque résiduel de corruption de l'agent).
 - **Arbitrage Centralisé** : En cas de litige, seul l'Administrateur peut trancher sur le contrat (remboursement ou libération des fonds). Un système plus décentralisé de type "multi-signatures" (Multisig/DAO) n'est pas encore programmé.

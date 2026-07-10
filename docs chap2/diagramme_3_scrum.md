@@ -11,7 +11,7 @@ stateDiagram-v2
         DailyScrum --> Development
         Development --> DailyScrum
     }
-    Development --> SprintReview : "Incrément (KivuMarket+)"
+    Development --> SprintReview : "Incrément (KivuMobilier)"
     SprintReview --> SprintRetrospective
     SprintRetrospective --> ProductBacklog : "Nouveaux Besoins"
     SprintReview --> [*] : "Version Stable"

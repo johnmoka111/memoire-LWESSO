@@ -1,6 +1,6 @@
 {
   "name": "kivumarket/backend",
-  "description": "KivuMarket+ Backend - PHP 8.3 MVC Vanilla",
+  "description": "KivuMobilier Backend - PHP 8.3 MVC Vanilla",
   "type": "project",
   "require": {
     "php": ">=8.2",

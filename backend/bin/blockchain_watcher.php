@@ -23,7 +23,7 @@ $abi = '[{"anonymous":false,"inputs":[{"indexed":true,"name":"escrowId","type":"
 
 $contract = new Contract($eth->provider, $abi);
 
-echo "Démarrage du watcher KivuMarket+...\n";
+echo "Démarrage du watcher KivuMobilier...\n";
 
 // En production, on stockerait le "last_block_seen" en DB
 $eth->blockNumber(function ($err, $blockNumber) use ($contract, $eth) {

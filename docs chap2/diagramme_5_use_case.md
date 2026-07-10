@@ -1,4 +1,4 @@
-# Diagramme 5 : Cas d'Utilisation (Use Case) - KivuMarket+
+# Diagramme 5 : Cas d'Utilisation (Use Case) - KivuMobilier
 
 ```mermaid
 useCaseDiagram

@@ -1,7 +1,7 @@
 {
   "name": "kivu-market-frontend",
   "version": "1.0.0",
-  "description": "Frontend KivuMarket+ avec React et esbuild",
+  "description": "Frontend KivuMobilier avec React et esbuild",
   "main": "src/index.jsx",
   "scripts": {
     "dev": "concurrently \"node build.js --serve\" \"npx tailwindcss -i ./src/styles/index.css -o ./public/dist/app.css --watch\"",

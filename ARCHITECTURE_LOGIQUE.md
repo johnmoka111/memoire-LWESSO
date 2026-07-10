@@ -1,4 +1,4 @@
-# Architecture Logique et Fonctionnement de KivuMarket+
+# Architecture Logique et Fonctionnement de KivuMobilier
 
 Ce document détaille la logique métier, le rôle des différents acteurs et l'intégration de la technologie Blockchain pour la sécurisation foncière à Bukavu.
 

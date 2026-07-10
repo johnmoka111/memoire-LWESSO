@@ -2,14 +2,14 @@ Voici le cahier des charges **enrichi et professionnel**, intégrant l’ensembl
 
 ---
 
-**✅ CAHIER DES CHARGES COMPLET – KIVUMARKET+**  
+**✅ CAHIER DES CHARGES COMPLET – KivuMobilier**  
 **Version enrichie (Intégration des huit axes d’amélioration – Avril 2026)**  
 
 ---
 
 ### 1. Présentation Générale du Projet
 
-**Nom** : KivuMarket+  
+**Nom** : KivuMobilier  
 **Slogan** : *La technologie au service de la sécurité foncière à Bukavu.*  
 **Contexte** : Spoliation foncière, falsification de titres, doubles ventes, opacité des transactions à Bukavu (Sud-Kivu, RDC).  
 **Objectif général** : Plateforme hybride (web centralisée + blockchain) sécurisant le cycle complet d’une transaction immobilière avec escrow automatique, traçabilité immuable et visites immersives 360°.

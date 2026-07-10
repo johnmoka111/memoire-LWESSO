@@ -1,5 +1,5 @@
 -- ============================================================
--- KivuMarket+ — Schéma MySQL 8.0
+-- KivuMobilier — Schéma MySQL 8.0
 -- Version enrichie (4 rôles + notifications + blockchain)
 -- ============================================================
 

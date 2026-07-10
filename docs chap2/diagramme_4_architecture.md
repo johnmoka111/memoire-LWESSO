@@ -12,4 +12,4 @@ flowchart LR
     style BC fill:#ffd54f,stroke:#f57f17
     style Ledger fill:#fff,stroke-dasharray: 5 5
 
-# Diagramme 4 : Architecture de Confiance (KivuMarket+)
+# Diagramme 4 : Architecture de Confiance (KivuMobilier)

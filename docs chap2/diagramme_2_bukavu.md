@@ -18,7 +18,7 @@ mindmap
       Commissionnaires informels
       Manque de transparence
       Conflits parcellaires récurrents
-    Solution KivuMarket+
+    Solution KivuMobilier
       Digitalisation des titres
       Certification par Blockchain
       Arbitrage Agent/Admin

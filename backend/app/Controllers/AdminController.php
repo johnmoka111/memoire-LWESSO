@@ -68,16 +68,16 @@ final class AdminController extends Controller
 
         // Envoi d'email professionnel
         try {
-            $subject = "Activation de compte Agent - KivuMarket+";
+            $subject = "Activation de compte Agent - KivuMobilier";
             $htmlBody = "
                 <div style='font-family: \"Segoe UI\", Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 4px; padding: 40px; color: #1e293b;'>
                     <div style='border-bottom: 2px solid #0f172a; padding-bottom: 20px; margin-bottom: 30px;'>
-                        <h1 style='color: #0f172a; margin: 0; font-size: 24px; letter-spacing: -0.025em;'>KIVUMARKET+</h1>
+                        <h1 style='color: #0f172a; margin: 0; font-size: 24px; letter-spacing: -0.025em;'>KivuMobilier</h1>
                         <p style='color: #64748b; font-size: 12px; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 0.1em;'>Système de Gestion Foncière</p>
                     </div>
 
                     <p style='font-size: 16px; line-height: 1.6;'>Bonjour {$agentData['prenom']},</p>
-                    <p style='font-size: 16px; line-height: 1.6;'>Votre compte agent a été activé avec succès dans le système de gestion foncière KivuMarket+.</p>
+                    <p style='font-size: 16px; line-height: 1.6;'>Votre compte agent a été activé avec succès dans le système de gestion foncière KivuMobilier.</p>
                     
                     <div style='margin: 30px 0; border: 1px solid #e2e8f0; border-radius: 4px;'>
                         <div style='background: #f8fafc; padding: 15px; border-bottom: 1px solid #e2e8f0;'>
@@ -108,7 +108,7 @@ final class AdminController extends Controller
 
                     <div style='margin-top: 50px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #94a3b8; text-align: center;'>
                         Ceci est un message automatique, merci de ne pas y répondre.<br>
-                        &copy; " . date('Y') . " KivuMarket+ - Sécurité Foncière Blockchain.
+                        &copy; " . date('Y') . " KivuMobilier - Sécurité Foncière Blockchain.
                     </div>
                 </div>
             ";
@@ -145,11 +145,11 @@ final class AdminController extends Controller
 
         if ($success) {
             // Envoyer le nouvel email
-            $subject = "Réinitialisation des accès - KivuMarket+";
+            $subject = "Réinitialisation des accès - KivuMobilier";
             $htmlBody = "
                 <div style='font-family: \"Segoe UI\", Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 4px; padding: 40px; color: #1e293b;'>
                     <div style='border-bottom: 2px solid #0f172a; padding-bottom: 20px; margin-bottom: 30px;'>
-                        <h1 style='color: #0f172a; margin: 0; font-size: 24px;'>KIVUMARKET+</h1>
+                        <h1 style='color: #0f172a; margin: 0; font-size: 24px;'>KivuMobilier</h1>
                     </div>
 
                     <p style='font-size: 16px;'>Bonjour {$agent['prenom']},</p>
@@ -233,11 +233,11 @@ final class AdminController extends Controller
             // Envoyer un mail si l'affectation a changé
             if ($assignmentChanged) {
                 try {
-                    $subject = "Mise à jour de votre affectation - KivuMarket+";
+                    $subject = "Mise à jour de votre affectation - KivuMobilier";
                     $htmlBody = "
                         <div style='font-family: \"Segoe UI\", Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 4px; padding: 40px; color: #1e293b;'>
                             <div style='border-bottom: 2px solid #0f172a; padding-bottom: 20px; margin-bottom: 30px;'>
-                                <h1 style='color: #0f172a; margin: 0; font-size: 24px; letter-spacing: -0.025em;'>KIVUMARKET+</h1>
+                                <h1 style='color: #0f172a; margin: 0; font-size: 24px; letter-spacing: -0.025em;'>KivuMobilier</h1>
                                 <p style='color: #64748b; font-size: 12px; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 0.1em;'>Système de Gestion Foncière</p>
                             </div>
 
@@ -267,7 +267,7 @@ final class AdminController extends Controller
 
                             <div style='margin-top: 50px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #94a3b8; text-align: center;'>
                                 Ceci est un message automatique, merci de ne pas y répondre.<br>
-                                &copy; " . date('Y') . " KivuMarket+ - Sécurité Foncière Blockchain.
+                                &copy; " . date('Y') . " KivuMobilier - Sécurité Foncière Blockchain.
                             </div>
                         </div>
                     ";

@@ -325,7 +325,7 @@ const Agents = () => {
               <div className="p-10 border-b border-white/5 flex justify-between items-center bg-gradient-to-r from-primary/10 to-transparent">
                  <div>
                    <h2 className="text-3xl font-black italic text-white tracking-tighter">{editingAgent ? 'Éditer' : createdAgentInfo?.isReset ? 'Réinitialisation' : 'Nouvel'} <span className="text-primary">Agent</span></h2>
-                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Plateforme KivuMarket+ — Bukavu, RDC</p>
+                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Plateforme KivuMobilier — Bukavu, RDC</p>
                  </div>
                  <button onClick={() => setShowAddModal(false)} className="p-4 bg-white/5 rounded-2xl hover:bg-red-500 transition-all text-white"><X size={24} /></button>
               </div>

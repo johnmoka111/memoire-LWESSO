@@ -213,7 +213,7 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Demande envoyée !</h3>
               <p className="text-slate-400 text-sm mb-6">
-                Un agent KivuMarket+ vous contactera sous 24h pour finaliser l'achat via escrow.
+                Un agent KivuMobilier vous contactera sous 24h pour finaliser l'achat via escrow.
               </p>
               <button
                 onClick={onClose}
@@ -541,7 +541,7 @@ const PropertyDetail = () => {
                 <Sparkles size={20} className="text-emerald-400" />
                 <div>
                   <p className="text-[9px] font-bold uppercase text-emerald-400">Transaction 100% sécurisée</p>
-                  <p className="text-[8px] text-slate-500">Garantie KivuMarket+</p>
+                  <p className="text-[8px] text-slate-500">Garantie KivuMobilier</p>
                 </div>
               </div>
             </div>

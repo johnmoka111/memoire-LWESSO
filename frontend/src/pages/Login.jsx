@@ -53,13 +53,13 @@ const Login = () => {
       >
         <div className="text-center mb-8 md:mb-10">
           <Link to="/" className="inline-flex items-center justify-center mb-6 transition-transform hover:scale-105 duration-300">
-            <img src="assets/logo.png" alt="KivuMarket+" className="w-20 h-20 md:w-24 md:h-24 object-contain" />
+            <img src="assets/logo.png" alt="KivuMobilier" className="w-20 h-20 md:w-24 md:h-24 object-contain" />
           </Link>
           <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-2 bg-gradient-to-r from-white via-white to-primary/70 bg-clip-text text-transparent">
             Connexion
           </h1>
           <p className="text-slate-500 font-bold tracking-[0.2em] uppercase text-[9px] md:text-[10px]">
-            Espace sécurisé KivuMarket+
+            Espace sécurisé KivuMobilier
           </p>
         </div>
 

@@ -205,7 +205,7 @@ final class PropertyController extends Controller
             // Notification Email à l'agent
             MailService::send(
                 $agent['email'],
-                "Nouvelle mission d'inspection - KivuMarket+",
+                "Nouvelle mission d'inspection - KivuMobilier",
                 "<h1>Bonjour " . $agent['prenom'] . "</h1><p>Une nouvelle mission de validation terrain vous a été assignée. Veuillez consulter votre dashboard pour plus de détails.</p>",
                 'assignment',
                 $agentId
@@ -273,9 +273,9 @@ final class PropertyController extends Controller
                         "<h1>Annonce Validée !</h1>
                          <p>Bonjour {$owner['nom']},</p>
                          <p>Votre bien <strong>{$property['titre']}</strong> situé à <strong>{$property['quartier']}, {$property['commune']}</strong> a été validé par notre agent terrain.</p>
-                         <p>Il est désormais visible par tous nos utilisateurs sur la plateforme KivuMarket+.</p>
+                         <p>Il est désormais visible par tous nos utilisateurs sur la plateforme KivuMobilier.</p>
                          <br>
-                         <p><em>L'équipe KivuMarket+</em></p>",
+                         <p><em>L'équipe KivuMobilier</em></p>",
                         'validation_owner',
                         (int)$owner['id']
                     );
@@ -404,7 +404,7 @@ final class PropertyController extends Controller
                          </div>
                          <p>Votre annonce n'est plus visible publiquement. Veuillez contacter le support ou corriger les informations nécessaires.</p>
                          <br>
-                         <p><em>L'équipe de Sécurité KivuMarket+</em></p>",
+                         <p><em>L'équipe de Sécurité KivuMobilier</em></p>",
                         'rejet_owner',
                         (int)$owner['id']
                     );

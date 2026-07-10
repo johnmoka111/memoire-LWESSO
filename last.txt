@@ -1,6 +1,6 @@
 Je vérifie à nouveau le statut du commit.
 
-C'est fait ! Voici le récapitulatif des actions effectuées pour finaliser cette étape de **KivuMarket+** :
+C'est fait ! Voici le récapitulatif des actions effectuées pour finaliser cette étape de **KivuMobilier** :
 
 1.  **Documentation (README.md)** : J'ai rédigé un nouveau fichier README complet, structuré et professionnel, détaillant l'architecture technique, les nouvelles fonctionnalités (Carte Leaflet plein écran, centre de messages) et les instructions d'installation, le tout sans emojis.
 2.  **Sauvegarde (Git)** :
