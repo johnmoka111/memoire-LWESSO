@@ -4,17 +4,22 @@ import { Wallet, Search, Filter, ArrowUpRight, AlertCircle, Loader2 } from 'luci
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
+import { API_URL } from '../config';
 
 const Transactions = () => {
   const [txs, setTxs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/transactions')
+    const token = localStorage.getItem('token');
+    axios.get(`${API_URL}/transactions`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
       .then(res => setTxs(res.data.data || []))
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
   }, []);
+
 
   return (
     <div className="flex min-h-screen bg-dark">

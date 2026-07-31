@@ -111,6 +111,8 @@ final class Property extends Model
                 JOIN users u ON p.owner_id = u.id 
                 WHERE p.statut = 'en_attente'";
         return $this->db->query($sql)->fetchAll();
+    }
+
     /**
      * Rejette une annonce pour cause de litige ou non-conformité.
      */
