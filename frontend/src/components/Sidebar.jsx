@@ -65,7 +65,8 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = '/#/login';
+    window.location.hash = '#/login';
+    window.location.reload();
   };
 
   const openSecurityModal = (to) => {
@@ -75,7 +76,8 @@ const Sidebar = () => {
 
   const confirmSecurityExit = () => {
     localStorage.clear();
-    window.location.href = '/#/';
+    window.location.hash = '#/';
+    window.location.reload();
   };
 
   return (
@@ -144,10 +146,7 @@ const Sidebar = () => {
         <div className="pt-6 border-t border-white/5 space-y-2">
           <SidebarLink to="/settings" icon={Settings} label="Paramètres" active={isActive('/settings')} />
           <button 
-            onClick={() => {
-                localStorage.clear();
-                window.location.href = '/#/';
-            }}
+            onClick={handleLogout}
             className="flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-red-400 hover:bg-red-500/10 transition-all font-bold text-sm"
           >
             <LogOut size={20} />

@@ -16,7 +16,8 @@ const Navbar = () => {
       const confirm = window.confirm("Sécurité : Pour accéder à la zone publique, vous devez vous déconnecter. Souhaitez-vous fermer votre session ?");
       if (confirm) {
         localStorage.clear();
-        window.location.href = '/#/';
+        window.location.hash = '#/';
+        window.location.reload();
       }
     } else {
       navigate(to);
@@ -65,7 +66,8 @@ const Navbar = () => {
             <button 
               onClick={() => {
                 localStorage.clear();
-                window.location.href = '/#/';
+                window.location.hash = '#/';
+                window.location.reload();
               }}
               className="p-2 text-slate-500 hover:text-red-500 transition-colors"
               title="Déconnexion"
