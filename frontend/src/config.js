@@ -1,5 +1,6 @@
 // Version Apache (XAMPP Standard)
 export const API_URL = "http://localhost/kivumarket/backend/public/index.php/api";
 
-// Alternative si vous lancez le serveur manuellement via : php -S localhost:8080 -t public
-// export const API_URL = "http://127.0.0.1:8080/api";
+// Adresse du Smart Contract KivuMarketTitle (par défaut premier contrat Hardhat Localhost)
+export const CONTRACT_ADDRESS = localStorage.getItem('CONTRACT_ADDRESS') || "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
+

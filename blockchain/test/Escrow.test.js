@@ -95,7 +95,7 @@ describe("KivuMarketTitle - Tests NFT & Escrow", function () {
     });
 
     it("Devrait interdire la libération si le titre n'est pas vérifié", async function () {
-      await contract.connect(seller).mintTitle(uri, "hash2", "coords2"); // Token 1
+      await contract.connect(seller).mintTitle(uri, ethers.id("hash2"), "coords2"); // Token 1
       await contract.connect(buyer).depositEscrow(1, { value: amount });
       
       await expect(contract.connect(buyer).releaseFunds(1))

@@ -81,7 +81,7 @@ const AgentMissions = () => {
       setPanoramaUrl('');
       fetchMissions();
     } catch (err) {
-      alert("Erreur lors de la validation");
+      alert(err.response?.data?.message || "Erreur lors de la validation");
     }
   };
 
@@ -105,7 +105,7 @@ const AgentMissions = () => {
       setCustomReason('');
       fetchMissions();
     } catch (err) {
-      alert("Erreur lors du rejet");
+      alert(err.response?.data?.message || "Erreur lors du rejet");
     }
   };
 

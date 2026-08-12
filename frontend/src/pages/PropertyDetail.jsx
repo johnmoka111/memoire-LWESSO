@@ -9,7 +9,8 @@ import {
 } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import { API_URL } from '../config';
+import { API_URL, CONTRACT_ADDRESS } from '../config';
+import { BrowserProvider, parseEther, Contract } from 'ethers';
 import Navbar from '../components/Navbar';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
@@ -87,26 +88,155 @@ const PanoramaViewer = ({ url }) => {
   return <div ref={ref} className="w-full h-full" />;
 };
 
-// Composant Modal d'achat Escrow
+// Fonction de formatage des erreurs Web3 / MetaMask en français clair
+const formatWeb3Error = (err) => {
+  if (!err) return "Une erreur inconnue est survenue.";
+  
+  let msg = "";
+  try {
+    msg = typeof err === 'object' ? JSON.stringify(err) : String(err);
+  } catch (e) {
+    msg = String(err);
+  }
+  
+  const shortMsg = err.reason || err.shortMessage || err.message || "";
+  const fullText = (msg + " " + shortMsg).toLowerCase();
+
+  if (err?.code === 'ACTION_REJECTED' || fullText.includes('user rejected') || fullText.includes('action_rejected') || fullText.includes('4001')) {
+    return "Transaction annulée : Vous avez refusé la signature dans votre wallet MetaMask.";
+  }
+  if (fullText.includes('transaction deja en cours') || fullText.includes('deja en cours')) {
+    return "Opération impossible : Ce bien fait déjà l'objet d'un dépôt en séquestre actif sur le Smart Contract.";
+  }
+  if (fullText.includes('proprietaire ne peut pas acheter') || fullText.includes('own property') || fullText.includes('son propre bien')) {
+    return "Opération impossible : Votre compte MetaMask actuel est le propriétaire vendeur de ce bien.";
+  }
+  if (fullText.includes('insufficient funds') || fullText.includes('exceeds balance')) {
+    return "Solde insuffisant : Votre portefeuille n'a pas assez d'ETH pour valider cette transaction.";
+  }
+  if (fullText.includes('erc721nonexistenttoken') || fullText.includes('nonexistent token') || fullText.includes('invalid token')) {
+    return "Titre NFT non trouvé : Ce bien n'a pas encore été mis en vente on-chain par son propriétaire.";
+  }
+  if (fullText.includes('execution reverted')) {
+    const match = fullText.match(/execution reverted: "([^"]+)"/);
+    if (match && match[1]) {
+      return `Règle Smart Contract : ${match[1]}`;
+    }
+    return "La transaction a été refusée par les règles du Smart Contract.";
+  }
+
+  return err.reason || err.shortMessage || err.message || "Erreur lors de l'exécution de la transaction MetaMask.";
+};
+
+// Composant Modal d'achat Escrow avec MetaMask & Ethers.js
 const PurchaseModal = ({ property, onClose, onSuccess }) => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    nom: '',
-    email: '',
-    telephone: '',
-    message: ''
-  });
+  const [errorMsg, setErrorMsg] = useState('');
+  const [txHash, setTxHash] = useState('');
+  const [walletAccount, setWalletAccount] = useState('');
+
+  useEffect(() => {
+    // Vérifier si MetaMask est connecté au chargement
+    if (window.ethereum) {
+      window.ethereum.request({ method: 'eth_accounts' })
+        .then(accounts => {
+          if (accounts && accounts.length > 0) {
+            setWalletAccount(accounts[0]);
+          }
+        })
+        .catch(err => console.error("Erreur détection wallet:", err));
+    }
+  }, []);
+
+  const connectWallet = async () => {
+    if (!window.ethereum) {
+      setErrorMsg("MetaMask n'est pas détecté dans votre navigateur Chrome !");
+      return;
+    }
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      if (accounts && accounts.length > 0) {
+        setWalletAccount(accounts[0]);
+        setErrorMsg('');
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMsg("Connexion MetaMask annulée ou refusée.");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // Simulation d'appel API d'achat (à adapter selon votre backend)
-    setTimeout(() => {
+    setErrorMsg('');
+
+    // Vérifier si l'utilisateur est authentifié sur le site
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setErrorMsg("Veuillez d'abord vous connecter à votre compte KivuMarket+ pour réaliser cet achat.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      if (!window.ethereum) {
+        throw new Error("MetaMask n'est pas disponible sur votre navigateur.");
+      }
+
+      const provider = new BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const currentAccount = await signer.getAddress();
+      setWalletAccount(currentAccount);
+
+      // Calcul du montant en ETH (prix du bien)
+      const ethAmount = property?.prix ? String(property.prix) : "0.1";
+      const value = parseEther(ethAmount);
+
+      let hash = "";
+
+      // Soumettre au Smart Contract KivuMarketTitle
+      const titleAbi = [
+        "function depositEscrow(uint256 _tokenId) external payable",
+        "function ownerOf(uint256 tokenId) external view returns (address)"
+      ];
+      const titleContract = new Contract(CONTRACT_ADDRESS, titleAbi, signer);
+
+      // Alignement du Token ID de la blockchain (0-indexed) avec l'ID de la propriété
+      const tokenId = (property?.id && property.id > 0) ? (property.id - 1) : 0;
+
+      const tx = await titleContract.depositEscrow(tokenId, { value });
+      hash = tx.hash;
+      await tx.wait();
+
+      setTxHash(hash);
+
+      // Enregistrement de la transaction dans le backend PHP via l'API REST
+      try {
+        const token = localStorage.getItem('token');
+        if (token) {
+          await axios.post(`${API_URL}/transactions`, {
+            property_id: property?.id || 1,
+            escrow_id: property?.id || 1,
+            montant_eth: ethAmount,
+            tx_creation: hash
+          }, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+        }
+      } catch (backendErr) {
+        console.warn("La transaction Blockchain est validée avec succès, enregistrement API PHP secondaire :", backendErr);
+      }
+
       setLoading(false);
       setStep(2);
       if (onSuccess) onSuccess();
-    }, 1500);
+
+    } catch (err) {
+      console.error("Erreur transaction MetaMask:", err);
+      setLoading(false);
+      setErrorMsg(formatWeb3Error(err));
+    }
   };
 
   return (
@@ -132,7 +262,7 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
               <Wallet size={20} className="text-primary" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">Achat sécurisé via Escrow</h3>
+              <h3 className="text-lg font-bold text-white">Achat Blockchain via MetaMask</h3>
               <p className="text-[9px] text-slate-500 uppercase tracking-wider">{property?.titre}</p>
             </div>
           </div>
@@ -145,61 +275,63 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
           {step === 1 ? (
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="bg-gradient-to-r from-primary/5 to-transparent border border-primary/10 rounded-xl p-4 mb-4">
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-slate-400">Prix total</span>
-                  <span className="text-2xl font-bold text-white">${property?.prix?.toLocaleString()} USD</span>
+                <div className="flex justify-between items-center text-sm mb-2">
+                  <span className="text-slate-400">Prix en ETH</span>
+                  <span className="text-2xl font-bold text-white">{property?.prix || "0.1"} ETH</span>
                 </div>
-                <div className="flex justify-between items-center text-xs text-slate-500 mt-2">
-                  <span>Frais de séquestre inclus</span>
-                  <span className="text-emerald-400">0% commission</span>
+                <div className="flex justify-between items-center text-xs text-slate-500">
+                  <span>Smart Contract Escrow</span>
+                  <span className="text-emerald-400 font-mono text-[10px] truncate max-w-[200px]">{CONTRACT_ADDRESS}</span>
                 </div>
               </div>
 
-              <div>
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-2">Nom complet</label>
-                <input
-                  type="text"
-                  required
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-primary/50 focus:bg-white/[0.05] outline-none transition-all"
-                  value={formData.nom}
-                  onChange={e => setFormData({ ...formData, nom: e.target.value })}
-                />
+              {/* État du Wallet */}
+              <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Wallet size={20} className={walletAccount ? "text-emerald-400" : "text-amber-400"} />
+                  <div>
+                    <p className="text-xs font-semibold text-white">
+                      {walletAccount ? "MetaMask Connecté" : "Wallet non connecté"}
+                    </p>
+                    <p className="text-[10px] text-slate-400 font-mono">
+                      {walletAccount ? `${walletAccount.substring(0, 8)}...${walletAccount.substring(walletAccount.length - 6)}` : "Cliquez pour connecter votre adresse"}
+                    </p>
+                  </div>
+                </div>
+                {!walletAccount && (
+                  <button
+                    type="button"
+                    onClick={connectWallet}
+                    className="px-3 py-1.5 bg-primary/20 hover:bg-primary/30 text-primary text-xs font-bold rounded-lg border border-primary/30 transition-all"
+                  >
+                    Connecter
+                  </button>
+                )}
               </div>
-              <div>
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-2">Email</label>
-                <input
-                  type="email"
-                  required
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-primary/50 focus:bg-white/[0.05] outline-none transition-all"
-                  value={formData.email}
-                  onChange={e => setFormData({ ...formData, email: e.target.value })}
-                />
-              </div>
-              <div>
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-2">Téléphone</label>
-                <input
-                  type="tel"
-                  required
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-primary/50 focus:bg-white/[0.05] outline-none transition-all"
-                  value={formData.telephone}
-                  onChange={e => setFormData({ ...formData, telephone: e.target.value })}
-                />
-              </div>
-              <div>
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-2">Message (optionnel)</label>
-                <textarea
-                  rows="2"
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-primary/50 focus:bg-white/[0.05] outline-none transition-all resize-none"
-                  value={formData.message}
-                  onChange={e => setFormData({ ...formData, message: e.target.value })}
-                />
-              </div>
+
+              {errorMsg && (
+                <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2">
+                  <AlertTriangle size={16} />
+                  <span>{errorMsg}</span>
+                </div>
+              )}
+
               <button
                 type="submit"
                 disabled={loading}
                 className="w-full py-3.5 bg-gradient-to-r from-primary to-indigo-500 hover:from-primary/90 hover:to-indigo-500/90 text-white font-bold rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2"
               >
-                {loading ? <Loader2 className="animate-spin" size={18} /> : <><Lock size={16} /> Lancer la procédure sécurisée</>}
+                {loading ? (
+                  <>
+                    <Loader2 className="animate-spin" size={18} />
+                    <span>Transaction MetaMask en cours...</span>
+                  </>
+                ) : (
+                  <>
+                    <Lock size={16} />
+                    <span>Signer et déposer en Séquestre</span>
+                  </>
+                )}
               </button>
             </form>
           ) : (
@@ -211,10 +343,18 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
               <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-6">
                 <CheckCircle size={40} className="text-emerald-400" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Demande envoyée !</h3>
-              <p className="text-slate-400 text-sm mb-6">
-                Un agent KivuMobilier vous contactera sous 24h pour finaliser l'achat via escrow.
+              <h3 className="text-xl font-bold text-white mb-2">Dépôt Escrow Réussi !</h3>
+              <p className="text-slate-400 text-sm mb-4">
+                Les fonds ont été bloqués sur le Smart Contract et enregistrés dans le système.
               </p>
+
+              {txHash && (
+                <div className="p-3 bg-white/[0.03] border border-white/10 rounded-xl text-left mb-6">
+                  <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Hash de transaction</p>
+                  <p className="text-xs font-mono text-emerald-400 break-all">{txHash}</p>
+                </div>
+              )}
+
               <button
                 onClick={onClose}
                 className="px-6 py-2.5 bg-white/5 hover:bg-white/10 rounded-xl text-sm font-semibold transition-all"

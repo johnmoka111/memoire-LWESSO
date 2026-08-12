@@ -223,11 +223,7 @@ final class PropertyController extends Controller
     public function validate(Request $request, array $params): void
     {
         $propertyId = (int) $params['id'];
-        $panoramaUrl = $request->input('panorama_url');
-        
-        if (!$panoramaUrl) {
-            Response::error('Le lien du panorama 360° est requis pour la validation', 400);
-        }
+        $panoramaUrl = $request->input('panorama_url') ?: '';
 
         // --- SÉCURITÉ : Vérifier si l'agent est bien assigné à cette propriété ---
         $property = $this->propertyModel->find($propertyId);

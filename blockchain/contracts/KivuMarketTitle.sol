@@ -25,9 +25,11 @@ contract KivuMarketTitle is ERC721URIStorage, Ownable, ReentrancyGuard {
 
     mapping(uint256 => TitleMetadata) public titles;
     mapping(address => bool) public isCertifiedAgent;
+    mapping(bytes32 => bool) public documentHashes;
 
     event TitleMinted(uint256 indexed tokenId, bytes32 docHash, address owner);
     event TitleVerified(uint256 indexed tokenId, address agent);
+    event DocumentHashStored(bytes32 indexed docHash);
     event EscrowDeposited(uint256 indexed tokenId, uint256 amount, address buyer);
     event SaleFinalized(uint256 indexed tokenId, address newOwner, uint256 amount);
 
@@ -36,6 +38,12 @@ contract KivuMarketTitle is ERC721URIStorage, Ownable, ReentrancyGuard {
     // --- GESTION DES AGENTS (Orientation 2) ---
     function setAgentStatus(address _agent, bool _status) external onlyOwner {
         isCertifiedAgent[_agent] = _status;
+    }
+
+    // --- ANCRAGE TECHNIQUE (Optionnel - pour compatibilité backend) ---
+    function storeDocumentHash(bytes32 _docHash) external {
+        documentHashes[_docHash] = true;
+        emit DocumentHashStored(_docHash);
     }
 
     // --- ANCRAGE IMMUABLE & MINT (Orientation 1) ---
