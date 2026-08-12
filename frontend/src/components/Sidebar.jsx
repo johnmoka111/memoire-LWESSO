@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { LogoIcon } from './Logo';
 import { 
   LayoutDashboard, 
   Home, 
@@ -102,11 +103,9 @@ const Sidebar = () => {
           onClick={() => openSecurityModal('/')}
           className="flex items-center gap-3 mb-10 px-2 cursor-pointer group"
         >
-          <div className="w-8 h-8 rounded-lg bg-white/5 p-1 group-hover:bg-primary/10 transition-colors">
-            <img src="assets/logo.png" alt="KivuMobilier" className="w-full h-full object-contain" />
-          </div>
-          <span className="font-black text-lg tracking-tighter group-hover:text-primary transition-colors">
-            KivuMarket<span className="text-primary">+</span>
+          <LogoIcon size="sm" />
+          <span className="font-black text-base tracking-tighter group-hover:text-indigo-400 transition-colors">
+            Kivu Immobilier<span className="text-indigo-400">+</span>
           </span>
         </div>
 

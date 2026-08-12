@@ -4,6 +4,7 @@ import { Shield, ArrowLeft, ArrowRight, Check, MapPin, DollarSign, FileText, Cam
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
+import { LogoIcon } from '../components/Logo';
 import { API_URL } from '../config';
 import { KIVU_LOCATIONS } from '../data/locations';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
@@ -162,9 +163,9 @@ const CreateProperty = () => {
       <Navbar />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-8 py-8 md:py-12">
-        <div className="mb-10 text-center">
-          <img src="assets/logo.png" alt="Logo" className="w-12 h-12 mx-auto mb-4 opacity-50" />
-          <h1 className="text-2xl md:text-3xl font-black mb-2 text-white">Nouvelle Annonce</h1>
+        <div className="mb-10 text-center flex flex-col items-center">
+          <LogoIcon size="md" />
+          <h1 className="text-2xl md:text-3xl font-black mt-4 mb-2 text-white">Nouvelle Annonce</h1>
           <p className="text-slate-500 text-[10px] uppercase tracking-widest font-bold">Sécurisation Blockchain en cours</p>
         </div>
 
@@ -173,7 +174,6 @@ const CreateProperty = () => {
         </div>
 
         <div className="card relative overflow-hidden bg-secondary/10 border-white/5">
-          <img src="assets/logo.png" alt="Watermark" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 opacity-[0.02] pointer-events-none" />
 
           <AnimatePresence mode="wait">
             {step === 1 && (

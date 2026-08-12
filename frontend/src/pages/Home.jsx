@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Shield, MapPin, CheckCircle, ArrowRight, Wallet, Globe, Lock, Sparkles, TrendingUp, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { LogoIcon } from '../components/Logo';
 
 const Home = () => {
   return (
@@ -37,7 +38,7 @@ const Home = () => {
               </h1>
 
               <p className="text-base md:text-lg lg:text-xl text-slate-400 max-w-lg leading-relaxed">
-                KivuMobilier sécurise vos achats à Bukavu grâce à la validation terrain et l'escrow blockchain. Achetez, vendez et gérez vos biens en toute confiance.
+                Kivu Immobilier sécurise vos achats à Bukavu grâce à la validation terrain et l'escrow blockchain. Achetez, vendez et gérez vos biens en toute confiance.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -79,12 +80,9 @@ const Home = () => {
                 {/* Cercle décoratif */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-indigo-500/20 rounded-full blur-3xl opacity-50" />
 
-                <div className="relative z-10 bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-sm rounded-3xl border border-white/10 p-8 md:p-12 shadow-2xl">
-                  <img
-                    src="assets/logo.png"
-                    alt="KivuMobilier Logo"
-                    className="w-full max-w-[280px] mx-auto object-contain"
-                  />
+                <div className="relative z-10 bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-sm rounded-3xl border border-white/10 p-12 md:p-16 shadow-2xl flex flex-col items-center justify-center gap-4">
+                  <LogoIcon size="xl" />
+                  <span className="text-xl font-bold tracking-tight text-white">Kivu Immobilier<span className="text-indigo-400">+</span></span>
                 </div>
 
                 {/* Badge flottant 1 */}

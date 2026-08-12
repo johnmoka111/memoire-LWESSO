@@ -145,8 +145,8 @@ final class PropertyController extends Controller
             $docModel = new \App\Models\Document();
             
             // On enregistre un chemin relatif que le serveur pourra servir
-            // Sous XAMPP, on peut y accéder via : http://localhost/kivu%20market/backend/storage/uploads/
-            $baseUrl = "http://localhost/kivu%20market/backend/storage/uploads/";
+            // Sous XAMPP, on peut y accéder via : http://localhost/kivu_immobilier/backend/storage/uploads/
+            $baseUrl = "http://localhost/kivu_immobilier/backend/storage/uploads/";
             $fileUrl = $baseUrl . $filename;
 
             $docModel->register([
@@ -205,7 +205,7 @@ final class PropertyController extends Controller
             // Notification Email à l'agent
             MailService::send(
                 $agent['email'],
-                "Nouvelle mission d'inspection - KivuMobilier",
+                "Nouvelle mission d'inspection - Kivu Immobilier",
                 "<h1>Bonjour " . $agent['prenom'] . "</h1><p>Une nouvelle mission de validation terrain vous a été assignée. Veuillez consulter votre dashboard pour plus de détails.</p>",
                 'assignment',
                 $agentId
@@ -269,9 +269,9 @@ final class PropertyController extends Controller
                         "<h1>Annonce Validée !</h1>
                          <p>Bonjour {$owner['nom']},</p>
                          <p>Votre bien <strong>{$property['titre']}</strong> situé à <strong>{$property['quartier']}, {$property['commune']}</strong> a été validé par notre agent terrain.</p>
-                         <p>Il est désormais visible par tous nos utilisateurs sur la plateforme KivuMobilier.</p>
+                         <p>Il est désormais visible par tous nos utilisateurs sur la plateforme Kivu Immobilier.</p>
                          <br>
-                         <p><em>L'équipe KivuMobilier</em></p>",
+                         <p><em>L'équipe Kivu Immobilier</em></p>",
                         'validation_owner',
                         (int)$owner['id']
                     );
@@ -400,7 +400,7 @@ final class PropertyController extends Controller
                          </div>
                          <p>Votre annonce n'est plus visible publiquement. Veuillez contacter le support ou corriger les informations nécessaires.</p>
                          <br>
-                         <p><em>L'équipe de Sécurité KivuMobilier</em></p>",
+                         <p><em>L'équipe de Sécurité Kivu Immobilier</em></p>",
                         'rejet_owner',
                         (int)$owner['id']
                     );

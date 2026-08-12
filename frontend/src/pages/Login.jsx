@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Lock, Loader2, ArrowRight, Shield, Eye, EyeOff, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Lock, Loader2, ArrowRight, Shield, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../config';
+import { LogoIcon } from '../components/Logo';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -19,13 +20,21 @@ const Login = () => {
     setError('');
 
     try {
-      const res = await axios.post(`${API_URL}/auth/login`, { email, password });
-      localStorage.setItem('token', res.data.data.token);
-      localStorage.setItem('user', JSON.stringify(res.data.data.user));
-      navigate('/dashboard');
+      const response = await axios.post(`${API_URL}/auth/login`, {
+        email,
+        password
+      });
+
+      if (response.data.status === 'success') {
+        const { token, user } = response.data.data;
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        
+        navigate('/dashboard');
+      }
     } catch (err) {
-      console.error('Erreur API:', err);
-      setError(err.response?.data?.message || 'Impossible de contacter le serveur. Vérifiez vos identifiants ou votre connexion.');
+      console.error(err);
+      setError(err.response?.data?.error || err.response?.data?.message || 'Impossible de contacter le serveur. Vérifiez vos identifiants ou votre connexion.');
     } finally {
       setLoading(false);
     }
@@ -41,7 +50,7 @@ const Login = () => {
         
         {/* Filigrane Logo Centré */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-[0.02] pointer-events-none">
-            <img src="assets/logo.png" alt="" className="w-full h-full object-contain" />
+            <LogoIcon className="w-full h-full" />
         </div>
       </div>
 
@@ -53,13 +62,13 @@ const Login = () => {
       >
         <div className="text-center mb-8 md:mb-10">
           <Link to="/" className="inline-flex items-center justify-center mb-6 transition-transform hover:scale-105 duration-300">
-            <img src="assets/logo.png" alt="KivuMobilier" className="w-20 h-20 md:w-24 md:h-24 object-contain" />
+            <LogoIcon size="xl" />
           </Link>
           <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-2 bg-gradient-to-r from-white via-white to-primary/70 bg-clip-text text-transparent">
             Connexion
           </h1>
           <p className="text-slate-500 font-bold tracking-[0.2em] uppercase text-[9px] md:text-[10px]">
-            Espace sécurisé KivuMobilier
+            Espace sécurisé Kivu Immobilier
           </p>
         </div>
 
@@ -96,7 +105,7 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-white/[0.03] border border-white/10 rounded-xl pl-11 pr-4 py-3.5 text-sm outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all placeholder:text-slate-600"
-                    placeholder="agent@kivumarket.cd"
+                    placeholder="agent@kivuimmobilier.cd"
                     required
                   />
                 </div>

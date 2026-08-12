@@ -1,7 +1,7 @@
 {
-  "name": "kivumarket-blockchain",
+  "name": "kivu-immobilier-blockchain",
   "version": "1.0.0",
-  "description": "Smart Contracts pour KivuMobilier",
+  "description": "Smart Contracts pour Kivu Immobilier",
   "main": "index.js",
   "scripts": {
     "test": "hardhat test",

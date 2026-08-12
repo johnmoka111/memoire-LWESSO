@@ -6,11 +6,11 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 /**
- * @title KivuMarketTitle
+ * @title KivuImmobilierTitle
  * @dev Représentation des titres fonciers sous forme de NFT (ERC-721) avec logique d'Escrow.
  * Suit strictement les orientations : Ancrage (NFT), Certification (Agent Oracle), Séquestre (Payable).
  */
-contract KivuMarketTitle is ERC721URIStorage, Ownable, ReentrancyGuard {
+contract KivuImmobilierTitle is ERC721URIStorage, Ownable, ReentrancyGuard {
     
     uint256 private _nextTokenId;
     
@@ -33,7 +33,7 @@ contract KivuMarketTitle is ERC721URIStorage, Ownable, ReentrancyGuard {
     event EscrowDeposited(uint256 indexed tokenId, uint256 amount, address buyer);
     event SaleFinalized(uint256 indexed tokenId, address newOwner, uint256 amount);
 
-    constructor() ERC721("Kivu Market Title", "KIVU") Ownable(msg.sender) {}
+    constructor() ERC721("Kivu Immobilier Title", "KIVU") Ownable(msg.sender) {}
 
     // --- GESTION DES AGENTS (Orientation 2) ---
     function setAgentStatus(address _agent, bool _status) external onlyOwner {

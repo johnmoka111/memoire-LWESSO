@@ -8,15 +8,6 @@
     font-family: 'Outfit', sans-serif;
   }
   
-  /* Global Watermark - Applied to all pages - Overlays everything */
-  body::after {
-    content: "";
-    @apply fixed inset-0 pointer-events-none z-[-1] opacity-[0.05];
-    background-image: url('assets/logo.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 800px;
-  }
 }
 
 @layer components {

@@ -6,7 +6,7 @@ graph TD
         ADM[Administrateur]
     end
 
-    subgraph "Kivu Market+ (Système)"
+    subgraph "Kivu Immobilier+ (Système)"
         UC1(("S'authentifier"))
         UC2(("Soumettre une propriété"))
         UC3(("Consulter le catalogue"))

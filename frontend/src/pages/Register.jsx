@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../config';
 
+import { LogoIcon } from '../components/Logo';
+
 const Register = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -39,7 +41,7 @@ const Register = () => {
       >
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex mb-6">
-            <img src="assets/logo.png" alt="Logo" className="w-16 h-16 object-contain" />
+            <LogoIcon size="lg" />
           </Link>
           <h1 className="text-3xl font-black mb-2">Inscription</h1>
           
@@ -52,7 +54,6 @@ const Register = () => {
         </div>
 
         <div className="card relative overflow-hidden">
-          <img src="assets/logo.png" alt="Watermark" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 opacity-[0.02] pointer-events-none" />
 
           <AnimatePresence mode="wait">
             {step === 1 && (

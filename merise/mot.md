@@ -4,7 +4,7 @@ graph TD
         A2[Envoyer justificatifs]
     end
 
-    subgraph "SYSTEME KIVUMARKET (Automatique)"
+    subgraph "SYSTEME KIVU IMMOBILIER (Automatique)"
         S1{Verification Login}
         S2[Enregistrement DB]
         S3[Notification Admin]

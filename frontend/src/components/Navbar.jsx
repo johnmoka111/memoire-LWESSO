@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Shield, User, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, User, Shield } from 'lucide-react';
+import { LogoIcon, BrandName } from './Logo';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
@@ -36,13 +37,8 @@ const Navbar = () => {
           onClick={() => handleSecurityExit('/')}
           className="flex items-center gap-3 cursor-pointer group"
         >
-          <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl overflow-hidden bg-white/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-            <img src="assets/logo.png" alt="KivuMobilier" className="w-full h-full object-contain" />
-          </div>
-          <div className="flex flex-col leading-tight">
-            <span className="font-bold text-base md:text-lg tracking-tight text-white group-hover:text-primary transition-colors">KivuMarket<span className="text-primary">+</span></span>
-            <span className="hidden md:block text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Blockchain Immobilier</span>
-          </div>
+          <LogoIcon size="md" />
+          <BrandName />
         </div>
       </div>
 

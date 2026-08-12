@@ -40,10 +40,7 @@ const PropertyCard = ({ property, index }) => {
         {property.image_url ? (
           <img src={property.image_url} alt={property.titre} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
         ) : (
-          <>
-            <img src="assets/logo.png" alt="Watermark" className="absolute w-24 h-24 opacity-10" />
-            <HomeIcon size={56} className="text-white/10 relative z-10" />
-          </>
+          <HomeIcon size={56} className="text-white/10 relative z-10" />
         )}
         <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full border text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm ${statusStyles[property.statut]}`}>
           {property.statut === 'valide' && 'Validé'}
@@ -347,7 +344,7 @@ const Properties = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
           <div className="max-w-xl">
             <h1 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">
-              Découvrez le <span className="text-primary italic">Marché Kivu</span>
+              Découvrez <span className="text-primary italic">Kivu Immobilier</span>
             </h1>
             <p className="text-slate-400 text-sm md:text-base">Explorez des biens certifiés sur la blockchain au Sud-Kivu.</p>
           </div>

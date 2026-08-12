@@ -1,4 +1,4 @@
-# KivuMobilier — Cahier des Charges
+# Kivu Immobilier — Cahier des Charges
 
 > **Slogan** : *La technologie au service de la sécurité foncière à Bukavu.*
 
@@ -6,7 +6,7 @@
 
 ## 1. Présentation du Projet
 
-- **Nom** : KivuMobilier
+- **Nom** : Kivu Immobilier
 - **Slogan** : La technologie au service de la sécurité foncière à Bukavu.
 - **Objectif général** : Digitaliser et sécuriser les transactions immobilières à Bukavu en combinant une plateforme web classique et la technologie blockchain pour lutter contre la spoliation foncière.
 - **Innovation principale** : Utiliser un smart contract Solidity pour automatiser le séquestre (escrow), bloquer les fonds de l'acheteur jusqu'à la validation finale par un agent de terrain, et libérer les fonds uniquement après confirmation.

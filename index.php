@@ -1,4 +1,4 @@
 <?php
-// Redirection vers le frontend KivuMobilier
-header('Location: /kivumarket/frontend/public/index.html');
+// Redirection vers le frontend Kivu Immobilier
+header('Location: /kivu_immobilier/frontend/public/index.html');
 exit;

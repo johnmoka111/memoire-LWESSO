@@ -14,7 +14,7 @@ spl_autoload_register(function (string $class): void {
 use App\Models\User;
 
 $userModel = new User();
-$email = 'admin@kivumarket.cd';
+$email = 'admin@kivuimmobilier.cd';
 $password = 'Admin@Kivu2026!';
 
 $user = $userModel->findByEmail($email);
@@ -28,7 +28,7 @@ if ($user) {
 } else {
     echo "Creating admin user...\n";
     $userModel->create([
-        'nom' => 'Market',
+        'nom' => 'Immobilier',
         'prenom' => 'Admin',
         'email' => $email,
         'password' => $password,

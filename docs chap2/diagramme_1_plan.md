@@ -16,7 +16,7 @@ flowchart TD
         subgraph S2 ["2.2 Méthodologie Logicielle"]
             C --> C1[Le Modèle Processus : SCRUM]
             C1 --> C2[Planification des Sprints]
-            C1 --> C3[Développement incrémental de KivuMobilier]
+            C1 --> C3[Développement incrémental de Kivu Immobilier]
             C1 --> C4[Validation et Tests utilisateurs]
         end
     end

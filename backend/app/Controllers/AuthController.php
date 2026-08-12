@@ -48,7 +48,7 @@ final class AuthController extends Controller
         // Notification Email (spécifié dans am.md)
         MailService::send(
             $request->input('email'),
-            "Bienvenue sur KivuMobilier",
+            "Bienvenue sur Kivu Immobilier",
             "<h1>Bonjour " . $request->input('prenom') . "</h1><p>Votre compte a été créé avec succès. Vous pouvez maintenant sécuriser vos transactions foncières à Bukavu.</p>",
             'registration',
             $userId

@@ -1,6 +1,6 @@
 <?php
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=kivumarket', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=kivu_immobilier', 'root', '');
     
     // Créer la table notifications si elle n'existe pas
     $pdo->exec("CREATE TABLE IF NOT EXISTS notifications (

@@ -1,13 +1,13 @@
 -- ============================================================
--- KivuMobilier — Schéma MySQL 8.0
+-- Kivu Immobilier — Schéma MySQL 8.0
 -- Version enrichie (4 rôles + notifications + blockchain)
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS kivumarket
+CREATE DATABASE IF NOT EXISTS kivu_immobilier
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
-USE kivumarket;
+USE kivu_immobilier;
 
 -- ─── USERS ────────────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS users (
@@ -143,8 +143,8 @@ CREATE TABLE IF NOT EXISTS property_photos (
 -- Mot de passe : Admin@Kivu2026! (à changer en production)
 INSERT INTO users (nom, prenom, email, password, role, is_active, email_verified)
 VALUES (
-    'Admin', 'KivuMarket',
-    'admin@kivumarket.cd',
+    'Admin', 'Kivu Immobilier',
+    'admin@kivuimmobilier.cd',
     '$2y$12$eImiTXuWVxfM37uY4JANjOe5XIfA21uH6eis/Sj/odYbhiEpezSi2',
     'admin', 1, 1
 );

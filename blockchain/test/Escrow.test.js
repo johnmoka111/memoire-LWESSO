@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("KivuMarketTitle - Tests NFT & Escrow", function () {
+describe("KivuImmobilierTitle - Tests NFT & Escrow", function () {
   let Title, contract;
   let owner, buyer, seller, agent, other;
   const docHash = ethers.id("titre-foncier-test-123"); // Génère un bytes32 (hash SHA256)
@@ -11,7 +11,7 @@ describe("KivuMarketTitle - Tests NFT & Escrow", function () {
 
   beforeEach(async function () {
     [owner, buyer, seller, agent, other] = await ethers.getSigners();
-    Title = await ethers.getContractFactory("KivuMarketTitle");
+    Title = await ethers.getContractFactory("KivuImmobilierTitle");
     contract = await Title.deploy();
     await contract.waitForDeployment();
     

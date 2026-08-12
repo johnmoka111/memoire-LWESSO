@@ -138,9 +138,10 @@ const Dashboard = () => {
   }, []);
 
   // Calculs supplémentaires à partir des données existantes
-  const pendingTransactions = stats.transactions.filter(tx => tx.etat !== 'libere').length;
-  const totalVolume = stats.transactions.reduce((sum, tx) => sum + parseFloat(tx.montant_usd || 0), 0);
-  const recentTransactions = stats.transactions.slice(0, 5);
+  const transactionsList = Array.isArray(stats.transactions) ? stats.transactions : [];
+  const pendingTransactions = transactionsList.filter(tx => tx?.etat !== 'libere').length;
+  const totalVolume = transactionsList.reduce((sum, tx) => sum + parseFloat(tx?.montant_usd || tx?.prix || 0), 0);
+  const recentTransactions = transactionsList.slice(0, 5);
 
   const canCreateProperty = user.role === 'proprietaire' || user.role === 'admin' || user.role === 'superadmin';
 

@@ -21,7 +21,7 @@ final class BlockchainService
     public function __construct()
     {
         $this->web3 = new Web3(new HttpProvider(new HttpRequestManager(ETH_RPC_URL)));
-        $abi = file_get_contents(ROOT_PATH . '/config/KivuMarketEscrow.json');
+        $abi = file_get_contents(ROOT_PATH . '/config/KivuImmobilierEscrow.json');
         $this->contract = new Contract($this->web3->getProvider(), $abi);
     }
 

@@ -17,7 +17,7 @@ const generateUniversalId = (id) => {
   const hash = Math.abs(id * 12345).toString(16).toUpperCase();
   const segment1 = hash.slice(0, 4).padEnd(4, '0');
   const segment2 = id.toString().padStart(4, '0');
-  return `KM-${segment1}-${segment2}`;
+  return `KI-${segment1}-${segment2}`;
 };
 
 const StatCard = ({ label, value, icon: Icon, color }) => (
@@ -325,7 +325,7 @@ const Agents = () => {
               <div className="p-10 border-b border-white/5 flex justify-between items-center bg-gradient-to-r from-primary/10 to-transparent">
                  <div>
                    <h2 className="text-3xl font-black italic text-white tracking-tighter">{editingAgent ? 'Éditer' : createdAgentInfo?.isReset ? 'Réinitialisation' : 'Nouvel'} <span className="text-primary">Agent</span></h2>
-                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Plateforme KivuMobilier — Bukavu, RDC</p>
+                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Plateforme Kivu Immobilier — Bukavu, RDC</p>
                  </div>
                  <button onClick={() => setShowAddModal(false)} className="p-4 bg-white/5 rounded-2xl hover:bg-red-500 transition-all text-white"><X size={24} /></button>
               </div>

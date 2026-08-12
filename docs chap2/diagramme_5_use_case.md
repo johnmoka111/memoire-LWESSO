@@ -1,4 +1,4 @@
-# Diagramme 5 : Cas d'Utilisation (Use Case) - KivuMobilier
+# Diagramme 5 : Cas d'Utilisation (Use Case) - Kivu Immobilier
 
 ```mermaid
 useCaseDiagram
@@ -7,7 +7,7 @@ useCaseDiagram
     actor "Agent Immobilier" as Ag
     actor "Administrateur" as Ad
 
-    package KivuMarket_System {
+    package KivuImmobilier_System {
         usecase "Rechercher et Consulter les Biens" as UC1
         usecase "Publier une Annonce (Offre)" as UC2
         usecase "Soumettre Documents (Titre/Plan)" as UC3

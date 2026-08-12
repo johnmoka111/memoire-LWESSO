@@ -5,15 +5,15 @@
          colors="true"
          cacheDirectory=".phpunit.cache">
     <testsuites>
-        <testsuite name="KivuMarket Unit Tests">
+        <testsuite name="Kivu Immobilier Unit Tests">
             <directory>tests/Unit</directory>
         </testsuite>
-        <testsuite name="KivuMarket Integration Tests">
+        <testsuite name="Kivu Immobilier Integration Tests">
             <directory>tests/Integration</directory>
         </testsuite>
     </testsuites>
     <php>
         <env name="APP_ENV" value="testing"/>
-        <env name="DB_DATABASE" value="kivumarket_test"/>
+        <env name="DB_DATABASE" value="kivu_immobilier_test"/>
     </php>
 </phpunit>

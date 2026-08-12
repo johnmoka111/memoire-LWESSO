@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 // ─── Application ─────────────────────────────────────────────────────────────
-define('APP_NAME',    'KivuMobilier');
+define('APP_NAME',    'Kivu Immobilier');
 define('APP_VERSION', '1.0.0');
 define('APP_ENV',     getenv('APP_ENV') ?: 'development');
 define('APP_URL',     getenv('APP_URL')  ?: 'http://localhost:8080');
 
 // ─── JWT ─────────────────────────────────────────────────────────────────────
-define('JWT_SECRET', 'kivu_market_ultra_secure_secret_key_2026_bukavu_rdc_security_first');
+define('JWT_SECRET', 'kivu_immobilier_ultra_secure_secret_key_2026_bukavu_rdc_security_first');
 define('JWT_EXPIRE',  3600 * 24 * 7); // 7 jours
 
 // ─── PHPMailer / SMTP (Gmail) ────────────────────────────────────────────────
@@ -18,11 +18,11 @@ define('MAIL_PORT',     (int)(getenv('MAIL_PORT') ?: 587));
 define('MAIL_USERNAME', getenv('MAIL_USERNAME') ?: 'johnmoka2024@gmail.com');
 define('MAIL_PASSWORD', getenv('MAIL_PASSWORD') ?: 'wvwytphahnjhujvz');
 define('MAIL_FROM',     getenv('MAIL_FROM')     ?: 'johnmoka2024@gmail.com');
-define('MAIL_FROM_NAME',getenv('MAIL_FROM_NAME') ?: 'KivuMobilier');
+define('MAIL_FROM_NAME',getenv('MAIL_FROM_NAME') ?: 'Kivu Immobilier');
 
 // ─── Google Cloud Storage ─────────────────────────────────────────────────────
-define('GCS_BUCKET',      getenv('GCS_BUCKET')      ?: 'kivumarket-files');
-define('GCS_PROJECT',     getenv('GCS_PROJECT')     ?: 'kivu-market-project');
+define('GCS_BUCKET',      getenv('GCS_BUCKET')      ?: 'kivuimmobilier-files');
+define('GCS_PROJECT',     getenv('GCS_PROJECT')     ?: 'kivu-immobilier-project');
 define('GCS_CREDENTIALS', getenv('GCS_CREDENTIALS') ?: ROOT_PATH . '/config/gcs-key.json');
 
 // ─── Blockchain (Sepolia testnet → Ethereum mainnet) ─────────────────────────

@@ -13,7 +13,7 @@ graph TB
 
     subgraph "Réseau Blockchain (Ethereum Network)"
         SC_Escrow["Smart Contract Escrow (Solidity)"]
-        SC_NFT["Smart Contract KivuTitle (NFT - ERC721)"]
+        SC_NFT["Smart Contract KivuImmobilierTitle (NFT - ERC721)"]
         Nodes["Noeuds de Validation (ETH)"]
     end
 

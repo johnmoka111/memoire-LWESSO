@@ -1,5 +1,5 @@
 graph TD
-    subgraph "KivuMarket_Project"
+    subgraph "KivuImmobilier_Project"
         direction TB
         
         subgraph "Frontend"

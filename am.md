@@ -2,14 +2,14 @@ Voici le cahier des charges **enrichi et professionnel**, intégrant l’ensembl
 
 ---
 
-**✅ CAHIER DES CHARGES COMPLET – KivuMobilier**  
+**✅ CAHIER DES CHARGES COMPLET – Kivu Immobilier**  
 **Version enrichie (Intégration des huit axes d’amélioration – Avril 2026)**  
 
 ---
 
 ### 1. Présentation Générale du Projet
 
-**Nom** : KivuMobilier  
+**Nom** : Kivu Immobilier  
 **Slogan** : *La technologie au service de la sécurité foncière à Bukavu.*  
 **Contexte** : Spoliation foncière, falsification de titres, doubles ventes, opacité des transactions à Bukavu (Sud-Kivu, RDC).  
 **Objectif général** : Plateforme hybride (web centralisée + blockchain) sécurisant le cycle complet d’une transaction immobilière avec escrow automatique, traçabilité immuable et visites immersives 360°.
@@ -99,7 +99,7 @@ Voici le cahier des charges **enrichi et professionnel**, intégrant l’ensembl
 - Index et clés étrangères sur toutes les jointures fréquentes.
 
 **Blockchain (Solidity 0.8.27 + Hardhat)**
-- Contrat `KivuMarketEscrow.sol` enrichi :
+- Contrat `KivuImmobilierEscrow.sol` enrichi :
   - `struct Escrow { address buyer; address seller; uint amount; bool validated; bool released; ... }`
   - `mapping(uint => Escrow) escrows`
   - `modifier onlyAgent()`, `modifier onlyAdmin()`

@@ -1,9 +1,9 @@
 const hre = require("hardhat");
 
 async function main() {
-  console.log("Démarrage du déploiement de KivuMarketTitle...");
+  console.log("Démarrage du déploiement de KivuImmobilierTitle...");
 
-  const Title = await hre.ethers.getContractFactory("KivuMarketTitle");
+  const Title = await hre.ethers.getContractFactory("KivuImmobilierTitle");
   const contract = await Title.deploy();
 
   await contract.waitForDeployment();
@@ -20,10 +20,16 @@ async function main() {
   console.log(`Agent Certifié configuré : ${agent.address}`);
 
   // Mint des titres fonciers de test (#1 à #5) attribués au vendeur (seller = compte #2)
-  const docHash = hre.ethers.id("DOC_HASH_DEMO_KIVUMARKET");
+  const docHash = hre.ethers.id("DOC_HASH_DEMO_KIVU_IMMOBILIER");
   for (let i = 1; i <= 5; i++) {
-    await contract.connect(seller).mintTitle(`https://kivumarket.cd/api/titles/${i}`, docHash, `-2.49,28.85`);
-    console.log(`✅ Titre NFT #${i} minté avec succès (Propriétaire : ${seller.address})`);
+    const txMint = await contract.connect(seller).mintTitle(`https://kivuimmobilier.cd/api/titles/${i}`, docHash, `-2.49,28.85`);
+    await txMint.wait();
+    console.log(`✅ Titre NFT #${i-1} (Property #${i}) minté avec succès (Vendeur : ${seller.address})`);
+
+    // Verification par l'agent certifié
+    const txVerify = await contract.connect(agent).verifyTitle(i-1);
+    await txVerify.wait();
+    console.log(`  └─ Certifié par l'Agent : ${agent.address}`);
   }
 }
 
