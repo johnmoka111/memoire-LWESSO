@@ -10,6 +10,7 @@ async function run() {
     outfile: 'public/dist/app.js',
     format: 'esm',
     jsx: 'automatic',
+    publicPath: 'dist/',
     loader: { '.js': 'jsx', '.jsx': 'jsx', '.png': 'file', '.jpg': 'file', '.jpeg': 'file', '.svg': 'file' },
     define: { 'process.env.NODE_ENV': isDev ? '"development"' : '"production"' },
     minify: !isDev,
