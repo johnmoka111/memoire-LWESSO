@@ -58,7 +58,7 @@ const Navbar = () => {
   // SI NON CONNECTÉ : Afficher le Header du Site Public
   if (!token) {
     return (
-      <nav className="sticky top-0 z-50 w-full bg-[#060812] border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between shadow-[0_4px_25px_rgba(0,0,0,0.9)]" style={{ backgroundColor: '#060812', opacity: 1 }}>
+      <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-[#060812] border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between shadow-[0_4px_25px_rgba(0,0,0,0.9)]" style={{ backgroundColor: '#060812', opacity: 1 }}>
         {/* Logo du Site Public */}
         <Link to="/" className="flex items-center gap-3 cursor-pointer group">
           <LogoIcon size="md" />
@@ -87,7 +87,7 @@ const Navbar = () => {
 
   // SI CONNECTÉ : Header Administration / Espace Sécurisé
   return (
-    <nav className="sticky top-0 z-50 w-full bg-[#060812] border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between shadow-[0_4px_25px_rgba(0,0,0,0.9)]" style={{ backgroundColor: '#060812', opacity: 1 }}>
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-[#060812] border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between shadow-[0_4px_25px_rgba(0,0,0,0.9)]" style={{ backgroundColor: '#060812', opacity: 1 }}>
       {/* Partie Gauche : Logo + Titre Dynamique de la Page Admin */}
       <div className="flex items-center gap-3 md:gap-4">
         {!isHome && (

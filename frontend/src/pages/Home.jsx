@@ -4,85 +4,110 @@ import { Shield, MapPin, CheckCircle, ArrowRight, Wallet, Globe, Lock, Sparkles,
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { LogoIcon } from '../components/Logo';
+import placeImg from '../assets/place.jpeg';
 
 const Home = () => {
+  const handlePlaceImageError = (e) => {
+    if (!e.target.dataset.triedFallback) {
+      e.target.dataset.triedFallback = "true";
+      e.target.src = "assets/place.jpeg";
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0A0A0F] via-[#0F0F1A] to-[#0A0A0F] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#0A0A0F] via-[#0F0F1A] to-[#0A0A0F] text-white pt-20 md:pt-24 relative">
       <Navbar />
 
       <main className="relative">
         {/* Effet de fond global */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] opacity-30" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px] opacity-30" />
           <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-indigo-500/20 rounded-full blur-[100px] opacity-20" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10 pt-16 md:pt-20 lg:pt-24 pb-24 md:pb-32 relative z-10">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10 pt-8 md:pt-12 pb-24 md:pb-32 relative z-10">
 
           {/* Section Hero */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="space-y-6 md:space-y-8"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-primary/5 rounded-full border border-primary/30 backdrop-blur-sm">
-                <Sparkles size={14} className="text-primary" />
-                <span className="text-[10px] md:text-xs font-bold text-primary uppercase tracking-[0.2em]">Standard de Sécurité Foncière 2.0</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600/20 to-blue-600/5 rounded-full border border-blue-500/30 backdrop-blur-sm">
+                <Sparkles size={14} className="text-blue-400" />
+                <span className="text-[10px] md:text-xs font-bold text-blue-400 uppercase tracking-[0.2em]">Standard de Sécurité Foncière 2.0</span>
               </div>
 
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.1]">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1]">
                 L'Immobilier <br />
-                <span className="bg-gradient-to-r from-primary via-indigo-400 to-primary bg-clip-text text-transparent">Sans Risque.</span>
+                <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500 bg-clip-text text-transparent">Sans Risque à Bukavu.</span>
               </h1>
 
-              <p className="text-base md:text-lg lg:text-xl text-slate-400 max-w-lg leading-relaxed">
-                Kivu Immobilier sécurise vos achats à Bukavu grâce à la validation terrain et l'escrow blockchain. Achetez, vendez et gérez vos biens en toute confiance.
+              <p className="text-base md:text-lg text-slate-400 max-w-lg leading-relaxed">
+                Kivu Immobilier+ sécurise vos parcelles et maisons au Sud-Kivu grâce à la validation terrain assermentée et l'escrow blockchain.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link
                   to="/properties"
-                  className="group px-8 py-4 bg-gradient-to-r from-primary to-indigo-500 hover:from-primary/90 hover:to-indigo-500/90 rounded-xl font-bold text-white transition-all active:scale-95 shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
+                  className="group px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold text-white transition-all active:scale-95 shadow-xl shadow-blue-600/30 flex items-center justify-center gap-3"
                 >
                   Explorer les annonces
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   to="/register"
-                  className="px-8 py-4 rounded-xl bg-white/[0.03] border border-white/10 hover:bg-white/10 hover:border-white/20 font-bold text-white transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
+                  className="px-8 py-4 rounded-xl bg-white/[0.05] border border-white/10 hover:bg-white/10 font-bold text-white transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
                 >
                   Devenir Propriétaire
                 </Link>
               </div>
 
               {/* Badge de confiance supplémentaire */}
-              <div className="flex items-center gap-6 pt-6 text-slate-500 text-xs">
+              <div className="flex items-center gap-6 pt-4 text-slate-400 text-xs">
                 <div className="flex items-center gap-2">
-                  <Award size={14} className="text-primary" />
+                  <Award size={14} className="text-blue-400" />
                   <span>Notarisation blockchain</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Shield size={14} className="text-primary" />
+                  <Shield size={14} className="text-blue-400" />
                   <span>Escrow certifié</span>
                 </div>
               </div>
             </motion.div>
 
+            {/* Image Héro : Place de l'Indépendance */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
               className="relative flex justify-center"
             >
-              <div className="relative w-full max-w-md lg:max-w-lg">
-                {/* Cercle décoratif */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-indigo-500/20 rounded-full blur-3xl opacity-50" />
+              <div className="relative w-full max-w-md lg:max-w-lg rounded-3xl overflow-hidden border border-slate-700 shadow-2xl group">
+                <div className="aspect-[4/3] w-full overflow-hidden bg-slate-900">
+                  <img
+                    src={placeImg || "assets/place.jpeg"}
+                    alt="Place de l'Indépendance Bukavu"
+                    onError={handlePlaceImageError}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                <div className="relative z-10 bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-sm rounded-3xl border border-white/10 p-12 md:p-16 shadow-2xl flex flex-col items-center justify-center gap-4">
-                  <LogoIcon size="xl" />
-                  <span className="text-xl font-bold tracking-tight text-white">Kivu Immobilier<span className="text-indigo-400">+</span></span>
+                {/* Badge flottant Bas */}
+                <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <MapPin size={18} className="text-blue-400 shrink-0" />
+                    <div>
+                      <p className="text-xs font-bold text-white">Place de l'Indépendance</p>
+                      <p className="text-[10px] text-slate-400">Bukavu, Sud-Kivu • RDC</p>
+                    </div>
+                  </div>
+                  <span className="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-[9px] font-black uppercase tracking-wider">
+                    Zone Certifiée
+                  </span>
                 </div>
 
                 {/* Badge flottant 1 */}
@@ -90,21 +115,10 @@ const Home = () => {
                   initial={{ opacity: 0, x: 20, y: -20 }}
                   animate={{ opacity: 1, x: 0, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
-                  className="absolute -top-6 -right-6 md:-top-8 md:-right-8 bg-gradient-to-br from-emerald-500/90 to-emerald-600/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 flex items-center gap-2 shadow-2xl border border-emerald-400/30"
+                  className="absolute top-4 right-4 bg-emerald-600/90 backdrop-blur-md rounded-xl px-3 py-2 flex items-center gap-2 shadow-xl border border-emerald-400/30"
                 >
-                  <CheckCircle size={18} className="text-white" />
-                  <div className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-white">Titre Vérifié</div>
-                </motion.div>
-
-                {/* Badge flottant 2 */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20, y: 20 }}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.5 }}
-                  className="absolute -bottom-6 -left-6 md:-bottom-8 md:-left-8 bg-gradient-to-br from-primary/90 to-indigo-500/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 flex items-center gap-2 shadow-2xl border border-primary/30"
-                >
-                  <Wallet size={18} className="text-white" />
-                  <div className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-white">Escrow Actif</div>
+                  <CheckCircle size={16} className="text-white" />
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-white">Titres Sécurisés</div>
                 </motion.div>
               </div>
             </motion.div>
