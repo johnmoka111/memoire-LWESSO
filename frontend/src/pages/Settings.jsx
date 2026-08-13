@@ -169,6 +169,16 @@ const Settings = () => {
             </div>
           </div>
 
+          {/* Barre de Progression Étape par Étape (Expérience similaire à CreateProperty) */}
+          <div className="relative h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+            <motion.div 
+              className="h-full bg-gradient-to-r from-blue-600 to-indigo-500 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${(activeSection / 4) * 100}%` }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+
           {/* Navigation par Sections Étape par Étape */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {sections.map((sec) => {
@@ -182,14 +192,14 @@ const Settings = () => {
                   onClick={() => setActiveSection(sec.id)}
                   className={`p-4 rounded-2xl border text-left transition-all relative overflow-hidden ${
                     isActive
-                      ? 'bg-gradient-to-br from-indigo-600/30 to-primary/20 border-indigo-500 text-white shadow-lg shadow-indigo-500/10'
+                      ? 'bg-blue-950/70 border-blue-600 text-white shadow-lg'
                       : isDone
-                      ? 'bg-emerald-500/5 border-emerald-500/30 text-slate-300'
-                      : 'bg-white/[0.02] border-white/10 text-slate-400 hover:border-white/20'
+                      ? 'bg-emerald-950/30 border-emerald-800/50 text-slate-300'
+                      : 'bg-[#0B101D] border-slate-800 text-slate-400 hover:border-slate-700'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <div className={`p-2 rounded-xl ${isActive ? 'bg-indigo-600 text-white' : isDone ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 text-slate-400'}`}>
+                    <div className={`p-2 rounded-xl ${isActive ? 'bg-blue-600 text-white' : isDone ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 text-slate-400'}`}>
                       {isDone ? <Check size={16} /> : <Icon size={16} />}
                     </div>
                     <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">Sec 0{sec.id}</span>
@@ -202,13 +212,13 @@ const Settings = () => {
           </div>
 
           {/* Contenu des Sections Complétables l'une après l'autre */}
-          <div className="bg-white/[0.02] border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-xl">
+          <div className="bg-[#0B101D] border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl">
             {/* SECTION 1 : INFORMATIONS PERSONNELLES */}
             {activeSection === 1 && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <div className="flex items-center justify-between pb-4 border-b border-slate-800">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-indigo-400">
+                    <div className="p-3 bg-blue-950/60 border border-blue-800/40 rounded-2xl text-blue-400">
                       <User size={22} />
                     </div>
                     <div>
@@ -216,12 +226,12 @@ const Settings = () => {
                       <p className="text-xs text-slate-400">Mettez à jour vos identifiants et votre photo de profil.</p>
                     </div>
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Étape 1 sur 4</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-950/60 px-3 py-1 rounded-full border border-blue-800/40">Étape 1 sur 4</span>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-6 p-4 bg-white/[0.02] border border-white/10 rounded-2xl">
+                <div className="flex flex-col sm:flex-row items-center gap-6 p-4 bg-[#080C16] border border-slate-800 rounded-2xl">
                   <div className="relative">
-                    <div className="w-24 h-24 rounded-2xl overflow-hidden bg-white/10 border border-white/20 flex items-center justify-center">
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden bg-slate-900 border border-slate-700 flex items-center justify-center">
                       {formData.avatar_url ? (
                         <img src={formData.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
                       ) : (
@@ -230,7 +240,7 @@ const Settings = () => {
                     </div>
                     <button
                       onClick={() => fileInputRef.current?.click()}
-                      className="absolute -bottom-2 -right-2 p-2 bg-indigo-600 rounded-xl text-white shadow-lg hover:bg-indigo-500 transition-all"
+                      className="absolute -bottom-2 -right-2 p-2 bg-blue-600 rounded-xl text-white shadow-lg hover:bg-blue-500 transition-all"
                     >
                       <Camera size={14} />
                     </button>
@@ -239,7 +249,7 @@ const Settings = () => {
                   <div>
                     <h3 className="text-sm font-bold text-white">{formData.prenom} {formData.nom}</h3>
                     <p className="text-xs text-slate-400 mt-0.5">{formData.email}</p>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-indigo-400 mt-2">Format accepté : JPG, PNG (Max 5Mo)</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-blue-400 mt-2">Format accepté : JPG, PNG (Max 5Mo)</p>
                   </div>
                 </div>
 
@@ -249,7 +259,7 @@ const Settings = () => {
                       <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Prénom</label>
                       <input
                         type="text"
-                        className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-indigo-500 outline-none"
+                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
                         value={formData.prenom}
                         onChange={e => setFormData({ ...formData, prenom: e.target.value })}
                         required
@@ -259,7 +269,7 @@ const Settings = () => {
                       <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Nom</label>
                       <input
                         type="text"
-                        className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-indigo-500 outline-none"
+                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
                         value={formData.nom}
                         onChange={e => setFormData({ ...formData, nom: e.target.value })}
                         required
@@ -271,7 +281,7 @@ const Settings = () => {
                     <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Téléphone</label>
                     <input
                       type="tel"
-                      className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-indigo-500 outline-none"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
                       placeholder="+243 XXX XXX XXX"
                       value={formData.telephone}
                       onChange={e => setFormData({ ...formData, telephone: e.target.value })}

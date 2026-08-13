@@ -338,31 +338,218 @@ const Properties = () => {
 
   const token = localStorage.getItem('token');
 
-  const content = (
+  const [viewMode, setViewMode] = useState('table'); // 'table' or 'grid'
+
+  const user = useMemo(() => {
+    const stored = localStorage.getItem('user');
+    return stored ? JSON.parse(stored) : null;
+  }, []);
+
+  const adminContent = (
+    <div className="max-w-7xl mx-auto space-y-8 w-full">
+      {/* Header Admin */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-[#0B101D] border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl">
+        <div>
+          <span className="inline-flex items-center gap-2 px-3 py-1 bg-blue-950/70 text-blue-400 border border-blue-800/50 rounded-full text-[10px] font-black uppercase tracking-widest mb-3">
+            <Shield size={12} /> Console de Supervision Foncière
+          </span>
+          <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
+            Gestion des Annonces Immobilier
+          </h1>
+          <p className="text-slate-400 text-xs md:text-sm mt-1">
+            Tableau de contrôle des propriétés soumises, en cours d'inspection et certifiées au Sud-Kivu.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setViewMode('table')}
+            className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              viewMode === 'table'
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
+                : 'bg-slate-800 text-slate-400 hover:text-white'
+            }`}
+          >
+            <Layers size={16} /> Vue Tableau Admin
+          </button>
+          <button
+            onClick={() => setViewMode('grid')}
+            className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              viewMode === 'grid'
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
+                : 'bg-slate-800 text-slate-400 hover:text-white'
+            }`}
+          >
+            <Building2 size={16} /> Vue Grille
+          </button>
+          <Link
+            to="/properties/create"
+            className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl flex items-center gap-2 shadow-lg shadow-emerald-600/20 transition-all"
+          >
+            + Nouvelle Annonce
+          </Link>
+        </div>
+      </div>
+
+      {/* Barre de Recherche et Filtres Admin */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-[#080C16] p-4 border border-slate-800 rounded-2xl">
+        <div className="relative w-full md:w-96">
+          <Search className="absolute left-3.5 top-3.5 text-slate-400" size={18} />
+          <input
+            type="text"
+            placeholder="Rechercher par titre, commune, référence..."
+            className="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-sm text-black font-bold outline-none focus:border-blue-600"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+          />
+        </div>
+
+        <div className="flex items-center gap-3 w-full md:w-auto">
+          <select
+            className="bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-black font-bold outline-none"
+            value={filters.statut}
+            onChange={e => setFilters({ ...filters, statut: e.target.value })}
+          >
+            <option value="all">Tous les Statuts</option>
+            <option value="valide">🟢 Validés & Certifiés</option>
+            <option value="en_attente">🟡 En Attente de Terrain</option>
+            <option value="assigne">🔵 Assignés Agent</option>
+            <option value="vendu">⚪ Vendus</option>
+          </select>
+          
+          <select
+            className="bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-black font-bold outline-none"
+            value={filters.commune}
+            onChange={e => setFilters({ ...filters, commune: e.target.value })}
+          >
+            <option value="all">Toutes les Communes</option>
+            {availableCommunes.map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </div>
+      </div>
+
+      {/* Vue Tableau pour Admins et Agents */}
+      {viewMode === 'table' ? (
+        <div className="bg-[#0B101D] border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-[#070914] border-b border-slate-800 text-[10px] font-black uppercase tracking-wider text-slate-400">
+                  <th className="py-4 px-6">Propriété & Localisation</th>
+                  <th className="py-4 px-6">Type & Surface</th>
+                  <th className="py-4 px-6">Prix Estimatifs ($)</th>
+                  <th className="py-4 px-6">Statut Blockchain</th>
+                  <th className="py-4 px-6">Agent Responsable</th>
+                  <th className="py-4 px-6 text-right">Actions Admin</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-800/60 text-xs">
+                {loading ? (
+                  <tr>
+                    <td colSpan={6} className="py-12 text-center text-slate-500">
+                      Chargement des propriétés admin en cours...
+                    </td>
+                  </tr>
+                ) : filteredListings.length > 0 ? (
+                  filteredListings.map((p) => (
+                    <tr key={p.id} className="hover:bg-slate-800/30 transition-colors">
+                      <td className="py-4 px-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-xl bg-slate-900 overflow-hidden shrink-0 border border-slate-800 flex items-center justify-center">
+                            {p.image_url ? (
+                              <img src={p.image_url} alt={p.titre} className="w-full h-full object-cover" />
+                            ) : (
+                              <HomeIcon size={20} className="text-slate-600" />
+                            )}
+                          </div>
+                          <div>
+                            <p className="font-bold text-white text-sm line-clamp-1">{p.titre}</p>
+                            <p className="text-slate-400 text-[11px] flex items-center gap-1 mt-0.5">
+                              <MapPin size={12} className="text-blue-400" /> {p.commune}, Bukavu
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-4 px-6">
+                        <span className="font-bold text-white">{p.type_bien || 'Maison'}</span>
+                        <p className="text-slate-500 text-[10px] mt-0.5">{p.superficie || 'N/C'} m²</p>
+                      </td>
+                      <td className="py-4 px-6">
+                        <span className="text-sm font-black text-white">${parseFloat(p.prix).toLocaleString()}</span>
+                      </td>
+                      <td className="py-4 px-6">
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${statusStyles[p.statut]}`}>
+                          {p.statut === 'valide' && <>🟢 Validé & Minté</>}
+                          {p.statut === 'en_attente' && <>🟡 Inspection Requise</>}
+                          {p.statut === 'assigne' && <>🔵 En Cours</>}
+                          {p.statut === 'vendu' && <>⚪ Vendu / Transféré</>}
+                        </span>
+                      </td>
+                      <td className="py-4 px-6">
+                        <div className="flex items-center gap-2 text-slate-300">
+                          <div className="w-6 h-6 rounded-full bg-blue-900/50 border border-blue-700 flex items-center justify-center text-[10px] font-bold text-blue-300">
+                            {p.agent_nom ? p.agent_nom.charAt(0) : 'A'}
+                          </div>
+                          <span className="font-medium text-xs">{p.agent_nom || 'Non Assigné'}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-6 text-right">
+                        <div className="flex items-center justify-end gap-2">
+                          <Link
+                            to={`/properties/${p.id}`}
+                            className="px-3 py-1.5 bg-blue-950 hover:bg-blue-900 border border-blue-800 text-blue-300 rounded-lg font-bold text-[11px] transition-all"
+                          >
+                            Gérer / Fiche
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={6} className="py-12 text-center text-slate-500">
+                      Aucune propriété ne correspond aux critères de recherche admin.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {filteredListings.map((property, idx) => (
+            <PropertyCard key={property.id} property={property} index={idx} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  const publicContent = (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full">
-      {/* Header avec barre de recherche */}
+      {/* Header avec barre de recherche publique */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-10">
         <div className="max-w-xl">
           <h1 className="text-2xl md:text-4xl font-black text-white mb-2 tracking-tight">
-            Catalogue <span className="text-primary italic">Kivu Immobilier</span>
+            Catalogue <span className="text-blue-400 italic">Kivu Immobilier</span>
           </h1>
           <p className="text-slate-400 text-xs md:text-sm">Explorez les biens certifiés sur la blockchain au Sud-Kivu.</p>
         </div>
 
         <div className="relative group w-full md:w-96">
-          <div className="absolute inset-0 bg-primary/20 blur-xl group-focus-within:bg-primary/30 transition-all opacity-0 group-focus-within:opacity-100" />
-          <div className="relative flex items-center bg-white/[0.03] border border-white/10 rounded-2xl px-4 py-3 backdrop-blur-md focus-within:border-primary/50 transition-all">
+          <div className="flex items-center bg-white border border-slate-300 rounded-2xl px-4 py-3 shadow-md">
             <Search className="text-slate-500 mr-3 shrink-0" size={18} />
             <input
               type="text"
               placeholder="Quartier, type, mot-clé..."
-              className="bg-transparent border-none text-white w-full focus:ring-0 outline-none text-sm"
+              className="bg-transparent border-none text-black font-bold w-full focus:ring-0 outline-none text-sm"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
             />
             <button 
               onClick={() => setShowFilters(true)}
-              className="md:hidden ml-3 p-2 bg-white/5 rounded-lg text-primary hover:bg-white/10 transition-all"
+              className="md:hidden ml-3 p-2 bg-slate-100 rounded-lg text-blue-600 hover:bg-slate-200 transition-all"
             >
               <SlidersHorizontal size={18} />
             </button>
@@ -379,20 +566,12 @@ const Properties = () => {
             <p className="text-slate-400 text-xs md:text-sm">
               <span className="text-white font-bold">{filteredListings.length}</span> {filteredListings.length > 1 ? 'biens disponibles' : 'bien disponible'}
             </p>
-            <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span>Trier par:</span>
-              <select className="bg-transparent border-none text-primary font-bold focus:ring-0 cursor-pointer outline-none">
-                <option className="bg-dark">Plus récents</option>
-                <option className="bg-dark">Prix croissant</option>
-                <option className="bg-dark">Prix décroissant</option>
-              </select>
-            </div>
           </div>
 
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {[1, 2, 3, 4, 5, 6].map(i => (
-                <div key={i} className="h-96 bg-white/[0.02] rounded-2xl animate-pulse border border-white/5" />
+                <div key={i} className="h-96 bg-[#0B101D] rounded-2xl animate-pulse border border-slate-800" />
               ))}
             </div>
           ) : filteredListings.length > 0 ? (
@@ -403,7 +582,7 @@ const Properties = () => {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-20 text-center">
-              <div className="w-24 h-24 bg-white/[0.02] rounded-full flex items-center justify-center mb-6">
+              <div className="w-24 h-24 bg-[#0B101D] rounded-full flex items-center justify-center mb-6 border border-slate-800">
                 <AlertCircle size={40} className="text-slate-600" />
               </div>
               <h3 className="text-xl font-bold text-slate-400 mb-2">Aucun bien trouvé</h3>
@@ -428,12 +607,12 @@ const Properties = () => {
 
   if (token) {
     return (
-      <div className="flex min-h-screen bg-[#080A12] text-slate-100 font-sans">
+      <div className="flex min-h-screen bg-[#05070C] text-slate-100 font-sans">
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
           <Navbar />
           <main className="flex-1 p-4 md:p-8">
-            {content}
+            {adminContent}
           </main>
         </div>
       </div>
@@ -441,9 +620,9 @@ const Properties = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#080A12] text-slate-100 font-sans pb-20">
+    <div className="min-h-screen bg-[#05070C] text-slate-100 font-sans pb-20">
       <Navbar />
-      {content}
+      {publicContent}
     </div>
   );
 };

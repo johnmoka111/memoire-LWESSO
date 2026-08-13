@@ -8,39 +8,41 @@
     font-family: 'Outfit', sans-serif;
   }
 
-  /* Form Input Dark Styling & Autofill Fix */
+  /* Form Input Styling: White background with crisp bold black text */
   input, select, textarea {
-    background-color: #0d1424 !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 0.75rem;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 600 !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 0.75rem !important;
   }
 
   input::placeholder, textarea::placeholder {
     color: #64748b !important;
+    font-weight: 400 !important;
   }
 
   input:focus, select:focus, textarea:focus {
-    border-color: #3b82f6 !important;
+    border-color: #2563eb !important;
     outline: none !important;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
   }
 
-  /* Override Chrome / Edge Autofill White Box Bug */
+  /* Override Chrome / Edge Autofill White Box Bug with Black Text */
   input:-webkit-autofill,
   input:-webkit-autofill:hover, 
   input:-webkit-autofill:focus, 
   input:-webkit-autofill:active {
-    -webkit-text-fill-color: #ffffff !important;
-    -webkit-box-shadow: 0 0 0px 1000px #0d1424 inset !important;
+    -webkit-text-fill-color: #000000 !important;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
     transition: background-color 5000s ease-in-out 0s;
   }
 }
 
 /* Custom Sleek Dark Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -72,7 +74,7 @@
   }
 
   .input-field {
-    @apply w-full bg-[#0d1424] border border-white/15 rounded-xl px-4 py-3 text-white outline-none focus:border-blue-500 transition-all placeholder:text-slate-500;
+    @apply w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-black font-semibold outline-none focus:border-blue-600 transition-all placeholder:text-slate-400;
   }
 
   .text-brand {
