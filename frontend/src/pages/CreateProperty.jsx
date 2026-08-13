@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, ArrowLeft, ArrowRight, Check, MapPin, DollarSign, FileText, Camera, Wallet, Loader2, X, Maximize2, Minimize2 } from 'lucide-react';
+import { Shield, ArrowLeft, ArrowRight, Check, MapPin, DollarSign, FileText, Camera, Wallet, Loader2, X, Maximize2, Minimize2, Sparkles } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
 import { LogoIcon } from '../components/Logo';
 import { API_URL } from '../config';
 import { KIVU_LOCATIONS } from '../data/locations';
@@ -78,7 +79,7 @@ const CreateProperty = () => {
     
     const newPhotos = files.map(file => ({
       file: file,
-      description: '' // Par défaut vide
+      description: ''
     }));
 
     setFormData(prev => ({ 
@@ -118,19 +119,16 @@ const CreateProperty = () => {
       const token = localStorage.getItem('token');
       const data = new FormData();
       
-      // Ajout des champs texte
       Object.keys(formData).forEach(key => {
         if (key !== 'photos' && key !== 'document') {
           data.append(key, formData[key]);
         }
       });
 
-      // Ajout du document
       if (formData.document) {
         data.append('document', formData.document);
       }
 
-      // Ajout des photos AVEC leurs descriptions
       formData.photos.forEach((photoObj, index) => {
         data.append(`photo_${index}`, photoObj.file);
         data.append(`photo_desc_${index}`, photoObj.description);
@@ -159,15 +157,20 @@ const CreateProperty = () => {
   const progress = (step / totalSteps) * 100;
 
   return (
-    <div className="min-h-screen pb-20 bg-dark">
-      <Navbar />
+    <div className="flex min-h-screen bg-[#080A12] text-slate-100 font-sans">
+      <Sidebar />
+      
+      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
+        <Navbar />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-8 py-8 md:py-12">
-        <div className="mb-10 text-center flex flex-col items-center">
-          <LogoIcon size="md" />
-          <h1 className="text-2xl md:text-3xl font-black mt-4 mb-2 text-white">Nouvelle Annonce</h1>
-          <p className="text-slate-500 text-[10px] uppercase tracking-widest font-bold">Sécurisation Blockchain en cours</p>
-        </div>
+        <main className="flex-1 p-4 md:p-8 max-w-5xl mx-auto w-full">
+          <div className="mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-3">
+              <Sparkles size={12} /> Formulaire de Certification Foncière
+            </div>
+            <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">Ajouter un nouveau bien</h1>
+            <p className="text-slate-400 text-xs md:text-sm mt-1">Remplissez les informations ci-dessous pour soumettre le titre foncier à la validation.</p>
+          </div>
 
         <div className="relative h-1.5 w-full bg-white/5 rounded-full mb-12 overflow-hidden">
           <motion.div initial={{ width: 0 }} animate={{ width: `${progress}%` }} className="absolute top-0 left-0 h-full bg-primary" />
@@ -457,9 +460,10 @@ const CreateProperty = () => {
             )}
           </div>
         </div>
-      </div>
+      </main>
     </div>
-  );
+  </div>
+);
 };
 
 export default CreateProperty;

@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../config';
 import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
 
 // Mapping des styles de statut
 const statusStyles = {
@@ -335,82 +336,80 @@ const Properties = () => {
     </div>
   );
 
-  return (
-    <div className="min-h-screen bg-dark pb-20">
-      <Navbar />
+  const token = localStorage.getItem('token');
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
-        {/* Header avec barre de recherche */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
-          <div className="max-w-xl">
-            <h1 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">
-              Découvrez <span className="text-primary italic">Kivu Immobilier</span>
-            </h1>
-            <p className="text-slate-400 text-sm md:text-base">Explorez des biens certifiés sur la blockchain au Sud-Kivu.</p>
-          </div>
-
-          <div className="relative group w-full md:w-96">
-            <div className="absolute inset-0 bg-primary/20 blur-xl group-focus-within:bg-primary/30 transition-all opacity-0 group-focus-within:opacity-100" />
-            <div className="relative flex items-center bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 backdrop-blur-md focus-within:border-primary/50 transition-all">
-              <Search className="text-slate-500 mr-3 shrink-0" size={20} />
-              <input
-                type="text"
-                placeholder="Quartier, type, mot-clé..."
-                className="bg-transparent border-none text-white w-full focus:ring-0 outline-none text-sm"
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-              />
-              <button 
-                onClick={() => setShowFilters(true)}
-                className="md:hidden ml-3 p-2 bg-white/5 rounded-lg text-primary hover:bg-white/10 transition-all"
-              >
-                <SlidersHorizontal size={18} />
-              </button>
-            </div>
-          </div>
+  const content = (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full">
+      {/* Header avec barre de recherche */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-10">
+        <div className="max-w-xl">
+          <h1 className="text-2xl md:text-4xl font-black text-white mb-2 tracking-tight">
+            Catalogue <span className="text-primary italic">Kivu Immobilier</span>
+          </h1>
+          <p className="text-slate-400 text-xs md:text-sm">Explorez les biens certifiés sur la blockchain au Sud-Kivu.</p>
         </div>
 
-        {/* Grille principale avec sidebar filtres desktop */}
-        <div className="flex flex-col md:flex-row gap-8">
-          <FilterDesktop />
-
-          <div className="flex-1">
-            <div className="flex items-center justify-between mb-8">
-              <p className="text-slate-400 text-sm">
-                <span className="text-white font-bold">{filteredListings.length}</span> {filteredListings.length > 1 ? 'biens disponibles' : 'bien disponible'}
-              </p>
-              <div className="flex items-center gap-2 text-xs text-slate-500">
-                <span>Trier par:</span>
-                <select className="bg-transparent border-none text-primary font-bold focus:ring-0 cursor-pointer outline-none">
-                  <option className="bg-dark">Plus récents</option>
-                  <option className="bg-dark">Prix croissant</option>
-                  <option className="bg-dark">Prix décroissant</option>
-                </select>
-              </div>
-            </div>
-
-            {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {[1, 2, 3, 4, 5, 6].map(i => (
-                  <div key={i} className="h-96 bg-white/[0.02] rounded-2xl animate-pulse border border-white/5" />
-                ))}
-              </div>
-            ) : filteredListings.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredListings.map((property, idx) => (
-                  <PropertyCard key={property.id} property={property} index={idx} />
-                ))}
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center py-20 text-center">
-                <div className="w-24 h-24 bg-white/[0.02] rounded-full flex items-center justify-center mb-6">
-                  <AlertCircle size={40} className="text-slate-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-400 mb-2">Aucun bien trouvé</h3>
-                <p className="text-slate-500 text-sm">Essayez de modifier vos critères de recherche ou de filtres.</p>
-              </div>
-            )}
+        <div className="relative group w-full md:w-96">
+          <div className="absolute inset-0 bg-primary/20 blur-xl group-focus-within:bg-primary/30 transition-all opacity-0 group-focus-within:opacity-100" />
+          <div className="relative flex items-center bg-white/[0.03] border border-white/10 rounded-2xl px-4 py-3 backdrop-blur-md focus-within:border-primary/50 transition-all">
+            <Search className="text-slate-500 mr-3 shrink-0" size={18} />
+            <input
+              type="text"
+              placeholder="Quartier, type, mot-clé..."
+              className="bg-transparent border-none text-white w-full focus:ring-0 outline-none text-sm"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+            />
+            <button 
+              onClick={() => setShowFilters(true)}
+              className="md:hidden ml-3 p-2 bg-white/5 rounded-lg text-primary hover:bg-white/10 transition-all"
+            >
+              <SlidersHorizontal size={18} />
+            </button>
           </div>
+        </div>
+      </div>
+
+      {/* Grille principale avec sidebar filtres desktop */}
+      <div className="flex flex-col md:flex-row gap-8">
+        <FilterDesktop />
+
+        <div className="flex-1">
+          <div className="flex items-center justify-between mb-8">
+            <p className="text-slate-400 text-xs md:text-sm">
+              <span className="text-white font-bold">{filteredListings.length}</span> {filteredListings.length > 1 ? 'biens disponibles' : 'bien disponible'}
+            </p>
+            <div className="flex items-center gap-2 text-xs text-slate-500">
+              <span>Trier par:</span>
+              <select className="bg-transparent border-none text-primary font-bold focus:ring-0 cursor-pointer outline-none">
+                <option className="bg-dark">Plus récents</option>
+                <option className="bg-dark">Prix croissant</option>
+                <option className="bg-dark">Prix décroissant</option>
+              </select>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map(i => (
+                <div key={i} className="h-96 bg-white/[0.02] rounded-2xl animate-pulse border border-white/5" />
+              ))}
+            </div>
+          ) : filteredListings.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filteredListings.map((property, idx) => (
+                <PropertyCard key={property.id} property={property} index={idx} />
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <div className="w-24 h-24 bg-white/[0.02] rounded-full flex items-center justify-center mb-6">
+                <AlertCircle size={40} className="text-slate-600" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-400 mb-2">Aucun bien trouvé</h3>
+              <p className="text-slate-500 text-sm">Essayez de modifier vos critères de recherche ou de filtres.</p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -424,6 +423,27 @@ const Properties = () => {
           />
         )}
       </AnimatePresence>
+    </div>
+  );
+
+  if (token) {
+    return (
+      <div className="flex min-h-screen bg-[#080A12] text-slate-100 font-sans">
+        <Sidebar />
+        <div className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
+          <Navbar />
+          <main className="flex-1 p-4 md:p-8">
+            {content}
+          </main>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-[#080A12] text-slate-100 font-sans pb-20">
+      <Navbar />
+      {content}
     </div>
   );
 };
