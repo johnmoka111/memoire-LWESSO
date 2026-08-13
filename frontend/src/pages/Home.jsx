@@ -4,13 +4,13 @@ import { Shield, MapPin, CheckCircle, ArrowRight, Wallet, Globe, Lock, Sparkles,
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { LogoIcon } from '../components/Logo';
-import placeImg from '../assets/place.jpeg';
+import placeIndepImg from '../assets/place-indep.png';
 
 const Home = () => {
   const handlePlaceImageError = (e) => {
     if (!e.target.dataset.triedFallback) {
       e.target.dataset.triedFallback = "true";
-      e.target.src = "assets/place.jpeg";
+      e.target.src = "assets/place-indep.png";
     }
   };
 
@@ -78,26 +78,23 @@ const Home = () => {
               </div>
             </motion.div>
 
-            {/* Image Héro : Place de l'Indépendance */}
+            {/* Image Héro Sans Cadre : Place de l'Indépendance */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-              className="relative flex justify-center"
+              className="relative flex justify-center items-center"
             >
-              <div className="relative w-full max-w-md lg:max-w-lg rounded-3xl overflow-hidden border border-slate-700 shadow-2xl group">
-                <div className="aspect-[4/3] w-full overflow-hidden bg-slate-900">
-                  <img
-                    src={placeImg || "assets/place.jpeg"}
-                    alt="Place de l'Indépendance Bukavu"
-                    onError={handlePlaceImageError}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="relative w-full max-w-lg lg:max-w-xl group">
+                <img
+                  src={placeIndepImg || "assets/place-indep.png"}
+                  alt="Place de l'Indépendance Bukavu"
+                  onError={handlePlaceImageError}
+                  className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(37,99,235,0.25)] group-hover:scale-105 transition-transform duration-700"
+                />
 
-                {/* Badge flottant Bas */}
-                <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-center justify-between">
+                {/* Badges d'accompagnement discrets sans cadre lourd */}
+                <div className="absolute -bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 bg-slate-950/80 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-3 sm:p-4 flex items-center justify-between shadow-2xl">
                   <div className="flex items-center gap-3">
                     <MapPin size={18} className="text-blue-400 shrink-0" />
                     <div>
@@ -105,21 +102,10 @@ const Home = () => {
                       <p className="text-[10px] text-slate-400">Bukavu, Sud-Kivu • RDC</p>
                     </div>
                   </div>
-                  <span className="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-[9px] font-black uppercase tracking-wider">
+                  <span className="px-3 py-1 bg-blue-600 text-white rounded-lg text-[9px] font-black uppercase tracking-wider shadow-md">
                     Zone Certifiée
                   </span>
                 </div>
-
-                {/* Badge flottant 1 */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20, y: -20 }}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
-                  className="absolute top-4 right-4 bg-emerald-600/90 backdrop-blur-md rounded-xl px-3 py-2 flex items-center gap-2 shadow-xl border border-emerald-400/30"
-                >
-                  <CheckCircle size={16} className="text-white" />
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-white">Titres Sécurisés</div>
-                </motion.div>
               </div>
             </motion.div>
           </div>

@@ -249,7 +249,7 @@ const Register = () => {
           {/* Section Droite : Vitrine Inscription (Desktop) */}
           <div className="hidden lg:relative lg:flex flex-col justify-between p-8 bg-gradient-to-br from-[#060812] via-[#0B101D] to-[#0D1426] text-white overflow-hidden">
             <div className="absolute inset-0 opacity-30">
-              <img src="assets/place.jpeg" alt="Bukavu" className="w-full h-full object-cover" />
+              <img src="assets/place-indep.png" alt="Bukavu" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#060812] via-[#0B101D]/90 to-transparent" />
             </div>
 

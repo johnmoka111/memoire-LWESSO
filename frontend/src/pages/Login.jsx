@@ -6,7 +6,7 @@ import axios from 'axios';
 import { API_URL } from '../config';
 import { LogoIcon } from '../components/Logo';
 import Navbar from '../components/Navbar';
-import placeImg from '../assets/place.jpeg';
+import placeIndepImg from '../assets/place-indep.png';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -179,7 +179,7 @@ const Login = () => {
           {/* Section Droite : Vitrine Visuelle Kivu Immobilier+ (Desktop) */}
           <div className="hidden lg:relative lg:flex flex-col justify-between p-8 bg-gradient-to-br from-[#060812] via-[#0B101D] to-[#0D1426] text-white overflow-hidden">
             <div className="absolute inset-0 opacity-30">
-              <img src={placeImg || "assets/place.jpeg"} alt="Bukavu" className="w-full h-full object-cover" />
+              <img src={placeIndepImg || "assets/place-indep.png"} alt="Bukavu" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#060812] via-[#0B101D]/90 to-transparent" />
             </div>
 
