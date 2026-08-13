@@ -7,7 +7,7 @@ const MobileNav = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-secondary/95 backdrop-blur-xl border-t border-white/10 px-6 py-3 flex items-center justify-between z-[100] pb-safe">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white text-slate-900 dark:bg-[#060812] dark:text-white border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex items-center justify-between z-[100] pb-safe opacity-100 shadow-lg">
       <Link to="/" className={`flex flex-col items-center gap-1 ${isActive('/') ? 'text-primary' : 'text-slate-500'}`}>
         <Home size={20} />
         <span className="text-[10px] font-bold uppercase tracking-widest">Accueil</span>

@@ -610,7 +610,7 @@ const Properties = () => {
 
   if (token) {
     return (
-      <div className="flex min-h-screen bg-[#05070C] text-slate-100 font-sans">
+      <div className="flex min-h-screen bg-slate-100 dark:bg-[#05070C] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
           <Navbar />
@@ -623,7 +623,7 @@ const Properties = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#05070C] text-slate-100 font-sans pb-20">
+    <div className="min-h-screen bg-slate-100 dark:bg-[#05070C] text-slate-900 dark:text-slate-100 font-sans pb-20 transition-colors duration-300">
       <Navbar />
       {publicContent}
     </div>
