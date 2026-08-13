@@ -122,59 +122,60 @@ const FilterSidebar = ({ filters, setFilters, availableCommunes, onClose }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
-        className="relative z-10 w-full max-w-md bg-gradient-to-br from-[#0F0F1A] to-[#0A0A0F] border border-white/10 rounded-2xl p-6 max-h-[80vh] overflow-y-auto"
+        className="relative z-10 w-full max-w-md bg-[#0F0F1A] border border-slate-800 rounded-2xl p-6 max-h-[80vh] overflow-y-auto"
       >
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-lg font-bold flex items-center gap-2">
-            <Filter size={18} className="text-primary" /> Filtres avancés
+          <h3 className="text-lg font-bold flex items-center gap-2 text-white">
+            <Filter size={18} className="text-blue-500" /> Filtres avancés
           </h3>
-          <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-lg"><X size={18} /></button>
+          <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-lg text-white"><X size={18} /></button>
         </div>
 
         <div className="space-y-5">
           <div>
-            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2 block">Statut</label>
+            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2 block">Statut</label>
             <select
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white"
+              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
               value={localFilters.statut}
               onChange={e => setLocalFilters({ ...localFilters, statut: e.target.value })}
             >
-              <option value="all">Tous</option>
-              <option value="valide">Validé</option>
-              <option value="en_attente">En attente</option>
-              <option value="assigne">Assigné</option>
-              <option value="vendu">Vendu</option>
+              <option value="all" className="text-black bg-white font-bold">Tous</option>
+              <option value="valide" className="text-black bg-white font-bold">Validé</option>
+              <option value="en_attente" className="text-black bg-white font-bold">En attente</option>
+              <option value="assigne" className="text-black bg-white font-bold">Assigné</option>
+              <option value="vendu" className="text-black bg-white font-bold">Vendu</option>
             </select>
           </div>
+
           <div>
-            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2 block">Commune</label>
+            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2 block">Commune</label>
             <select
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white"
+              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
               value={localFilters.commune}
               onChange={e => setLocalFilters({ ...localFilters, commune: e.target.value })}
             >
-              <option value="all">Toutes</option>
-              {availableCommunes.map(c => <option key={c} value={c}>{c}</option>)}
+              <option value="all" className="text-black bg-white font-bold">Toutes</option>
+              {availableCommunes.map(c => <option key={c} value={c} className="text-black bg-white font-bold">{c}</option>)}
             </select>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2 block">Prix min ($)</label>
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2 block">Prix min ($)</label>
               <input
                 type="number"
                 placeholder="0"
-                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white"
+                className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600 placeholder:text-slate-400"
                 value={localFilters.minPrice}
                 onChange={e => setLocalFilters({ ...localFilters, minPrice: e.target.value })}
               />
             </div>
             <div>
-              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2 block">Prix max ($)</label>
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2 block">Prix max ($)</label>
               <input
                 type="number"
                 placeholder="Illimité"
-                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white"
+                className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600 placeholder:text-slate-400"
                 value={localFilters.maxPrice}
                 onChange={e => setLocalFilters({ ...localFilters, maxPrice: e.target.value })}
               />
@@ -182,9 +183,9 @@ const FilterSidebar = ({ filters, setFilters, availableCommunes, onClose }) => {
           </div>
         </div>
 
-        <div className="flex gap-3 mt-8 pt-4 border-t border-white/10">
-          <button onClick={handleReset} className="flex-1 py-3 bg-white/5 hover:bg-white/10 rounded-xl text-sm font-semibold transition-all">Réinitialiser</button>
-          <button onClick={handleApply} className="flex-1 py-3 bg-gradient-to-r from-primary to-indigo-500 rounded-xl text-sm font-bold transition-all text-white">Appliquer</button>
+        <div className="flex gap-3 mt-8 pt-4 border-t border-slate-800">
+          <button onClick={handleReset} className="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-sm font-semibold transition-all">Réinitialiser</button>
+          <button onClick={handleApply} className="flex-1 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl text-sm font-bold transition-all text-white shadow-lg shadow-blue-600/30">Appliquer</button>
         </div>
       </motion.div>
     </div>
@@ -255,68 +256,70 @@ const Properties = () => {
 
   const FilterDesktop = () => (
     <div className="hidden md:block w-72 shrink-0">
-      <div className="sticky top-24 space-y-8 bg-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-md">
-        <div className="flex items-center gap-2 text-white font-bold mb-4">
-          <Filter size={18} className="text-primary" /> Filtres
+      <div className="sticky top-24 space-y-6 bg-[#0B101D] border border-slate-800 rounded-3xl p-6 shadow-xl">
+        <div className="flex items-center gap-2 text-white font-extrabold text-base mb-2">
+          <Filter size={18} className="text-blue-500" /> Filtres de Recherche
         </div>
         
-        <div className="space-y-6">
-          <div className="space-y-3">
-            <label className="text-[10px] font-bold uppercase text-slate-500 block">Statut</label>
+        <div className="space-y-5">
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Statut</label>
             <select 
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:border-primary outline-none"
+              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-black font-bold focus:border-blue-600 outline-none"
               value={filters.statut}
               onChange={e => setFilters({...filters, statut: e.target.value})}
             >
-              <option value="all">Tous</option>
-              <option value="valide">Validé</option>
-              <option value="en_attente">En attente</option>
-              <option value="assigne">Assigné</option>
-              <option value="vendu">Vendu</option>
+              <option value="all" className="text-black bg-white font-bold">Tous les Statuts</option>
+              <option value="valide" className="text-black bg-white font-bold">🟢 Validé & Certifié</option>
+              <option value="en_attente" className="text-black bg-white font-bold">🟡 En Attente</option>
+              <option value="assigne" className="text-black bg-white font-bold">🔵 Assigné Agent</option>
+              <option value="vendu" className="text-black bg-white font-bold">⚪ Vendu</option>
             </select>
           </div>
 
-          <div className="space-y-3">
-            <label className="text-[10px] font-bold uppercase text-slate-500 block">Commune</label>
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Commune</label>
             <select 
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:border-primary outline-none"
+              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-black font-bold focus:border-blue-600 outline-none"
               value={filters.commune}
               onChange={e => setFilters({...filters, commune: e.target.value})}
             >
-              <option value="all">Toutes</option>
-              {availableCommunes.map(c => <option key={c} value={c}>{c}</option>)}
+              <option value="all" className="text-black bg-white font-bold">Toutes les Communes</option>
+              {availableCommunes.map(c => <option key={c} value={c} className="text-black bg-white font-bold">{c}</option>)}
             </select>
           </div>
 
-          <div className="space-y-3">
-            <label className="text-[10px] font-bold uppercase text-slate-500 block">Type</label>
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Type de Bien</label>
             <select 
-              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:border-primary outline-none"
+              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-black font-bold focus:border-blue-600 outline-none"
               value={filters.type}
               onChange={e => setFilters({...filters, type: e.target.value})}
             >
-              <option value="all">Tous</option>
-              <option value="terrain">Terrain</option>
-              <option value="maison">Maison</option>
-              <option value="appartement">Appartement</option>
+              <option value="all" className="text-black bg-white font-bold">Tous les Types</option>
+              <option value="terrain" className="text-black bg-white font-bold">Terrain</option>
+              <option value="maison" className="text-black bg-white font-bold">Maison</option>
+              <option value="appartement" className="text-black bg-white font-bold">Appartement</option>
             </select>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase text-slate-500 block">Min ($)</label>
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Min ($)</label>
               <input 
                 type="number" 
-                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 py-2 text-sm text-white outline-none"
+                placeholder="0"
+                className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-black font-bold outline-none focus:border-blue-600 placeholder:text-slate-400"
                 value={filters.minPrice}
                 onChange={e => setFilters({...filters, minPrice: e.target.value})}
               />
             </div>
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase text-slate-500 block">Max ($)</label>
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Max ($)</label>
               <input 
                 type="number" 
-                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-3 py-2 text-sm text-white outline-none"
+                placeholder="Max"
+                className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-black font-bold outline-none focus:border-blue-600 placeholder:text-slate-400"
                 value={filters.maxPrice}
                 onChange={e => setFilters({...filters, maxPrice: e.target.value})}
               />
