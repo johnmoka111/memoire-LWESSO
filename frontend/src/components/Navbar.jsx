@@ -1,6 +1,21 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, User, Bell, LogOut, ShieldCheck, Cpu, LayoutDashboard, ShoppingBag, ChevronRight, Sparkles } from 'lucide-react';
+import { 
+  ArrowLeft, 
+  User, 
+  Bell, 
+  LogOut, 
+  ShieldCheck, 
+  LayoutDashboard, 
+  ShoppingBag, 
+  PlusCircle, 
+  Users, 
+  Wallet, 
+  MessageSquare, 
+  Settings, 
+  Home,
+  UserPlus
+} from 'lucide-react';
 import { LogoIcon, BrandName } from './Logo';
 
 const Navbar = () => {
@@ -12,17 +27,27 @@ const Navbar = () => {
 
   const isHome = location.pathname === '/';
   const isAdmin = ['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim());
-  const pageTitles = {
-    '/dashboard': 'Vue d’ensemble',
-    '/admin/agents': 'Gestion des agents',
-    '/admin/validations': 'Validations foncières',
-    '/agent/missions': 'Mes missions terrain',
-    '/messages': 'Messagerie sécurisée',
-    '/transactions': 'Séquestre Blockchain',
-    '/settings': 'Paramètres du compte',
-    '/properties/create': 'Nouveau bien foncier'
+
+  // Configuration Dynamique des Pages selon l'URL active
+  const getPageMeta = (path) => {
+    if (path === '/dashboard') return { title: 'Tableau de bord', badge: 'Vue d’ensemble', icon: LayoutDashboard };
+    if (path === '/properties') return { title: 'Annonces Immobilières', badge: 'Marketplace Publique', icon: ShoppingBag };
+    if (path === '/properties/create') return { title: 'Ajouter un Bien', badge: 'Soumission Foncière', icon: PlusCircle };
+    if (path === '/admin/agents') return { title: 'Gestion des Agents', badge: 'Supervision Admin', icon: Users };
+    if (path === '/admin/validations') return { title: 'Validations en Attente', badge: 'Contrôle Terrain', icon: ShieldCheck };
+    if (path === '/agent/missions') return { title: 'Missions Terrain', badge: 'Espace Agent Assermenté', icon: ShieldCheck };
+    if (path === '/transactions') return { title: 'Opérations Escrow', badge: 'Séquestre Blockchain', icon: Wallet };
+    if (path === '/messages') return { title: 'Messagerie', badge: 'Discussions Sécurisées', icon: MessageSquare };
+    if (path === '/settings') return { title: 'Paramètres du Compte', badge: 'Configuration Utilisateur', icon: Settings };
+    if (path.startsWith('/properties/')) return { title: 'Détail du Bien', badge: 'Titre Foncier Numérique', icon: Home };
+    if (path === '/login') return { title: 'Connexion', badge: 'Accès Sécurisé', icon: User };
+    if (path === '/register') return { title: 'Inscription', badge: 'Nouveau Compte', icon: UserPlus };
+
+    return { title: isAdmin ? 'Espace Administration' : 'Kivu Immobilier+', badge: 'Espace Sécurisé', icon: Home };
   };
-  const pageTitle = pageTitles[location.pathname] || (isAdmin ? 'Espace administration' : 'Kivu Immobilier');
+
+  const currentMeta = getPageMeta(location.pathname);
+  const PageIcon = currentMeta.icon;
 
   const logout = () => {
     localStorage.clear();
@@ -31,98 +56,51 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="border-b border-white/10 px-4 md:px-8 py-3 flex items-center justify-between sticky top-0 bg-[#080A12]/95 backdrop-blur-2xl z-50 shadow-[0_10px_35px_rgba(0,0,0,0.4)]">
-      {/* Côté Gauche : Navigation & Titre */}
-      <div className="flex items-center gap-4">
+    <nav className="sticky top-0 z-50 w-full bg-[#080A12]/95 border-b border-white/10 px-4 md:px-8 py-3.5 flex items-center justify-between backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition-all">
+      {/* Partie Gauche : Logo + Titre Dynamique de la Page */}
+      <div className="flex items-center gap-3 md:gap-4">
         {!isHome && (
           <button 
             onClick={() => navigate(-1)} 
             className="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all group"
-            title="Retour"
+            title="Page précédente"
           >
             <ArrowLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
           </button>
         )}
+        
         <Link to="/dashboard" className="flex items-center gap-3 cursor-pointer group">
-          <div className="relative">
-            <LogoIcon size="md" />
-            {isAdmin && (
-              <span className="absolute -bottom-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-indigo-500 ring-2 ring-[#080A12]">
-                <Sparkles size={8} className="text-white" />
-              </span>
-            )}
-          </div>
+          <LogoIcon size="md" />
           <div className="md:hidden"><BrandName subtitle={false} /></div>
+          
+          {/* Titre et Badge Dynamique selon la page */}
           <div className="hidden md:block">
             <div className="flex items-center gap-2">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                {isAdmin ? 'Administration Windows' : 'Espace Sécurisé'}
-              </p>
-              {isAdmin && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
-                  <Cpu size={10} className="animate-pulse text-indigo-400" /> Windows Node Active
-                </span>
-              )}
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-widest bg-white/5 text-indigo-300 border border-white/10">
+                <PageIcon size={10} className="text-indigo-400" />
+                {currentMeta.badge}
+              </span>
             </div>
-            <p className="mt-0.5 text-sm font-bold text-white group-hover:text-indigo-300 transition-colors flex items-center gap-1.5">
-              {pageTitle}
+            <p className="mt-0.5 text-sm font-bold text-white group-hover:text-indigo-300 transition-colors">
+              {currentMeta.title}
             </p>
           </div>
         </Link>
       </div>
 
-      {/* Côté Droit : Boutons de Navigation Personnalisés Admin & Profil */}
+      {/* Partie Droite : Actions Contextuelles Dynamiques & Profil */}
       <div className="flex items-center gap-3 md:gap-4">
-        {/* Bouton de Navigation Personnalisé pour Administrateur */}
-        {isAdmin && (
-          <div className="hidden lg:flex items-center gap-1 p-1 bg-white/[0.04] border border-white/10 rounded-2xl backdrop-blur-md">
-            <Link
-              to="/dashboard"
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                location.pathname === '/dashboard'
-                  ? 'bg-gradient-to-r from-indigo-600 to-primary text-white shadow-md shadow-indigo-500/25'
-                  : 'text-slate-400 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <LayoutDashboard size={14} />
-              <span>Dashboard</span>
-            </Link>
-            <Link
-              to="/admin/validations"
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                location.pathname === '/admin/validations'
-                  ? 'bg-gradient-to-r from-indigo-600 to-primary text-white shadow-md shadow-indigo-500/25'
-                  : 'text-slate-400 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <ShieldCheck size={14} />
-              <span>Validations</span>
-            </Link>
-            <Link
-              to="/properties"
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                location.pathname === '/properties'
-                  ? 'bg-gradient-to-r from-indigo-600 to-primary text-white shadow-md shadow-indigo-500/25'
-                  : 'text-slate-400 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <ShoppingBag size={14} />
-              <span>Marketplace</span>
-            </Link>
-          </div>
-        )}
-
-        {/* Bouton Annonces pour non-admin */}
-        {!isAdmin && (
-          <Link 
-            to="/properties"
-            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 text-xs font-bold transition-all"
+        {/* Bouton d'action dynamique selon la page */}
+        {location.pathname !== '/properties/create' && token && (
+          <Link
+            to="/properties/create"
+            className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-primary text-white text-xs font-bold shadow-lg shadow-indigo-500/20 hover:scale-105 transition-all"
           >
-            <ShoppingBag size={15} className="text-primary" />
-            <span>Catalogue Biens</span>
+            <PlusCircle size={15} />
+            <span>Ajouter un bien</span>
           </Link>
         )}
-        
+
         {token ? (
           <div className="flex items-center gap-2 md:gap-3 pl-3 md:pl-4 border-l border-white/10">
             <button className="hidden sm:flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10 hover:text-white transition-all relative" title="Notifications">
@@ -140,6 +118,7 @@ const Navbar = () => {
             <Link 
               to="/dashboard" 
               className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-primary flex items-center justify-center shadow-lg shadow-indigo-500/20 border border-white/20 hover:scale-105 transition-transform"
+              title="Mon Profil"
             >
               <User size={17} className="text-white" />
             </Link>
