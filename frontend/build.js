@@ -28,7 +28,19 @@ async function run() {
   } else {
     await esbuild.build(options);
     fs.copyFileSync('public/dist/app.js', 'public/dist/index.js');
-    console.log('✅ Build terminé (app.js & index.js synchronisés sur le disque) !');
+
+    // Assurer que le dossier public/assets existe et y copier les images
+    if (!fs.existsSync('public/assets')) {
+      fs.mkdirSync('public/assets', { recursive: true });
+    }
+    if (fs.existsSync('src/assets')) {
+      const files = fs.readdirSync('src/assets');
+      for (const file of files) {
+        fs.copyFileSync(`src/assets/${file}`, `public/assets/${file}`);
+      }
+    }
+
+    console.log('✅ Build terminé (app.js, index.js & assets synchronisés sur le disque) !');
     process.exit(0);
   }
 }

@@ -69,7 +69,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.hash = '#/login';
+    window.location.hash = '#/';
     window.location.reload();
   };
 
