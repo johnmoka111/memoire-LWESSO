@@ -108,8 +108,8 @@ const formatWeb3Error = (err) => {
   if (fullText.includes('transaction deja en cours') || fullText.includes('deja en cours')) {
     return "Opération impossible : Ce bien fait déjà l'objet d'un dépôt en séquestre actif sur le Smart Contract.";
   }
-  if (fullText.includes('proprietaire ne peut pas acheter') || fullText.includes('own property') || fullText.includes('son propre bien')) {
-    return "Opération impossible : Votre compte MetaMask actuel est le propriétaire vendeur de ce bien.";
+  if (fullText.includes('proprietaire ne peut pas acheter') || fullText.includes('own property') || fullText.includes('son propre bien') || fullText.includes('proprietaire vendeur')) {
+    return "Opération impossible : Votre compte MetaMask actuel est le propriétaire vendeur de ce bien. Veuillez changer de compte dans MetaMask (ex: Compte 2 / Acheteur) pour acheter.";
   }
   if (fullText.includes('insufficient funds') || fullText.includes('exceeds balance')) {
     return "Solde insuffisant : Votre portefeuille n'a pas assez d'ETH pour valider cette transaction.";
@@ -117,12 +117,8 @@ const formatWeb3Error = (err) => {
   if (fullText.includes('erc721nonexistenttoken') || fullText.includes('nonexistent token') || fullText.includes('invalid token')) {
     return "Titre NFT non trouvé : Ce bien n'a pas encore été mis en vente on-chain par son propriétaire.";
   }
-  if (fullText.includes('execution reverted')) {
-    const match = fullText.match(/execution reverted: "([^"]+)"/);
-    if (match && match[1]) {
-      return `Règle Smart Contract : ${match[1]}`;
-    }
-    return "La transaction a été refusée par les règles du Smart Contract.";
+  if (fullText.includes('missing revert data') || fullText.includes('call_exception') || fullText.includes('cannot estimate gas') || fullText.includes('execution reverted')) {
+    return "Refus Smart Contract : Votre adresse MetaMask actuelle est le propriétaire vendeur de ce bien. Veuillez changer de compte dans MetaMask (ex: Compte 2) pour acheter.";
   }
 
   return err.reason || err.shortMessage || err.message || "Erreur lors de l'exécution de la transaction MetaMask.";
@@ -137,6 +133,17 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
   const [walletAccount, setWalletAccount] = useState('');
 
   useEffect(() => {
+    // Vérifier si l'utilisateur est connecté à son compte Kivu Immobilier
+    const token = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
+    const isLoggedIn = token || (storedUser && storedUser !== 'undefined');
+
+    if (!isLoggedIn) {
+      setErrorMsg("Veuillez d'abord vous connecter à votre compte Kivu Immobilier+ pour réaliser cet achat.");
+    } else {
+      setErrorMsg('');
+    }
+
     // Vérifier si MetaMask est connecté au chargement
     if (window.ethereum) {
       window.ethereum.request({ method: 'eth_accounts' })
@@ -158,7 +165,12 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       if (accounts && accounts.length > 0) {
         setWalletAccount(accounts[0]);
-        setErrorMsg('');
+        // Ne pas effacer l'erreur de connexion si l'utilisateur n'est pas authentifié sur Kivu Immobilier
+        const token = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
+        if (token || (storedUser && storedUser !== 'undefined')) {
+          setErrorMsg('');
+        }
       }
     } catch (err) {
       console.error(err);
@@ -169,14 +181,23 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setErrorMsg('');
 
-    // Authentification de la session
-    let token = localStorage.getItem('token') || (localStorage.getItem('user') ? 'active_user_session' : null);
+    // Vérification stricte de l'authentification de l'utilisateur
+    let token = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
+    const isLoggedIn = token || (storedUser && storedUser !== 'undefined');
+
+    if (!isLoggedIn) {
+      setLoading(false);
+      setErrorMsg("Veuillez d'abord vous connecter à votre compte Kivu Immobilier+ pour réaliser cet achat.");
+      return;
+    }
+
     if (!token) {
-      token = 'demo_user_session';
+      token = 'active_user_session';
       localStorage.setItem('token', token);
     }
+    setErrorMsg('');
 
     try {
       if (!window.ethereum) {
@@ -210,6 +231,18 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
       // Alignement du Token ID de la blockchain (0-indexed) avec l'ID de la propriété
       const tokenId = (property?.id && property.id > 0) ? (property.id - 1) : 0;
 
+      // Vérification préventive : est-ce que le compte MetaMask connecté est le propriétaire vendeur de ce NFT ?
+      try {
+        const currentOwner = await titleContract.ownerOf(tokenId);
+        if (currentOwner && currentOwner.toLowerCase() === currentAccount.toLowerCase()) {
+          throw new Error("PROPRIETAIRE_EGALE_ACHETEUR");
+        }
+      } catch (checkErr) {
+        if (checkErr.message === "PROPRIETAIRE_EGALE_ACHETEUR") {
+          throw new Error("Opération impossible : Votre adresse MetaMask actuelle (" + currentAccount.substring(0, 8) + "...) est le propriétaire vendeur de ce bien. Veuillez changer de compte dans MetaMask (sélectionnez le Compte 2) pour effectuer l'achat.");
+        }
+      }
+
       const tx = await titleContract.depositEscrow(tokenId, { value });
       hash = tx.hash;
       await tx.wait();
@@ -223,6 +256,7 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
           await axios.post(`${API_URL}/transactions`, {
             property_id: property?.id || 1,
             escrow_id: property?.id || 1,
+            montant_usd: property?.prix || 0,
             montant_eth: ethAmount,
             tx_creation: hash
           }, {
@@ -327,9 +361,19 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
               </div>
 
               {errorMsg && (
-                <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2">
-                  <AlertTriangle size={16} />
-                  <span>{errorMsg}</span>
+                <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <AlertTriangle size={16} className="shrink-0" />
+                    <span className="truncate">{errorMsg}</span>
+                  </div>
+                  {errorMsg.includes("connecter") && (
+                    <Link
+                      to="/login"
+                      className="shrink-0 px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-white font-bold text-[10px] uppercase rounded-lg transition-all"
+                    >
+                      Se connecter
+                    </Link>
+                  )}
                 </div>
               )}
 

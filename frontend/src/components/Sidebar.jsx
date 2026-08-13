@@ -15,7 +15,9 @@ import {
   Shield,
   X,
   User as UserIcon,
-  MessageSquare
+  MessageSquare,
+  BadgeCheck,
+  CircleDot
 } from 'lucide-react';
 
 const SidebarLink = ({ to, icon: Icon, label, active, onClick }) => {
@@ -23,10 +25,10 @@ const SidebarLink = ({ to, icon: Icon, label, active, onClick }) => {
     return (
       <button 
         onClick={onClick}
-        className={`flex items-center justify-between w-full px-4 py-3.5 rounded-xl transition-all group ${
-          active 
-          ? 'bg-primary text-white shadow-lg shadow-primary/20' 
-          : 'text-slate-400 hover:bg-white/5 hover:text-white'
+        className={`flex items-center justify-between w-full px-4 py-3 rounded-2xl transition-all duration-200 group ${
+          active
+          ? 'bg-gradient-to-r from-primary to-indigo-500 text-white shadow-lg shadow-primary/20'
+          : 'text-slate-400 hover:bg-white/[0.06] hover:text-white'
         }`}
       >
         <div className="flex items-center gap-3">
@@ -41,10 +43,10 @@ const SidebarLink = ({ to, icon: Icon, label, active, onClick }) => {
   return (
     <Link 
       to={to} 
-      className={`flex items-center justify-between px-4 py-3.5 rounded-xl transition-all group ${
-        active 
-        ? 'bg-primary text-white shadow-lg shadow-primary/20' 
-        : 'text-slate-400 hover:bg-white/5 hover:text-white'
+        className={`flex items-center justify-between px-4 py-3 rounded-2xl transition-all duration-200 group ${
+          active
+          ? 'bg-gradient-to-r from-primary to-indigo-500 text-white shadow-lg shadow-primary/20'
+          : 'text-slate-400 hover:bg-white/[0.06] hover:text-white'
       }`}
     >
       <div className="flex items-center gap-3">
@@ -63,6 +65,8 @@ const Sidebar = () => {
   const [showSecurityModal, setShowSecurityModal] = useState(false);
   const [pendingPath, setPendingPath] = useState('');
   const isActive = (path) => location.pathname === path;
+  const isAdmin = ['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim());
+  const roleLabel = isAdmin ? 'Administration' : user.role === 'agent' ? 'Agent terrain' : user.role || 'Membre';
 
   const handleLogout = () => {
     localStorage.clear();
@@ -83,10 +87,27 @@ const Sidebar = () => {
 
   return (
     <>
-      <aside className="hidden md:flex flex-col w-72 bg-secondary/50 border-r border-white/5 h-screen sticky top-0 p-6">
-        {/* Profile Header Section */}
-        <div className="flex items-center gap-4 mb-10 p-3 bg-white/[0.03] border border-white/5 rounded-2xl">
-          <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 overflow-hidden flex items-center justify-center">
+      <aside className="hidden md:flex flex-col w-72 xl:w-80 bg-[#080A12]/90 border-r border-white/10 h-screen sticky top-0 p-4 xl:p-5 backdrop-blur-xl">
+        <Link to="/dashboard" className="flex items-center gap-3 mb-7 px-2 cursor-pointer group">
+          <LogoIcon size="sm" />
+          <div className="min-w-0">
+            <p className="font-black text-base tracking-tight text-white group-hover:text-indigo-300 transition-colors">Kivu Immobilier<span className="text-indigo-400">+</span></p>
+            <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">Espace sécurisé</p>
+          </div>
+        </Link>
+
+        {isAdmin && (
+          <div className="relative mb-6 overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/15 to-indigo-500/5 p-4">
+            <div className="absolute -right-5 -top-5 h-20 w-20 rounded-full bg-primary/20 blur-2xl" />
+            <div className="relative flex items-start gap-3">
+              <BadgeCheck size={18} className="mt-0.5 text-primary" />
+              <div><p className="text-xs font-bold text-white">Centre de contrôle</p><p className="mt-1 text-[10px] leading-relaxed text-slate-400">Supervisez les validations et votre équipe.</p></div>
+            </div>
+          </div>
+        )}
+
+        <div className="flex items-center gap-3 mb-7 p-3 bg-white/[0.035] border border-white/10 rounded-2xl">
+          <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 overflow-hidden flex items-center justify-center">
             {user.avatar_url ? (
               <img src={user.avatar_url} alt="Profile" className="w-full h-full object-cover" />
             ) : (
@@ -94,29 +115,20 @@ const Sidebar = () => {
             )}
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="font-bold text-sm text-white truncate">{user.prenom} {user.nom}</span>
-            <span className="text-[9px] font-black uppercase tracking-widest text-primary truncate">{user.role}</span>
+            <span className="font-bold text-sm text-white truncate">{user.prenom || 'Utilisateur'} {user.nom}</span>
+            <span className="text-[9px] font-black uppercase tracking-widest text-primary truncate">{roleLabel}</span>
           </div>
         </div>
 
-        <div 
-          onClick={() => openSecurityModal('/')}
-          className="flex items-center gap-3 mb-10 px-2 cursor-pointer group"
-        >
-          <LogoIcon size="sm" />
-          <span className="font-black text-base tracking-tighter group-hover:text-indigo-400 transition-colors">
-            Kivu Immobilier<span className="text-indigo-400">+</span>
-          </span>
-        </div>
-
-        <nav className="flex-1 space-y-2 overflow-y-auto">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 mb-4 px-4">Menu Principal</p>
+        <nav className="flex-1 space-y-1.5 overflow-y-auto pr-1">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 mb-3 px-4">Navigation</p>
           <SidebarLink to="/dashboard" icon={LayoutDashboard} label="Tableau de bord" active={isActive('/dashboard')} />
           
           <SidebarLink 
-            onClick={() => openSecurityModal('/properties')} 
+            to="/properties" 
             icon={Home} 
             label="Annonces Publiques" 
+            active={isActive('/properties')}
           />
           
           <SidebarLink to="/messages" icon={MessageSquare} label="Mes Messages" active={isActive('/messages')} />
@@ -133,20 +145,21 @@ const Sidebar = () => {
             <SidebarLink to="/transactions" icon={Wallet} label="Mes Transactions" active={isActive('/transactions')} />
           )}
           
-          {['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) && (
+          {isAdmin && (
             <>
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 mt-8 mb-4 px-4">Administration</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 mt-7 mb-3 px-4">Administration</p>
               <SidebarLink to="/admin/agents" icon={Users} label="Gestion des Agents" active={isActive('/admin/agents')} />
               <SidebarLink to="/admin/validations" icon={ShieldCheck} label="Validations en attente" active={isActive('/admin/validations')} />
             </>
           )}
         </nav>
 
-        <div className="pt-6 border-t border-white/5 space-y-2">
+        <div className="pt-4 mt-4 border-t border-white/10 space-y-1.5">
+          <div className="flex items-center gap-2 px-4 pb-2 text-[9px] font-bold uppercase tracking-widest text-emerald-400"><CircleDot size={10} className="fill-emerald-400" /> Session sécurisée</div>
           <SidebarLink to="/settings" icon={Settings} label="Paramètres" active={isActive('/settings')} />
           <button 
             onClick={handleLogout}
-            className="flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-red-400 hover:bg-red-500/10 transition-all font-bold text-sm"
+            className="flex items-center gap-3 w-full px-4 py-3 rounded-2xl text-red-400 hover:bg-red-500/10 transition-all font-bold text-sm"
           >
             <LogOut size={20} />
             <span>Déconnexion</span>

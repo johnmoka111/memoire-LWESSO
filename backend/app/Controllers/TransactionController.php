@@ -33,7 +33,7 @@ final class TransactionController extends Controller
         $role = $request->user['role'];
         $params = [];
 
-        $sql = "SELECT t.*, p.titre as property_title 
+        $sql = "SELECT t.*, p.titre as property_title, p.prix as montant_usd 
                 FROM transactions t 
                 JOIN properties p ON t.property_id = p.id";
         

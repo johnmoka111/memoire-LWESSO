@@ -19,7 +19,10 @@ import {
   Users,
   DollarSign,
   BarChart3,
-  Sparkles
+  Sparkles,
+  ClipboardCheck,
+  ListChecks,
+  CheckCheck
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -54,6 +57,22 @@ const StatCard = ({ label, value, icon: Icon, color, subValue, trend, trendValue
     </div>
   </motion.div>
 );
+
+const QuickAction = ({ to, icon: Icon, label, description, tone = 'primary' }) => {
+  const tones = {
+    primary: 'border-primary/20 hover:border-primary/50 hover:bg-primary/10 text-primary',
+    emerald: 'border-emerald-500/20 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-emerald-400',
+    amber: 'border-amber-500/20 hover:border-amber-500/50 hover:bg-amber-500/10 text-amber-400'
+  };
+
+  return (
+    <Link to={to} className={`group flex items-center gap-3 rounded-2xl border bg-white/[0.02] p-4 transition-all ${tones[tone]}`}>
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/5 transition-transform group-hover:scale-110"><Icon size={18} /></span>
+      <span className="min-w-0 flex-1"><span className="block text-sm font-bold text-white">{label}</span><span className="block truncate text-[10px] text-slate-500">{description}</span></span>
+      <ChevronRight size={16} className="text-slate-600 transition-transform group-hover:translate-x-1" />
+    </Link>
+  );
+};
 
 // Composant de transaction récente amélioré
 const TransactionItem = ({ tx, index }) => {
@@ -99,6 +118,9 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [greeting, setGreeting] = useState('');
   const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const role = user.role?.toLowerCase().trim();
+  const isAdmin = ['admin', 'superadmin', 'administrateur'].includes(role);
+  const isAgent = role === 'agent';
 
   useEffect(() => {
     // Définir le message d'accueil selon l'heure
@@ -114,9 +136,9 @@ const Dashboard = () => {
 
         const [statsRes, activityRes] = await Promise.all([
           axios.get(`${API_URL}/dashboard/stats`, config),
-          ['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim())
+          isAdmin
             ? axios.get(`${API_URL}/properties`, config)
-            : user.role === 'agent' 
+            : isAgent
               ? axios.get(`${API_URL}/agent/missions`, config) 
               : axios.get(`${API_URL}/transactions`, config)
         ]);
@@ -135,15 +157,24 @@ const Dashboard = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [isAdmin, isAgent]);
 
   // Calculs supplémentaires à partir des données existantes
   const transactionsList = Array.isArray(stats.transactions) ? stats.transactions : [];
   const pendingTransactions = transactionsList.filter(tx => tx?.etat !== 'libere').length;
   const totalVolume = transactionsList.reduce((sum, tx) => sum + parseFloat(tx?.montant_usd || tx?.prix || 0), 0);
   const recentTransactions = transactionsList.slice(0, 5);
+  const pendingItems = transactionsList.filter(item => ['en_attente', 'pending', 'a_valider'].includes(item?.statut?.toLowerCase())).length;
+  const completedMissions = transactionsList.filter(item => ['valide', 'termine', 'completed'].includes(item?.statut?.toLowerCase())).length;
+  const missionProgress = transactionsList.length ? Math.round((completedMissions / transactionsList.length) * 100) : 0;
 
-  const canCreateProperty = user.role === 'proprietaire' || user.role === 'admin' || user.role === 'superadmin';
+  const canCreateProperty = user.role === 'proprietaire' || isAdmin;
+  const dashboardLabel = isAdmin ? 'Centre de pilotage' : isAgent ? 'Espace terrain' : 'Tableau de bord';
+  const dashboardSubtitle = isAdmin
+    ? 'Suivez le catalogue, les validations et votre réseau d’agents.'
+    : isAgent
+      ? 'Organisez vos visites et avancez sur vos missions prioritaires.'
+      : 'Gardez une vue claire sur votre activité immobilière.';
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-[#0A0A0F] via-[#0F0F1A] to-[#0A0A0F] text-white">
@@ -161,18 +192,19 @@ const Dashboard = () => {
                 <div className="space-y-3">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-primary/30 to-primary/10 rounded-full border border-primary/30 backdrop-blur-sm">
                     <Sparkles size={12} className="text-primary" />
-                    <span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">Tableau de bord exécutif</span>
+                    <span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">{dashboardLabel}</span>
                   </div>
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
                     {greeting}, <span className="text-primary">{user.prenom || 'Invité'}</span>
                   </h1>
-                  <p className="text-slate-400 text-sm flex items-center gap-2">
-                    <Activity size={12} />
-                    Rôle : <span className="font-semibold text-white">{user.role || 'visiteur'}</span> • Session active
-                  </p>
+                  <p className="text-slate-400 text-sm flex items-center gap-2"><Activity size={12} />{dashboardSubtitle}</p>
                 </div>
 
-                {canCreateProperty && (
+                {isAgent ? (
+                  <Link to="/agent/missions" className="group px-6 py-3 bg-gradient-to-r from-primary to-indigo-500 hover:from-primary/90 hover:to-indigo-500/90 text-white font-semibold rounded-xl transition-all active:scale-95 shadow-xl shadow-primary/20 flex items-center justify-center gap-2 whitespace-nowrap">
+                    <ClipboardCheck size={18} /> Voir mes missions
+                  </Link>
+                ) : canCreateProperty && (
                   <Link
                     to="/properties/create"
                     className="group px-6 py-3 bg-gradient-to-r from-primary to-indigo-500 hover:from-primary/90 hover:to-indigo-500/90 text-white font-semibold rounded-xl transition-all active:scale-95 shadow-xl shadow-primary/20 flex items-center justify-center gap-2 whitespace-nowrap"
@@ -192,28 +224,28 @@ const Dashboard = () => {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatCard
-                  label="Actifs en séquestre"
-                  value={`${parseFloat(stats.balance).toLocaleString()} $`}
-                  icon={Wallet}
+                  label={isAdmin ? 'Validations à traiter' : isAgent ? 'Missions assignées' : 'Actifs en séquestre'}
+                  value={isAdmin ? pendingItems : isAgent ? transactionsList.length : `${parseFloat(stats.balance).toLocaleString()} $`}
+                  icon={isAdmin ? ClipboardCheck : isAgent ? ListChecks : Wallet}
                   color="bg-gradient-to-br from-primary/20 to-indigo-500/20 text-primary"
-                  subValue="USD verrouillés"
-                  trend={true}
-                  trendValue="+8%"
+                  subValue={isAdmin ? 'Demandent votre attention' : isAgent ? 'Dossiers à suivre' : 'USD verrouillés'}
+                  trend={(isAdmin && pendingItems > 0) || (isAgent && missionProgress > 0)}
+                  trendValue={isAgent ? `${missionProgress}% finalisées` : `${pendingItems} à revoir`}
                 />
                 <StatCard
-                  label={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "Total Agents" : "Propriétés"}
-                  value={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? (stats.total_agents || 0) : stats.total_properties}
-                  icon={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? Users : Building2}
-                  color={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "bg-gradient-to-br from-blue-500/20 to-indigo-500/20 text-blue-400" : "bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-400"}
-                  subValue={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "Agents actifs" : "Total catalogue"}
+                  label={isAdmin ? "Réseau d’agents" : isAgent ? "Missions terminées" : "Propriétés"}
+                  value={isAdmin ? (stats.total_agents || 0) : isAgent ? completedMissions : stats.total_properties}
+                  icon={isAdmin ? Users : isAgent ? CheckCheck : Building2}
+                  color={isAdmin ? "bg-gradient-to-br from-blue-500/20 to-indigo-500/20 text-blue-400" : "bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-400"}
+                  subValue={isAdmin ? "Collaborateurs enregistrés" : isAgent ? "Expertises validées" : "Total catalogue"}
                 />
                 <StatCard
-                  label={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "Catalogue" : "Transactions"}
-                  value={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? stats.total_properties : stats.transactions.length}
-                  icon={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? Building2 : Activity}
+                  label={isAdmin ? "Catalogue" : isAgent ? "À planifier" : "Transactions"}
+                  value={isAdmin ? stats.total_properties : isAgent ? Math.max(transactionsList.length - completedMissions, 0) : stats.transactions.length}
+                  icon={isAdmin ? Building2 : isAgent ? Calendar : Activity}
                   color="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 text-blue-400"
-                  subValue={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "Tous les biens" : "Dont pending"}
-                  trend={!['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) && pendingTransactions > 0}
+                  subValue={isAdmin ? "Biens référencés" : isAgent ? "Interventions restantes" : "Dont pending"}
+                  trend={!isAdmin && !isAgent && pendingTransactions > 0}
                   trendValue={`${pendingTransactions} en attente`}
                 />
                 <StatCard
@@ -234,14 +266,14 @@ const Dashboard = () => {
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 border-b border-white/10 bg-white/[0.02]">
                     <div>
                       <h3 className="text-xl font-bold text-white">
-                        {['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? 'Toutes les propriétés' : user.role === 'agent' ? 'Missions assignées' : 'Activité récente'}
+                        {isAdmin ? 'Vue opérationnelle' : isAgent ? 'Prochaines missions' : 'Activité récente'}
                       </h3>
                       <p className="text-xs text-slate-500 mt-1">
-                        {['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? 'Gestion globale du catalogue' : user.role === 'agent' ? 'Dernières expertises terrain à effectuer' : 'Dernières transactions immobilières'}
+                        {isAdmin ? 'Les biens les plus récents du catalogue' : isAgent ? 'Vos expertises terrain à traiter en priorité' : 'Dernières transactions immobilières'}
                       </p>
                     </div>
                     <Link 
-                      to={['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim()) ? "/properties" : user.role === 'agent' ? "/agent/missions" : "/transactions"} 
+                      to={isAdmin ? "/properties" : isAgent ? "/agent/missions" : "/transactions"}
                       className="mt-3 sm:mt-0 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
                     >
                       Voir tout <ChevronRight size={16} />
@@ -255,16 +287,16 @@ const Dashboard = () => {
                           <AlertCircle size={32} className="text-slate-600" />
                         </div>
                         <p className="text-sm font-semibold text-slate-400">
-                          {user.role === 'agent' ? 'Aucune mission en attente' : 'Aucune transaction récente'}
+                          {isAgent ? 'Aucune mission en attente' : isAdmin ? 'Aucun bien récent' : 'Aucune transaction récente'}
                         </p>
                         <p className="text-[10px] text-slate-600 uppercase tracking-wider mt-1">Le flux est actuellement vide</p>
                       </div>
                     ) : (
                       <div className="space-y-3">
                         {recentTransactions.map((item, idx) => {
-                          if (user.role === 'agent' || ['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim())) {
+                          if (isAgent || isAdmin) {
                             // Rendu spécifique pour une mission ou une propriété admin
-                            const isMission = user.role === 'agent';
+                            const isMission = isAgent;
                             return (
                               <motion.div
                                 key={item.id || idx}
@@ -311,6 +343,26 @@ const Dashboard = () => {
 
               {/* Colonne Wallet / Sécurité - 1/3 */}
               <div className="space-y-6">
+                {(isAdmin || isAgent) && (
+                  <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-transparent p-5">
+                    <div className="mb-4 flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Raccourcis</p>
+                        <h3 className="mt-1 text-lg font-bold text-white">{isAdmin ? 'Actions de supervision' : 'Mon plan de terrain'}</h3>
+                      </div>
+                      <div className="rounded-xl bg-white/5 p-2 text-primary">{isAdmin ? <BarChart3 size={18} /> : <MapPin size={18} />}</div>
+                    </div>
+                    <div className="space-y-2">
+                      {isAdmin ? <>
+                        <QuickAction to="/admin/validations" icon={ClipboardCheck} label="Traiter les validations" description={`${pendingItems} dossier(s) à examiner`} tone="amber" />
+                        <QuickAction to="/admin/agents" icon={Users} label="Gérer les agents" description="Ajouter, activer ou suivre l’équipe" tone="emerald" />
+                      </> : <>
+                        <QuickAction to="/agent/missions" icon={ListChecks} label="Ouvrir mes missions" description={`${Math.max(transactionsList.length - completedMissions, 0)} intervention(s) restante(s)`} tone="primary" />
+                        <QuickAction to="/messages" icon={Activity} label="Consulter les messages" description="Restez en lien avec l’équipe" tone="emerald" />
+                      </>}
+                    </div>
+                  </div>
+                )}
                 <div className="relative group bg-gradient-to-br from-primary/5 via-indigo-500/5 to-transparent border border-primary/20 rounded-2xl overflow-hidden transition-all hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 rounded-full blur-[80px]" />
