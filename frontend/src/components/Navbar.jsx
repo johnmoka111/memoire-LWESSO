@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   ArrowLeft, 
@@ -14,7 +14,9 @@ import {
   MessageSquare, 
   Settings, 
   Home,
-  UserPlus
+  UserPlus,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { LogoIcon, BrandName } from './Logo';
 
@@ -27,6 +29,24 @@ const Navbar = () => {
 
   const isHome = location.pathname === '/';
   const isAdmin = ['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim());
+
+  const [isLightMode, setIsLightMode] = useState(() => {
+    return localStorage.getItem('theme') === 'light';
+  });
+
+  useEffect(() => {
+    if (isLightMode) {
+      document.body.classList.add('light-mode');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.body.classList.remove('light-mode');
+      localStorage.setItem('theme', 'dark');
+    }
+  }, [isLightMode]);
+
+  const toggleTheme = () => {
+    setIsLightMode(prev => !prev);
+  };
 
   // Configuration Dynamique des Pages selon l'URL active
   const getPageMeta = (path) => {
@@ -58,7 +78,7 @@ const Navbar = () => {
   // SI NON CONNECTÉ : Afficher le Header du Site Public
   if (!token) {
     return (
-      <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-[#060812] border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between shadow-[0_4px_25px_rgba(0,0,0,0.9)]" style={{ backgroundColor: '#060812', opacity: 1 }}>
+      <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-[#060812] border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between shadow-[0_4px_25px_rgba(0,0,0,0.9)] transition-colors duration-300">
         {/* Logo du Site Public */}
         <Link to="/" className="flex items-center gap-3 cursor-pointer group">
           <LogoIcon size="md" />
@@ -72,8 +92,19 @@ const Navbar = () => {
           <Link to="/properties/create" className="text-slate-300 hover:text-blue-400 transition-colors">Soumettre un Bien</Link>
         </div>
 
-        {/* Boutons d'Action Public (Connexion / Inscription) */}
+        {/* Boutons d'Action Public (Connexion / Inscription + Theme Toggle) */}
         <div className="flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all flex items-center gap-1.5 shadow-sm"
+            title={isLightMode ? "Passer en mode Sombre" : "Passer en mode Clair"}
+          >
+            {isLightMode ? <Moon size={16} className="text-indigo-600" /> : <Sun size={16} className="text-amber-400" />}
+            <span className="hidden sm:inline text-xs font-bold">
+              {isLightMode ? 'Sombre' : 'Clair'}
+            </span>
+          </button>
+
           <Link to="/login" className="px-4 py-2 text-xs font-bold text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700 rounded-xl transition-all">
             Connexion
           </Link>
@@ -87,7 +118,7 @@ const Navbar = () => {
 
   // SI CONNECTÉ : Header Administration / Espace Sécurisé
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-[#060812] border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between shadow-[0_4px_25px_rgba(0,0,0,0.9)]" style={{ backgroundColor: '#060812', opacity: 1 }}>
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-[#060812] border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between shadow-[0_4px_25px_rgba(0,0,0,0.9)] transition-colors duration-300">
       {/* Partie Gauche : Logo + Titre Dynamique de la Page Admin */}
       <div className="flex items-center gap-3 md:gap-4">
         {!isHome && (
@@ -119,8 +150,19 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Partie Droite : User Profile & Logout */}
+      {/* Partie Droite : User Profile, Theme Toggle & Logout */}
       <div className="flex items-center gap-3 md:gap-4">
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all flex items-center gap-1.5 shadow-sm"
+          title={isLightMode ? "Passer en mode Sombre" : "Passer en mode Clair"}
+        >
+          {isLightMode ? <Moon size={16} className="text-indigo-600" /> : <Sun size={16} className="text-amber-400" />}
+          <span className="hidden sm:inline text-xs font-bold">
+            {isLightMode ? 'Sombre' : 'Clair'}
+          </span>
+        </button>
+
         {location.pathname !== '/properties/create' && (
           <Link
             to="/properties/create"

@@ -4,8 +4,65 @@
 
 @layer base {
   body {
-    @apply bg-[#05070C] text-slate-100 min-h-screen relative overflow-x-hidden;
+    @apply bg-[#05070C] text-slate-100 min-h-screen relative overflow-x-hidden transition-colors duration-300;
     font-family: 'Outfit', sans-serif;
+  }
+
+  /* Support du Mode Clair (Light Mode) sur tout le site */
+  body.light-mode {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+  }
+
+  body.light-mode nav {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  body.light-mode nav a, 
+  body.light-mode nav p,
+  body.light-mode nav span:not(.hero-glow) {
+    color: #1e293b !important;
+  }
+
+  body.light-mode nav .text-slate-300,
+  body.light-mode nav .text-slate-400 {
+    color: #475569 !important;
+  }
+
+  body.light-mode .bg-\[\#05070C\],
+  body.light-mode .bg-\[\#060812\],
+  body.light-mode .bg-\[\#0A0A0F\],
+  body.light-mode .bg-\[\#0F0F1A\],
+  body.light-mode .bg-\[\#0B101D\],
+  body.light-mode .bg-\[\#070914\],
+  body.light-mode .bg-\[\#080C16\] {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  body.light-mode .border-slate-800,
+  body.light-mode .border-slate-700,
+  body.light-mode .border-slate-800\/60,
+  body.light-mode .border-white\/10 {
+    border-color: #e2e8f0 !important;
+  }
+
+  body.light-mode h1, 
+  body.light-mode h2, 
+  body.light-mode h3, 
+  body.light-mode h4,
+  body.light-mode .text-white,
+  body.light-mode .text-slate-100,
+  body.light-mode .text-slate-200 {
+    color: #0f172a !important;
+  }
+
+  body.light-mode .text-slate-300,
+  body.light-mode .text-slate-400,
+  body.light-mode .text-slate-500 {
+    color: #475569 !important;
   }
 
   /* Form Input Styling: White background with crisp bold black text for 100% legibility */
@@ -41,7 +98,7 @@
   }
 }
 
-/* Custom Sleek Dark Scrollbar */
+/* Custom Sleek Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -51,24 +108,27 @@
   background: #060810;
 }
 
+body.light-mode ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #2563eb;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #1d4ed8;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1e293b #060810;
+  scrollbar-color: #2563eb #060810;
 }
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-3.5 bg-gradient-to-r from-blue-700 to-slate-800 hover:from-blue-600 hover:to-slate-700 text-white font-bold rounded-xl transition-all active:scale-95 disabled:opacity-50 shadow-md;
+    @apply px-6 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl transition-all active:scale-95 disabled:opacity-50 shadow-md;
   }
 
   .card {
@@ -80,6 +140,6 @@
   }
 
   .text-brand {
-    @apply text-blue-400;
+    @apply text-blue-500;
   }
 }

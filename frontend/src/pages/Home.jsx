@@ -42,7 +42,7 @@ const Home = () => {
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1]">
                 L'Immobilier <br />
-                <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500 bg-clip-text text-transparent">Sans Risque à Bukavu.</span>
+                <span className="bg-gradient-to-r from-blue-500 via-sky-400 to-cyan-300 bg-clip-text text-transparent font-black drop-shadow-[0_4px_20px_rgba(56,189,248,0.5)]">Sans Risque à Bukavu.</span>
               </h1>
 
               <p className="text-base md:text-lg text-slate-400 max-w-lg leading-relaxed">
