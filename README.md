@@ -1,508 +1,245 @@
-# 🏡 KivuMarket+ — Plateforme de Sécurité Foncière à Bukavu
+# 🏡 Kivu Immobilier+ — Plateforme de Sécurité Foncière & Escrow Blockchain
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![React](https://img.shields.io/badge/Frontend-React_19-61DAFB?logo=react)](https://react.dev/)
+[![PHP](https://img.shields.io/badge/Backend-PHP_8.2-777BB4?logo=php)](https://www.php.net/)
+[![Solidity](https://img.shields.io/badge/Blockchain-Solidity_^0.8.27-363636?logo=solidity)](https://soliditylang.org/)
+[![MetaMask](https://img.shields.io/badge/Web3-MetaMask_Integration-F6851B?logo=metamask)](https://metamask.io/)
 
 > **Mémoire de fin d'études — LWESSO**  
-> Système de gestion et de sécurisation des transactions immobilières basé sur la Blockchain (GoChain/Ethereum) et la vérification terrain par agents certifiés.
+> Système de gestion, d'ancrage numérique et de sécurisation des transactions immobilières basé sur la Blockchain (Solidity / Hardhat / Ethereum Testnet) et la vérification terrain par agents certifiés.
 
 ---
 
 ## 📋 Table des Matières
 
 1. [Description du Projet](#-description-du-projet)
-2. [Architecture Technique](#-architecture-technique)
-3. [Prérequis](#-prérequis)
-4. [Installation Complète](#-installation-complète)
-5. [Démarrage de l'Application](#-démarrage-de-lapplication)
-6. [Identifiants de Connexion](#-identifiants-de-connexion)
-7. [Fonctionnalités par Rôle](#-fonctionnalités-par-rôle)
-8. [Workflow Complet](#-workflow-complet)
-9. [API Endpoints](#-api-endpoints)
-10. [Migration sur un Autre PC](#-migration-sur-un-autre-pc)
-11. [Ce qui reste à faire](#-ce-qui-reste-à-faire)
+2. [Technologies et Langages Utilisés](#-technologies-et-langages-utilisés)
+3. [Guide : Déploiement et Connexion du Smart Contract](#-guide--déploiement-et-connexion-du-smart-contract)
+4. [Guide : Lancement sur un Autre PC (Multi-OS & Navigateurs)](#-guide--lancement-sur-un-autre-pc-multi-os--navigateurs)
+5. [Compatibilité Systèmes et Navigateurs](#-compatibilité-systèmes-et-navigateurs)
+6. [Architecture Technique](#-architecture-technique)
+7. [Identifiants de Connexion (Démo)](#-identifiants-de-connexion-démo)
+8. [Fonctionnalités par Rôle](#-fonctionnalités-par-rôle)
+9. [Workflow Général](#-workflow-général)
+10. [Licence et Contribution](#-licence-et-contribution)
 
 ---
 
 ## 📌 Description du Projet
 
-**KivuMarket+** est une plateforme web académique qui résout le problème des fraudes foncières dans la région du Kivu (RDC) en combinant :
+**Kivu Immobilier+** est une plateforme web moderne qui résout les problématiques de fraudes et litiges fonciers dans la région du Kivu (RDC) en combinant :
 
-- ✅ **Validation physique terrain** par des agents certifiés
-- ✅ **Ancrage blockchain** des titres fonciers (hash SHA-256 immuable)
-- ✅ **Escrow sécurisé** pour les transactions immobilières
-- ✅ **Notifications email** automatisées à chaque étape
-- ✅ **Géolocalisation** interactive des biens (Leaflet.js)
+- 🛡️ **Certification terrain** : Audit et visite physique par des agents assermentés.
+- 🔗 **Ancrage Blockchain** : Création d'un Titre Foncier Numérique immuable sous forme de NFT (ERC-721).
+- 💰 **Paiement Escrow Séquestre** : Verrouillage des fonds via Smart Contract Solidity jusqu'à validation finale.
+- 🌐 **Cartographie Interactive** : Géolocalisation des propriétés (Leaflet.js) et panoramas virtuels 360°.
+
+---
+
+## 💻 Technologies et Langages Utilisés
+
+### 🎨 Frontend
+- **Langages** : JavaScript (ES6+), HTML5, CSS3.
+- **Framework & Libraries** : React 19, Tailwind CSS, Framer Motion (Animations), Lucide React (Iconographie), Leaflet.js (Cartographie).
+- **Web3 Integration** : `ethers.js v6` pour l'interaction directe avec l'extension MetaMask.
+- **Bundler** : Script de compilation ultra-rapide basé sur `esbuild` (`node build.js`).
+
+### ⚙️ Backend
+- **Langage** : PHP 8.2+ (Vanilla Architecture MVC RESTful API).
+- **Sécurité & Authentification** : Jeton JWT (`firebase/php-jwt`), hachage de mots de passe `BCRYPT`.
+- **Communications & Services** : PHPMailer (Notifications SMTP automatiques).
+
+### ⛓️ Blockchain & Smart Contracts
+- **Langage** : Solidity (`^0.8.27`).
+- **Framework de développement** : Hardhat Node / Localhost (Port 8545).
+- **Standard & Securité** : OpenZeppelin ERC721 (`ERC721URIStorage`, `ReentrancyGuard`, `Ownable`).
+
+### 🗄️ Base de Données & Infrastructure
+- **SGBD** : MySQL 8.0 / MariaDB.
+- **Serveur Web Local** : XAMPP (Apache + PHP + MySQL).
+
+---
+
+## ⛓️ Guide : Déploiement et Connexion du Smart Contract
+
+Ce guide explique comment compiler, déployer et raccorder le Smart Contract Solidity `KivuImmobilierTitle.sol` à l'application web et à votre portefeuille MetaMask.
+
+### 1. Compilation du Smart Contract
+Dans le répertoire `blockchain/` :
+```bash
+cd blockchain
+npx hardhat compile
+```
+
+### 2. Démarrage du Nœud Blockchain Local
+Lancez le réseau local Hardhat (qui simule la blockchain Ethereum) sur le port `8545` :
+```bash
+npx hardhat node
+```
+*Laissez ce terminal ouvert.* Il fournit 20 comptes pré-alimentés avec 10 000 ETH de test.
+
+### 3. Déploiement du Contrat sur Localhost
+Dans un nouveau terminal :
+```bash
+cd blockchain
+npx hardhat run scripts/deploy.js --network localhost
+```
+Le script affichera l'adresse du contrat déployé :
+`✅ Contrat déployé avec succès à l'adresse : 0x5FbDB2315678afecb367f032d93F642f64180aa3`
+
+### 4. Configuration de l'Application Frontend
+Ouvrez le fichier `frontend/src/config.js` et mettez à jour l'adresse du contrat si nécessaire :
+```javascript
+export const API_URL = "http://localhost/kivu_immobilier/backend/public/index.php/api";
+export const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+export const ADMIN_WALLET_ADDRESS = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
+```
+Reconstruisez ensuite le bundle frontend :
+```bash
+cd frontend
+node build.js
+```
+
+### 5. Configuration de l'extension MetaMask
+Dans votre navigateur :
+1. Ouvrez l'extension **MetaMask** 🦊.
+2. Allez dans le sélecteur de réseau > **Ajouter un réseau** > **Ajouter un réseau manuellement**.
+3. Renseignez les paramètres suivants :
+   - **Nom du réseau** : `Localhost 8545`
+   - **URL RPC** : `http://127.0.0.1:8545` *(Attention : n'oubliez pas `http://`)*
+   - **ID de chaîne (Chain ID)** : `31337`
+   - **Symbole** : `ETH`
+4. **Importer un compte acheteur** :
+   - Dans MetaMask, cliquez sur **Importer un compte**.
+   - Collez la clé privée du compte de test Hardhat #2 :
+     `0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d`
+   - Vous obtiendrez un portefeuille de test alimenté en ETH pour valider les achats en séquestre.
+
+---
+
+## 🖥️ Guide : Lancement sur un Autre PC (Multi-OS & Navigateurs)
+
+Suivez ces étapes pour installer et exécuter l'application **Kivu Immobilier+** sur n'importe quel nouvel ordinateur.
+
+### 1. Prérequis Système
+Installez les outils suivants sur le nouveau PC :
+- **XAMPP** (PHP 8.2+, MySQL, Apache) — [ApacheFriends](https://www.apachefriends.org/)
+- **Node.js** (v18+) — [Nodejs.org](https://nodejs.org/)
+- **Git** — [Git-scm.com](https://git-scm.com/)
+- **Composer** — [Getcomposer.org](https://getcomposer.org/)
+- Extension Web3 **MetaMask** sur votre navigateur.
+
+### 2. Cloner le Projet
+Placez-vous dans le dossier racine de votre serveur web (ex: `C:\xampp\htdocs\` sur Windows ou `/var/www/html/` sur Linux/macOS) :
+```bash
+cd C:\xampp\htdocs
+git clone https://github.com/johnmoka111/memoire-LWESSO.git kivu_immobilier
+```
+
+### 3. Configuration de la Base de Données
+1. Lancez **Apache** et **MySQL** dans XAMPP.
+2. Ouvrez **phpMyAdmin** (`http://localhost/phpmyadmin`).
+3. Créez une nouvelle base de données nommée **`kivu_immobilier`** (Collation : `utf8mb4_general_ci`).
+4. Importez le fichier SQL situé dans le projet : `database/schema.sql`.
+
+### 4. Configuration Backend (PHP)
+```bash
+cd C:\xampp\htdocs\kivu_immobilier\backend
+composer install
+```
+Créez le fichier `.env` à partir de l'exemple :
+```bash
+copy .env.example .env
+```
+Assurez-vous que les accès DB correspondent :
+```env
+DB_HOST=localhost
+DB_NAME=kivu_immobilier
+DB_USER=root
+DB_PASS=
+```
+
+### 5. Compilation et Démarrage Frontend
+```bash
+cd C:\xampp\htdocs\kivu_immobilier\frontend
+npm install
+node build.js
+```
+
+### 6. Accès à l'Application
+Ouvrez votre navigateur sur l'adresse :
+```text
+http://localhost/kivu_immobilier/frontend/public/index.html#/login
+```
+
+---
+
+## 🌐 Compatibilité Systèmes et Navigateurs
+
+### 💻 Systèmes d'Exploitation Supportés
+- **Windows** : Windows 10 / Windows 11 (via XAMPP / WampServer).
+- **macOS** : macOS Monterey, Ventura, Sonoma (via XAMPP pour Mac ou MAMP).
+- **Linux** : Ubuntu 20.04+, Debian, Fedora, Arch Linux (via LAMP Stack).
+
+### 🌐 Navigateurs Compatibles
+- **Google Chrome** *(Recommandé)*
+- **Brave Browser** *(Recommandé - Support Web3 natif)*
+- **Microsoft Edge**
+- **Mozilla Firefox**
+- **Opera / Opera GX**
 
 ---
 
 ## 🏗️ Architecture Technique
 
-```
-kivumarket/
-├── backend/                    # API REST (PHP 8.2 Vanilla MVC)
+```text
+kivu_immobilier/
+├── backend/                    # API REST (PHP 8.2 Vanilla Architecture MVC)
 │   ├── app/
 │   │   ├── Controllers/        # Auth, Property, Transaction, Admin, Document
-│   │   ├── Models/             # User, Property, Document, Transaction, Notification
+│   │   ├── Models/             # User, Property, Document, Transaction
 │   │   ├── Services/           # BlockchainService, MailService
-│   │   ├── Core/               # Router, Request, Response, Database, Model
-│   │   └── Middlewares/        # AuthMiddleware, RoleMiddleware (JWT)
-│   ├── config/
-│   │   ├── app.php             # Constantes : DB, JWT, SMTP, Blockchain
-│   │   └── KivuMarketEscrow.json  # ABI du Smart Contract
-│   ├── routes/api.php          # Toutes les routes de l'API
-│   ├── storage/uploads/        # Photos et documents uploadés
-│   └── public/index.php        # Point d'entrée unique de l'API
+│   │   └── Core/               # Router, Request, Response, Database
+│   ├── config/                 # Paramètres DB, JWT, ABI Smart Contract
+│   └── public/index.php        # Point d'entrée unique API
 │
-├── frontend/                   # SPA React 19 + Tailwind CSS
+├── frontend/                   # Single Page Application (React 19)
 │   ├── src/
-│   │   ├── pages/              # Login, Register, Dashboard, PropertyDetail, Transactions...
+│   │   ├── pages/              # Login, Dashboard, PropertyDetail, Transactions...
 │   │   ├── components/         # Sidebar, Navbar, Map...
-│   │   └── config.js           # URL de l'API (API_URL)
+│   │   └── config.js           # Adresse API & Contrat Blockchain
 │   ├── public/
-│   │   ├── index.html          # Point d'entrée HTML
-│   │   └── dist/               # Bundle JS/CSS compilé (app.js, app.css)
-│   └── build.js                # Script de build (esbuild)
+│   │   └── dist/               # App compilée (app.js, index.js)
+│   └── build.js                # Script de compilation ESBuild
 │
-├── blockchain/
-│   ├── contracts/KivuMarketTitle.sol  # Smart Contract Solidity
-│   └── hardhat.config.js
+├── blockchain/                 # Environnement Hardhat & Solidity
+│   ├── contracts/              # KivuImmobilierTitle.sol (Smart Contract ERC-721)
+│   └── scripts/deploy.js       # Script de déploiement automatisé
 │
-├── database/schema.sql         # Schéma complet de la base de données
-└── scratch/                    # Scripts utilitaires de diagnostic
-```
-
-**Stack :**
-| Couche | Technologie |
-|---|---|
-| Frontend | React 19, Tailwind CSS, Framer Motion, Leaflet.js, Axios |
-| Backend | PHP 8.2, JWT (firebase/php-jwt), PHPMailer, web3.php |
-| Base de données | MySQL 8.0 |
-| Blockchain | Solidity 0.8, Hardhat, GoChain Testnet |
-| Serveur local | XAMPP (Apache + PHP + MySQL) |
-
----
-
-## ⚙️ Prérequis
-
-- **XAMPP** v8.2+ (Windows) — [xampp.org](https://www.apachefriends.org/)
-- **Node.js** v18+ — [nodejs.org](https://nodejs.org/)
-- **Git** — [git-scm.com](https://git-scm.com/)
-- **Composer** — [getcomposer.org](https://getcomposer.org/)
-
----
-
-## 🚀 Installation Complète
-
-### Étape 1 — Cloner le dépôt
-
-```bash
-# Placer le projet dans le répertoire web de XAMPP
-cd C:\xampp\htdocs
-
-git clone https://github.com/johnmoka111/memoire-LWESSO.git kivumarket
-```
-
-### Étape 2 — Installer les dépendances backend (PHP)
-
-```bash
-cd C:\xampp\htdocs\kivumarket\backend
-composer install
-```
-
-### Étape 3 — Configurer le fichier d'environnement
-
-```bash
-# Copier le fichier d'exemple
-copy backend\.env.example backend\.env
-```
-
-Ouvrir `backend/.env` et vérifier :
-
-```env
-# Base de données (XAMPP par défaut)
-DB_HOST=localhost
-DB_NAME=kivumarket
-DB_USER=root
-DB_PASS=
-
-# JWT
-JWT_SECRET=KivuMarketSecretKey2026!
-
-# Email SMTP (Gmail)
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=votre-email@gmail.com
-SMTP_PASS=votre-mot-de-passe-application
-
-# Blockchain (GoChain Testnet)
-ETH_RPC_URL=https://testnet-rpc.gochain.io
-CONTRACT_ADDRESS=0x...
-ADMIN_WALLET=0x...
-```
-
-> **Note :** Pour le SMTP Gmail, vous devez activer un **"Mot de passe d'application"** dans les paramètres de sécurité Google (pas votre mot de passe habituel).
-
-### Étape 4 — Créer la base de données
-
-1. Démarrer XAMPP (Apache + MySQL)
-2. Ouvrir **phpMyAdmin** : `http://localhost/phpmyadmin`
-3. Créer une base de données nommée **`kivumarket`** (collation : `utf8mb4_general_ci`)
-4. Importer le fichier schema :
-
-```sql
--- Dans phpMyAdmin > kivumarket > Importer
-Fichier : C:\xampp\htdocs\kivumarket\database\schema.sql
-```
-
-### Étape 5 — Créer le compte administrateur
-
-```bash
-cd C:\xampp\htdocs\kivumarket
-C:\xampp\php\php.exe scratch\seed_admin.php
-```
-
-> Cela crée le compte `admin@kivumarket.cd` avec le mot de passe `Admin@Kivu2026!`
-
-### Étape 6 — Installer les dépendances frontend
-
-```bash
-cd C:\xampp\htdocs\kivumarket\frontend
-npm install
-```
-
-### Étape 7 — Compiler le frontend
-
-```bash
-cd C:\xampp\htdocs\kivumarket\frontend
-npm run build
-```
-
-> Le bundle sera généré dans `frontend/public/dist/`
-
----
-
-## ▶️ Démarrage de l'Application
-
-### 1. Démarrer XAMPP
-
-Ouvrir le **panneau de contrôle XAMPP** et démarrer :
-- ✅ **Apache**
-- ✅ **MySQL**
-
-### 2. Accéder à l'application
-
-| Interface | URL |
-|---|---|
-| **Frontend (Application)** | `http://localhost/kivumarket/frontend/public/index.html` |
-| **API Backend** | `http://localhost/kivumarket/backend/public/index.php/api` |
-| **PhpMyAdmin** | `http://localhost/phpmyadmin` |
-
----
-
-## 🔑 Identifiants de Connexion
-
-> **IMPORTANT :** Ces identifiants sont ceux de la base de données locale après import du `schema.sql` et exécution de `seed_admin.php`.
-
-### Compte Administrateur
-
-| Champ | Valeur |
-|---|---|
-| **Email** | `admin@kivumarket.cd` |
-| **Mot de passe** | `Admin@Kivu2026!` |
-| **Rôle** | `admin` |
-
-### Comptes Agents (Terrain)
-
-| Nom | Email | Mot de passe | Commune assignée |
-|---|---|---|---|
-| John Moka | `johnmoka2024@gmail.com` | `Agent@Kivu2026!` | Ibanda |
-| TAL Hub | `tal.communities@gmail.com` | `Agent@Kivu2026!` | Kalundu |
-| Blonde Tuliya | `blondetuliya@gmail.com` | `Agent@Kivu2026!` | Mulongwe |
-| Lucien Amani | `johnfrederickbkm@gmail.com` | `Agent@Kivu2026!` | Goma |
-
-### Compte Acheteur
-
-| Champ | Valeur |
-|---|---|
-| **Email** | `luciusamani@gmail.com` |
-| **Mot de passe** | `Buyer@Kivu2026!` |
-| **Rôle** | `acheteur` |
-
-> **Pour créer un compte propriétaire :** Utiliser le formulaire d'inscription sur `#/register`.
-
----
-
-## 🎭 Fonctionnalités par Rôle
-
-### 👑 Administrateur (`admin`)
-
-- **Dashboard** : Statistiques globales (biens, agents, transactions, escrow actif en USD)
-- **Gestion des Agents** : Créer, modifier, réinitialiser mot de passe, assigner une commune
-- **Validations Foncières** : Voir tous les biens `en_attente` et assigner un agent terrain
-- **Transactions** : Voir toutes les transactions escrow et résoudre des litiges (arbitrage)
-- **Profil** : Modifier ses informations personnelles
-
-### 🕵️ Agent Terrain (`agent`)
-
-- **Dashboard** : Ses propres statistiques et biens de sa commune
-- **Mes Missions** : Liste des biens `assigne` en attente de validation physique
-- Pour chaque mission :
-  - 📷 **Valider le bien** : Ajouter un lien panorama 360° → passe le bien en `valide` + ancrage blockchain
-  - 🚨 **Signaler un litige** : Sélectionner parmi 20 motifs prédéfinis → passe en `rejete`
-- **Profil** : Modifier ses informations
-
-### 🏠 Propriétaire (`proprietaire`)
-
-- **Soumettre un bien** : Formulaire complet (titre, localisation GPS, superficie, photos, titre foncier PDF)
-- **Mes Biens** : Suivre le statut de ses annonces (`en_attente` → `assigne` → `valide`)
-- **Transactions** : Voir les offres d'achat reçues
-
-### 🛒 Acheteur (`acheteur`)
-
-- **Marketplace** : Parcourir tous les biens validés avec carte interactive
-- **Détail d'un bien** : Photos, panorama 360°, titre foncier, hash blockchain, géolocalisation
-- **Initier un achat** : Créer une transaction escrow (modal de paiement MetaMask)
-- **Mes Transactions** : Historique des transactions (`cree`, `libere`, `rembourse`)
-
----
-
-## 🔄 Workflow Complet
-
-```
-1. PROPRIÉTAIRE soumet un bien
-   └─> Statut : en_attente
-
-2. ADMIN assigne un AGENT terrain
-   └─> Statut : assigne
-   └─> Email de notification envoyé à l'agent
-
-3. AGENT effectue la visite physique
-   ├─> Valide : ajoute panorama 360° → Statut : valide
-   │   └─> Ancrage hash SHA-256 du titre foncier sur la blockchain
-   │   └─> Le bien apparaît sur la marketplace publique
-   └─> Rejette : motif de litige → Statut : rejete
-       └─> Email envoyé au propriétaire avec le motif
-
-4. ACHETEUR initie un achat
-   └─> Création transaction Escrow (smart contract)
-   └─> Statut : cree
-
-5. ADMIN arbitre si litige
-   ├─> libere : fonds envoyés au vendeur
-   └─> rembourse : fonds retournés à l'acheteur
-   └─> Hash de la transaction blockchain enregistré
+├── database/schema.sql         # Base de données initiale
+├── LICENSE                     # Licence MIT
+└── CONTRIBUTING.md             # Guide de contribution
 ```
 
 ---
 
-## 🌐 API Endpoints
+## 🔑 Identifiants de Connexion (Démo)
 
-**Base URL :** `http://localhost/kivumarket/backend/public/index.php/api`
-
-### Authentification (public)
-```
-POST /api/auth/login          # Connexion (retourne JWT)
-POST /api/auth/register       # Inscription
-```
-
-### Biens Immobiliers
-```
-GET  /api/properties           # Liste publique des biens validés
-GET  /api/properties/{id}      # Détail + photos + titres fonciers
-POST /api/properties           # Créer un bien [auth: proprietaire/admin]
-POST /api/properties/{id}/assign  # Assigner un agent [auth: admin]
-```
-
-### Agent
-```
-GET  /api/agent/missions             # Missions assignées à l'agent [auth: agent]
-POST /api/agent/validate/{id}        # Valider un bien terrain [auth: agent]
-POST /api/agent/reject/{id}          # Rejeter / signaler litige [auth: agent]
-```
-
-### Transactions Escrow
-```
-GET  /api/transactions               # Transactions de l'utilisateur [auth]
-POST /api/transactions               # Créer une transaction escrow [auth: acheteur]
-POST /api/transactions/resolve       # Résoudre litige [auth: admin]
-```
-
-### Administration
-```
-GET  /api/admin/properties           # Tous les biens [auth: admin]
-GET  /api/admin/agents               # Liste des agents [auth: admin]
-POST /api/admin/agents               # Créer un agent [auth: admin]
-PUT  /api/admin/agents/{id}          # Modifier un agent [auth: admin]
-POST /api/admin/agents/{id}/reset-password  # Reset MDP agent [auth: admin]
-```
-
-### Dashboard & Profil
-```
-GET  /api/dashboard/stats            # Statistiques [auth]
-GET  /api/profile                    # Profil utilisateur [auth]
-PUT  /api/profile                    # Mettre à jour profil [auth]
-GET  /api/notifications              # Notifications [auth]
-```
+| Rôle | Email | Mot de Passe |
+|---|---|---|
+| **Administrateur** | `admin@kivuimmobilier.cd` | `Admin@Kivu2026!` |
+| **Agent Assermenté** | `johnmoka2024@gmail.com` | `Agent@Kivu2026!` |
+| **Agent Terrain** | `tal.communities@gmail.com` | `Agent@Kivu2026!` |
+| **Acheteur** | `luciusamani@gmail.com` | `Buyer@Kivu2026!` |
 
 ---
 
-## 💻 Migration sur un Autre PC
+## 📄 Licence et Contribution
 
-Pour transférer l'application complète sur un autre ordinateur **sans perdre les données** :
-
-### Option A — Copie Complète (Recommandée)
-
-**Sur le PC source :**
-
-**Étape 1 — Exporter la base de données**
-```bash
-# Via phpMyAdmin : kivumarket > Exporter > Format SQL > Télécharger
-# OU via ligne de commande :
-C:\xampp\mysql\bin\mysqldump.exe -u root kivumarket > C:\backup_kivumarket.sql
-```
-
-**Étape 2 — Copier les fichiers uploadés**
-```bash
-# Copier tout le dossier storage/uploads/
-xcopy /E /I "C:\xampp\htdocs\kivumarket\backend\storage\uploads" "D:\backup_uploads"
-```
-
-**Étape 3 — Exporter les identifiants**
-```bash
-# Copier le fichier .env
-copy "C:\xampp\htdocs\kivumarket\backend\.env" "D:\backup_env.txt"
-```
+Ce projet est distribué sous la licence **MIT**. Consulter le fichier [LICENSE](LICENSE) pour plus de détails.  
+Pour contribuer au projet, veuillez lire le guide [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
-**Sur le PC destination :**
-
-**Étape 1 — Installer XAMPP, Node.js, Git, Composer** (voir Prérequis)
-
-**Étape 2 — Cloner le dépôt**
-```bash
-cd C:\xampp\htdocs
-git clone https://github.com/johnmoka111/memoire-LWESSO.git kivumarket
-```
-
-**Étape 3 — Installer les dépendances**
-```bash
-cd C:\xampp\htdocs\kivumarket\backend
-composer install
-
-cd ..\frontend
-npm install
-npm run build
-```
-
-**Étape 4 — Restaurer la base de données**
-```bash
-# 1. Créer la base "kivumarket" dans phpMyAdmin
-# 2. Importer le backup SQL :
-C:\xampp\mysql\bin\mysql.exe -u root kivumarket < C:\backup_kivumarket.sql
-```
-
-**Étape 5 — Restaurer les fichiers uploadés**
-```bash
-xcopy /E /I "D:\backup_uploads" "C:\xampp\htdocs\kivumarket\backend\storage\uploads"
-```
-
-**Étape 6 — Restaurer le fichier .env**
-```bash
-copy "D:\backup_env.txt" "C:\xampp\htdocs\kivumarket\backend\.env"
-```
-
-**Étape 7 — Démarrer XAMPP et tester**
-- Lancer Apache + MySQL dans XAMPP
-- Ouvrir : `http://localhost/kivumarket/frontend/public/index.html`
-
----
-
-### Option B — Via Git (Sans données DB)
-
-```bash
-# Pull les dernières modifications
-cd C:\xampp\htdocs\kivumarket
-git pull origin master
-
-# Réinstaller les dépendances
-cd backend && composer install
-cd ../frontend && npm install && npm run build
-
-# Recréer la DB depuis le schéma
-# (PhpMyAdmin → Importer database/schema.sql)
-
-# Recréer l'admin
-C:\xampp\php\php.exe scratch\seed_admin.php
-```
-
----
-
-### ⚠️ Points Critiques pour la Migration
-
-1. **Le dossier `backend/storage/uploads/`** contient les photos et PDF des biens — il doit être copié manuellement (non versionné sur Git).
-2. **Le fichier `backend/.env`** contient les secrets (SMTP, JWT) — il n'est pas sur Git pour sécurité. Toujours le copier manuellement.
-3. **Les URLs dans la DB** (`file_url` dans la table `documents`) contiennent `http://localhost/kivu%20market/...` — si le chemin du projet change, il faudra mettre à jour ces URLs dans la DB.
-4. **Le chemin XAMPP** doit rester identique : `C:\xampp\htdocs\kivumarket\` sinon les URLs de fichiers seront cassées.
-
----
-
-## 🏗️ Ce qui reste à faire
-
-### 🔴 Critique (pour production)
-- [ ] **Intégration MetaMask côté frontend** : Actuellement la création de transaction escrow passe via l'API backend. Il faut intégrer `ethers.js` pour que l'acheteur signe la transaction depuis son wallet.
-- [ ] **Déploiement du Smart Contract** : Le contrat `KivuMarketTitle.sol` doit être déployé sur le mainnet GoChain ou un testnet stable et son adresse mise dans `.env`.
-- [ ] **HTTPS / SSL** : Pour la production, configurer un certificat SSL (Let's Encrypt).
-- [ ] **Migrations DB** : Remplacer le fichier `schema.sql` monolithique par un système de migrations versionné.
-
-### 🟡 Important (améliorations)
-- [ ] **Oracle de prix ETH/USD** : Intégrer CoinGecko API pour convertir automatiquement les prix ETH en USD en temps réel (champ `prix_usd` actuellement vide).
-- [ ] **Intégration cadastre** : Connecter l'API du cadastre congolais pour valider automatiquement les références foncières.
-- [ ] **Upload photos sur Cloud** : Remplacer le stockage local (`storage/uploads/`) par Google Cloud Storage (GCS) pour la production (déjà configuré dans `app.php`).
-- [ ] **Tests unitaires** : Aucun test automatisé n'existe pour le backend PHP.
-- [ ] **Reset mot de passe** : L'email de reset fonctionne pour les agents, mais pas encore de route frontend `/reset-password` pour les utilisateurs réguliers.
-
-### 🟢 Optionnel (UX)
-- [ ] **Notifications temps réel** : Remplacer le polling par WebSockets (Ratchet PHP ou Node.js).
-- [ ] **PWA (Progressive Web App)** : Ajouter un `service-worker.js` pour fonctionner offline.
-- [ ] **Signature numérique** : Permettre aux propriétaires de signer électroniquement les documents.
-- [ ] **Export PDF** : Générer des attestations de propriété en PDF depuis l'interface.
-- [ ] **Multi-langue** : Support Français / Swahili / Anglais.
-
----
-
-## 📊 État Actuel (Soutenance — Juillet 2026)
-
-| Fonctionnalité | État |
-|---|---|
-| Authentification JWT multi-rôles | ✅ Fonctionnel |
-| Soumission de biens + upload fichiers | ✅ Fonctionnel |
-| Assignation d'agents par l'admin | ✅ Fonctionnel |
-| Validation terrain + panorama 360° | ✅ Fonctionnel |
-| Rejet avec motifs de litige | ✅ Fonctionnel |
-| Ancrage blockchain SHA-256 | ✅ Fonctionnel (simulé si RPC offline) |
-| Transactions Escrow (création/consultation) | ✅ Fonctionnel |
-| Arbitrage admin (libérer/rembourser) | ✅ Fonctionnel |
-| Notifications email (SMTP) | ✅ Fonctionnel |
-| Carte interactive Leaflet | ✅ Fonctionnel |
-| Panorama 360° (Pannellum) | ✅ Fonctionnel |
-| Dashboard stats en temps réel | ✅ Fonctionnel |
-| MetaMask (signature frontend) | ❌ Non implémenté |
-| Oracle prix ETH/USD (CoinGecko) | ❌ Non implémenté |
-| Cadastre DRC (API externe) | ❌ Non disponible |
-
----
-
-## 👨‍💻 Auteur
-
-**LWESSO** — Mémoire de fin d'études  
-Université / Institit Supérieur — Promotion 2026  
-Encadreur : [Nom de l'encadreur]
-
----
-
-## 📄 Licence
-
-Ce projet est développé dans le cadre académique. Tous droits réservés.
-
----
-
-*KivuMarket+ — Sécuriser le patrimoine foncier du Kivu, une transaction à la fois.*
+*Kivu Immobilier+ — Transparence, Sécurité et Blockchain pour le patrimoine foncier du Kivu.*
