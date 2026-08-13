@@ -4,27 +4,78 @@
 
 @layer base {
   body {
-    @apply bg-dark text-white min-h-screen relative overflow-x-hidden;
+    @apply bg-[#05070C] text-slate-100 min-h-screen relative overflow-x-hidden;
     font-family: 'Outfit', sans-serif;
   }
-  
+
+  /* Form Input Dark Styling & Autofill Fix */
+  input, select, textarea {
+    background-color: #0d1424 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 0.75rem;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #64748b !important;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: #3b82f6 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25) !important;
+  }
+
+  /* Override Chrome / Edge Autofill White Box Bug */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #0d1424 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+/* Custom Sleek Dark Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060810;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e293b #060810;
 }
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-4 bg-primary hover:bg-indigo-500 text-white font-bold rounded-xl transition-all active:scale-95 disabled:opacity-50;
+    @apply px-6 py-3.5 bg-gradient-to-r from-blue-700 to-slate-800 hover:from-blue-600 hover:to-slate-700 text-white font-bold rounded-xl transition-all active:scale-95 disabled:opacity-50 shadow-md;
   }
 
   .card {
-    @apply bg-secondary/30 border border-white/10 rounded-2xl p-8;
+    @apply bg-[#0B101D] border border-slate-800 rounded-2xl p-6 shadow-xl;
   }
 
   .input-field {
-    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-primary transition-all placeholder:text-slate-600;
+    @apply w-full bg-[#0d1424] border border-white/15 rounded-xl px-4 py-3 text-white outline-none focus:border-blue-500 transition-all placeholder:text-slate-500;
   }
 
-  /* No more complex gradients, just solid primary color for emphasis */
   .text-brand {
-    @apply text-primary;
+    @apply text-blue-400;
   }
 }

@@ -25,17 +25,17 @@ const SidebarLink = ({ to, icon: Icon, label, active, onClick }) => {
     return (
       <button 
         onClick={onClick}
-        className={`flex items-center justify-between w-full px-4 py-3 rounded-2xl transition-all duration-200 group ${
+        className={`flex items-center justify-between w-full px-4 py-3 rounded-xl transition-all duration-200 group ${
           active
-          ? 'bg-gradient-to-r from-primary to-indigo-500 text-white shadow-lg shadow-primary/20'
-          : 'text-slate-400 hover:bg-white/[0.06] hover:text-white'
+          ? 'bg-blue-950/70 border border-blue-800/60 text-white shadow-md shadow-black/40'
+          : 'text-slate-400 hover:bg-white/[0.04] hover:text-slate-200'
         }`}
       >
         <div className="flex items-center gap-3">
-          <Icon size={20} className={active ? 'text-white' : 'text-slate-500 group-hover:text-primary transition-colors'} />
+          <Icon size={19} className={active ? 'text-blue-400' : 'text-slate-500 group-hover:text-slate-300 transition-colors'} />
           <span className="text-sm font-bold tracking-tight">{label}</span>
         </div>
-        {active && <ChevronRight size={14} />}
+        {active && <ChevronRight size={14} className="text-blue-400" />}
       </button>
     );
   }
@@ -43,17 +43,17 @@ const SidebarLink = ({ to, icon: Icon, label, active, onClick }) => {
   return (
     <Link 
       to={to} 
-        className={`flex items-center justify-between px-4 py-3 rounded-2xl transition-all duration-200 group ${
-          active
-          ? 'bg-gradient-to-r from-primary to-indigo-500 text-white shadow-lg shadow-primary/20'
-          : 'text-slate-400 hover:bg-white/[0.06] hover:text-white'
+      className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group ${
+        active
+        ? 'bg-blue-950/70 border border-blue-800/60 text-white shadow-md shadow-black/40'
+        : 'text-slate-400 hover:bg-white/[0.04] hover:text-slate-200'
       }`}
     >
       <div className="flex items-center gap-3">
-        <Icon size={20} className={active ? 'text-white' : 'text-slate-500 group-hover:text-primary transition-colors'} />
+        <Icon size={19} className={active ? 'text-blue-400' : 'text-slate-500 group-hover:text-slate-300 transition-colors'} />
         <span className="text-sm font-bold tracking-tight">{label}</span>
       </div>
-      {active && <ChevronRight size={14} />}
+      {active && <ChevronRight size={14} className="text-blue-400" />}
     </Link>
   );
 };
@@ -66,7 +66,6 @@ const Sidebar = () => {
   const [pendingPath, setPendingPath] = useState('');
   const isActive = (path) => location.pathname === path;
   const isAdmin = ['admin', 'superadmin', 'administrateur'].includes(user.role?.toLowerCase().trim());
-  const roleLabel = isAdmin ? 'Administration' : user.role === 'agent' ? 'Agent terrain' : user.role || 'Membre';
 
   const handleLogout = () => {
     localStorage.clear();
@@ -87,30 +86,15 @@ const Sidebar = () => {
 
   return (
     <>
-      <aside className="hidden md:flex flex-col w-72 xl:w-80 bg-[#080A12]/95 border-r border-white/10 h-screen sticky top-0 p-4 xl:p-5 backdrop-blur-2xl shadow-[10px_0_30px_rgba(0,0,0,0.3)]">
+      <aside className="hidden md:flex flex-col w-72 xl:w-80 bg-[#070911] border-r border-slate-800/80 h-screen sticky top-0 p-4 xl:p-5 shadow-[10px_0_30px_rgba(0,0,0,0.5)]">
         {/* Brand / Logo */}
-        <Link to="/dashboard" className="flex items-center gap-3 mb-6 px-2 cursor-pointer group">
+        <Link to="/dashboard" className="flex items-center gap-3 mb-8 px-2 cursor-pointer group">
           <LogoIcon size="sm" />
           <div className="min-w-0">
-            <p className="font-black text-base tracking-tight text-white group-hover:text-indigo-300 transition-colors">Kivu Immobilier<span className="text-indigo-400">+</span></p>
+            <p className="font-black text-base tracking-tight text-white group-hover:text-blue-400 transition-colors">Kivu Immobilier<span className="text-blue-500">+</span></p>
             <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">Espace Sécurisé</p>
           </div>
         </Link>
-
-        {/* Profil Utilisateur Compact */}
-        <div className="flex items-center gap-3 mb-6 p-3 bg-white/[0.04] border border-white/10 rounded-2xl backdrop-blur-md">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500/20 to-primary/20 border border-indigo-500/30 overflow-hidden flex items-center justify-center shrink-0">
-            {user.avatar_url ? (
-              <img src={user.avatar_url} alt="Profile" className="w-full h-full object-cover" />
-            ) : (
-              <UserIcon size={18} className="text-indigo-400" />
-            )}
-          </div>
-          <div className="flex flex-col min-w-0">
-            <span className="font-bold text-xs text-white truncate">{user.prenom || 'Utilisateur'} {user.nom}</span>
-            <span className="text-[9px] font-black uppercase tracking-widest text-indigo-400 truncate">{roleLabel}</span>
-          </div>
-        </div>
 
         {/* Liste des Boutons de Navigation Utiles */}
         <nav className="flex-1 space-y-1.5 overflow-y-auto pr-1">
@@ -142,7 +126,7 @@ const Sidebar = () => {
           {/* Boutons réservés à l'administration */}
           {isAdmin && (
             <>
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-400 mt-6 mb-3 px-4">Administration</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mt-6 mb-3 px-4">Administration</p>
               <SidebarLink to="/admin/agents" icon={Users} label="Gestion des Agents" active={isActive('/admin/agents')} />
               <SidebarLink to="/admin/validations" icon={ShieldCheck} label="Validations en attente" active={isActive('/admin/validations')} />
             </>
