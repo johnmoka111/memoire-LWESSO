@@ -8,24 +8,26 @@
     font-family: 'Outfit', sans-serif;
   }
 
-  /* Form Input Styling: White background with crisp bold black text */
+  /* Form Input Styling: White background with crisp bold black text for 100% legibility */
   input, select, textarea {
     background-color: #ffffff !important;
     color: #000000 !important;
-    font-weight: 600 !important;
+    -webkit-text-fill-color: #000000 !important;
+    font-weight: 700 !important;
     border: 1.5px solid #cbd5e1 !important;
     border-radius: 0.75rem !important;
   }
 
   input::placeholder, textarea::placeholder {
     color: #64748b !important;
+    -webkit-text-fill-color: #64748b !important;
     font-weight: 400 !important;
   }
 
   input:focus, select:focus, textarea:focus {
     border-color: #2563eb !important;
     outline: none !important;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25) !important;
   }
 
   /* Override Chrome / Edge Autofill White Box Bug with Black Text */

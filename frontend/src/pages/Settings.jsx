@@ -334,12 +334,12 @@ const Settings = () => {
                     <div className="relative">
                       <input
                         type={showPassword ? "text" : "password"}
-                        className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none pr-10"
+                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600 pr-10"
                         value={passwordData.current_password}
                         onChange={e => setPasswordData({ ...passwordData, current_password: e.target.value })}
                         required
                       />
-                      <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-slate-500 hover:text-white">
+                      <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-slate-500 hover:text-black">
                         {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                       </button>
                     </div>
@@ -350,7 +350,7 @@ const Settings = () => {
                       <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Nouveau mot de passe</label>
                       <input
                         type="password"
-                        className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none"
+                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
                         value={passwordData.new_password}
                         onChange={e => setPasswordData({ ...passwordData, new_password: e.target.value })}
                         required
@@ -360,7 +360,7 @@ const Settings = () => {
                       <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Confirmer le nouveau mot de passe</label>
                       <input
                         type="password"
-                        className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none"
+                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
                         value={passwordData.confirm_password}
                         onChange={e => setPasswordData({ ...passwordData, confirm_password: e.target.value })}
                         required

@@ -55,9 +55,40 @@ const Navbar = () => {
     window.location.reload();
   };
 
+  // SI NON CONNECTÉ : Afficher le Header du Site Public
+  if (!token) {
+    return (
+      <nav className="sticky top-0 z-50 w-full bg-[#060812] border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between shadow-[0_4px_25px_rgba(0,0,0,0.9)]" style={{ backgroundColor: '#060812', opacity: 1 }}>
+        {/* Logo du Site Public */}
+        <Link to="/" className="flex items-center gap-3 cursor-pointer group">
+          <LogoIcon size="md" />
+          <BrandName subtitle={true} />
+        </Link>
+
+        {/* Liens du Menu Public */}
+        <div className="hidden md:flex items-center gap-6 text-xs font-bold">
+          <Link to="/" className="text-slate-300 hover:text-blue-400 transition-colors">Accueil</Link>
+          <Link to="/properties" className="text-slate-300 hover:text-blue-400 transition-colors">Catalogue Annonces</Link>
+          <Link to="/properties/create" className="text-slate-300 hover:text-blue-400 transition-colors">Soumettre un Bien</Link>
+        </div>
+
+        {/* Boutons d'Action Public (Connexion / Inscription) */}
+        <div className="flex items-center gap-3">
+          <Link to="/login" className="px-4 py-2 text-xs font-bold text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700 rounded-xl transition-all">
+            Connexion
+          </Link>
+          <Link to="/register" className="px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-xl shadow-lg shadow-blue-600/30 transition-all">
+            S'inscrire
+          </Link>
+        </div>
+      </nav>
+    );
+  }
+
+  // SI CONNECTÉ : Header Administration / Espace Sécurisé
   return (
     <nav className="sticky top-0 z-50 w-full bg-[#060812] border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between shadow-[0_4px_25px_rgba(0,0,0,0.9)]" style={{ backgroundColor: '#060812', opacity: 1 }}>
-      {/* Partie Gauche : Logo + Titre Dynamique de la Page */}
+      {/* Partie Gauche : Logo + Titre Dynamique de la Page Admin */}
       <div className="flex items-center gap-3 md:gap-4">
         {!isHome && (
           <button 
@@ -73,7 +104,7 @@ const Navbar = () => {
           <LogoIcon size="md" />
           <div className="md:hidden"><BrandName subtitle={false} /></div>
           
-          {/* Titre et Badge Dynamique selon la page */}
+          {/* Titre et Badge Dynamique Admin */}
           <div className="hidden md:block">
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-widest bg-white/5 text-indigo-300 border border-white/10">
@@ -88,57 +119,42 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Partie Droite : Actions Contextuelles Dynamiques & Profil */}
+      {/* Partie Droite : User Profile & Logout */}
       <div className="flex items-center gap-3 md:gap-4">
-        {/* Bouton d'action dynamique selon la page */}
-        {location.pathname !== '/properties/create' && token && (
+        {location.pathname !== '/properties/create' && (
           <Link
             to="/properties/create"
-            className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-primary text-white text-xs font-bold shadow-lg shadow-indigo-500/20 hover:scale-105 transition-all"
+            className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold shadow-lg shadow-blue-500/20 hover:scale-105 transition-all"
           >
             <PlusCircle size={15} />
             <span>Ajouter un bien</span>
           </Link>
         )}
 
-        {token ? (
-          <div className="flex items-center gap-2 md:gap-3 pl-3 md:pl-4 border-l border-white/10">
-            <button className="hidden sm:flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10 hover:text-white transition-all relative" title="Notifications">
-              <Bell size={16} />
-              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-indigo-500 ring-2 ring-[#080A12]" />
-            </button>
-
-            <div className="hidden md:block text-right">
-              <p className="text-xs font-bold text-white leading-tight">{user.prenom || 'Utilisateur'} {user.nom}</p>
-              <span className="text-[9px] font-black uppercase tracking-widest text-indigo-400">
-                {isAdmin ? '👑 Administrateur' : user.role}
-              </span>
-            </div>
-
-            <Link 
-              to="/dashboard" 
-              className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-primary flex items-center justify-center shadow-lg shadow-indigo-500/20 border border-white/20 hover:scale-105 transition-transform"
-              title="Mon Profil"
-            >
-              <User size={17} className="text-white" />
-            </Link>
-
-            <button 
-              onClick={logout} 
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-all" 
-              title="Déconnexion"
-            >
-              <LogOut size={16} />
-            </button>
+        <div className="flex items-center gap-2 md:gap-3 pl-3 md:pl-4 border-l border-white/10">
+          <div className="hidden md:block text-right">
+            <p className="text-xs font-bold text-white leading-tight">{user.prenom || 'Utilisateur'} {user.nom}</p>
+            <span className="text-[9px] font-black uppercase tracking-widest text-blue-400">
+              {isAdmin ? '👑 Administrateur' : user.role}
+            </span>
           </div>
-        ) : (
-          <div className="flex items-center gap-3">
-            <Link to="/login" className="text-slate-400 text-xs font-bold hover:text-white transition-colors px-3 py-2">Connexion</Link>
-            <Link to="/register" className="btn-primary py-2 px-4 text-xs font-bold shadow-lg shadow-primary/25">
-              S'inscrire
-            </Link>
-          </div>
-        )}
+
+          <Link 
+            to="/dashboard" 
+            className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg border border-white/20 hover:scale-105 transition-transform"
+            title="Mon Profil"
+          >
+            <User size={17} className="text-white" />
+          </Link>
+
+          <button 
+            onClick={logout} 
+            className="flex h-9 w-9 items-center justify-center rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-all" 
+            title="Déconnexion"
+          >
+            <LogOut size={16} />
+          </button>
+        </div>
       </div>
     </nav>
   );

@@ -194,8 +194,91 @@ const Sidebar = () => {
           </div>
         )}
       </AnimatePresence>
-    </>
-  );
-};
+        {/* Navigation Bas de Page pour Mobile (md:hidden) avec TOUS les boutons utiles */}
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#060812] border-t border-slate-800 flex items-center justify-around px-2 py-2 shadow-[0_-4px_25px_rgba(0,0,0,0.8)]">
+          <Link 
+            to="/dashboard" 
+            className={`flex flex-col items-center gap-1 p-2 rounded-xl text-[10px] font-bold transition-all ${
+              isActive('/dashboard') ? 'text-blue-400 bg-blue-950/60' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <LayoutDashboard size={18} />
+            <span>Dashboard</span>
+          </Link>
+
+          <Link 
+            to="/properties" 
+            className={`flex flex-col items-center gap-1 p-2 rounded-xl text-[10px] font-bold transition-all ${
+              isActive('/properties') ? 'text-blue-400 bg-blue-950/60' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <Home size={18} />
+            <span>Annonces</span>
+          </Link>
+
+          <Link 
+            to="/properties/create" 
+            className={`flex flex-col items-center gap-1 p-2 rounded-xl text-[10px] font-bold transition-all ${
+              isActive('/properties/create') ? 'text-blue-400 bg-blue-950/60' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <PlusCircle size={20} className="text-blue-400" />
+            <span>+ Ajouter</span>
+          </Link>
+
+          {isAdmin ? (
+            <Link 
+              to="/admin/validations" 
+              className={`flex flex-col items-center gap-1 p-2 rounded-xl text-[10px] font-bold transition-all ${
+                isActive('/admin/validations') ? 'text-blue-400 bg-blue-950/60' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <ShieldCheck size={18} />
+              <span>Validations</span>
+            </Link>
+          ) : user.role === 'agent' ? (
+            <Link 
+              to="/agent/missions" 
+              className={`flex flex-col items-center gap-1 p-2 rounded-xl text-[10px] font-bold transition-all ${
+                isActive('/agent/missions') ? 'text-blue-400 bg-blue-950/60' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <ShieldCheck size={18} />
+              <span>Missions</span>
+            </Link>
+          ) : (
+            <Link 
+              to="/transactions" 
+              className={`flex flex-col items-center gap-1 p-2 rounded-xl text-[10px] font-bold transition-all ${
+                isActive('/transactions') ? 'text-blue-400 bg-blue-950/60' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Wallet size={18} />
+              <span>Escrow</span>
+            </Link>
+          )}
+
+          <Link 
+            to="/settings" 
+            className={`flex flex-col items-center gap-1 p-2 rounded-xl text-[10px] font-bold transition-all ${
+              isActive('/settings') ? 'text-blue-400 bg-blue-950/60' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <Settings size={18} />
+            <span>Option</span>
+          </Link>
+
+          <button 
+            onClick={handleLogout} 
+            className="flex flex-col items-center gap-1 p-2 rounded-xl text-[10px] font-bold text-red-400 hover:text-red-300 transition-all"
+            title="Déconnexion"
+          >
+            <LogOut size={18} />
+            <span>Quitter</span>
+          </button>
+        </div>
+      </>
+    );
+  };
 
 export default Sidebar;
