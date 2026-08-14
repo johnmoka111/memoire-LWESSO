@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS properties (
     agent_id      INT UNSIGNED NULL COMMENT 'Agent assigné pour validation',
     titre         VARCHAR(255) NOT NULL,
     description   TEXT         NULL,
-    prix          DECIMAL(18,8) NOT NULL COMMENT 'Prix en ETH',
-    prix_usd      DECIMAL(18,2) NULL     COMMENT 'Équivalent USD (oracle)',
+    prix          DECIMAL(18,8) NOT NULL COMMENT 'Montant ETH à régler, calculé depuis USD',
+    prix_usd      DECIMAL(18,2) NOT NULL COMMENT 'Prix de référence en USD',
     commune       VARCHAR(100) NOT NULL,
     quartier      VARCHAR(100) NULL,
     latitude      DECIMAL(10,8) NULL,
@@ -148,3 +148,23 @@ VALUES (
     '$2y$12$eImiTXuWVxfM37uY4JANjOe5XIfA21uH6eis/Sj/odYbhiEpezSi2',
     'admin', 1, 1
 );
+
+-- JOURNAUX SYSTÈME / AUDIT ADMINISTRATEUR
+CREATE TABLE IF NOT EXISTS system_logs (
+    id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id     INT UNSIGNED NULL,
+    event_type  VARCHAR(100) NOT NULL,
+    description VARCHAR(500) NOT NULL,
+    method      VARCHAR(10) NULL,
+    route       VARCHAR(255) NULL,
+    ip_address  VARCHAR(45) NULL,
+    metadata    JSON NULL,
+    user_agent  TEXT NULL,
+    device      VARCHAR(160) NULL,
+    archived_at DATETIME NULL,
+    created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_logs_created_at (created_at),
+    INDEX idx_logs_user_id (user_id),
+    INDEX idx_logs_event_type (event_type),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB;

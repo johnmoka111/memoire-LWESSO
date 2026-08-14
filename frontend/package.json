@@ -5,7 +5,7 @@
   "main": "src/index.jsx",
   "scripts": {
     "dev": "concurrently \"node build.js --serve\" \"npx tailwindcss -i ./src/styles/index.css -o ./public/dist/app.css --watch\"",
-    "build": "npx tailwindcss -i ./src/styles/index.css -o ./public/dist/app.css --minify; node build.js"
+    "build": "npx tailwindcss -i ./src/styles/index.css -o ./public/dist/app.css --minify && node build.js"
   },
   "dependencies": {
     "axios": "^1.7.0",

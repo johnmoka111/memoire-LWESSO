@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { LogoIcon } from '../components/Logo';
 import placeIndepImg from '../assets/place-indep.png';
+import PublicFooter from '../components/PublicFooter';
 
 const Home = () => {
   const handlePlaceImageError = (e) => {
@@ -158,14 +159,14 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.5 }}
-                  className="group relative bg-white dark:bg-gradient-to-br dark:from-white/[0.03] dark:to-white/[0.01] border border-slate-200 dark:border-white/10 rounded-2xl p-6 md:p-8 transition-all hover:border-blue-400 dark:hover:border-white/20 shadow-md hover:shadow-xl overflow-hidden"
+                  className="group relative bg-white border border-slate-200 dark:border-blue-400/15 dark:bg-gradient-to-br dark:from-[#17284a] dark:to-[#0a1224] rounded-2xl p-6 md:p-8 transition-all hover:border-blue-400 dark:hover:border-blue-400/50 shadow-md dark:shadow-black/30 hover:shadow-xl overflow-hidden"
                 >
                   <div className="relative z-10">
                     <div className={`w-14 h-14 rounded-xl bg-blue-50 dark:bg-gradient-to-br ${item.color} flex items-center justify-center mb-6 ${item.iconColor} group-hover:scale-110 transition-transform duration-300`}>
                       {item.icon}
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">{item.title}</h3>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -199,6 +200,7 @@ const Home = () => {
           </motion.div>
         </div>
       </main>
+      <PublicFooter />
     </div>
   );
 };

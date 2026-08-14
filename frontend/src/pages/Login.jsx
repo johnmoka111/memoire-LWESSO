@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Mail, Lock, Loader2, ArrowRight, Shield, Eye, EyeOff, 
-  AlertCircle, CheckCircle2, MapPin, Building2, Sparkles, 
-  KeyRound, UserCheck
+  AlertCircle, CheckCircle2, MapPin, Building2,
+  KeyRound
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -26,18 +26,6 @@ const Login = () => {
   const isDark = theme === 'dark';
 
   // Comptes démos rapides pour faciliter l'évaluation et l'expérience utilisateur
-  const demoAccounts = [
-    { label: 'Administrateur', email: 'admin@kivuimmobilier.cd', pass: 'Admin@Kivu2026!', badge: 'Admin' },
-    { label: 'Agent Cadastral', email: 'agent@kivu.cd', pass: 'Agent123!', badge: 'Agent' },
-    { label: 'Acheteur', email: 'acheteur@kivu.cd', pass: 'Acheteur123!', badge: 'Client' },
-  ];
-
-  const fillDemoAccount = (acc) => {
-    setEmail(acc.email);
-    setPassword(acc.pass);
-    setError('');
-  };
-
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -123,37 +111,6 @@ const Login = () => {
                 <p className={`text-xs sm:text-sm font-medium leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                   Connectez-vous à votre espace personnel pour suivre vos titres fonciers et transactions.
                 </p>
-              </div>
-
-              {/* Raccourcis de Connexion Démo Rapide */}
-              <div className={`mb-6 p-3.5 border rounded-2xl ${
-                isDark ? 'bg-[#080C16] border-slate-800' : 'bg-slate-50 border-slate-200'
-              }`}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 ${
-                    isDark ? 'text-slate-300' : 'text-slate-700'
-                  }`}>
-                    <Sparkles size={13} className="text-amber-500 animate-pulse" /> Démonstration rapide :
-                  </span>
-                  <span className="text-[10px] text-slate-400 font-semibold">Cliquer pour remplir</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {demoAccounts.map((acc, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => fillDemoAccount(acc)}
-                      className={`px-2.5 py-1.5 border text-xs font-semibold rounded-lg shadow-sm transition-all flex items-center gap-1.5 active:scale-95 ${
-                        isDark 
-                          ? 'bg-slate-900 border-slate-700 text-slate-200 hover:bg-blue-950 hover:border-blue-700 hover:text-white' 
-                          : 'bg-white border-slate-200 text-slate-700 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700'
-                      }`}
-                    >
-                      <UserCheck size={13} className="text-blue-600 dark:text-blue-400" />
-                      <span>{acc.label}</span>
-                    </button>
-                  ))}
-                </div>
               </div>
 
               {/* Formulaire principal */}

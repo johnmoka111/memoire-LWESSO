@@ -21,8 +21,8 @@ final class Transaction extends Model
         $this->db->beginTransaction();
         try {
             $sql = "INSERT INTO {$this->table} 
-                    (property_id, acheteur_id, escrow_id, contract_address, montant_eth, tx_creation, etat) 
-                    VALUES (?, ?, ?, ?, ?, ?, 'cree')";
+                    (property_id, acheteur_id, escrow_id, contract_address, montant_eth, montant_usd, tx_creation, etat) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, 'cree')";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 $data['property_id'],
@@ -30,6 +30,7 @@ final class Transaction extends Model
                 $data['escrow_id'],
                 $data['contract_address'],
                 $data['montant_eth'],
+                $data['montant_usd'] ?? null,
                 $data['tx_creation']
             ]);
             $id = (int) $this->db->lastInsertId();

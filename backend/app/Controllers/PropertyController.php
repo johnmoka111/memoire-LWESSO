@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Document;
 use App\Services\MailService;
 use App\Services\BlockchainService;
+use App\Services\EthPriceService;
 use App\Models\Notification;
 
 /**
@@ -31,8 +32,14 @@ final class PropertyController extends Controller
      */
     public function index(Request $request): void
     {
-        $properties = $this->propertyModel->getPublicListings();
+        $properties = array_map(fn (array $property) => $this->withCurrencyValues($property), $this->propertyModel->getPublicListings());
         Response::success($properties);
+    }
+
+    /** Taux indicatif pour prévisualiser la conversion dans le formulaire. */
+    public function ethUsdRate(Request $request): void
+    {
+        Response::success(['usd_per_eth' => EthPriceService::usdRate()]);
     }
 
     /**
@@ -47,6 +54,7 @@ final class PropertyController extends Controller
         $stmt = $this->propertyModel->db()->prepare($sql);
         $stmt->execute();
         $properties = $stmt->fetchAll();
+        $properties = array_map(fn (array $property) => $this->withCurrencyValues($property), $properties);
         Response::success($properties);
     }
 
@@ -81,6 +89,7 @@ final class PropertyController extends Controller
             }
         }
         
+        $property = $this->withCurrencyValues($property);
         $property['photos'] = $photos;
         $property['titres_fonciers'] = $titres;
 
@@ -99,6 +108,15 @@ final class PropertyController extends Controller
 
             $ownerId = (int) $request->user['id'];
             $data = $request->all();
+            // `prix_usd` est le champ courant. `prix` reste accepté pour les
+            // formulaires encore présents dans le cache des anciens navigateurs.
+            $priceUsd = (float) ($data['prix_usd'] ?? $data['prix'] ?? 0);
+            if ($priceUsd <= 0) {
+                Response::error('Le prix en USD doit être supérieur à zéro', 422);
+            }
+            // USD est la source de vérité. ETH est le montant de règlement recalculé.
+            $data['prix_usd'] = round($priceUsd, 2);
+            $data['prix'] = EthPriceService::toEth($priceUsd);
             
             // Si c'est un agent qui crée, on l'assigne automatiquement comme agent du bien
             if ($request->user['role'] === 'agent') {
@@ -173,10 +191,20 @@ final class PropertyController extends Controller
         // Attacher les documents à chaque mission
         $documentModel = new Document();
         foreach ($missions as &$mission) {
+            $mission = $this->withCurrencyValues($mission);
             $mission['documents'] = $documentModel->getDocumentsByProperty((int) $mission['id']);
         }
         
         Response::success($missions);
+    }
+
+    private function withCurrencyValues(array $property): array
+    {
+        if ((float) ($property['prix_usd'] ?? 0) <= 0 && (float) ($property['prix'] ?? 0) > 0) {
+            // Compatibilité avec les annonces historiques où seul le montant ETH existe.
+            $property['prix_usd'] = EthPriceService::toUsd($property['prix']);
+        }
+        return $property;
     }
 
     /**
@@ -321,13 +349,30 @@ final class PropertyController extends Controller
         $stats = [
             'total_properties' => 0,
             'active_escrow' => 0,
-            'recent_transactions' => 0
+            'recent_transactions' => 0,
+            'sold_properties' => 0,
+            'unsold_properties' => 0,
+            'sold_value_usd' => 0,
+            'unsold_value_usd' => 0,
+            'pending_properties' => 0
         ];
 
         if (in_array(strtolower(trim($role)), ['admin', 'superadmin', 'administrateur'])) {
             try {
-                $stats['total_properties'] = (int) $db->query("SELECT COUNT(*) FROM properties")->fetchColumn();
-            } catch (\Exception $e) { $stats['total_properties'] = 0; }
+                $propertyTotals = $db->query("SELECT
+                    COUNT(*) AS total_properties,
+                    SUM(CASE WHEN statut = 'vendu' THEN 1 ELSE 0 END) AS sold_properties,
+                    SUM(CASE WHEN statut NOT IN ('vendu', 'rejete') THEN 1 ELSE 0 END) AS unsold_properties,
+                    SUM(CASE WHEN statut = 'vendu' THEN COALESCE(prix_usd, 0) ELSE 0 END) AS sold_value_usd,
+                    SUM(CASE WHEN statut NOT IN ('vendu', 'rejete') THEN COALESCE(prix_usd, 0) ELSE 0 END) AS unsold_value_usd,
+                    SUM(CASE WHEN statut = 'en_attente' THEN 1 ELSE 0 END) AS pending_properties
+                    FROM properties")->fetch();
+                $stats = array_merge($stats, array_map(static fn ($value) => (float) ($value ?? 0), $propertyTotals ?: []));
+                $stats['total_properties'] = (int) $stats['total_properties'];
+                $stats['sold_properties'] = (int) $stats['sold_properties'];
+                $stats['unsold_properties'] = (int) $stats['unsold_properties'];
+                $stats['pending_properties'] = (int) $stats['pending_properties'];
+            } catch (\Exception $e) { /* Les valeurs par défaut restent à zéro. */ }
 
             try {
                 $stats['total_agents'] = (int) $db->query("SELECT COUNT(*) FROM users WHERE LOWER(role) = 'agent'")->fetchColumn();

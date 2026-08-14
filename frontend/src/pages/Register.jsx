@@ -11,9 +11,11 @@ import { API_URL } from '../config';
 import { LogoIcon } from '../components/Logo';
 import Navbar from '../components/Navbar';
 import { useTheme } from '../context/ThemeContext';
+import { useToast } from '../context/ToastContext';
 import placeIndepImg from '../assets/place-indep.png';
 
 const Register = () => {
+  const { toast } = useToast();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -95,7 +97,7 @@ const Register = () => {
         setConnectingWallet(false);
       }
     } else {
-      alert("MetaMask n'est pas détecté dans votre navigateur. Vous pourrez ajouter votre adresse wallet plus tard.");
+      toast("MetaMask n'est pas détecté. Vous pourrez ajouter votre adresse wallet plus tard.", 'warning');
     }
   };
 

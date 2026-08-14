@@ -16,8 +16,10 @@ import axios from 'axios';
 import Sidebar from '../../components/Sidebar';
 import Navbar from '../../components/Navbar';
 import { API_URL } from '../../config';
+import { useToast } from '../../context/ToastContext';
 
 const Validations = () => {
+  const { toast } = useToast();
   const [properties, setProperties] = useState([]);
   const [agents, setAgents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,7 +42,8 @@ const Validations = () => {
       // Filtrer pour ne garder que ceux en attente d'assignation
       const pending = propRes.data.data?.filter(p => p.statut === 'en_attente') || [];
       setProperties(pending);
-      setAgents(agentRes.data.data || []);
+      // L'API des agents est paginée : ne conserver que les éléments de la page.
+      setAgents(agentRes.data?.data?.items || agentRes.data?.data || []);
     } catch (err) {
       console.error(err);
     } finally {
@@ -61,12 +64,12 @@ const Validations = () => {
       setSelectedAgent('');
       fetchData(); // Rafraîchir la liste
     } catch (err) {
-      alert("Erreur lors de l'assignation");
+      toast("Erreur lors de l'assignation", 'error');
     }
   };
 
   return (
-    <div className="flex min-h-screen bg-dark">
+    <div className="flex min-h-screen bg-slate-100 dark:bg-[#05070C] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Navbar />
@@ -74,8 +77,8 @@ const Validations = () => {
         <main className="p-4 md:p-10 space-y-10 mb-20 md:mb-0">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <h1 className="text-3xl md:text-4xl font-black tracking-tight mb-2">Validations Foncières</h1>
-              <p className="text-slate-500 text-[10px] uppercase tracking-widest font-bold">Assignation des missions de terrain</p>
+              <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Validations Foncières</h1>
+              <p className="text-slate-600 dark:text-slate-400 text-[10px] uppercase tracking-widest font-bold">Assignation des missions de terrain</p>
             </div>
             <div className="flex items-center gap-3 px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full">
               <ShieldAlert size={16} className="text-amber-500" />
@@ -90,61 +93,65 @@ const Validations = () => {
               </div>
             ) : properties.length === 0 ? (
               <div className="card py-20 text-center opacity-30">
-                <CheckCircle2 size={64} className="mx-auto mb-6" />
-                <p className="font-black uppercase tracking-widest text-sm">Toutes les annonces sont traitées</p>
+                <CheckCircle2 size={64} className="mx-auto mb-6 text-primary" />
+                <p className="font-black uppercase tracking-widest text-sm text-slate-700 dark:text-slate-300">Toutes les annonces sont traitées</p>
               </div>
             ) : (
               properties.map((prop) => (
                 <motion.div 
-                  key={prop.id}
-                  layout
-                  className="card group hover:border-primary/20 transition-all !p-0 overflow-hidden"
+                   key={prop.id}
+                   layout
+                   className="card group hover:border-primary/20 transition-all !p-0 overflow-hidden"
                 >
                   <div className="flex flex-col lg:flex-row">
                     {/* Infos Principales */}
                     <div className="p-8 flex-1 space-y-6">
                       <div className="flex justify-between items-start">
                         <div>
-                          <h3 className="text-2xl font-black mb-1">{prop.titre}</h3>
-                          <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-widest">
+                          <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-1">{prop.titre}</h3>
+                          <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-bold uppercase tracking-widest">
                             <MapPin size={14} className="text-primary" />
                             {prop.commune}, {prop.quartier}
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-2xl font-black text-primary">{prop.prix} ETH</p>
-                          <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">${parseFloat(prop.prix_usd || 0).toLocaleString()}</p>
+                          <p className="text-2xl font-black text-primary">${Number(prop.prix_usd || 0).toLocaleString('fr-FR', { maximumFractionDigits: 2 })}</p>
+                          {Number(prop.prix_usd) > 0 ? (
+                            <p className="text-[10px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-widest">≈ {Number(prop.prix).toFixed(8)} ETH à payer</p>
+                          ) : (
+                            <p className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest">Équivalent USD non renseigné</p>
+                          )}
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/5">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-200 dark:border-white/5">
                         <div className="space-y-1">
-                          <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em]">Superficie</p>
-                          <p className="text-sm font-bold">{prop.superficie} m²</p>
+                          <p className="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em]">Superficie</p>
+                          <p className="text-sm font-bold text-slate-800 dark:text-slate-200">{prop.superficie} m²</p>
                         </div>
                         <div className="space-y-1">
-                          <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em]">Type</p>
-                          <p className="text-sm font-bold capitalize">{prop.type_bien}</p>
+                          <p className="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em]">Type</p>
+                          <p className="text-sm font-bold text-slate-800 dark:text-slate-200 capitalize">{prop.type_bien}</p>
                         </div>
                         <div className="space-y-1">
-                          <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em]">Propriétaire</p>
+                          <p className="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em]">Propriétaire</p>
                           <div className="flex items-center gap-2">
                              <User size={12} className="text-slate-500" />
-                             <p className="text-sm font-bold truncate">{prop.owner_name || 'Utilisateur'}</p>
+                             <p className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate">{prop.owner_name || 'Utilisateur'}</p>
                           </div>
                         </div>
                         <div className="space-y-1">
-                          <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em]">Soumis le</p>
+                          <p className="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em]">Soumis le</p>
                           <div className="flex items-center gap-2">
                              <Clock size={12} className="text-slate-500" />
-                             <p className="text-sm font-bold">{new Date(prop.created_at).toLocaleDateString('fr-FR')}</p>
+                             <p className="text-sm font-bold text-slate-800 dark:text-slate-200">{new Date(prop.created_at).toLocaleDateString('fr-FR')}</p>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     {/* Zone d'action (Assignation) */}
-                    <div className="bg-white/[0.02] border-l border-white/5 p-8 w-full lg:w-96 flex flex-col justify-center">
+                    <div className="bg-slate-50 dark:bg-white/[0.02] border-l border-slate-200 dark:border-white/5 p-8 w-full lg:w-96 flex flex-col justify-center">
                       {assigningId === prop.id ? (
                         <div className="space-y-4">
                           <p className="text-[10px] font-black uppercase tracking-widest text-primary">Choisir un Agent</p>
@@ -168,7 +175,7 @@ const Validations = () => {
                             </button>
                             <button 
                               onClick={() => { setAssigningId(null); setSelectedAgent(''); }}
-                              className="p-3 bg-white/5 rounded-xl text-slate-500 hover:text-white"
+                              className="p-3 bg-slate-200 hover:bg-slate-300 dark:bg-white/5 rounded-xl text-slate-500 dark:text-slate-400 dark:hover:text-white"
                             >
                               <X size={18} />
                             </button>
@@ -182,7 +189,7 @@ const Validations = () => {
                           ASSIGNER UN AGENT <ChevronRight size={18} />
                         </button>
                       )}
-                      <p className="text-center text-[9px] text-slate-600 font-bold uppercase tracking-widest mt-6 italic">
+                      <p className="text-center text-[9px] text-slate-500 dark:text-slate-650 font-bold uppercase tracking-widest mt-6 italic">
                         Une mission terrain sera créée automatiquement
                       </p>
                     </div>

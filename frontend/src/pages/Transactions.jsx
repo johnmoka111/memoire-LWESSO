@@ -22,7 +22,7 @@ const Transactions = () => {
 
 
   return (
-    <div className="flex min-h-screen bg-dark">
+    <div className="flex min-h-screen bg-slate-100 dark:bg-[#05070C] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Navbar />
@@ -33,10 +33,10 @@ const Transactions = () => {
               <p className="text-slate-500 text-[10px] uppercase tracking-widest font-bold">Historique de vos opérations Escrow</p>
             </div>
             <div className="flex gap-3">
-               <button className="p-4 bg-white/5 border border-white/10 rounded-xl text-slate-400 hover:text-white transition-all">
+               <button className="p-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 transition-all shadow-sm">
                   <Search size={20} />
                </button>
-               <button className="p-4 bg-white/5 border border-white/10 rounded-xl text-slate-400 hover:text-white transition-all">
+               <button className="p-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 transition-all shadow-sm">
                   <Filter size={20} />
                </button>
             </div>
@@ -56,7 +56,7 @@ const Transactions = () => {
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-white/5">
+                    <tr className="border-b border-slate-200 dark:border-white/5">
                       <th className="py-6 text-[10px] font-black uppercase tracking-widest text-slate-500">Détails du bien</th>
                       <th className="py-6 text-[10px] font-black uppercase tracking-widest text-slate-500">Montant</th>
                       <th className="py-6 text-[10px] font-black uppercase tracking-widest text-slate-500">État</th>
@@ -65,20 +65,20 @@ const Transactions = () => {
                   </thead>
                   <tbody>
                     {txs.map((tx, i) => (
-                      <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                      <tr key={i} className="border-b border-slate-200 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group">
                         <td className="py-6">
-                          <p className="font-bold text-white group-hover:text-primary transition-colors">{tx.property_title || 'N/A'}</p>
+                          <p className="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">{tx.property_title || 'N/A'}</p>
                           <p className="text-[10px] text-slate-600 font-mono tracking-tighter mt-1">{tx.tx_creation?.substring(0, 16)}...</p>
                         </td>
                         <td className="py-6">
-                          <p className="font-black text-white">${parseFloat(tx.montant_usd || 0).toLocaleString()}</p>
+                          <p className="font-black text-slate-900 dark:text-white">${parseFloat(tx.montant_usd || 0).toLocaleString()}</p>
                           <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">{tx.montant_eth} ETH</p>
                         </td>
                         <td className="py-6">
                            <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${
                              tx.etat === 'libere' ? 'border-emerald-500/20 text-emerald-500 bg-emerald-500/5' : 
                              tx.etat === 'cree' ? 'border-amber-500/20 text-amber-500 bg-amber-500/5' : 
-                             'border-white/10 text-slate-500 bg-white/5'
+                             'border-slate-200 dark:border-white/10 text-slate-500 bg-white/5'
                            }`}>
                              {tx.etat}
                            </span>

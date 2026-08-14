@@ -146,31 +146,31 @@ const Settings = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#080A12] text-slate-100 font-sans">
+    <div className="flex min-h-screen bg-slate-100 dark:bg-[#05070C] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
         <Navbar />
 
         <main className="flex-1 p-4 md:p-8 max-w-5xl mx-auto w-full space-y-8">
           {/* Header */}
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-900/30 via-primary/10 to-transparent border border-white/10 p-6 md:p-8">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-50/50 via-primary/5 to-transparent dark:from-indigo-900/30 dark:via-primary/10 dark:to-transparent border border-slate-200 dark:border-white/10 p-6 md:p-8">
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div className="space-y-2">
-                <span className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-full text-[10px] font-black uppercase tracking-widest">
+                <span className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 rounded-full text-[10px] font-black uppercase tracking-widest">
                   <Sparkles size={12} /> Configuration Pas-à-Pas
                 </span>
-                <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">Paramètres du Compte</h1>
-                <p className="text-slate-400 text-xs md:text-sm">Complétez les sections ci-dessous l'une après l'autre pour sécuriser votre compte.</p>
+                <h1 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">Paramètres du Compte</h1>
+                <p className="text-slate-500 dark:text-slate-400 text-xs md:text-sm">Complétez les sections ci-dessous l'une après l'autre pour sécuriser votre compte.</p>
               </div>
-              <div className="flex items-center gap-2 text-xs text-slate-400 bg-white/5 rounded-2xl px-4 py-2 border border-white/10 shrink-0">
-                <Shield size={14} className="text-emerald-400" />
+              <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 bg-slate-200/50 dark:bg-white/5 rounded-2xl px-4 py-2 border border-slate-300 dark:border-white/10 shrink-0">
+                <Shield size={14} className="text-emerald-500 dark:text-emerald-400" />
                 <span>Protection SSL & Web3 Active</span>
               </div>
             </div>
           </div>
 
           {/* Barre de Progression Étape par Étape (Expérience similaire à CreateProperty) */}
-          <div className="relative h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+          <div className="relative h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
             <motion.div 
               className="h-full bg-gradient-to-r from-blue-600 to-indigo-500 rounded-full"
               initial={{ width: 0 }}
@@ -192,14 +192,14 @@ const Settings = () => {
                   onClick={() => setActiveSection(sec.id)}
                   className={`p-4 rounded-2xl border text-left transition-all relative overflow-hidden ${
                     isActive
-                      ? 'bg-blue-950/70 border-blue-600 text-white shadow-lg'
+                      ? 'bg-blue-50 border-blue-600 text-blue-600 dark:bg-blue-950/70 dark:border-blue-600 dark:text-white shadow-lg'
                       : isDone
-                      ? 'bg-emerald-950/30 border-emerald-800/50 text-slate-300'
-                      : 'bg-[#0B101D] border-slate-800 text-slate-400 hover:border-slate-700'
+                      ? 'bg-emerald-50 border-emerald-500/50 text-emerald-600 dark:bg-emerald-950/30 dark:border-emerald-800/50 dark:text-slate-300'
+                      : 'bg-white border-slate-200 text-slate-500 hover:border-slate-300 dark:bg-[#0B101D] dark:border-slate-800 dark:text-slate-400 dark:hover:border-slate-700'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <div className={`p-2 rounded-xl ${isActive ? 'bg-blue-600 text-white' : isDone ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 text-slate-400'}`}>
+                    <div className={`p-2 rounded-xl ${isActive ? 'bg-blue-600 text-white' : isDone ? 'bg-emerald-500/20 text-emerald-500 dark:text-emerald-400' : 'bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400'}`}>
                       {isDone ? <Check size={16} /> : <Icon size={16} />}
                     </div>
                     <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">Sec 0{sec.id}</span>
@@ -212,26 +212,26 @@ const Settings = () => {
           </div>
 
           {/* Contenu des Sections Complétables l'une après l'autre */}
-          <div className="bg-[#0B101D] border border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-lg dark:bg-[#0B101D] dark:border-slate-800 dark:shadow-none">
             {/* SECTION 1 : INFORMATIONS PERSONNELLES */}
             {activeSection === 1 && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+                <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-blue-950/60 border border-blue-800/40 rounded-2xl text-blue-400">
+                    <div className="p-3 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/40 rounded-2xl text-blue-600 dark:text-blue-400">
                       <User size={22} />
                     </div>
                     <div>
-                      <h2 className="text-lg font-bold text-white">Section 1 — Informations Personnelles</h2>
-                      <p className="text-xs text-slate-400">Mettez à jour vos identifiants et votre photo de profil.</p>
+                      <h2 className="text-lg font-bold text-slate-900 dark:text-white">Section 1 — Informations Personnelles</h2>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Mettez à jour vos identifiants et votre photo de profil.</p>
                     </div>
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-950/60 px-3 py-1 rounded-full border border-blue-800/40">Étape 1 sur 4</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800/40">Étape 1 sur 4</span>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-6 p-4 bg-[#080C16] border border-slate-800 rounded-2xl">
+                <div className="flex flex-col sm:flex-row items-center gap-6 p-4 bg-slate-50 dark:bg-[#080C16] border border-slate-200 dark:border-slate-800 rounded-2xl">
                   <div className="relative">
-                    <div className="w-24 h-24 rounded-2xl overflow-hidden bg-slate-900 border border-slate-700 flex items-center justify-center">
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden bg-slate-200 border border-slate-300 dark:bg-slate-900 dark:border-slate-700 flex items-center justify-center">
                       {formData.avatar_url ? (
                         <img src={formData.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
                       ) : (
@@ -247,16 +247,16 @@ const Settings = () => {
                     <input type="file" ref={fileInputRef} hidden accept="image/*" onChange={handleAvatarChange} />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-white">{formData.prenom} {formData.nom}</h3>
-                    <p className="text-xs text-slate-400 mt-0.5">{formData.email}</p>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-blue-400 mt-2">Format accepté : JPG, PNG (Max 5Mo)</p>
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">{formData.prenom} {formData.nom}</h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{formData.email}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mt-2">Format accepté : JPG, PNG (Max 5Mo)</p>
                   </div>
                 </div>
 
                 <form onSubmit={handleUpdateProfile} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Prénom</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 block mb-2">Prénom</label>
                       <input
                         type="text"
                         className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
@@ -266,7 +266,7 @@ const Settings = () => {
                       />
                     </div>
                     <div>
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Nom</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 block mb-2">Nom</label>
                       <input
                         type="text"
                         className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
@@ -278,7 +278,7 @@ const Settings = () => {
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Téléphone</label>
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 block mb-2">Téléphone</label>
                     <input
                       type="tel"
                       className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
@@ -289,13 +289,13 @@ const Settings = () => {
                   </div>
 
                   {success && (
-                    <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-xs font-bold flex items-center gap-2">
+                    <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-500 dark:text-emerald-400 text-xs font-bold flex items-center gap-2">
                       <CheckCircle size={16} /> Section 1 enregistrée avec succès !
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                    <span className="text-xs text-slate-500">Sauvegardez pour passer à la section suivante.</span>
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-white/10">
+                    <span className="text-xs text-slate-500 dark:text-slate-400">Sauvegardez pour passer à la section suivante.</span>
                     <button
                       type="button"
                       onClick={async (e) => {
@@ -315,22 +315,22 @@ const Settings = () => {
             {/* SECTION 2 : SÉCURITÉ ET MOT DE PASSE */}
             {activeSection === 2 && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-2xl text-amber-400">
+                    <div className="p-3 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-2xl text-amber-600 dark:text-amber-400">
                       <Lock size={22} />
                     </div>
                     <div>
-                      <h2 className="text-lg font-bold text-white">Section 2 — Sécurité & Mot de Passe</h2>
-                      <p className="text-xs text-slate-400">Renforcez l'accès à votre compte administrateur.</p>
+                      <h2 className="text-lg font-bold text-slate-900 dark:text-white">Section 2 — Sécurité & Mot de Passe</h2>
+                      <p className="text-xs text-slate-505 dark:text-slate-400">Renforcez l'accès à votre compte administrateur.</p>
                     </div>
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Étape 2 sur 4</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-3 py-1 rounded-full border border-amber-200 dark:border-amber-500/20">Étape 2 sur 4</span>
                 </div>
 
                 <form onSubmit={handleChangePassword} className="space-y-5">
                   <div>
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Mot de passe actuel</label>
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 block mb-2">Mot de passe actuel</label>
                     <div className="relative">
                       <input
                         type={showPassword ? "text" : "password"}
@@ -347,7 +347,7 @@ const Settings = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Nouveau mot de passe</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 block mb-2">Nouveau mot de passe</label>
                       <input
                         type="password"
                         className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
@@ -357,7 +357,7 @@ const Settings = () => {
                       />
                     </div>
                     <div>
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Confirmer le nouveau mot de passe</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 block mb-2">Confirmer le nouveau mot de passe</label>
                       <input
                         type="password"
                         className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-black font-bold outline-none focus:border-blue-600"
@@ -369,19 +369,19 @@ const Settings = () => {
                   </div>
 
                   {passwordSuccess && (
-                    <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-xs font-bold flex items-center gap-2">
+                    <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-500 dark:text-emerald-400 text-xs font-bold flex items-center gap-2">
                       <CheckCircle size={16} /> Mot de passe modifié avec succès !
                     </div>
                   )}
 
                   {passwordError && (
-                    <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-xs font-bold flex items-center gap-2">
+                    <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-red-500 dark:text-red-400 text-xs font-bold flex items-center gap-2">
                       <AlertCircle size={16} /> {passwordError}
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                    <button type="button" onClick={() => setActiveSection(1)} className="px-4 py-2 text-xs text-slate-400 hover:text-white flex items-center gap-2">
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-white/10">
+                    <button type="button" onClick={() => setActiveSection(1)} className="px-4 py-2 text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white flex items-center gap-2">
                       <ArrowLeft size={16} /> Section Précédente
                     </button>
                     <button
@@ -407,34 +407,34 @@ const Settings = () => {
             {/* SECTION 3 : PORTEFEUILLE BLOCKCHAIN */}
             {activeSection === 3 && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-emerald-400">
+                    <div className="p-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-2xl text-emerald-600 dark:text-emerald-400">
                       <Wallet size={22} />
                     </div>
                     <div>
-                      <h2 className="text-lg font-bold text-white">Section 3 — Portefeuille Blockchain & Web3</h2>
-                      <p className="text-xs text-slate-400">Vérifiez les clés de signature et le nœud Hardhat.</p>
+                      <h2 className="text-lg font-bold text-slate-900 dark:text-white">Section 3 — Portefeuille Blockchain & Web3</h2>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Vérifiez les clés de signature et le nœud Hardhat.</p>
                     </div>
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Étape 3 sur 4</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-500/20">Étape 3 sur 4</span>
                 </div>
 
-                <div className="p-5 bg-white/[0.02] border border-white/10 rounded-2xl space-y-4">
+                <div className="p-5 bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-300">Réseau Local Hardhat</span>
-                    <span className="px-2.5 py-1 text-[9px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Connected 8545
+                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Réseau Local Hardhat</span>
+                    <span className="px-2.5 py-1 text-[9px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-500 dark:text-emerald-400 border border-emerald-500/30 rounded-full flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-450 dark:bg-emerald-400 animate-pulse" /> Connected 8545
                     </span>
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Adresse de Contrat Escrow</label>
-                    <input type="text" readOnly className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-slate-300 font-mono" value="0x5FbDB2315678afecb367f032d93F642f64180aa3" />
+                    <input type="text" readOnly className="w-full bg-white border border-slate-300 text-slate-700 dark:bg-black/40 dark:border-white/10 dark:text-slate-300 rounded-xl px-4 py-2.5 text-xs font-mono" value="0x5FbDB2315678afecb367f032d93F642f64180aa3" />
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                  <button type="button" onClick={() => setActiveSection(2)} className="px-4 py-2 text-xs text-slate-400 hover:text-white flex items-center gap-2">
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-white/10">
+                  <button type="button" onClick={() => setActiveSection(2)} className="px-4 py-2 text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white flex items-center gap-2">
                     <ArrowLeft size={16} /> Section Précédente
                   </button>
                   <button
@@ -451,38 +451,38 @@ const Settings = () => {
             {/* SECTION 4 : PRÉFÉRENCES DE SESSION */}
             {activeSection === 4 && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-purple-500/10 border border-purple-500/20 rounded-2xl text-purple-400">
+                    <div className="p-3 bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 rounded-2xl text-purple-600 dark:text-purple-400">
                       <Cpu size={22} />
                     </div>
                     <div>
-                      <h2 className="text-lg font-bold text-white">Section 4 — Préférences & Session Active</h2>
-                      <p className="text-xs text-slate-400">Récapitulatif et validation de la configuration de votre compte.</p>
+                      <h2 className="text-lg font-bold text-slate-900 dark:text-white">Section 4 — Préférences & Session Active</h2>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Récapitulatif et validation de la configuration de votre compte.</p>
                     </div>
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">Étape 4 sur 4</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-500/10 px-3 py-1 rounded-full border border-purple-200 dark:border-purple-500/20">Étape 4 sur 4</span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-4 bg-white/[0.02] border border-white/10 rounded-2xl space-y-2">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Rôle Actif</span>
-                    <p className="text-sm font-bold text-white uppercase">{user.role || 'Utilisateur'}</p>
+                  <div className="p-4 bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl space-y-2">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Rôle Actif</span>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white uppercase">{user.role || 'Utilisateur'}</p>
                   </div>
-                  <div className="p-4 bg-white/[0.02] border border-white/10 rounded-2xl space-y-2">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Environnement OS</span>
-                    <p className="text-sm font-bold text-emerald-400">Windows Desktop Active</p>
+                  <div className="p-4 bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl space-y-2">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Environnement OS</span>
+                    <p className="text-sm font-bold text-emerald-500">Windows Desktop Active</p>
                   </div>
                 </div>
 
                 <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-center space-y-2">
-                  <Award size={32} className="text-emerald-400 mx-auto" />
-                  <h3 className="text-sm font-bold text-white">Toutes les sections sont complétées avec succès !</h3>
-                  <p className="text-xs text-slate-400">Votre profil et votre session sont parfaitement sécurisés.</p>
+                  <Award size={32} className="text-emerald-500 dark:text-emerald-400 mx-auto" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">Toutes les sections sont complétées avec succès !</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Votre profil et votre session sont parfaitement sécurisés.</p>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                  <button type="button" onClick={() => setActiveSection(3)} className="px-4 py-2 text-xs text-slate-400 hover:text-white flex items-center gap-2">
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-white/10">
+                  <button type="button" onClick={() => setActiveSection(3)} className="px-4 py-2 text-xs text-slate-505 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white flex items-center gap-2">
                     <ArrowLeft size={16} /> Section Précédente
                   </button>
                   <a

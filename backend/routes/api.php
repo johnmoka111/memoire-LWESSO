@@ -12,6 +12,7 @@ $router->post('/api/auth/login',    'AuthController@login');
 
 // ─── PROPERTIES ─────────────────────────────────────────────────────────────
 $router->get('/api/properties',             'PropertyController@index');
+$router->get('/api/pricing/eth-usd',        'PropertyController@ethUsdRate');
 $router->get('/api/dashboard/stats',        'PropertyController@getDashboardStats', ['auth']);
 $router->get('/api/properties/{id}',        'PropertyController@show');
 $router->post('/api/properties',            'PropertyController@store', ['auth', 'role:proprietaire,admin,superadmin']);
@@ -36,11 +37,12 @@ $router->post('/api/transactions/resolve',  'TransactionController@resolve', ['a
 $router->put('/api/user/profile',           'UserController@updateProfile', ['auth']);
 
 // ─── ADMIN ──────────────────────────────────────────────────────────────────
-$router->post('/api/admin/agents',          'AdminController@createAgent', ['auth', 'role:admin']);
-$router->get('/api/admin/agents',           'AdminController@listAgents', ['auth', 'role:admin']);
-$router->put('/api/admin/agents/{id}',      'AdminController@updateAgent', ['auth', 'role:admin']);
-$router->post('/api/admin/agents/{id}/reset-password', 'AdminController@resetAgentPassword', ['auth', 'role:admin']);
-$router->delete('/api/admin/agents/{id}',    'AdminController@deleteAgent', ['auth', 'role:admin']);
+$router->post('/api/admin/agents',          'AdminController@createAgent', ['auth', 'role:admin,superadmin,administrateur']);
+$router->get('/api/admin/agents',           'AdminController@listAgents', ['auth', 'role:admin,superadmin,administrateur']);
+$router->get('/api/admin/system-logs',      'AdminController@systemLogs', ['auth', 'role:admin,superadmin,administrateur']);
+$router->put('/api/admin/agents/{id}',      'AdminController@updateAgent', ['auth', 'role:admin,superadmin,administrateur']);
+$router->post('/api/admin/agents/{id}/reset-password', 'AdminController@resetAgentPassword', ['auth', 'role:admin,superadmin,administrateur']);
+$router->delete('/api/admin/agents/{id}',    'AdminController@deleteAgent', ['auth', 'role:admin,superadmin,administrateur']);
 $router->get('/api/admin/properties',       'PropertyController@adminList', ['auth', 'role:admin']);
 
 // ─── NOTIFICATIONS ──────────────────────────────────────────────────────────

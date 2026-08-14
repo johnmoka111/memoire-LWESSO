@@ -8,6 +8,7 @@ use App\Core\Controller;
 use App\Core\Request;
 use App\Core\Response;
 use App\Models\User;
+use App\Services\AuditService;
 use App\Services\MailService;
 use Firebase\JWT\JWT;
 
@@ -88,6 +89,8 @@ final class AuthController extends Controller
         ];
 
         $jwt = JWT::encode($payload, JWT_SECRET, 'HS256');
+
+        AuditService::log((int) $user['id'], 'auth.login', 'Connexion réussie', 'POST', '/api/auth/login');
 
         Response::success([
             'token' => $jwt,

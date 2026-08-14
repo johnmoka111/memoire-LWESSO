@@ -17,8 +17,10 @@ import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
 import { API_URL } from '../config';
+import { useToast } from '../context/ToastContext';
 
 const AgentMissions = () => {
+  const { toast } = useToast();
   const [missions, setMissions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [validatingId, setValidatingId] = useState(null);
@@ -81,14 +83,14 @@ const AgentMissions = () => {
       setPanoramaUrl('');
       fetchMissions();
     } catch (err) {
-      alert(err.response?.data?.message || "Erreur lors de la validation");
+      toast(err.response?.data?.message || "Erreur lors de la validation", 'error');
     }
   };
 
   const handleReject = async (propertyId) => {
     const finalReason = selectedReason === "Autre raison (préciser)" ? customReason : selectedReason;
     if (!finalReason) {
-      alert("Veuillez sélectionner ou écrire une raison.");
+      toast("Veuillez sélectionner ou écrire une raison.", 'warning');
       return;
     }
 
@@ -105,12 +107,12 @@ const AgentMissions = () => {
       setCustomReason('');
       fetchMissions();
     } catch (err) {
-      alert(err.response?.data?.message || "Erreur lors du rejet");
+      toast(err.response?.data?.message || "Erreur lors du rejet", 'error');
     }
   };
 
   return (
-    <div className="flex min-h-screen bg-dark">
+    <div className="flex min-h-screen bg-slate-100 dark:bg-[#05070C] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Navbar />
@@ -156,17 +158,17 @@ const AgentMissions = () => {
                           </div>
                           <h3 className="text-2xl font-black mb-1">{prop.titre}</h3>
                           <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-widest">
-                            <MapPin size={14} className="text-primary" />
-                            {prop.commune}, {prop.quartier}
+                             <MapPin size={14} className="text-primary" />
+                             {prop.commune}, {prop.quartier}
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-2xl font-black text-white">${parseFloat(prop.prix || 0).toLocaleString()}</p>
+                          <p className="text-2xl font-black text-slate-900 dark:text-white">${parseFloat(prop.prix_usd ?? prop.prix ?? 0).toLocaleString()}</p>
                           <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">USD</p>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/5">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-200 dark:border-white/5">
                         <div className="space-y-1">
                           <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em]">Superficie</p>
                           <p className="text-sm font-bold">{prop.superficie} m²</p>
@@ -192,7 +194,7 @@ const AgentMissions = () => {
                       </div>
                     </div>
 
-                    <div className="bg-white/[0.02] border-l border-white/5 p-8 w-full lg:w-96 flex flex-col justify-center gap-4">
+                    <div className="bg-slate-50 dark:bg-white/[0.02] border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-white/5 p-8 w-full lg:w-96 flex flex-col justify-center gap-4">
                       {validatingId === prop.id ? (
                         <div className="space-y-4">
                            <div className="space-y-2">
@@ -214,7 +216,7 @@ const AgentMissions = () => {
                               </button>
                               <button 
                                 onClick={() => { setValidatingId(null); setPanoramaUrl(''); }}
-                                className="p-3 bg-white/5 rounded-xl text-slate-500 hover:text-white"
+                                className="p-3 bg-slate-200/50 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 hover:text-slate-900 dark:hover:text-white rounded-xl"
                               >
                                 <XIcon size={18} />
                               </button>
@@ -253,7 +255,7 @@ const AgentMissions = () => {
                               </button>
                               <button 
                                 onClick={() => { setRejectingId(null); setSelectedReason(''); setCustomReason(''); }}
-                                className="p-3 bg-white/5 rounded-xl text-slate-500 hover:text-white"
+                                className="p-3 bg-slate-200/50 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 hover:text-slate-900 dark:hover:text-white rounded-xl"
                               >
                                 <XIcon size={18} />
                               </button>

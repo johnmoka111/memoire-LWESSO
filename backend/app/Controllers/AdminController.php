@@ -9,6 +9,7 @@ use App\Core\Request;
 use App\Core\Response;
 use App\Models\User;
 use App\Services\MailService;
+use App\Services\AuditService;
 
 /**
  * Contrôleur pour les actions administratives.
@@ -180,12 +181,55 @@ final class AdminController extends Controller
      */
     public function listAgents(Request $request): void
     {
-        $sql = "SELECT id, nom, prenom, email, telephone, avatar_url, province, ville, commune, is_active, created_at FROM users WHERE role = 'agent' ORDER BY created_at DESC";
-        $stmt = $this->userModel->db()->prepare($sql);
-        $stmt->execute();
-        $agents = $stmt->fetchAll();
+        $page = max(1, (int) $request->query('page', 1));
+        $limit = min(100, max(10, (int) $request->query('limit', 25)));
+        $search = trim((string) $request->query('search', ''));
+        $status = (string) $request->query('status', 'all');
+        $where = ["role = 'agent'"];
+        $params = [];
 
-        Response::success($agents);
+        if ($search !== '') {
+            $where[] = '(nom LIKE :search OR prenom LIKE :search OR email LIKE :search OR telephone LIKE :search)';
+            $params[':search'] = "%{$search}%";
+        }
+        if ($status === 'active') {
+            $where[] = 'is_active = 1';
+        } elseif ($status === 'inactive') {
+            $where[] = 'is_active = 0';
+        }
+
+        $whereSql = implode(' AND ', $where);
+        $db = $this->userModel->db();
+        $countStmt = $db->prepare("SELECT COUNT(*) FROM users WHERE {$whereSql}");
+        $countStmt->execute($params);
+        $total = (int) $countStmt->fetchColumn();
+        $totalPages = max(1, (int) ceil($total / $limit));
+        $page = min($page, $totalPages);
+        $offset = ($page - 1) * $limit;
+
+        $sql = "SELECT id, nom, prenom, email, telephone, avatar_url, province, ville, commune, is_active, created_at FROM users WHERE {$whereSql} ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
+        $stmt = $db->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $summary = $db->query("SELECT COUNT(*) AS total, COALESCE(SUM(is_active = 1), 0) AS active FROM users WHERE role = 'agent'")->fetch();
+        Response::success([
+            'items' => $stmt->fetchAll(),
+            'pagination' => ['page' => $page, 'limit' => $limit, 'total' => $total, 'total_pages' => $totalPages],
+            'summary' => ['total' => (int) $summary['total'], 'active' => (int) $summary['active']]
+        ]);
+    }
+
+    public function systemLogs(Request $request): void
+    {
+        $page = max(1, (int) $request->query('page', 1));
+        $limit = min(100, max(10, (int) $request->query('limit', 30)));
+        $search = trim((string) $request->query('search', ''));
+        Response::success(AuditService::list($page, $limit, $search));
     }
 
     /**

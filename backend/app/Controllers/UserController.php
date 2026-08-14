@@ -27,7 +27,7 @@ final class UserController extends Controller
     public function updateProfile(Request $request): void
     {
         // Récupérer l'ID depuis le token (injecté par le middleware Auth)
-        $userId = $request->userId; 
+        $userId = $request->user['id'] ?? null;
 
         if (!$userId) {
             Response::error('Non autorisé', 401);

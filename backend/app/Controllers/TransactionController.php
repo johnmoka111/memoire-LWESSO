@@ -9,7 +9,9 @@ use App\Core\Request;
 use App\Core\Response;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Property;
 use App\Services\BlockchainService;
+use App\Services\EthPriceService;
 use App\Services\MailService;
 
 /**
@@ -33,7 +35,7 @@ final class TransactionController extends Controller
         $role = $request->user['role'];
         $params = [];
 
-        $sql = "SELECT t.*, p.titre as property_title, p.prix as montant_usd 
+        $sql = "SELECT t.*, p.titre as property_title, p.prix_usd as property_prix_usd 
                 FROM transactions t 
                 JOIN properties p ON t.property_id = p.id";
         
@@ -49,7 +51,16 @@ final class TransactionController extends Controller
         
         $stmt = \App\Core\Database::getInstance()->prepare($sql);
         $stmt->execute($params);
-        Response::success($stmt->fetchAll());
+        $transactions = $stmt->fetchAll();
+        foreach ($transactions as &$transaction) {
+            if ((float) ($transaction['montant_usd'] ?? 0) <= 0) {
+                $eth = $transaction['montant_eth'] ?? 0;
+                $transaction['montant_usd'] = (float) ($transaction['property_prix_usd'] ?? 0) > 0
+                    ? (float) $transaction['property_prix_usd']
+                    : EthPriceService::toUsd($eth);
+            }
+        }
+        Response::success($transactions);
     }
 
     /**
@@ -70,6 +81,22 @@ final class TransactionController extends Controller
 
         // --- VÉRIFICATION BLOCKCHAIN (gracieuse pour la démo) ---
         // On tente de vérifier la transaction sur le réseau, mais on ne bloque pas si le RPC est indisponible.
+        // Le montant affiché au client n'est jamais une source de vérité : il doit
+        // correspondre au prix officiel enregistré pour le bien.
+        $property = (new Property())->find((int) $request->input('property_id'));
+        if (!$property) {
+            Response::error('Bien introuvable', 404);
+        }
+        if (in_array($property['statut'] ?? '', ['vendu', 'annule'], true)) {
+            Response::error('Ce bien n’est plus disponible à la vente', 409);
+        }
+
+        $officialAmountEth = (float) ($property['prix'] ?? 0);
+        $submittedAmountEth = (float) $request->input('montant_eth');
+        if ($officialAmountEth <= 0 || abs($officialAmountEth - $submittedAmountEth) > 0.00000001) {
+            Response::error('Le montant ETH ne correspond pas au prix officiel du bien', 422);
+        }
+
         $txHash = $request->input('tx_creation');
         try {
             $blockchain = new BlockchainService();
@@ -87,7 +114,8 @@ final class TransactionController extends Controller
             'acheteur_id'      => $request->user['id'],
             'escrow_id'        => $request->input('escrow_id'),
             'contract_address' => CONTRACT_ADDRESS,
-            'montant_eth'      => $request->input('montant_eth'),
+            'montant_eth'      => $officialAmountEth,
+            'montant_usd'      => EthPriceService::toUsd($officialAmountEth),
             'tx_creation'      => $request->input('tx_creation')
         ]);
 

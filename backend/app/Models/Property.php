@@ -33,14 +33,15 @@ final class Property extends Model
     public function create(array $data, int $ownerId): int
     {
         $sql = "INSERT INTO {$this->table} 
-                (owner_id, titre, description, prix, commune, quartier, latitude, longitude, superficie, chambres, sdb, type_bien, statut, panorama_url) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'en_attente', ?)";
+                (owner_id, titre, description, prix, prix_usd, commune, quartier, latitude, longitude, superficie, chambres, sdb, type_bien, statut, panorama_url) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'en_attente', ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
             $ownerId,
             $data['titre'],
             $data['description'] ?? null,
             $data['prix'],
+            $data['prix_usd'] ?? null,
             $data['commune'],
             $data['quartier'] ?? null,
             $data['latitude'] ?? null,

@@ -5,6 +5,9 @@ import { Home, Search, PlusCircle, LayoutDashboard, User } from 'lucide-react';
 const MobileNav = () => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
+  const isAuthenticated = Boolean(localStorage.getItem('token'));
+
+  if (isAuthenticated) return null;
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white text-slate-900 dark:bg-[#060812] dark:text-white border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex items-center justify-between z-[100] pb-safe opacity-100 shadow-lg">

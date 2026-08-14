@@ -12,6 +12,8 @@ import { API_URL } from '../config';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 
+const formatUsd = (value) => new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 2 }).format(Number(value || 0));
+
 // Mapping des styles de statut
 const statusStyles = {
   valide: 'bg-gradient-to-r from-emerald-500/20 to-emerald-600/10 text-emerald-400 border-emerald-500/30',
@@ -84,7 +86,7 @@ const PropertyCard = ({ property, index }) => {
           <div>
             <p className="text-[9px] font-bold uppercase tracking-wider text-slate-500 mb-1">Prix</p>
             <p className="text-2xl md:text-3xl font-black text-white">
-              ${parseFloat(property.prix).toLocaleString()}
+              ${formatUsd(property.prix_usd ?? property.prix)}
             </p>
           </div>
           <Link
@@ -245,10 +247,10 @@ const Properties = () => {
     }
 
     if (filters.minPrice) {
-      filtered = filtered.filter(p => parseFloat(p.prix) >= parseFloat(filters.minPrice));
+      filtered = filtered.filter(p => parseFloat(p.prix_usd ?? p.prix) >= parseFloat(filters.minPrice));
     }
     if (filters.maxPrice) {
-      filtered = filtered.filter(p => parseFloat(p.prix) <= parseFloat(filters.maxPrice));
+      filtered = filtered.filter(p => parseFloat(p.prix_usd ?? p.prix) <= parseFloat(filters.maxPrice));
     }
 
     return filtered;
@@ -478,7 +480,7 @@ const Properties = () => {
                         <p className="text-slate-500 text-[10px] mt-0.5">{p.superficie || 'N/C'} m²</p>
                       </td>
                       <td className="py-4 px-6">
-                        <span className="text-sm font-black text-white">${parseFloat(p.prix).toLocaleString()}</span>
+                        <span className="text-sm font-black text-white">${formatUsd(p.prix_usd ?? p.prix)}</span>
                       </td>
                       <td className="py-4 px-6">
                         <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${statusStyles[p.statut]}`}>

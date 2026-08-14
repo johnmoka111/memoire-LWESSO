@@ -21,6 +21,27 @@ import {
 import { LogoIcon } from './Logo';
 import { useTheme } from '../context/ThemeContext';
 
+const ProfileAvatar = ({ user, size = 'h-10 w-10' }) => {
+  const initials = `${user.prenom?.[0] || ''}${user.nom?.[0] || ''}`.trim() || 'U';
+
+  if (user.avatar_url) {
+    return (
+      <img
+        src={user.avatar_url}
+        alt={`Photo de profil de ${user.prenom || 'l’utilisateur'}`}
+        className={`${size} rounded-xl object-cover border border-white/20 bg-slate-200 dark:bg-slate-800`}
+        onError={(event) => { event.currentTarget.style.display = 'none'; }}
+      />
+    );
+  }
+
+  return (
+    <span className={`${size} inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-xs font-black text-white shadow-md shadow-blue-600/20`}>
+      {initials.toUpperCase()}
+    </span>
+  );
+};
+
 const Navbar = () => {
   const token = localStorage.getItem('token');
   const storedUser = localStorage.getItem('user');
@@ -54,7 +75,9 @@ const Navbar = () => {
   const PageIcon = currentMeta.icon;
 
   const logout = () => {
-    localStorage.clear();
+    // Ne supprimer que la session : le thème et les préférences du navigateur restent intacts.
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     window.location.hash = '#/';
     window.location.reload();
   };
@@ -180,6 +203,13 @@ const Navbar = () => {
         )}
 
         <div className="flex items-center gap-2 md:gap-3 pl-2.5 md:pl-3 border-l border-slate-200 dark:border-white/10">
+          <Link
+            to="/messages"
+            className="hidden md:inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-500 transition-all hover:border-blue-300 hover:text-blue-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:border-blue-500/40 dark:hover:text-blue-400"
+            title="Notifications et messages"
+          >
+            <Bell size={16} />
+          </Link>
           <div className="hidden md:block text-right">
             <p className="text-xs font-bold text-slate-900 dark:text-white leading-tight">{user.prenom || 'Utilisateur'} {user.nom}</p>
             <span className="text-[9px] font-black uppercase tracking-wider text-blue-600 bg-blue-50 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-400 dark:border-blue-800 px-1.5 py-0.5 rounded">
@@ -188,11 +218,12 @@ const Navbar = () => {
           </div>
 
           <Link 
-            to="/dashboard" 
-            className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-md border border-blue-500 hover:scale-105 transition-transform text-white"
-            title="Mon Profil"
+            to="/settings" 
+            className="group relative rounded-xl transition-transform hover:scale-105"
+            title="Ouvrir mon profil et mes paramètres"
           >
-            <User size={17} />
+            <ProfileAvatar user={user} size="h-9 w-9" />
+            <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500 dark:border-[#060812]" />
           </Link>
 
           <button 

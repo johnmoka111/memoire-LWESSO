@@ -14,6 +14,9 @@ import { BrowserProvider, parseEther, Contract } from 'ethers';
 import Navbar from '../components/Navbar';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import { useToast } from '../context/ToastContext';
+
+const formatUsd = (value) => new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 2 }).format(Number(value || 0));
 
 // Fix pour les icônes Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -114,6 +117,21 @@ const formatWeb3Error = (err) => {
   if (fullText.includes('insufficient funds') || fullText.includes('exceeds balance')) {
     return "Solde insuffisant : Votre portefeuille n'a pas assez d'ETH pour valider cette transaction.";
   }
+  if (fullText.includes('reseau_incorrect')) {
+    return "Réseau MetaMask incorrect : sélectionnez le réseau Hardhat local (chain ID 31337), puis réessayez.";
+  }
+  if (fullText.includes('contrat_absent')) {
+    return "Le contrat immobilier n’est pas déployé sur ce réseau. Démarrez le nœud Hardhat puis sélectionnez le réseau local dans MetaMask.";
+  }
+  if (fullText.includes('noeud_hardhat_indisponible')) {
+    return "Le nœud Hardhat local ne répond pas. Démarrez-le sur le port 8545, redéployez le contrat, puis reconnectez MetaMask au réseau Hardhat (chain ID 31337).";
+  }
+  if (fullText.includes('titre_non_mint')) {
+    return "Ce bien n’est pas encore créé sur la blockchain. Le propriétaire doit d’abord émettre son titre NFT.";
+  }
+  if (fullText.includes('could not coalesce')) {
+    return "MetaMask ne peut pas estimer cette transaction. Vérifiez le réseau Hardhat local, le contrat et le titre NFT.";
+  }
   if (fullText.includes('erc721nonexistenttoken') || fullText.includes('nonexistent token') || fullText.includes('invalid token')) {
     return "Titre NFT non trouvé : Ce bien n'a pas encore été mis en vente on-chain par son propriétaire.";
   }
@@ -126,6 +144,7 @@ const formatWeb3Error = (err) => {
 
 // Composant Modal d'achat Escrow avec MetaMask & Ethers.js
 const PurchaseModal = ({ property, onClose, onSuccess }) => {
+  const { toast } = useToast();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -209,13 +228,25 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
       const currentAccount = await signer.getAddress();
       setWalletAccount(currentAccount);
 
+      const network = await provider.getNetwork();
+      if (network.chainId !== 31337n) {
+        throw new Error('RESEAU_INCORRECT');
+      }
+      let deployedCode;
+      try {
+        deployedCode = await provider.getCode(CONTRACT_ADDRESS);
+      } catch {
+        throw new Error('NOEUD_HARDHAT_INDISPONIBLE');
+      }
+      if (!deployedCode || deployedCode === '0x') {
+        throw new Error('CONTRAT_ABSENT');
+      }
+
       // Calcul du quota ETH adapté pour testnet & démo (ex: 0.05 ETH, 0.01 ETH, 0.003 ETH)
-      const numPrix = parseFloat(property?.prix || 0);
-      let ethAmount = "0.01";
-      if (property?.id === 1 || numPrix >= 10000) ethAmount = "0.05";
-      else if (property?.id === 2 || (numPrix >= 1000 && numPrix < 10000)) ethAmount = "0.01";
-      else if (property?.id === 3 || numPrix < 1000) ethAmount = "0.003";
-      else ethAmount = numPrix <= 10 ? String(numPrix) : "0.01";
+      const ethAmount = String(property?.prix || 0);
+      if (Number(ethAmount) <= 0) {
+        throw new Error("Montant ETH indisponible pour ce bien.");
+      }
 
       const value = parseEther(ethAmount);
 
@@ -232,12 +263,16 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
       const tokenId = (property?.id && property.id > 0) ? (property.id - 1) : 0;
 
       // Vérification préventive : est-ce que le compte MetaMask connecté est le propriétaire vendeur de ce NFT ?
+      let currentOwner;
       try {
-        const currentOwner = await titleContract.ownerOf(tokenId);
+        currentOwner = await titleContract.ownerOf(tokenId);
         if (currentOwner && currentOwner.toLowerCase() === currentAccount.toLowerCase()) {
           throw new Error("PROPRIETAIRE_EGALE_ACHETEUR");
         }
       } catch (checkErr) {
+        if (checkErr.message !== "PROPRIETAIRE_EGALE_ACHETEUR") {
+          throw new Error('TITRE_NON_MINT');
+        }
         if (checkErr.message === "PROPRIETAIRE_EGALE_ACHETEUR") {
           throw new Error("Opération impossible : Votre adresse MetaMask actuelle (" + currentAccount.substring(0, 8) + "...) est le propriétaire vendeur de ce bien. Veuillez changer de compte dans MetaMask (sélectionnez le Compte 2) pour effectuer l'achat.");
         }
@@ -256,7 +291,7 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
           await axios.post(`${API_URL}/transactions`, {
             property_id: property?.id || 1,
             escrow_id: property?.id || 1,
-            montant_usd: property?.prix || 0,
+            montant_usd: property?.prix_usd || 0,
             montant_eth: ethAmount,
             tx_creation: hash
           }, {
@@ -269,6 +304,7 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
 
       setLoading(false);
       setStep(2);
+      toast(`Dépôt confirmé : ${displayEthQuota} ETH sont maintenant bloqués en séquestre pour « ${property?.titre} ».`, 'success');
       if (onSuccess) onSuccess();
 
     } catch (err) {
@@ -279,12 +315,8 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
   };
 
   // Calcul d'affichage pour la modal
-  const numPrixDisplay = parseFloat(property?.prix || 0);
-  let displayEthQuota = "0.01";
-  if (property?.id === 1 || numPrixDisplay >= 10000) displayEthQuota = "0.05";
-  else if (property?.id === 2 || (numPrixDisplay >= 1000 && numPrixDisplay < 10000)) displayEthQuota = "0.01";
-  else if (property?.id === 3 || numPrixDisplay < 1000) displayEthQuota = "0.003";
-  else displayEthQuota = numPrixDisplay <= 10 ? String(numPrixDisplay) : "0.01";
+  const numPrixDisplay = parseFloat(property?.prix_usd || 0);
+  const displayEthQuota = Number(property?.prix || 0).toFixed(8);
 
   return (
     <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
@@ -299,22 +331,22 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="relative z-10 w-full max-w-lg bg-gradient-to-br from-[#0F0F1A] to-[#0A0A0F] border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+        className="relative z-10 w-full max-w-lg bg-white dark:bg-gradient-to-br dark:from-[#0F0F1A] dark:to-[#0A0A0F] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl"
       >
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-indigo-500" />
 
-        <div className="p-6 border-b border-white/10 flex justify-between items-center bg-white/[0.02]">
+        <div className="p-6 border-b border-slate-200 dark:border-white/10 flex justify-between items-center bg-slate-50 dark:bg-white/[0.02]">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
               <Wallet size={20} className="text-primary" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">Achat Blockchain via MetaMask</h3>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">Achat Blockchain via MetaMask</h3>
               <p className="text-[9px] text-slate-500 uppercase tracking-wider">{property?.titre}</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-            <X size={18} className="text-slate-400" />
+          <button onClick={onClose} className="p-2 hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors">
+            <X size={18} className="text-slate-400 dark:text-slate-400" />
           </button>
         </div>
 
@@ -323,28 +355,28 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="bg-gradient-to-r from-primary/5 to-transparent border border-primary/10 rounded-xl p-4 mb-4 space-y-2">
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-slate-400">Quota Testnet Escrow</span>
-                  <span className="text-2xl font-bold text-emerald-400">{displayEthQuota} ETH</span>
+                  <span className="text-slate-655 dark:text-slate-400">Montant à déposer</span>
+                  <span className="text-2xl font-bold text-emerald-500 dark:text-emerald-400">{displayEthQuota} ETH</span>
                 </div>
-                <div className="flex justify-between items-center text-xs text-slate-500">
-                  <span>Valeur déclarée</span>
-                  <span className="text-white font-bold">${numPrixDisplay.toLocaleString()} USD</span>
+                <div className="flex justify-between items-center text-xs text-slate-500 dark:text-slate-500">
+                  <span>Prix de vente (USD)</span>
+                  <span className="text-slate-800 dark:text-white font-bold">${formatUsd(numPrixDisplay)} USD</span>
                 </div>
-                <div className="flex justify-between items-center text-xs text-slate-500 border-t border-white/5 pt-2">
+                <div className="flex justify-between items-center text-xs text-slate-500 dark:text-slate-500 border-t border-slate-200 dark:border-white/5 pt-2">
                   <span>Contrat KivuImmobilierTitle</span>
                   <span className="text-primary font-mono text-[10px] truncate max-w-[180px]">{CONTRACT_ADDRESS}</span>
                 </div>
               </div>
 
               {/* État du Wallet */}
-              <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 flex items-center justify-between">
+              <div className="bg-slate-50 border border-slate-200 dark:bg-white/[0.03] dark:border-white/10 rounded-xl p-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Wallet size={20} className={walletAccount ? "text-emerald-400" : "text-amber-400"} />
+                  <Wallet size={20} className={walletAccount ? "text-emerald-500 dark:text-emerald-400" : "text-amber-500 dark:text-amber-400"} />
                   <div>
-                    <p className="text-xs font-semibold text-white">
+                    <p className="text-xs font-semibold text-slate-900 dark:text-white">
                       {walletAccount ? "MetaMask Connecté" : "Wallet non connecté"}
                     </p>
-                    <p className="text-[10px] text-slate-400 font-mono">
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                       {walletAccount ? `${walletAccount.substring(0, 8)}...${walletAccount.substring(walletAccount.length - 6)}` : "Cliquez pour connecter votre adresse"}
                     </p>
                   </div>
@@ -361,7 +393,7 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
               </div>
 
               {errorMsg && (
-                <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center justify-between gap-3">
+                <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-550 dark:text-rose-400 text-xs flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2 min-w-0">
                     <AlertTriangle size={16} className="shrink-0" />
                     <span className="truncate">{errorMsg}</span>
@@ -402,23 +434,23 @@ const PurchaseModal = ({ property, onClose, onSuccess }) => {
               className="text-center py-8"
             >
               <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-6">
-                <CheckCircle size={40} className="text-emerald-400" />
+                <CheckCircle size={40} className="text-emerald-500 dark:text-emerald-400" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Dépôt Escrow Réussi !</h3>
-              <p className="text-slate-400 text-sm mb-4">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Dépôt Escrow Réussi !</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">
                 Les fonds ont été bloqués sur le Smart Contract et enregistrés dans le système.
               </p>
 
               {txHash && (
-                <div className="p-3 bg-white/[0.03] border border-white/10 rounded-xl text-left mb-6">
+                <div className="p-3 bg-slate-50 border border-slate-200 dark:bg-white/[0.03] dark:border-white/10 rounded-xl text-left mb-6">
                   <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Hash de transaction</p>
-                  <p className="text-xs font-mono text-emerald-400 break-all">{txHash}</p>
+                  <p className="text-xs font-mono text-emerald-600 dark:text-emerald-400 break-all">{txHash}</p>
                 </div>
               )}
 
               <button
                 onClick={onClose}
-                className="px-6 py-2.5 bg-white/5 hover:bg-white/10 rounded-xl text-sm font-semibold transition-all"
+                className="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-800 dark:text-white rounded-xl text-sm font-semibold transition-all"
               >
                 Fermer
               </button>
@@ -436,7 +468,8 @@ const MOCK = {
   titre: 'Villa moderne à Ibanda',
   commune: 'Ibanda',
   quartier: 'Zone résidentielle',
-  prix: 85000,
+  prix: 44.73684211,
+  prix_usd: 85000,
   type_bien: 'villa',
   statut: 'valide',
   owner_name: 'Muderhwa J.',
@@ -476,7 +509,7 @@ const PropertyDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0A0A0F] via-[#0F0F1A] to-[#0A0A0F] flex items-center justify-center">
+      <div className="min-h-screen bg-slate-100 dark:bg-gradient-to-br dark:from-[#0A0A0F] dark:via-[#0F0F1A] dark:to-[#0A0A0F] flex items-center justify-center transition-colors duration-300">
         <Loader2 className="animate-spin text-primary" size={48} />
       </div>
     );
@@ -487,14 +520,14 @@ const PropertyDetail = () => {
   const lng = parseFloat(data.longitude) || 28.8614;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0A0A0F] via-[#0F0F1A] to-[#0A0A0F] text-white">
+    <div className="min-h-screen bg-slate-100 dark:bg-[#05070C] text-slate-900 dark:text-slate-105 transition-colors duration-300">
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-8 md:py-12">
         {/* Bouton retour animé */}
         <Link
           to="/properties"
-          className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8 font-medium text-sm group"
+          className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8 font-medium text-sm group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           Retour aux annonces
@@ -503,9 +536,8 @@ const PropertyDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Colonne principale */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Galerie Photos Améliorée */}
             {data.photos && data.photos.length > 0 ? (
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 group bg-[#050508]">
+              <div className="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 group bg-slate-200 dark:bg-[#050508] shadow-sm dark:shadow-none">
                 {/* Photo principale */}
                 <div className="w-full h-[350px] md:h-[500px] relative">
                   <img 
@@ -533,7 +565,7 @@ const PropertyDetail = () => {
 
                 {/* Miniatures */}
                 {data.photos.length > 1 && (
-                  <div className="flex overflow-x-auto gap-3 p-3 bg-black/40 backdrop-blur-sm border-t border-white/10 hide-scrollbar">
+                  <div className="flex overflow-x-auto gap-3 p-3 bg-black/40 backdrop-blur-sm border-t border-slate-200 dark:border-white/10 hide-scrollbar">
                     {data.photos.map((photo, idx) => (
                       <div 
                         key={idx} 
@@ -552,7 +584,7 @@ const PropertyDetail = () => {
                 )}
               </div>
             ) : (
-              <div className="w-full h-[300px] bg-white/[0.02] rounded-2xl border border-white/10 flex items-center justify-center">
+              <div className="w-full h-[300px] bg-white dark:bg-white/[0.02] rounded-2xl border border-slate-200 dark:border-white/10 flex items-center justify-center shadow-sm dark:shadow-none">
                  <div className="text-center text-slate-500">
                     <Home size={48} className="mx-auto mb-3 opacity-20" />
                     <p className="text-sm font-bold uppercase tracking-wider">Aucune photo disponible</p>
@@ -562,7 +594,7 @@ const PropertyDetail = () => {
 
             {/* Visionneuse 360° */}
             {data.panorama_url && (
-              <div className="relative bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 rounded-2xl overflow-hidden h-[450px] group">
+              <div className="relative bg-gradient-to-br from-slate-50 to-transparent dark:from-white/[0.03] dark:to-transparent border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden h-[450px] group shadow-sm dark:shadow-none">
                  <div className="absolute top-5 left-5 z-10 px-3 py-1.5 bg-black/60 backdrop-blur-md rounded-xl text-[9px] font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
                     <Maximize2 size={12} /> Visite Virtuelle 360° (Pannellum)
                  </div>
@@ -709,11 +741,11 @@ const PropertyDetail = () => {
                     <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Prix de vente</p>
                     <div className="flex items-baseline gap-2">
                       <span className="text-4xl font-black text-white">
-                        ${new Intl.NumberFormat('en-US').format(parseFloat(data.prix || 0))}
+                        ${formatUsd(data.prix_usd)}
                       </span>
                       <span className="text-sm font-bold text-slate-500">USD</span>
                     </div>
-                    <p className="text-[10px] text-slate-500 mt-2">≈ {new Intl.NumberFormat('fr-FR').format(parseFloat(data.prix || 0) * 2800)} CDF</p>
+                    <p className="text-[10px] text-slate-500 mt-2">≈ {Number(data.prix || 0).toFixed(8)} ETH à régler via escrow</p>
                   </div>
                 </div>
 

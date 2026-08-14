@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use App\Services\AuditService;
+
 /**
  * Routeur MVC maison — dispatche les requêtes HTTP vers les bons Controllers.
  *
@@ -60,6 +62,17 @@ final class Router
                 // Exécuter les middlewares dans l'ordre
                 foreach ($config['middlewares'] as $mw) {
                     $this->runMiddleware($mw, $request);
+                }
+
+                if ($request->user !== null) {
+                    AuditService::log(
+                        (int) ($request->user['id'] ?? 0) ?: null,
+                        'api.' . strtolower($method),
+                        AuditService::describeAction($config['handler'], $method),
+                        $method,
+                        $uri,
+                        ['params' => $params]
+                    );
                 }
 
                 // Instancier Controller et appeler la méthode
